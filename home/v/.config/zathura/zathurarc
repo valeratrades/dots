@@ -1,5 +1,9 @@
 # https://manpages.ubuntu.com/manpages/xenial/man5/zathurarc.5.html
-map r reload
+# https://manpages.ubuntu.com/manpages/xenial/man1/zathura.1.html
+
+# reload on R
+# quit on q
+# zoom in or out on + and -
 
 map h scroll left
 map t scroll down
@@ -12,6 +16,18 @@ map <A-q> quit
 
 map T scroll half-down
 map N scroll half-up
+# doesn't work
+map H S
 
-map <A-h> jumplist forward
-map <A-s> jumplist backward
+map <A-h> jumplist backward
+map <A-s> jumplist forward
+
+
+# Genaral
+set selection-clipboard clipboard
+set adjust-open "best-fit"
+
+#TODO: make it respect gtk-theme-preference
+#set font "{{ font.monospace }} {{ font.size }}"
+#set recolor true
+#set guioptions=csh

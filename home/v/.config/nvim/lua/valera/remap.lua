@@ -18,8 +18,8 @@ k("", "l", "<nop>")
 -- Jumps
 k("", "T", "<C-d>zz")
 k("", "N", "<C-u>zz")
-k("", "H", "gg")
-k("", "S", "G")
+k("", "H", "<C-b>zz")
+k("", "S", "<C-f>zz")
 
 -- Quickfix and Location List
 -- Defined in (`cmp.lua')
