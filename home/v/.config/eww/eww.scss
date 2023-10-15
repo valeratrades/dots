@@ -1,0 +1,88 @@
+$foreground: #ffffff;
+$grey: #aaaaaa;
+$foreground-alt: #465059;
+$background_legend: #0e1419;
+$shades_of_grey: 75;
+$background: rgba($shades_of_grey, $shades_of_grey, $shades_of_grey, 1.0);
+$black: #000000;
+$red: #ff6565;
+$green: #b8cc52;
+$yellow: #e6c446;
+$blue: #68d4ff;
+$magenta: #ffa3aa;
+$cyan: #36a3d9;
+$white: #ffffff;
+$brown: #ba6e3d;
+
+$test: #ba6e3d;
+
+* {
+  all: unset;
+}
+
+window {
+  background: $background;
+//  background: rgba(0, 0, 0, 0.2);
+}
+
+.bar {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  margin: 0 0px;
+  color: $black;
+	.myopia {
+		font-size: 32px;
+	}
+  .urgent {
+    color: $red;
+  }
+  .problematic {
+    color: $brown;
+  }
+}
+
+.icon-module {
+  margin: 0 3px;
+  color: $black;
+
+  & > &__icon {
+    margin-right: 0px;
+    font-family: "Font Awesome 5 Free Solid";
+  }
+}
+// // could reuse for other icons
+// .workspaces {
+//   font-family: "Font Awesome 5 Free Solid";
+//   font-size: 12px;
+//   margin-right: 20px;
+//
+//   button {
+//     margin: 0px 3px;
+//   }
+//   .occupied {
+//     color: $grey;
+//   }
+//
+//   .focused {
+//     color: $white;
+//   }
+//
+//   .urgent {
+//     color: $red; 
+//   }
+//
+//   .empty {
+//     padding-top: 2px;
+//     color: $foreground-alt;
+//     font-size: 10px;
+// //  font-family: "Font Awesome 5 Free Regular"
+//   }
+// }
+
+// .revealer-on-hover .eventbox {
+//   color: $grey;
+// }
+// .revealer-on-hover .eventbox:hover {
+//   color: $foreground;
+// }
+//

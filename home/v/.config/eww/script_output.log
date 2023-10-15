@@ -1,0 +1,24 @@
+[34m/home/v/.config/sway[0m
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+[34m/home/v/.config/eww[0m
+[master 3fce63c] Auto-Sync
+ 1 file changed, 6 insertions(+)
+ create mode 100644 script_output.log
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+[34m/home/v/.config/nvim[0m
+fatal: not a git repository (or any of the parent directories): .git
+[34m/home/v/.config/keyd[0m
+fatal: not a git repository (or any of the parent directories): .git
+[34m/home/v/.config/helix[0m
+On branch master
+nothing to commit, working tree clean

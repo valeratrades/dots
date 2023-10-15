@@ -1,0 +1,117 @@
+; stolen from https://github.com/druskus20/dots/blob/master/eww/.config/eww/eww.yuck
+; general docs are at https://elkowar.github.io/eww/configuration.html
+; another nice config and options showcase https://github.com/druskus20/eugh
+
+; the best one so far: https://github.com/rxyhn/tokyo/blob/main/config/eww/bar/eww.yuck
+
+(defvar bar_visible "true")
+(defvar myopia "false")
+(defvar todo_timer "None")
+
+(defwindow bar 
+ :monitor 0
+ :hexpand false
+ :vexpand false
+ ; setting the width to 0 for now, so it itself takes as much space as neeeded. Might change later in order to prevent the width from ever changing dynamically.
+ :geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
+ :reserve (struts :distance "17px" :side "top")
+ (bar))
+
+(defwidget bar []
+	(box :orientation "h"
+			 :space-evenly false
+			 :class {myopia == "true" ? "myopia" : ""}
+			 :visible {bar_visible == "true"}
+		(box :halign "end"
+				 :spacing 0
+				 :hexpand true
+				 :space-evenly false
+			(todo_timer)
+			(notifications)
+			(github)
+			(bluetooth)
+			(microphone)
+			(speaker)
+			(ping)
+			(ram)
+			(cpu)
+			(time)
+			(battery))))
+
+(defwidget icon-module [icon ?class ?visible]
+	(box :class "${class} icon-module"
+			 :orientation "h"
+			 :halign "end"
+			 :space-evenly false
+			 ; this expression sets parameter to true if an argument is passed.
+			 :visible {visible ?: true}
+		(label :class "icon-module__icon" :text "${icon}")
+		(children)))
+;; ----------------------------------------------------------------------------
+
+;; Todo Timer ;;
+(defwidget todo_timer []
+	(icon-module	:class {todo_timer == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
+								:icon ""
+								:visible {todo_timer != "None"}
+		(label :text todo_timer)))
+
+
+;; Battery ;;
+(defpoll battery_poll	:initial "{}" :interval "1s" "./modules/battery.sh")
+(defwidget battery []
+	(icon-module	:class {battery_poll.content < 10 && battery_poll.icon != "" ? "urgent" : battery_poll.content < 10 && battery_poll.icon == "" ? "problematic" : ""}
+								:icon {battery_poll.icon}
+								:visible {battery_poll.content < 98}
+		(label :text {battery_poll.content})))
+
+;; Time ;;
+(defpoll time_poll :interval "1s" "date +\"%Y/%m/%d %H:%M:%S\"")
+(defwidget time []
+ (icon-module :class "time" :icon "" 
+	(label :text time_poll)))
+
+;; Bluetooth ;;
+(defwidget bluetooth []
+	(icon-module :class "bluetooth" :icon "" :visible {bluetooth_connection != ""}
+		(label :text bluetooth_connection)))
+(defpoll bluetooth_connection :interval "2s" "./modules/bluetooth.sh")
+
+;; System Utilization ;;
+(defwidget cpu []
+	(icon-module :class {"${round(EWW_CPU.avg, 0)}" > 90 ? "problematic" : ""} :icon "" 
+		(label :text "${round(EWW_CPU.avg, 0)}%")))
+(defwidget ram []
+	(icon-module :class "ram" :icon "" :visible {EWW_RAM.used_mem_perc != ""}
+		(label :text "${round(EWW_RAM.used_mem_perc, 0)}%")))
+
+;; Notifications ;;
+(defpoll github_poll :initial "" :interval "1m" "./modules/github.sh")
+(defwidget github []
+	(icon-module :class "github" :icon "" :visible {github_poll != ""}
+		(label :text github_poll)))
+
+(deflisten notifications_listen :initial '{"show": "no", "content": ""}' "./modules/notifications.sh")
+(defwidget notifications []
+	(icon-module :class "notifications" :icon "" :visible {notifications_listen.show == "yes"}
+		(literal :content {notifications_listen.content})))
+
+;; Network ;;
+(defpoll ping_poll :interval "10s" "./modules/ping.sh")
+(defwidget ping []
+	(icon-module :class {ping_poll > 100 ? "problematic" : ""} :icon ""
+		; apparently, it is not always possible to determine whether we do have wifi, as some providers block pings.
+		(label :text {ping_poll == "None" ? " ? WiFi" : "${ping_poll} ms"}))) 
+
+;; Volume ;;
+(defpoll speaker_poll :initial "{}" :interval "1s" "./modules/speaker.sh")
+(defwidget speaker []
+	(icon-module :class "speaker" 
+							 :icon {speaker_poll.icon}
+	 (label :text {speaker_poll.content})))
+
+(defpoll microphone_poll :initial "{}" :interval "1s" "./modules/microphone.sh")
+(defwidget microphone []
+	(icon-module :class {microphone_poll.content <= 15 ? "problematic" : ""}
+							 :icon {microphone_poll.icon}
+		(label :text {microphone_poll.content})))

@@ -1,0 +1,206 @@
+exec systemctl --user import-environment
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec /usr/lib/xdg-desktop-portal -r & exec /usr/lib/xdg-desktop-portal-wlr
+exec mkdir -p ~/tmp/Screenshots
+
+set $mod Mod4
+# Rofi
+set $power ~/.config/rofi/modi/power
+set $wifi ~/.config/rofi/modi/nmcli
+set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
+#
+# Screenshots
+set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
+set $fullscreen_screenshot grim ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
+set $delayed_screenshot sleep 3 && slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
+set $important_screenshot slurp | grim -g - ~/Images/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
+set $open_last_screenshot swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
+#
+
+
+set $background ~/Wallpapers/AndreySakharov.jpg
+
+set $left h
+set $down t
+set $up n
+set $right s
+
+set $ws1   1
+set $ws2   2
+set $ws3   3
+set $ws4   4
+set $ws5   5
+set $ws6   6
+set $ws7   7
+set $ws8   8
+set $ws9   9
+set $ws0   10
+
+assign [class="Google-chrome"] $ws2
+assign [class="discord"] $ws3
+assign [app_id="org.telegram.desktop"] $ws3
+# doesn't work.
+#assign [title="^nvim\: ~/.config/Todo*$"] $ws4
+#assign [app_id="Alacritty" title="nvim: ~/Todo(/.*)?$"] $ws4
+
+
+font pango:Sans 8
+titlebar_padding 1 1
+titlebar_border_thickness 1
+focus_on_window_activation focus
+focus_follows_mouse yes
+focus_on_window_activation urgent
+mouse_warping container
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders smart
+smart_gaps off
+gaps inner 0
+#workspace_auto_back_and_forth yes
+
+bindgesture pinch:outward exec xdotool key ctrl+plus
+bindgesture pinch:inward exec xdotool key ctrl+minus
+
+# Autostart
+exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
+exec "bash ~/.config/sway/restore_session.sh"
+#exec "bash ~/.config/sway/listen.sh"
+
+exec mako
+exec libinput-gestures
+exec wlr-gamma-service
+exec keyd-application-mapper -d
+exec bluetoothctl
+exec pipewire
+exec pipewire-pulse
+exec wireplumber
+# clipboard history
+exec greenclip daemon>/dev/null
+bindsym $mod+g exec rofi -modi "clipboard:greenclip print" -show clipboard
+bindsym $mod+Shift+g exec greenclip clear
+#
+
+input * {
+    xkb_layout "us,ru"
+    xkb_variant "dvorak,"
+
+    natural_scroll enabled
+    tap enabled
+    scroll_factor 1.43
+
+    repeat_delay 140
+    repeat_rate 65
+}
+# Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
+# to get the code of the key, use xev or auto-hotkey
+bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
+
+output * bg $background fill
+
+# Still not sure if it does anything.
+#exec swayidle \
+#       timeout 600 'swaymsg "output * dpms off"' \
+#       after-resume 'swaymsg "output * dpms on"' \
+
+# Multimedia
+bindsym $mod+F5 exec pamixer --toggle-mute
+bindsym $mod+F6 exec pamixer --decrease 5
+bindsym $mod+F7 exec pamixer --increase 5
+bindsym $mod+F8 exec pamixer --default-source -t
+bindsym $mod+Shift+F6 exec pamixer --default-source --decrease 5
+bindsym $mod+Shift+F7 exec pamixer --default-source --increase 5
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym $mod+F3 exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+# could be redundant, if I find a way to fix a bug with audio on the phone stopping at times with headphones connected to pc too.
+bindsym $mod+b exec bluetoothctl connect E8:EE:CC:36:53:49
+bindsym $mod+Shift+b exec bluetoothctl disconnect E8:EE:CC:36:53:49
+
+# calibrated so it takes 20 key presses for both temperature and brightness to move between the two default states.
+bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.decrease 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.decrease 0.0275
+bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
+bindsym $mod+Shift+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
+bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
+
+bindsym $mod+1   workspace $ws1
+bindsym $mod+2   workspace $ws2
+bindsym $mod+3   workspace $ws3
+bindsym $mod+4   workspace $ws4
+bindsym $mod+5   workspace $ws5
+bindsym $mod+6   workspace $ws6
+bindsym $mod+7   workspace $ws7
+bindsym $mod+8   workspace $ws8
+bindsym $mod+9   workspace $ws9
+bindsym $mod+0   workspace $ws0
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws0
+
+bindsym Mod1+Tab focus prev
+bindsym Mod1+apostrophe focus next
+
+bindsym $mod+c kill
+bindsym $mod+r reload
+# I never actually want to exit sway; so just kill the pc on q. Shift+q is never suppesed to be used.
+bindsym $mod+Shift+q exec "bash -c 'for pid in $(ps -u $USER -o pid=); do if ! rg -q -w $pid /tmp/sway_existing_pids.txt; then kill -TERM $pid 2>/dev/null; fi; done'", exec swaymsg exit
+# the first command gracefully exits chrome, which is apparently very sensitive.
+bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
+
+#bindsym $mod+l exec $lock
+bindsym $mod+Escape exec $power
+bindsym $mod+End exec $wifi
+
+bindsym $mod+$left resize grow width 6ppt
+bindsym $mod+$down resize shrink height 6ppt
+bindsym $mod+$up resize grow height 6ppt
+bindsym $mod+$right resize shrink width 6ppt
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+Return exec alacritty
+#TODO:
+#bindsym $mod+Shift+Return exec alacritty --class temp_floating_terminal -e sh -c 'alacritty --title temp_alacritty'; for_windoow [class="temp_floating_terminal"] floating enable
+#TODO:
+# move into a separate mode, started with $mod+Insert (standard screenshot remains on Insert).
+# Then: 'l' for open last, 'i' for important, 'f' for fullscreen, and then a bunch of screenshots to be saved into specific libraries, like 'p' for trading pattern, 'm' for meme, for example; and so on.
+bindsym Insert exec $throwaway_screenshot
+bindsym Shift+Insert exec $important_screenshot
+bindsym Mod1+Insert exec $fullscreen_screenshot
+bindsym Ctrl+Insert exec $delayed_screenshot
+bindsym $mod+Insert exec $open_last_screenshot
+
+bindsym $mod+m exec $menu
+bindsym $mod+Space exec makoctl dismiss --all
+bindsym $mod+o split toggle
+bindsym $mod+Ctrl+t layout tabbed
+bindsym $mod+f fullscreen
+bindsym $mod+p focus parent
+bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad
+bindsym Ctrl+Shift+Escape exec alacritty --class btm-float -e btm -u; for_window [app_id="btm-float"] floating enable
+bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
+bindsym $mod+Mod1+t exec ~/s/sh_scripts/theme_toggle.sh
+
+exec "eww daemon; eww open bar"
+# toggle visibility
+bindsym $mod+e exec ~/.config/sway/eww_visibility_toggle.sh
+bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
+# restart properly
+bindsym $mod+Shift+e exec "eww kill; eww open bar"
+
+exec bash ~/.config/sway/auto_redshift.sh
+#exec bash ~/.config/sway/try_connect_headphones.sh
+
+
+#exec_always "swaymsg -t get_tree > ~/.config/sway/last_layout.json"
