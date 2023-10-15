@@ -1,0 +1,28 @@
+# do remember that it just converts the sentletters according to the dvorak layout
+capslock = overload(ctrl_vim, esc)
+
+[ctrl_vim:C]
+space = swap(vim_mode)
+x = cut
+c = copy
+v = paste
+delete = C-delete
+backspace = C-backspace
+
+[vim_mode:C]
+space = swap(ctrl_vim)
+j = left
+k = down
+l = up
+; = right
+n = C-left
+, = C-right
+delete = C-delete
+backspace = C-backspace
+[vim_mode+shift]
+j = S-left
+k = S-down
+l = S-up
+; = S-right
+n = C-S-left
+, = C-S-right
