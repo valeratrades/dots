@@ -32,7 +32,7 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- Language setups
-local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright' }
+local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
