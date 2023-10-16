@@ -13,7 +13,10 @@ dot_directories="
 	${HOME}/.config/keyd
 	/etc/keyd
 	${HOME}/.config/helix
-	${HOME}/.config/git # should be here or won't work, as I'm redefining the git config directory elsewhere
+	${HOME}/.config/git
+	${HOME}/.config/greenclip
+	${HOME}/.config/foot
+	${HOME}/.config/alacritty
 "
 
 exclude_gitignore() {
