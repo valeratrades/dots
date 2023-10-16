@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/env sh
 
 target_dir="${HOME}/.dots"
 dot_directories="
