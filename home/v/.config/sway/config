@@ -162,8 +162,7 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 bindsym $mod+Return exec alacritty
-#TODO:
-#bindsym $mod+Shift+Return exec alacritty --class temp_floating_terminal -e sh -c 'alacritty --title temp_alacritty'; for_windoow [class="temp_floating_terminal"] floating enable
+bindsym $mod+z floating toggle
 
 # Screenshots
 set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
