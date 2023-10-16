@@ -33,12 +33,10 @@ for dir in $dot_directories; do
 	command="rsync -au"
 	command=$(exclude_gitignore "$dir" "$command" 2>/dev/null || :)
 
-	base_command="rsync -au"
-	exclude="${command}#$base_command"
-	if [[ -n $exclude ]]; then
-		echo exclude
-	fi
-	
+	case "$command" in
+		*"--exclude"*) echo "It is" ;;
+	esac
+
 	to="$target_dir$dir"
 	mkdir -p "$to"
 	$command "$dir" "${to}/.."
