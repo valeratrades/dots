@@ -34,7 +34,7 @@ for dir in $dot_directories; do
 	command=$(exclude_gitignore "$dir" "$command" 2>/dev/null || :)
 
 	case "$command" in
-		*"--exclude"*) echo "It is" ;;
+		*"--exclude"*) echo ${command} ;;
 	esac
 
 	to="$target_dir$dir"
