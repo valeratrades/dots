@@ -3,9 +3,9 @@
 swaymsg "workspace 4, exec alacritty"
 #swaymsg "for_window [class=\".*\"] focus=off"
 #swaymsg "workspace 2, exec google-chrome-stable"
-swaymsg "workspace 2, exec google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland"
-swaymsg "workspace 3, exec telegram-desktop &
-discord  --enable-features=UseOzonePlatform --ozone-platform=wayland &"
+swaymsg "workspace 2, exec google-chrome-stable" #--enable-features=UseOzonePlatform --ozone-platform=wayland"
+swaymsg "workspace 3, exec telegram-desktop &"
+swaymsg "exec discord &" # --enable-features=UseOzonePlatform --ozone-platform=wayland &"
 swaymsg "workspace 1, exec alacritty"
 
 

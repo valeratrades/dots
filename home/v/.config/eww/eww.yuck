@@ -7,6 +7,7 @@
 (defvar bar_visible "true")
 (defvar myopia "false")
 (defvar todo_timer "None")
+(defvar sway_mode "default")
 
 (defwindow bar 
  :monitor 0
@@ -26,6 +27,7 @@
 				 :spacing 0
 				 :hexpand true
 				 :space-evenly false
+			(sway_mode)
 			(todo_timer)
 			(notifications)
 			(github)
@@ -49,13 +51,20 @@
 		(children)))
 ;; ----------------------------------------------------------------------------
 
+
+;; Sway Mode ;;
+(defwidget sway_mode []
+	(icon-module	:class ""
+								:icon "#"
+								:visible {sway_mode != "default"}
+		(label :text sway_mode)))
+
 ;; Todo Timer ;;
 (defwidget todo_timer []
 	(icon-module	:class {todo_timer == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
 								:icon ""
 								:visible {todo_timer != "None"}
 		(label :text todo_timer)))
-
 
 ;; Battery ;;
 (defpoll battery_poll	:initial "{}" :interval "1s" "./modules/battery.sh")
