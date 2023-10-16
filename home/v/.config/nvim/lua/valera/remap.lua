@@ -94,14 +94,14 @@ k("", "<A-.>", "gt")
 k("", "<A-p>", "g<Tab>")
 k("", "<A-y>", "<cmd>tablast<cr>")
 for i = 1, 9 do
-	vim.api.nvim_set_keymap('', '<A-' .. i .. '>', ':tabn ' .. i .. '<cr>', { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('', '<A-' .. i .. '>', '<cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
 k("i", "<A-,>", "<esc>gT")
 k("i", "<A-.>", "<esc>gt")
 k("i", "<A-p>", "<esc>g<Tab>")
 k("i", "<A-y>", "<esc><cmd>tablast<cr>")
 for i = 1, 9 do
-	vim.api.nvim_set_keymap('i', '<esc><A-' .. i .. '>', ':tabn ' .. i .. '<cr>', { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('i', '<A-' .. i .. '>', '<Esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
 --
 

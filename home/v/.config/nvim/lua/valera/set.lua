@@ -24,9 +24,8 @@ o.undofile = true
 o.hlsearch = false
 o.incsearch = true
 
--- PERF I don't no why, but both <Esc> is instant and <Space> is appendable to, when it is exactly like this.
---vim.o.timeoutlen = 0
-vim.o.ttimeoutlen = -1
+--vim.o.timeoutlen = 700
+--vim.o.ttimeoutlen = 2
 --
 
 o.termguicolors = true

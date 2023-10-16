@@ -36,15 +36,15 @@ return require('lazy').setup({
 			require('Comment').setup()
 		end
 	},
-	--{
-	--	"folke/which-key.nvim",
-	--	event = "VeryLazy",
-	--	init = function()
-	--		vim.o.timeout = true
-	--		vim.o.timeoutlen = 300
-	--	end,
-	--	opts = {}
-	--},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {}
+	},
 	{ -- Cmp
 		'hrsh7th/nvim-cmp',
 		'hrsh7th/cmp-nvim-lsp',
