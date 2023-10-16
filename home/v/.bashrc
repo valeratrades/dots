@@ -37,10 +37,10 @@ sv() {
 }
 
 alias ls="ls -A"
-#mkdir stuff #TODO add -p and mv when I'm sure I don't ever need raw.
-mkfile() {
+mkp() {
   file_path="$1"
-  mkdir -p "$(dirname "${file_path}")" && touch "${file_path}"
+  mkdir -p "$(dirname "${file_path}")"
+	touch "${file_path}" || mkdir "${file_path}"
 }
 cs() {
 	cd "$@" && ls
