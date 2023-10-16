@@ -38,7 +38,7 @@ for dir in $dot_directories; do
 	esac
 
 	to="$target_dir$dir"
-	mkdir -p "$to"
+	mkdir -p "$to" || mkfile "$to"
 	$command "$dir" $(dirname "$to")
 done
 
