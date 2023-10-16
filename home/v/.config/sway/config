@@ -47,7 +47,7 @@ assign [app_id="org.telegram.desktop"] $ws3
 font pango:Sans 8
 titlebar_padding 1 1
 titlebar_border_thickness 1
-focus_on_window_activation focus
+focus_on_window_activation none
 focus_follows_mouse yes
 focus_on_window_activation urgent
 mouse_warping container
@@ -56,7 +56,6 @@ default_floating_border normal
 hide_edge_borders smart
 smart_gaps off
 gaps inner 0
-#workspace_auto_back_and_forth yes
 
 bindgesture pinch:outward exec xdotool key ctrl+plus
 bindgesture pinch:inward exec xdotool key ctrl+minus

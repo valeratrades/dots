@@ -1,13 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 
 target_dir="${HOME}/.dots"
 dot_directories="
+	${HOME}/.bashrc
+	${HOME}/.profile
+	/usr/bin/start_sway.sh
+	${HOME}/s/sh_scripts
+
 	${HOME}/.config/sway
 	${HOME}/.config/eww
 	${HOME}/.config/nvim
 	${HOME}/.config/keyd
 	/etc/keyd
 	${HOME}/.config/helix
+	${HOME}/.config/git # should be here or won't work, as I'm redefining the git config directory elsewhere
 "
 
 exclude_gitignore() {
@@ -24,10 +30,10 @@ for dir in $dot_directories; do
     command="rsync -au"
     command=$(exclude_gitignore "$dir" "$command" 2>/dev/null || :)
     
-    excluding="${command:9}"
-		if [[ -n "$excluding" ]]; then
-			echo "$excluding"
-		fi
+  #  excluding="${command:9}"
+		#if [[ -n "$excluding" ]]; then
+		#	echo "$excluding"
+		#fi
 
     to="$target_dir$dir"
     mkdir -p "$to"
