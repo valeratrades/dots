@@ -1,2 +1,2 @@
 # dots
-My configuration files
+My Arch Linux configuration files
