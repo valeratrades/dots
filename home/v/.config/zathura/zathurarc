@@ -1,0 +1,10 @@
+# https://manpages.ubuntu.com/manpages/xenial/man5/zathurarc.5.html
+
+map h scroll left
+map t scroll down
+map n scroll up
+map s scroll right
+
+map <C-\=> zoom in
+map <C-\-> zoom out
+map <A-q> quit

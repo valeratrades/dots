@@ -17,6 +17,7 @@ dot_directories="
 	${HOME}/.config/foot
 	${HOME}/.config/alacritty
 	${HOME}/.config/cargo
+	${HOME}/.config/zathura
 "
 
 exclude_gitignore() {

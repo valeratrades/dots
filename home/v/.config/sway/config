@@ -45,11 +45,18 @@ focus_on_window_activation none
 focus_follows_mouse yes
 mouse_warping container
 default_border pixel 1
-default_floating_border normal
+#normal
+default_floating_border none
 hide_edge_borders smart
 smart_gaps off
 gaps inner 0
 xwayland enable
+#	default_border color white
+#	border.color
+	
+for_window [tiling] border pixel none
+for_window [floating] border non
+smart_borders off
 
 bindgesture pinch:outward exec xdotool key ctrl+plus
 bindgesture pinch:inward exec xdotool key ctrl+minus
@@ -179,6 +186,7 @@ mode "screenshot" {
 	bindsym f exec $switch_out && $fullscrseen_screenshot
 	bindsym d exec $switch_out && $delayed_screenshot
 	bindsym o exec $switch_out && $open_last_screenshot
+	bindsym Insert exec $switch_out && throwaway_screenshot
 
 	bindsym $mod+Insert exec $switch_out
 	bindsym $mod+C exec $switch_out
