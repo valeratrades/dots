@@ -5,13 +5,15 @@ local cmp_action = require('lsp-zero').cmp_action()
 
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
 cmp.setup({
+	--timeout = cmp.config.performance.fetching_timeout({
+	--	300
+	--}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
+		{ name = 'nvim_lsp', keyword_length = 5 },
+		{ name = 'luasnip',  keyword_length = 5 },
 	}, {
-		{ name = 'buffer' },
+		{ name = 'buffer', keyword_length = 5, option = { keyword_length = 5 } }, -- `option` is defined by the source itself, and currently is useless, as keyword_lenght is above 4. But keeping just in case.
 	}),
 	-- Show source name in completion menu.
 	formatting = cmp_format,
@@ -57,8 +59,8 @@ cmp.setup({
 })
 cmp.setup.filetype('gitcommit', {
 	sources = cmp.config.sources({
-		{ name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+		{ name = 'git', keyword_length = 5 }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
 	}, {
-		{ name = 'buffer' },
+		{ name = 'buffer', keyword_length = 5, option = { keyword_length = 5 } },
 	})
 })
