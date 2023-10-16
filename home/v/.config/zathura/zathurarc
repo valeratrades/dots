@@ -8,3 +8,6 @@ map s scroll right
 map <C-\=> zoom in
 map <C-\-> zoom out
 map <A-q> quit
+
+map T scroll half-down
+map N scroll half-up
