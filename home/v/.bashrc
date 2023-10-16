@@ -66,8 +66,10 @@ alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"
 # pacman
 alias pS="sudo pacman -Su --noconfirm"
-alias pR="sudo pacman -Rns --noconfirm"
+alias pR="sudo pacman -R --noconfirm"
+alias pRn="sudo pacman -Rns --noconfirm"
 alias pQ="pacman -Q | rg"
+alias pY="system_sync.sh"
 # yay
 alias yS="yay -Su --noconfirm"
 alias yR="yay -Rns --noconfirm"
@@ -85,4 +87,3 @@ alias py="~/envs/Python/bin/python3"
 . ~/s/todo/functions.sh
 . ~/s/sh_scripts/weird.sh
 . ~/.credentials.sh
-. ~/s/sh_scripts/sync.sh
