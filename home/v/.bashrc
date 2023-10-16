@@ -54,6 +54,11 @@ cs() {
 chh() {
 	sudo chmod -R 777 ~/
 }
+##TODO
+#z() {
+#	ending=".pdf"
+#	zathura "$1$ending" &
+#}
 
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"

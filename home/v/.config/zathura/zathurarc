@@ -1,4 +1,5 @@
 # https://manpages.ubuntu.com/manpages/xenial/man5/zathurarc.5.html
+map r reload
 
 map h scroll left
 map t scroll down
@@ -11,3 +12,6 @@ map <A-q> quit
 
 map T scroll half-down
 map N scroll half-up
+
+map <A-h> jumplist forward
+map <A-s> jumplist backward
