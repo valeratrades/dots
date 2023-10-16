@@ -17,6 +17,7 @@ dot_directories="
 	${HOME}/.config/greenclip
 	${HOME}/.config/foot
 	${HOME}/.config/alacritty
+	${HOME}/.config/cargo
 "
 
 exclude_gitignore() {
