@@ -34,7 +34,7 @@ for dir in $dot_directories; do
 	command=$(exclude_gitignore "$dir" "$command" 2>/dev/null || :)
 
 	base_command="rsync -au"
-	exclude="${command}#${base_command}"
+	exclude="${command#$base_command}"
 	if [[ -n $exclude ]]; then
 		echo exclude
 	fi
