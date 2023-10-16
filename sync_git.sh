@@ -6,7 +6,6 @@ dot_directories="
 	${HOME}/.profile
 	/usr/bin/start_sway.sh
 	${HOME}/s/sh_scripts
-
 	${HOME}/.config/sway
 	${HOME}/.config/eww
 	${HOME}/.config/nvim
@@ -34,11 +33,12 @@ for dir in $dot_directories; do
 	command="rsync -au"
 	command=$(exclude_gitignore "$dir" "$command" 2>/dev/null || :)
 
-	#echo $command #dbg
-	#if [[ -n "${command:9}" ]]; then
-	#	echo "${command:9}"
-	#fi
-	#
+	base_command="rsync -au"
+	exclude="${command}#${base_command}"
+	if [[ -n $exclude ]]; then
+		echo exclude
+	fi
+	
 	to="$target_dir$dir"
 	mkdir -p "$to"
 	$command "$dir" "${to}/.."
