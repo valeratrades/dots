@@ -3,7 +3,7 @@
 #
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-export PATH="$PATH:~/s/evdev/:~/.cargo/bin/:~/s/sh_scripts/:~/go/bin/:/usr/lib/rustup/bin/"
+export PATH="$PATH:~/s/evdev/:~/.cargo/bin/:~/s/help_scripts/:~/go/bin/:/usr/lib/rustup/bin/"
 
 PS1='[\u@\h \W]\$ '
 
@@ -54,11 +54,10 @@ cs() {
 chh() {
 	sudo chmod -R 777 ~/
 }
-##TODO
-#z() {
-#	ending=".pdf"
-#	zathura "$1$ending" &
-#}
+z() {
+	ending=".pdf"
+	zathura "$1$ending"
+}
 
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
@@ -90,5 +89,5 @@ alias py="~/envs/Python/bin/python3"
 #
 
 . ~/s/todo/functions.sh
-. ~/s/sh_scripts/weird.sh
+. ~/s/help_scripts/weird.sh
 . ~/.credentials.sh

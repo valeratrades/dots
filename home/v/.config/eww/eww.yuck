@@ -71,7 +71,7 @@
 (defwidget battery []
 	(icon-module	:class {battery_poll.content < 10 && battery_poll.icon != "" ? "urgent" : battery_poll.content < 10 && battery_poll.icon == "" ? "problematic" : ""}
 								:icon {battery_poll.icon}
-								:visible {battery_poll.content < 98}
+								:visible {battery_poll.content < 99}
 		(label :text {battery_poll.content})))
 
 ;; Time ;;
