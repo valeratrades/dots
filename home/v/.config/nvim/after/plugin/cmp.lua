@@ -54,17 +54,6 @@ cmp.setup({
 			"i",
 			"s",
 		}),
-		['<Esc>'] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.mapping.abort()
-				vim.api.nvim_command('stopinsert')
-			else
-				vim.api.nvim_input('<Esc>')
-			end
-		end, {
-			"i",
-			"s",
-		})
 	}),
 })
 cmp.setup.filetype('gitcommit', {

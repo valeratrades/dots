@@ -24,9 +24,8 @@ o.undofile = true
 o.hlsearch = false
 o.incsearch = true
 
---vim.o.timeoutlen = 700
---vim.o.ttimeoutlen = 2
---
+vim.o.timeoutlen = 700
+vim.o.ttimeoutlen = 2
 
 o.termguicolors = true
 
