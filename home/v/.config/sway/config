@@ -33,9 +33,9 @@ assign [class="Google-chrome"] $ws2
 assign [app_id="google-chrome"] $ws2
 assign [class="discord"] $ws3
 assign [app_id="org.telegram.desktop"] $ws3
-# doesn't work.
-#assign [title="^nvim\: ~/.config/Todo*$"] $ws4
-#assign [app_id="Alacritty" title="nvim: ~/Todo(/.*)?$"] $ws4
+assign [app_id="org.pwmt.zathura"] $ws4
+# doesn't work, as netrw sets the title as "nvim: [No name]"
+#assign [app_id="Alacritty" title="nvim: ~/Todo*$"] $ws4
 
 
 font pango:Sans 8
@@ -117,11 +117,14 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+b exec bluetoothctl connect E8:EE:CC:36:53:49
 bindsym $mod+Shift+b exec bluetoothctl disconnect E8:EE:CC:36:53:49
 
+# Redshift
 # calibrated so it takes 20 key presses for both temperature and brightness to move between the two default states.
 bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.decrease 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.decrease 0.0275
 bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
 bindsym $mod+Shift+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
 bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
+exec ~/s/help_scripts/auto_redshift/target/release/auto_redshift 23:00
+#
 
 bindsym $mod+1   workspace $ws1
 bindsym $mod+2   workspace $ws2
@@ -149,7 +152,7 @@ bindsym Mod1+apostrophe focus next
 
 bindsym $mod+c kill
 bindsym $mod+r reload
-# I never actually want to exit sway; so just kill the pc on q. Shift+q is never suppesed to be used.
+# I never actually want to exit sway; so just kill the pc on q. Shift+q is never supposed to be used.
 bindsym $mod+Shift+q exec "bash -c 'for pid in $(ps -u $USER -o pid=); do if ! rg -q -w $pid /tmp/sway_existing_pids.txt; then kill -TERM $pid 2>/dev/null; fi; done'", exec swaymsg exit
 # the first command gracefully exits chrome, which is apparently very sensitive.
 bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
@@ -207,7 +210,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 bindsym Ctrl+Shift+Escape exec alacritty --class btm-float -e btm -u; for_window [app_id="btm-float"] floating enable
 bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
-bindsym $mod+Mod1+t exec ~/s/sh_scripts/theme_toggle.sh
+bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 
 exec "eww daemon; eww open bar"
 # toggle visibility
@@ -216,7 +219,6 @@ bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
 # restart properly
 bindsym $mod+Shift+e exec "eww kill; eww open bar"
 
-exec bash ~/.config/sway/auto_redshift.sh
 #exec bash ~/.config/sway/try_connect_headphones.sh
 
 

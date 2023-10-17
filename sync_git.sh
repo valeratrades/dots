@@ -5,7 +5,7 @@ dot_directories="
 	${HOME}/.bashrc
 	${HOME}/.profile
 	/usr/bin/start_sway.sh
-	${HOME}/s/sh_scripts
+	${HOME}/s/help_scripts
 	${HOME}/.config/sway
 	${HOME}/.config/eww
 	${HOME}/.config/nvim

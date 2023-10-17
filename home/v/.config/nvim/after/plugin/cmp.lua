@@ -29,7 +29,7 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		['<Tab>'] = cmp_action.luasnip_supertab(),
 		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-		['<Esc>'] = cmp.mapping.abort(),                  -- if esc in insert mode is not instantenious, change this (my estimation is this thing takes about 40ms)
+		['<C-e>'] = cmp.mapping.abort(),                  -- if esc in insert mode is not instantenious, change this (my estimation is this thing takes about 40ms)
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` to only confirm explicitly selected items.
 
 		['<C-t>'] = cmp.mapping(function()
@@ -54,7 +54,17 @@ cmp.setup({
 			"i",
 			"s",
 		}),
-
+		['<Esc>'] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.mapping.abort()
+				vim.api.nvim_command('stopinsert')
+			else
+				vim.api.nvim_input('<Esc>')
+			end
+		end, {
+			"i",
+			"s",
+		})
 	}),
 })
 cmp.setup.filetype('gitcommit', {

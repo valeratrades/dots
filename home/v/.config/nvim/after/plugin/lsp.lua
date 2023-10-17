@@ -18,6 +18,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("lr", "<cmd>lua vim.lsp.buf.references()<cr>", "references")
 	map("lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
 	-- TODO: If possible, make it ignore all warnings if there are any errors.
+	--// probably, want to adjust the level of scrutiny of the lsp engine itself. So it doesn't even show them warnings until I ask it to.
 	map("lt", "<cmd>lua vim.diagnostic.goto_next()<cr>", "next diagnostic")
 	map("ln", "<cmd>lua vim.diagnostic.goto_prev()<cr>", "prev diagnostic")
 	map("ls", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")

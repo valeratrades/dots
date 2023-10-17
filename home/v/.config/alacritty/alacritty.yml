@@ -6,7 +6,7 @@ env:
 
 # Position of the import line does not matter. Main alacritty.yml always overwrites all the imports.
 import:
-  - ~/.config/alacritty/themes/rose-pine.yml
+  - ~/.config/alacritty/themes/catppuccin-latte.yml
 window:
   padding:
    x: 0
