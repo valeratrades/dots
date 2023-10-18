@@ -61,7 +61,7 @@
 
 ;; Todo Timer ;;
 (defwidget todo_timer []
-	(icon-module	:class {todo_timer == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
+	(icon-module	:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
 								:icon ""
 								:visible {todo_timer != "None"}
 		(label :text todo_timer)))

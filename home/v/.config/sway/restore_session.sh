@@ -1,6 +1,6 @@
 #!/bin/sh
 
-swaymsg "workspace 4, exec alacritty -e todo"
+swaymsg "workspace 4, exec alacritty && todo"
 swaymsg "workspace 2, exec google-chrome-stable" #--enable-features=UseOzonePlatform --ozone-platform=wayland"
 swaymsg "workspace 3, exec telegram-desktop &"
 swaymsg "exec discord &" # --enable-features=UseOzonePlatform --ozone-platform=wayland &"

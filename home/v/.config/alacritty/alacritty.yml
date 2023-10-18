@@ -3,10 +3,10 @@
 # set by alacritty itself.
 env:
   TERM: xterm-256color
-
 # Position of the import line does not matter. Main alacritty.yml always overwrites all the imports.
 import:
   - ~/.config/alacritty/themes/rose-pine.yml
+tabspaces: 2 # doesn't work.
 window:
   padding:
    x: 0
