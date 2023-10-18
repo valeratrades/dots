@@ -63,12 +63,39 @@ fn set_redshift(bedtime: &Bedtime) {
 	if redshift != 0 {
 		let temperature: f32 = 6500.0 - redshift as f32 * 210.0;
 		let brightness: f32 = 1.0 - redshift as f32 * 0.0275;
-		dbg!(&temperature);
-		dbg!(&brightness);
-		let _ = Command::new("sh")
-        .arg("-c")
-        .arg(format!("gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set {} && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set {}", temperature, brightness))
-        .output()
-        .expect("Failed to execute command");
+
+		let extra_characters: &[_] = &['(', ')', ','];
+		let current_temperature_bytes = Command::new("sh")
+			.arg("-c")
+			.arg("gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.get".to_owned())
+			.output()
+			.unwrap()
+			.stdout;
+		let current_temperature = String::from_utf8_lossy(&current_temperature_bytes)
+			.trim()
+			.to_string()
+			.trim_matches(extra_characters)
+			.parse()
+			.unwrap();
+		let current_brightness_bytes = Command::new("sh")
+			.arg("-c")
+			.arg("gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.get".to_owned())
+			.output()
+			.unwrap()
+			.stdout;
+		let current_brightness = String::from_utf8_lossy(&current_brightness_bytes)
+			.trim()
+			.to_string()
+			.trim_matches(extra_characters)
+			.parse()
+			.unwrap();
+
+		if temperature < current_temperature && brightness < current_brightness {
+			let _ = Command::new("sh")
+					.arg("-c")
+					.arg(format!("gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set {} && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set {}", temperature, brightness))
+					.output()
+					.unwrap();
+		}
 	}
 }

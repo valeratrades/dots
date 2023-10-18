@@ -2,7 +2,9 @@
 ; general docs are at https://elkowar.github.io/eww/configuration.html
 ; another nice config and options showcase https://github.com/druskus20/eugh
 
-; the best one so far: https://github.com/rxyhn/tokyo/blob/main/config/eww/bar/eww.yuck
+; currently sitting on:
+; gc -b tray-3 https://github.com/ralismark/eww
+; that's a version with tray support. Will have to switch to main when it is merged.
 
 (defvar bar_visible "true")
 (defvar myopia "false")
@@ -38,7 +40,9 @@
 			(ram)
 			(cpu)
 			(time)
-			(battery))))
+			(battery))
+		(systray :class "tray"))) ; :pack-direction "ttb") // this thing makes it vertical
+
 
 (defwidget icon-module [icon ?class ?visible]
 	(box :class "${class} icon-module"
