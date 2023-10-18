@@ -1,5 +1,5 @@
 ,h() {
-	cs ~/s/todo/my_todo
+	cs ~/s/valera
 	. ./run.sh
 }
 
