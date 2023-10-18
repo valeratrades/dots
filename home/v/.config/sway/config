@@ -41,7 +41,9 @@ assign [app_id="org.pwmt.zathura"] $ws4
 font pango:Sans 8
 titlebar_padding 1 1
 titlebar_border_thickness 1
-focus_on_window_activation none
+focus_on_window_activation focus
+for_window [class="discord"] focus=off
+for_window [app_id="org.telegram.desktop"] focus=off
 focus_follows_mouse yes
 mouse_warping container
 default_border pixel 1
@@ -55,7 +57,7 @@ xwayland enable
 #	border.color
 	
 for_window [tiling] border pixel none
-for_window [floating] border non
+for_window [floating] border none
 smart_borders off
 
 bindgesture pinch:outward exec xdotool key ctrl+plus

@@ -91,3 +91,4 @@ alias py="~/envs/Python/bin/python3"
 . ~/s/todo/functions.sh
 . ~/s/help_scripts/weird.sh
 . ~/.credentials.sh
+. ~/s/help_scripts/shell_harpoon/main.sh
