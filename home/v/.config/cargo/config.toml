@@ -5,3 +5,6 @@ rustc-wrapper = "sccache"
 # the following is assumed with modern gcc. Keeping in case something brakes.
 # linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=/path/to/mold"]
+
+[doc]
+browser = "google-chrome-stable"

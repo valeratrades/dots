@@ -57,7 +57,7 @@ fn set_redshift(bedtime: &Bedtime) {
 	if now_shifted <= 4 * 60 {
 		redshift = 20;
 	} else if now_shifted >= 20 * 60 {
-		redshift = ((now_shifted as f32 / 60.0 - 20.0) * 6.0) as u32;
+		redshift = ((now_shifted as f32 / 60.0 - 19.5) * 5.0) as u32;
 	}
 
 	if redshift != 0 {

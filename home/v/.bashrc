@@ -43,7 +43,9 @@ mkp() {
 	touch "${file_path}" || mkdir "${file_path}"
 }
 cs() {
-	cd "$@" && ls
+	cd "$@"
+	. "./run.sh" > /dev/null 2>&1
+	ls
 }
 
 # ============================================================================
@@ -83,6 +85,18 @@ alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 # cargo
 alias c="cargo"
 alias ck="stop_all_run_cargo.sh"
+cn() {
+	cargo new "$@"
+	project_name="${!#}"
+	cd "$project_name" || printf "\033[31m'cn' assumes project_name being the last argument\033[0m\n"
+	cp ${HOME}/.file_snippets/run.sh ./run.sh
+	cp ${HOME}/.file_snippets/rustfmt.toml ./rustfmt.toml
+	cp ${HOME}/.file_snippets/rust_gitignore ./.gitignore
+	git add -A
+	git commit -m "-- New Project Snippet --"
+}
+#
+
 # python
 alias pip="~/envs/Python/bin/pip"
 alias py="~/envs/Python/bin/python3"

@@ -1,6 +1,5 @@
 ,h() {
 	cs ~/s/valera
-	. ./run.sh
 }
 
 ,t() {
@@ -8,9 +7,9 @@
 }
 
 ,n() {
-	v ~/.dots/sync_git.sh
+	v ~/.local/share/applications
 }
 
 ,s() {
-	v ~/.config/sway
+	v ~/.config/mimeapps.list
 }

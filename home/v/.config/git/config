@@ -8,3 +8,5 @@
 	rebase = true
 [safe]
 	directory = *
+[core]
+	excludesfile = /home/v/.config/git/.gitignore_global

@@ -5,6 +5,7 @@
 ; currently sitting on:
 ; gc -b tray-3 https://github.com/ralismark/eww
 ; that's a version with tray support. Will have to switch to main when it is merged.
+; pull request here: https://github.com/elkowar/eww/pull/743
 
 (defvar bar_visible "true")
 (defvar myopia "false")
@@ -12,19 +13,18 @@
 (defvar sway_mode "default")
 
 (defwindow bar 
- :monitor 0
- :hexpand false
- :vexpand false
- ; setting the width to 0 for now, so it itself takes as much space as neeeded. Might change later in order to prevent the width from ever changing dynamically.
- :geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
- :reserve (struts :distance "17px" :side "top")
- (bar))
+	:monitor 0
+	:hexpand false
+	:vexpand false
+	:geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
+	(bar))
 
 (defwidget bar []
 	(box :orientation "h"
 			 :space-evenly false
 			 :class {myopia == "true" ? "myopia" : ""}
 			 :visible {bar_visible == "true"}
+		;;(systray :pack_direction "left")
 		(box :halign "end"
 				 :spacing 0
 				 :hexpand true
@@ -40,8 +40,7 @@
 			(ram)
 			(cpu)
 			(time)
-			(battery))
-		(systray :class "tray"))) ; :pack-direction "ttb") // this thing makes it vertical
+			(battery))))
 
 
 (defwidget icon-module [icon ?class ?visible]
@@ -54,7 +53,6 @@
 		(label :class "icon-module__icon" :text "${icon}")
 		(children)))
 ;; ----------------------------------------------------------------------------
-
 
 ;; Sway Mode ;;
 (defwidget sway_mode []
