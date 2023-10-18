@@ -1,6 +1,6 @@
 local cmp = require('cmp')
 local cmp_format = require('lsp-zero').cmp_format()
---local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local _ = { behavior = cmp.SelectBehavior.Select } -- somehow forces cmp into the right behavior.
 local cmp_action = require('lsp-zero').cmp_action()
 
 
