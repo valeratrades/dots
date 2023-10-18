@@ -5,13 +5,10 @@ mute() {
 	nohup alacritty -e nvim ${HOME}/s/help_scripts/shell_harpoon/config.sh > /dev/null 2>&1 &
 	sleep 0.3
 	swaymsg floating enable
-	#nvim ${HOME}/s/help_scripts/shell_harpoon/config.sh
-	#
 
 	wait $!
 	. $config_path
 }
-
 ,ui() {
 	mute > /dev/null 2>&1
 }
