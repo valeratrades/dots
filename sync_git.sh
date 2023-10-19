@@ -18,6 +18,10 @@ dot_directories="
 	${HOME}/.config/alacritty
 	${HOME}/.config/cargo
 	${HOME}/.config/zathura
+	${HOME}/.config/mimeapps.list
+	${HOME}/.local/share/applications/nnn.desktop
+	${HOME}/.local/share/applications/nvim.desktop
+	${HOME}/.config/dconf/user
 "
 
 exclude_gitignore() {

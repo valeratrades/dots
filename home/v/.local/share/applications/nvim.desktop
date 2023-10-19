@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=nvim
+Exec=alacritty -e nvim %U
+Terminal=false
+Type=Application
+MimeType=text/plain;
