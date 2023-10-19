@@ -10,7 +10,7 @@ struct Bedtime {
 impl From<String> for Bedtime {
 	fn from(s: String) -> Self {
 		let split: Vec<_> = s.split(':').collect();
-		assert!(split.len() == 2, "bedtime should be supplied in the format: \"%H:%M\"");
+		assert!(split.len() == 2, "ERROR: bedtime should be supplied in the format: \"%H:%M\"");
 		let hours: u32 = split[0].parse().unwrap();
 		let minutes: u32 = split[1].parse().unwrap();
 		Bedtime { hours, minutes }
@@ -19,6 +19,7 @@ impl From<String> for Bedtime {
 
 fn main() {
 	let args: Vec<String> = std::env::args().collect();
+	assert!(args.len() == 2, "ERROR: provide one and only one argument, being the bedtime in format: '%H:%M'");
 	let bedtime: Bedtime = args[1].clone().into();
 
 	//PERF dancing with tambourine to get into the 30m cycle

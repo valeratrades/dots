@@ -16,8 +16,6 @@ map <A-q> quit
 
 map T scroll half-down
 map N scroll half-up
-# doesn't work
-map H S
 
 map <A-h> jumplist backward
 map <A-s> jumplist forward

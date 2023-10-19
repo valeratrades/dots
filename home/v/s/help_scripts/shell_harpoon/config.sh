@@ -1,5 +1,5 @@
 ,h() {
-	cs ~/s/valera
+	cs ~/Documents/Courses/_Writing/
 }
 
 ,t() {
