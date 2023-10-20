@@ -24,7 +24,7 @@ dot_directories="
 	${HOME}/.config/dconf/user
 	${HOME}/.config/nnn/termfilechooser.sh
 	${HOME}/.config/nnn/setup.sh
-	${HOME}/.config/xdg-dekstop-portal-termfilechooser/config
+	${HOME}/.config/xdg-desktop-portal-termfilechooser/config
 "
 
 exclude_gitignore() {
