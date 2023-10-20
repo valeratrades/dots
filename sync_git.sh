@@ -22,6 +22,9 @@ dot_directories="
 	${HOME}/.local/share/applications/nnn.desktop
 	${HOME}/.local/share/applications/nvim.desktop
 	${HOME}/.config/dconf/user
+	${HOME}/.config/nnn/termfilechooser.sh
+	${HOME}/.config/nnn/setup.sh
+	${HOME}/.config/xdg-dekstop-portal-termfilechooser/config
 "
 
 exclude_gitignore() {
