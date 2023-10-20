@@ -3,7 +3,7 @@
 }
 
 ,t() {
-	cs ~/s/help_scripts
+	cs ~/.config/nnn
 }
 
 ,n() {

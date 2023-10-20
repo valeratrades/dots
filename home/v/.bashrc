@@ -61,6 +61,7 @@ z() {
 	zathura "$1$ending"
 }
 
+eval "$(jump shell)" # binds to j
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.bashrc'
@@ -78,6 +79,7 @@ alias pQ="pacman -Q | rg"
 alias pY="system_sync.sh"
 # yay
 alias yS="yay -Su --noconfirm"
+alias yR="yay -R --noconfirm"
 alias yR="yay -Rns --noconfirm"
 alias yQ="yay -Q | rg"
 #
@@ -96,7 +98,6 @@ cn() {
 	git commit -m "-- New Project Snippet --"
 }
 #
-
 # python
 alias pip="~/envs/Python/bin/pip"
 alias py="~/envs/Python/bin/python3"
