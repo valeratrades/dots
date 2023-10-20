@@ -1,5 +1,5 @@
 ,h() {
-	sv /usr/share/xdg-desktop-portal-termfilechooser
+	cs ~/.config/sway
 }
 
 ,t() {
