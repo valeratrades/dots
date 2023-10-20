@@ -34,7 +34,7 @@ exclude_gitignore() {
 }
 
 for dir in $dot_directories; do
-	printf "\x1b[34m%s\x1b[0m\n" "$dir"
+	printf "\033[34m%s\033[0m\n" "$dir"
 	command="rsync -au"
 	command=$(exclude_gitignore "$dir" "$command" 2>/dev/null || :)
 
