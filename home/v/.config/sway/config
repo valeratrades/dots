@@ -227,7 +227,8 @@ bindsym $mod+Shift+e exec "eww kill; eww open bar"
 
 # # Pin Focused
 # 26 is a dot on my keyboard (look up with xev)
-bindcode $mod+26 exec ~/.config/sway/pin_focused/toggle.sh
+#bindcode $mod+26 exec ~/.config/sway/pin_focused/toggle.sh
+bindcode $mod+26 sticky toggle
 #bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
 #
 
