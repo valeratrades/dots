@@ -41,7 +41,7 @@ assign [app_id="org.pwmt.zathura"] $ws4
 font pango:Sans 8
 titlebar_padding 1 1
 titlebar_border_thickness 1
-focus_on_window_activation focus
+focus_on_window_activation none
 for_window [class="discord"] focus=off
 for_window [app_id="org.telegram.desktop"] focus=off
 focus_follows_mouse yes
@@ -125,7 +125,7 @@ bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoi
 bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
 bindsym $mod+Shift+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
 bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
-exec /home/v/s/help_scripts/auto_redshift/target/release/auto_redshift 23:00
+exec sleep 2 && /home/v/s/help_scripts/auto_redshift/target/release/auto_redshift 23:00
 #
 
 bindsym $mod+1   workspace $ws1

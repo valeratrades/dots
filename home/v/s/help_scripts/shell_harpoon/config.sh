@@ -1,5 +1,5 @@
 ,h() {
-	cs ~/Documents/Courses/_Writing/
+	sv /usr/share/xdg-desktop-portal-termfilechooser
 }
 
 ,t() {
