@@ -56,6 +56,7 @@ cs() {
 # ----------------------------------------------------------------------------
 # BELOW THIS LINE ARE THINGS WE NEVER USE RECURSIVELY.
 # ============================================================================
+eval "$(jump shell)" # binds to j
 chh() {
 	sudo chmod -R 777 ~/
 }
@@ -64,10 +65,15 @@ z() {
 	zathura "$1$ending"
 }
 
-eval "$(jump shell)" # binds to j
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.zshrc'
+# # cd
+alias cdc="cd ~/.config"
+alias cds="cd ~/s"
+alias cdh="cd ~/s/help_scripts"
+alias cdv="cd ~/s/valera"
+#
 # # editor
 # for editor config
 alias ec='e ~/.config/nvim'
