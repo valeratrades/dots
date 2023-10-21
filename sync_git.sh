@@ -13,7 +13,7 @@ dot_directories="
 	/etc/keyd
 	${HOME}/.config/helix
 	${HOME}/.config/git
-	${HOME}/.config/greenclip
+	${HOME}/.config/greenclip.toml
 	${HOME}/.config/foot
 	${HOME}/.config/alacritty
 	${HOME}/.config/cargo
