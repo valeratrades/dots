@@ -26,7 +26,8 @@ function mnml_status {
         job_ansi="$MNML_BGJOB_MODE"
     fi
 
-    local err_ansi="$MNML_OK_COLOR"
+		# 4 is blue. Default was green.
+    local err_ansi="4"
     if [ "$MNML_LAST_ERR" != "0" ]; then
         err_ansi="$MNML_ERR_COLOR"
     fi
