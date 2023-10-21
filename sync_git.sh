@@ -47,7 +47,7 @@ for dir in $dot_directories; do
 
 	to="$target_dir$dir"
 	mkdir -p "$(dirname "$to")"
-	$command "$dir" $(dirname "$to")
+	$command "$dir" $(dirname "$to") || printf "\033[31merror\033[0m\n"
 done
 
 date=$(date +"%Y-%m-%d %H:%M:%S")
