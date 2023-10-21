@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # ---------- Xwayland ------------
 # ensure xdg run dir exists and is clean
@@ -32,7 +32,7 @@ export QT_WAYLAND_FORCE_DPI GDK_BACKEND QT_QPA_PLATFORM CLUTTER_BACKEND SDL_VIDE
 export GIT_CONFIG_HOME="$HOME/.config/git/config"
 dbus-run-session -- sway
 
-# this solves the problem with file pickers everywhere (this and the thing at ${HOME}/s/help_scripts/kdialog and at ${HOME}/.config/nnn/termfilechooser.sh)
+# this solves the problem with file pickers (this and the thing at ${HOME}/s/help_scripts/kdialog and at ${HOME}/.config/nnn/termfilechooser.sh)
 export QT_QPA_PLATFORMTHEME=flatpak
 export GTK_USE_PORTAL=1
 export GDK_DEBUG=portals

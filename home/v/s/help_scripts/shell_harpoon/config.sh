@@ -7,9 +7,9 @@
 }
 
 ,n() {
-	v ~/.local/share/applications
+	e ~/.local/share/applications
 }
 
 ,s() {
-	v ~/.config/mimeapps.list
+	e ~/.config/mimeapps.list
 }
