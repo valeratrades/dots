@@ -1,0 +1,10 @@
+**/target/
+**/debug/
+**/Cargo.lock
+.DS_Store
+**/*.rs.bk
+*.sw[po]
+.cargo/config.toml
+.cargo/config
+**/.vscode
+**/_*
