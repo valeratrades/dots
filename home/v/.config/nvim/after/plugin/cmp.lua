@@ -10,8 +10,8 @@ cmp.setup({
 	--	300
 	--}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp', keyword_length = 5 },
-		{ name = 'luasnip',  keyword_length = 5 },
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
 	}, {
 		{ name = 'buffer', keyword_length = 5, option = { keyword_length = 5 } }, -- `option` is defined by the source itself, and currently is useless, as keyword_lenght is above 4. But keeping just in case.
 	}),

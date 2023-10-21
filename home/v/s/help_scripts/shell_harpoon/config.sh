@@ -1,5 +1,5 @@
 ,h() {
-	cs ~/.config/sway
+	cs ~/s/todo/my_todo
 }
 
 ,t() {

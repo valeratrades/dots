@@ -114,9 +114,8 @@ k("", "<C-q>", "\"+ygv\"_d")
 k("i", "<C-del>", "X<esc>ce") -- n mappings for <del> below rely on this
 k("v", "<bs>", "d")
 k("n", "<bs>", "i<bs>")
-k("n", "<C-bs>", "i<C-bs>", { noremap = false })
 k("n", "<del>", "i<del>")
-k("n", "<C-del>", "i<C-del>", { noremap = false })
+k("n", "<C-del>", "a<C-del>", { remap = true })
 --test this thing is-it/actually() working?
 
 k('', '<C-a>', 'ggVG', { noremap = true, silent = true })

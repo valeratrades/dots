@@ -36,23 +36,16 @@ for_window [app_id="org.telegram.desktop"] focus=off
 focus_follows_mouse yes
 mouse_warping container
 default_border pixel 1
-#normal
-default_floating_border none
-hide_edge_borders smart
 smart_gaps off
 gaps inner 0
 xwayland enable
-#	default_border color white
-#	border.color
-	
-for_window [tiling] border pixel none
-for_window [floating] border none
-smart_borders off
+smart_borders on
+hide_edge_borders both
 
 bindgesture pinch:outward exec xdotool key ctrl+plus
 bindgesture pinch:inward exec xdotool key ctrl+minus
 
-# Autostart
+# # Autostart
 exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
 exec "bash ~/.config/sway/restore_session.sh"
 #exec "bash ~/.config/sway/listen.sh"
@@ -88,12 +81,9 @@ bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
 
 output * bg $background fill
 
-# Still not sure if it does anything.
-#exec swayidle \
-#       timeout 600 'swaymsg "output * dpms off"' \
-#       after-resume 'swaymsg "output * dpms on"' \
-
-# Multimedia
+# # Multimedia
+exec pamixer --default-source --set-volume 30
+exec pamixer --set-volume 45
 bindsym $mod+F5 exec pamixer --toggle-mute
 bindsym $mod+F6 exec pamixer --decrease 5
 bindsym $mod+F7 exec pamixer --increase 5
@@ -107,8 +97,9 @@ bindsym XF86AudioPrev exec playerctl previous
 # could be redundant, if I find a way to fix a bug with audio on the phone stopping at times with headphones connected to pc too.
 bindsym $mod+b exec bluetoothctl connect E8:EE:CC:36:53:49
 bindsym $mod+Shift+b exec bluetoothctl disconnect E8:EE:CC:36:53:49
+#
 
-# Redshift
+# # Redshift
 # calibrated so it takes 20 key presses for both temperature and brightness to move between the two default states.
 bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.decrease 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.decrease 0.0275
 bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
