@@ -4,7 +4,7 @@ target_dir="${HOME}/.dots"
 dot_directories="
 	${HOME}/.zshrc
 	${HOME}/.zprofile
-	${HOME}/.zsh_custom
+	${HOME}/.config/zsh
 	/usr/bin/start_sway.sh
 	${HOME}/s/help_scripts
 	${HOME}/.config/sway

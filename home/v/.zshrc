@@ -6,8 +6,7 @@
 [[ $- != *i* ]] && return
 export PATH="$PATH:~/s/evdev/:~/.cargo/bin/:~/s/help_scripts/:~/go/bin/:/usr/lib/rustup/bin/"
 
-ZSH_CUSTOM="${HOME}/.zsh_custom"
-ZSH_THEME="${ZSH_CUSTOM}/themes/minimal.zsh"
+ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
 source $ZSH_THEME
 
 # currently it is 3,65Gb # And B is for bytes
