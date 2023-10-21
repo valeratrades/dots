@@ -26,6 +26,8 @@ dot_directories="
 	${HOME}/.config/nnn/termfilechooser.sh
 	${HOME}/.config/nnn/setup.sh
 	${HOME}/.config/xdg-desktop-portal-termfilechooser/config
+	${HOME}/.config/.file_snippets
+	/etc/systemd/system/getty@tty1.service.d/override.conf
 "
 
 exclude_gitignore() {
