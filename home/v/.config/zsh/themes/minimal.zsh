@@ -1,3 +1,5 @@
+#NB: the fucking morons designing this language decided that an array starts at 1. (It's still from 0 in bash)
+
 # Global settings
 MNML_OK_COLOR="${MNML_OK_COLOR:-2}"
 MNML_ERR_COLOR="${MNML_ERR_COLOR:-1}"
@@ -15,6 +17,25 @@ MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 [ "${+MNML_MAGICENTER}" -eq 0 ] && MNML_MAGICENTER=(mnml_me_dirs mnml_me_ls mnml_me_git)
 
 
+#NB: subset dirs have to be earlier, as I would break on them in `mnml_cmd` otherwise. (eg: `s/valera` has to be before `s`)
+local special_dirs=("s/help_scripts" "s/valera" ".dots" ".config" "s")
+local special_chars=("h" "v" "d" "c" "s")
+
+function custom_cwd {
+	#NB: "%~" returns a name with non-standard ~ character. The following special_dir spec contains it as well.
+	local cwd="%~"
+	cwd="${(%)cwd}"
+	for i in {1..${#special_dirs[@]}}; do
+		local tilda_plus_dir="~/${special_dirs[$i]}"
+		if [[ "$cwd" == "$tilda_plus_dir"* ]]; then
+			cwd="${cwd/#$tilda_plus_dir/$special_chars[$i]}"
+			break
+		fi
+	done
+	echo $cwd
+}
+
+
 # Components
 function mnml_status {
 	local okc="$MNML_OK_COLOR"
@@ -25,15 +46,14 @@ function mnml_status {
 		uchar="~"
 	elif [ "$PWD" = "/" ]; then
 		uchar="/"
-	elif [ "$PWD" = "${HOME}/s" ]; then
-		uchar="s"
-	elif [ "$PWD" = "${HOME}/s/help_scripts" ]; then
-		uchar="h"
-	elif [ "$PWD" = "${HOME}/.config" ]; then
-		uchar="c"
-	elif [ "$PWD" = "${HOME}/s/valera" ]; then
-		uchar="v"
 	fi
+	for i in {1..${#special_dirs[@]}}; do
+		local home_plus_dir="${HOME}/${special_dirs[$i]}"
+		if [ "$PWD" = "$home_plus_dir" ]; then
+			uchar="${special_chars[$i]}"
+			break
+		fi
+	done
 
 	local job_ansi="0"
 	if [ -n "$(jobs | sed -n '$=')" ]; then
@@ -57,23 +77,17 @@ function mnml_status {
 
 	function mnml_cwd {
 		local echar="$MNML_ELLIPSIS_CHAR"
-		# this thing caps how many segments are displayed at once.
-		#local segments="${1:-2}"
 		local seg_len="${2:-0}"
 
 		local _w="%{\e[0m%}"
 		local _g="%{\e[38;5;244m%}"
 
-		if [ "$segments" -le 0 ]; then
-			segments=0
-		fi
 		if [ "$seg_len" -gt 0 ] && [ "$seg_len" -lt 4 ]; then
 			seg_len=4
 		fi
 		local seg_hlen=$((seg_len / 2 - 1))
 
-		local cwd="%${segments}~"
-		cwd="${(%)cwd}"
+		local cwd=$(custom_cwd)
 		cwd=("${(@s:/:)cwd}")
 
 		local pi=""
@@ -99,47 +113,12 @@ function mnml_status {
 		fi
 	}
 
-	function mnml_hg {
-		local statc="%{\e[0;3${MNML_OK_COLOR}m%}" # assume clean
-		local bname="$(hg branch 2> /dev/null)"
-		if [ -n "$bname" ]; then
-			if [ -n "$(hg status 2> /dev/null)" ]; then
-				statc="%{\e[0;3${MNML_ERR_COLOR}m%}"
-			fi
-			printf '%b' "$statc$bname%{\e[0m%}"
-		fi
-	}
-
-	function mnml_hg_no_color {
-		# Assume branch name is clean
-		local statc="%{\e[0;3${MNML_OK_COLOR}m%}"
-		local bname=""
-		# Defines path as current directory
-		local current_dir=$PWD
-		# While current path is not root path
-		while [[ $current_dir != '/' ]]
-		do
-			if [[ -d "${current_dir}/.hg" ]]
-			then
-				if [[ -f "$current_dir/.hg/branch" ]]
-				then
-					bname=$(<"$current_dir/.hg/branch")
-				else
-					bname="default"
-				fi
-				printf '%b' "$statc$bname%{\e[0m%}"
-				return;
-			fi
-			# Defines path as parent directory and keeps looking for :)
-			current_dir="${current_dir:h}"
-		done
-	}
-
 	function mnml_uhp {
 		local _w="%{\e[0m%}"
 		local _g="%{\e[38;5;244m%}"
-		local cwd="%~"
-		cwd="${(%)cwd}"
+		#local cwd="%~"
+		#cwd="${(%)cwd}"
+		local cwd=$(custom_cwd)
 
 		printf '%b' "$_g%n$_w@$_g%m$_w:$_g${cwd//\//$_w/$_g}$_w"
 	}
@@ -147,13 +126,6 @@ function mnml_status {
 	function mnml_ssh {
 		if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 			printf '%b' "$(hostname -s)"
-		fi
-	}
-
-	function mnml_pyenv {
-		if [ -n "$VIRTUAL_ENV" ]; then
-			_venv="$(basename $VIRTUAL_ENV)"
-			printf '%b' "${_venv%%.*}"
 		fi
 	}
 

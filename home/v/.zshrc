@@ -4,7 +4,7 @@
 #
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-export PATH="$PATH:~/s/evdev/:~/.cargo/bin/:~/s/help_scripts/:~/go/bin/:/usr/lib/rustup/bin/"
+export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/s/help_scripts/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
 
 ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
 source $ZSH_THEME
@@ -73,12 +73,15 @@ alias cdc="cd ~/.config"
 alias cds="cd ~/s"
 alias cdh="cd ~/s/help_scripts"
 alias cdv="cd ~/s/valera"
+alias cdd="cd ~/.dots"
 #
 # # editor
 # for editor config
-alias ec='e ~/.config/nvim'
+alias ec="e ~/.config/nvim"
 # for edit shell
-alias es='e ~/.zshrc'
+alias es="e ~/.zshrc"
+# for edit zsh theme
+alias ezt="e ~/.config/zsh/themes/minimal.zsh"
 alias hx="helix"
 #
 # # keyd
