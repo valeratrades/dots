@@ -27,6 +27,7 @@ dot_directories="
 	${HOME}/.config/nnn/setup.sh
 	${HOME}/.config/xdg-desktop-portal-termfilechooser/config
 	${HOME}/.file_snippets
+	${HOME}/.config/openvpn
 	/etc/systemd/system/getty@tty1.service.d/override.conf
 "
 
