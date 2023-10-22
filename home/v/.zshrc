@@ -22,13 +22,30 @@ e() {
 			basename=$(basename $1)
 			shift
 			nvim $basename $@
-			# if unsucessful, make it try to add `.sh` to the path.
 		elif [ -d "$1" ]; then
-			cd $(dirname $1)
+			cd $1
 			shift
 			nvim "$@" .
 		else
-			return 1
+			local could_fix=0
+			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt")
+			# note that indexing starts at 1, as we're in a piece of shit shell.
+			for i in {1..${#try_extensions[@]}}; do
+				local try_path="${1}${try_extensions[$i]}"
+				if [ -f "$try_path" ]; then
+					cd $(dirname $try_path)
+					basename=$(basename $try_path)
+					shift
+					nvim $basename $@
+					could_fix=1
+					break
+				fi
+			done
+			if [ $could_fix = 1 ]; then
+				return 0
+			else
+				return 1
+			fi
 		fi
 	
 		cd - > /dev/null
