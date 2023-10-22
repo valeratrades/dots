@@ -18,7 +18,7 @@ MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 
 
 #NB: subset dirs have to be earlier, as I would break on them in `mnml_cmd` otherwise. (eg: `s/valera` has to be before `s`)
-local special_dirs=("s/help_scripts" "s/valera" ".dots" "s/ai-news-trade-bot" ".config" "s")
+local special_dirs=("s/help_scripts" "s/valera" "Downloads" "s/ai-news-trade-bot" ".config" "s")
 local special_chars=("h" "v" "d" "a" "c" "s")
 
 function custom_cwd {

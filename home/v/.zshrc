@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/s/help_scripts/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
+. ~/.credentials.sh
 
 ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
 source $ZSH_THEME
@@ -16,16 +17,26 @@ TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}')
 # e stands for editor
 e() {
   if [ -n "$1" ]; then
-    split_array=$(echo "$1" | tr "/" "\n")
-    last_element=$(echo "$split_array" | tail -n 1)
-
-    cd "$1" && shift && nvim "$@" . || cd "${1%$last_element}" && shift && nvim $last_element $@ 
-
-    cd - > /dev/null
+		if [ -f "$1" ]; then
+			cd $(dirname $1)
+			basename=$(basename $1)
+			shift
+			nvim $basename $@
+			# if unsucessful, make it try to add `.sh` to the path.
+		elif [ -d "$1" ]; then
+			cd $(dirname $1)
+			shift
+			nvim "$@" .
+		else
+			return 1
+		fi
+	
+		cd - > /dev/null
   else
     nvim .
   fi
 }
+#TODO: in a few days, given `e` works correctly, update this to be the same.
 se() {
   if [ -n "$1" ]; then
     split_array=$(echo "$1" | tr "/" "\n")
@@ -65,6 +76,33 @@ z() {
 	zathura "$1$ending"
 }
 
+server() {
+  if [ "$1" = "ssh" ]; then
+    export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
+		expect -c "
+    spawn ssh $VINCENT_SSH_HOST
+    expect -re \".*password: \"
+    send \"$VINCENT_SSH_PASSWORD\r\"
+    interact
+    "
+  elif [ "$1" = "connect" ]; then
+    export VINCENT_SERVER_USERNAME VINCENT_SERVER_PASSWORD
+    expect <<EOD
+    spawn sudo openvpn --config ${HOME}/.config/openvpn/client.ovpn
+    expect "Enter Auth Username: "
+    send "\$env(VINCENT_SERVER_USERNAME)\r"
+    expect "Enter Auth Password: "
+    send "\$env(VINCENT_SERVER_PASSWORD)\r"
+    interact
+EOD
+	elif [ "$1" = "kill" ]; then
+		sudo killall openvpn
+  else
+    printf 'Commands: ["ssh", "connect", "kill"]\n'
+    return 1
+  fi
+}
+
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.zshrc'
@@ -73,7 +111,7 @@ alias cdc="cs ~/.config"
 alias cds="cs ~/s"
 alias cdh="cs ~/s/help_scripts"
 alias cdv="cs ~/s/valera"
-alias cdd="cs ~/.dots"
+alias cdd="cs ~/Downloads"
 alias cda="cs ~/s/ai-news-trade-bot"
 #
 # # editor
@@ -124,6 +162,5 @@ alias py="~/envs/Python/bin/python3"
 
 . ~/s/todo/functions.sh
 . ~/s/help_scripts/weird.sh
-. ~/.credentials.sh
 . ~/s/help_scripts/shell_harpoon/main.sh
 . ~/.config/nnn/setup.sh
