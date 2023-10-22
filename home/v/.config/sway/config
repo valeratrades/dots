@@ -208,6 +208,9 @@ bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
 # restart properly
 bindsym $mod+Shift+e exec "eww kill; eww open bar"
 
+# check if any task was cut short during the last session
+exec sleep 3 && my_todo
+
 
 #exec bash ~/.config/sway/try_connect_headphones.sh
 
