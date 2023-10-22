@@ -18,5 +18,7 @@ NNN_FIFO="/tmp/nnn.fifo"; export NNN_FIFO # crucial for some plugins
 export NNN_PLUG='g:dragdrop;u:davecloud;f:finder;o:fzopen;j:jump;c:fcd;d:diffs;m:nmount;v:imgview;p:preview-tui;t:preview-tabbed'
 #NNN_FCOLORS='0000E6310000000000000000'
 export NNN_OPTS="H" # hiddden files shown. (toggle with `.`)
+export NNN_PREFER_SELECTION=1
+export NNN_PREVIEWIMGPROG="feh"
 alias n="nnn -e"
 
