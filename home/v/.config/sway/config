@@ -81,8 +81,8 @@ bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
 output * bg $background fill
 
 # # Multimedia
-exec pamixer --default-source --set-volume 30
-exec pamixer --set-volume 45
+exec_always pamixer --default-source --set-volume 30
+exec_always pamixer --set-volume 45
 bindsym $mod+F5 exec pamixer --toggle-mute
 bindsym $mod+F6 exec pamixer --decrease 5
 bindsym $mod+F7 exec pamixer --increase 5

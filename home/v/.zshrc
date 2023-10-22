@@ -69,11 +69,12 @@ alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.zshrc'
 # # cd
-alias cdc="cd ~/.config"
-alias cds="cd ~/s"
-alias cdh="cd ~/s/help_scripts"
-alias cdv="cd ~/s/valera"
-alias cdd="cd ~/.dots"
+alias cdc="cs ~/.config"
+alias cds="cs ~/s"
+alias cdh="cs ~/s/help_scripts"
+alias cdv="cs ~/s/valera"
+alias cdd="cs ~/.dots"
+alias cda="cs ~/s/ai-news-trade-bot"
 #
 # # editor
 # for editor config
