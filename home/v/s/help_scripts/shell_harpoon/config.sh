@@ -1,5 +1,5 @@
 ,h() {
-	cs ~/s/valera
+	cs ~/s/tmp/mark_data
 }
 
 ,t() {

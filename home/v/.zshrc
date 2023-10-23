@@ -120,6 +120,7 @@ EOD
   fi
 }
 
+alias jn="jupyter notebook &"
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.zshrc'
@@ -132,12 +133,11 @@ alias csd="cs ~/Downloads"
 alias csa="cs ~/s/ai-news-trade-bot"
 #
 # # editor
-# for editor config
 alias ec="e ~/.config/nvim"
-# for edit shell
 alias es="e ~/.zshrc"
-# for edit zsh theme
 alias ezt="e ~/.config/zsh/themes/minimal.zsh"
+#? can I do this for rust and go? (maybe something with relative paths there)
+alias ep="e ~/envs/Python/lib/python3.11/site-packages" 
 alias hx="helix"
 #
 # # keyd
