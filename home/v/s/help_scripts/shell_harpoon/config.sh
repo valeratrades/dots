@@ -3,7 +3,7 @@
 }
 
 ,t() {
-	cs ~/.config/nnn
+	cs ~/s/ValeraLib
 }
 
 ,n() {
