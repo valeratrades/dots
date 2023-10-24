@@ -11,11 +11,8 @@ MNML_ELLIPSIS_CHAR="${MNML_ELLIPSIS_CHAR:-..}"
 MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 
 [ "${+MNML_PROMPT}" -eq 0 ] && MNML_PROMPT=(mnml_ssh mnml_status mnml_keymap)
-[ "${+MNML_RPROMPT}" -eq 0 ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
+[ "${+MNML_RPROMPT}" -eq 0 ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git mnml_files)
 [ "${+MNML_INFOLN}" -eq 0 ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
-
-[ "${+MNML_MAGICENTER}" -eq 0 ] && MNML_MAGICENTER=(mnml_me_dirs mnml_me_ls mnml_me_git)
-
 
 #NB: subset dirs have to be earlier, as I would break on them in `mnml_cmd` otherwise. (eg: `s/valera` has to be before `s`)
 local special_dirs=("s/help_scripts" "s/valera" "Downloads" "s/ai-news-trade-bot" ".config" "s")
@@ -166,29 +163,6 @@ function mnml_status {
 		printf '%b' "$output"
 	}
 
-# Magic enter functions
-function mnml_me_dirs {
-	local _w="\e[0m"
-	local _g="\e[38;5;244m"
-
-	if [ "$(dirs -p | sed -n '$=')" -gt 1 ]; then
-		local stack="$(dirs)"
-		echo "$_g${stack//\//$_w/$_g}$_w"
-	fi
-}
-
-function mnml_me_ls {
-	if [ "$(uname)" = "Darwin" ] && ! ls --version &> /dev/null; then
-		COLUMNS=$COLUMNS CLICOLOR_FORCE=1 ls -C -G -F
-	else
-		env ls -C -F --color="always" -w $COLUMNS
-	fi
-}
-
-function mnml_me_git {
-	git -c color.status=always status -sb 2> /dev/null
-}
-
 # Wrappers & utils
 # join outpus of components
 function _mnml_wrap {
@@ -209,21 +183,6 @@ function _mnml_wrap {
 # expand string as prompt would do
 function _mnml_iline {
 	echo "${(%)1}"
-}
-
-# display magic enter
-function _mnml_me {
-	local -a output
-	output=()
-	local cmd_out=""
-	local cmd
-	for cmd in $MNML_MAGICENTER; do
-		cmd_out="$(eval "$cmd")"
-		if [ -n "$cmd_out" ]; then
-			output+="$cmd_out"
-		fi
-	done
-	printf '%b' "${(j:\n:)output}" | less -XFR
 }
 
 # capture exit status and reset prompt
@@ -283,6 +242,3 @@ PROMPT='$(_mnml_wrap MNML_PROMPT) '
 RPROMPT='$(_mnml_wrap MNML_RPROMPT)'
 
 _mnml_bind_widgets
-
-bindkey -M main  "^M" buffer-empty
-bindkey -M vicmd "^M" buffer-empty

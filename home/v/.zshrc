@@ -124,6 +124,7 @@ alias jn="jupyter notebook &"
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.zshrc'
+alias gu='gitui'
 # # cd
 alias csc="cs ~/.config"
 alias css="cs ~/s"

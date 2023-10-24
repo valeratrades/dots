@@ -82,11 +82,14 @@ require('mason-lspconfig').setup({
 				typeCheckingMode = "strict",
 			},
 			before_init = function(params)
-				params.initializationOptions.cmd = {
-					"pyright-langserver",
-					"--stdio",
+				params.initializationOptions = {
+					cmd = {
+						"pyright-langserver",
+						"--stdio",
+					},
+					indentSize = 2,
 				}
 			end,
-		}
+		},
 	},
 })

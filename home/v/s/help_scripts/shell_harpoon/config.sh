@@ -7,7 +7,7 @@
 }
 
 ,n() {
-	e ~/.local/share/applications
+	cs ~/s/todo/my_todo
 }
 
 ,s() {
