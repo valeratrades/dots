@@ -4,7 +4,7 @@
 #
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/s/help_scripts/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
+export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
 . ~/.credentials.sh
 
 ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
@@ -93,33 +93,6 @@ z() {
 	zathura "$1$ending"
 }
 
-server() {
-  if [ "$1" = "ssh" ]; then
-    export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
-		expect -c "
-    spawn ssh $VINCENT_SSH_HOST
-    expect -re \".*password: \"
-    send \"$VINCENT_SSH_PASSWORD\r\"
-    interact
-    "
-  elif [ "$1" = "connect" ]; then
-    export VINCENT_SERVER_USERNAME VINCENT_SERVER_PASSWORD
-    expect <<EOD
-    spawn sudo openvpn --config ${HOME}/.config/openvpn/client.ovpn
-    expect "Enter Auth Username: "
-    send "\$env(VINCENT_SERVER_USERNAME)\r"
-    expect "Enter Auth Password: "
-    send "\$env(VINCENT_SERVER_PASSWORD)\r"
-    interact
-EOD
-	elif [ "$1" = "kill" ]; then
-		sudo killall openvpn
-  else
-    printf 'Commands: ["ssh", "connect", "kill"]\n'
-    return 1
-  fi
-}
-
 alias jn="jupyter notebook &"
 alias l="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
@@ -182,3 +155,4 @@ alias py="~/envs/Python/bin/python3"
 . ~/s/help_scripts/weird.sh
 . ~/s/help_scripts/shell_harpoon/main.sh
 . ~/.config/nnn/setup.sh
+. ~/s/help_scripts/server.sh
