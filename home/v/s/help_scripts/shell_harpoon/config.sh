@@ -7,9 +7,9 @@
 }
 
 ,n() {
-	cs ~/s/todo/my_todo
+	cs ~/s/_Testing/Go/site
 }
 
 ,s() {
-	e ~/.config/mimeapps.list
+	cs ~/s/PABreakdown
 }
