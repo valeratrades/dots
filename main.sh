@@ -69,8 +69,7 @@ load() {
 	touch "${HOME}/.local.sh"
 	for dir in $dot_directories; do
 		from="$(pwd)$dir"
-		tmp="$dir#\/home\/v"
-		to="${HOME}$tmp"
+		to="${HOME}$(echo "$dir" | sed 's/^\/home\/v//')"
 		mkdir -p "$(dirname "$to")"
 		rsync -u $from $(dirname "$to")
 	done

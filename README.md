@@ -1,4 +1,4 @@
-## Copying
+## Copy
 ```bash
 rm -rf ./dots
 git clone --depth=1 https://github.com/Valera6/dots
