@@ -73,9 +73,13 @@ load() {
 		if [ "$stripped" != "$dir" ]; then
 			to="${HOME}${stripped}"
 		else
-			to="$dir"
+			if [ "$dir" = "\/etc\/keyd" ]; then
+				to="$dir"
+			else
+				continue
+			fi
 		fi
-		sudo mkdir -p "$(dirname "$to")"
+		mkdir -p "$(dirname "$to")"
 		rsync -u $from $(dirname "$to")
 	done
 }
