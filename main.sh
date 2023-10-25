@@ -77,7 +77,7 @@ load() {
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
 	sync
-elif [ "1$" = "load" ]; then
+elif [ "$1" = "load" ]; then
 	load
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 	printf "${README}\n"
