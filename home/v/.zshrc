@@ -92,6 +92,10 @@ z() {
 	ending=".pdf"
 	zathura "$1$ending"
 }
+# Doesn't work
+vcp() {
+	scp "${1} ${VINCENT_SSH_HOST}:${2}"
+}
 
 alias jn="jupyter notebook &"
 alias l="sudo ln -s"
