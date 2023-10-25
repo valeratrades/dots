@@ -6,34 +6,34 @@ README="""\
   \033[34mload\033[0m to load global dots"""
 
 
-target_dir="${HOME}/.dots"
+target_dir="/home/v/.dots"
 dot_directories="
-	${HOME}/.zshrc
-	${HOME}/.zprofile
-	${HOME}/.config/zsh
+	/home/v/.zshrc
+	/home/v/.zprofile
+	/home/v/.config/zsh
 	/usr/bin/start_sway.sh
-	${HOME}/s/help_scripts
-	${HOME}/.config/sway
-	${HOME}/.config/eww
-	${HOME}/.config/nvim
-	${HOME}/.config/keyd
+	/home/v/s/help_scripts
+	/home/v/.config/sway
+	/home/v/.config/eww
+	/home/v/.config/nvim
+	/home/v/.config/keyd
 	/etc/keyd
-	${HOME}/.config/helix
-	${HOME}/.config/git
-	${HOME}/.config/greenclip.toml
-	${HOME}/.config/foot
-	${HOME}/.config/alacritty
-	${HOME}/.config/cargo
-	${HOME}/.config/zathura
-	${HOME}/.config/mimeapps.list
-	${HOME}/.local/share/applications/nnn.desktop
-	${HOME}/.local/share/applications/nvim.desktop
-	${HOME}/.config/dconf/user
-	${HOME}/.config/nnn/termfilechooser.sh
-	${HOME}/.config/nnn/setup.sh
-	${HOME}/.config/xdg-desktop-portal-termfilechooser/config
-	${HOME}/.file_snippets
-	${HOME}/.config/openvpn
+	/home/v/.config/helix
+	/home/v/.config/git
+	/home/v/.config/greenclip.toml
+	/home/v/.config/foot
+	/home/v/.config/alacritty
+	/home/v/.config/cargo
+	/home/v/.config/zathura
+	/home/v/.config/mimeapps.list
+	/home/v/.local/share/applications/nnn.desktop
+	/home/v/.local/share/applications/nvim.desktop
+	/home/v/.config/dconf/user
+	/home/v/.config/nnn/termfilechooser.sh
+	/home/v/.config/nnn/setup.sh
+	/home/v/.config/xdg-desktop-portal-termfilechooser/config
+	/home/v/.file_snippets
+	/home/v/.config/openvpn
 	/etc/systemd/system/getty@tty1.service.d/override.conf
 "
 
@@ -63,6 +63,13 @@ sync() {
 
 	date=$(date +"%Y-%m-%d %H:%M:%S")
 	git -C "$target_dir" add -A && git -C "$target_dir" commit -m "$date" && git -C "$target_dir" push
+}
+
+load() {
+	mkfile "${HOME}/.local.sh"
+	for dir in $dot_directories; do
+		from="$(pwd)$dir"
+	done
 }
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
