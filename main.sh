@@ -73,11 +73,8 @@ load() {
 		if [ "$stripped" != "$dir" ]; then
 			to="${HOME}${stripped}"
 		else
-			if [ "$dir" = "\/etc\/keyd" ]; then
-				to="$dir"
-			else
-				continue
-			fi
+			# normally, all the things outside ${HOME} are working on the dameon level, and should not be exported
+			continue
 		fi
 		mkdir -p "$(dirname "$to")"
 		rsync -u $from $(dirname "$to")
