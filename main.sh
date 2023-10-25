@@ -35,6 +35,7 @@ dot_directories="
 	/home/v/.file_snippets
 	/home/v/.config/openvpn
 	/etc/systemd/system/getty@tty1.service.d/override.conf
+	/home/v/.config/zellij
 "
 
 exclude_gitignore() {
