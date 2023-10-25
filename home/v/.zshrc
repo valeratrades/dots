@@ -66,10 +66,10 @@ se() {
 }
 
 alias ls="ls -A"
-mkp() {
+mkfile() {
   file_path="$1"
   mkdir -p "$(dirname "${file_path}")"
-	touch "${file_path}" || mkdir "${file_path}"
+	touch "${file_path}"
 }
 cs() {
 	cd "$@"

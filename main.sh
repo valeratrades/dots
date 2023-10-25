@@ -66,9 +66,12 @@ sync() {
 }
 
 load() {
-	mkfile "${HOME}/.local.sh"
+	touch "${HOME}/.local.sh"
 	for dir in $dot_directories; do
 		from="$(pwd)$dir"
+		tmp="$dir#\/home\/v"
+		to="${HOME}$tmp"
+		rsync -u $from $to
 	done
 }
 
