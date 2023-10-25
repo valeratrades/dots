@@ -1,7 +1,6 @@
 ## Copy
 ```bash
 #!/bin/sh
-
 dots() {
     current_dir=$(pwd)
     cd /tmp
