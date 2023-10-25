@@ -71,7 +71,8 @@ load() {
 		from="$(pwd)$dir"
 		tmp="$dir#\/home\/v"
 		to="${HOME}$tmp"
-		rsync -u $from $to
+		mkdir -p "$(dirname "$to")"
+		rsync -u $from $(dirname "$to")
 	done
 }
 
