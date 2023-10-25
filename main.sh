@@ -71,7 +71,7 @@ load() {
 		from="$(pwd)$dir"
 		stripped=$(echo "$dir" | sed 's/^\/home\/v//')
 		if [[ $stripped != $dir ]]; then
-			to="${HOME}$stripped"
+			to="${HOME}${stripped}"
 		else
 			to="$dir"
 		fi
