@@ -70,7 +70,7 @@ load() {
 	for dir in $dot_directories; do
 		from="$(pwd)$dir"
 		stripped=$(echo "$dir" | sed 's/^\/home\/v//')
-		if [[ $stripped != $dir ]]; then
+		if [ "$stripped" != "$dir" ]; then
 			to="${HOME}${stripped}"
 		else
 			to="$dir"
