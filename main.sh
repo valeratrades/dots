@@ -78,7 +78,7 @@ load() {
 			continue
 		fi
 		mkdir -p "$(dirname "$to")"
-		rsync -u $from $(dirname "$to")
+		rsync -ru $from $(dirname "$to")
 	done
 }
 
