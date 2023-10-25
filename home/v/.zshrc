@@ -7,9 +7,6 @@
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
 . ~/.credentials.sh
 
-ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
-source $ZSH_THEME
-
 # currently it is 3,65Gb # And B is for bytes
 TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}')
 
@@ -44,7 +41,8 @@ e() {
 			if [ $could_fix = 1 ]; then
 				return 0
 			else
-				return 1
+				nvim "$@"
+				#return 1
 			fi
 		fi
 	
@@ -160,3 +158,11 @@ alias py="~/envs/Python/bin/python3"
 . ~/s/help_scripts/shell_harpoon/main.sh
 . ~/.config/nnn/setup.sh
 . ~/s/help_scripts/server.sh
+
+# last one, so local changes can overwrite global.
+if [ -f "${HOME}/.local.sh" ]; then
+	source "${HOME}/.local.sh"
+else
+	ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
+	source $ZSH_THEME
+fi

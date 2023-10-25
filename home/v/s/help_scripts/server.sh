@@ -27,20 +27,20 @@ vincent_connect() {
 }
 
 server() {
-if [ -z "$1" ] || [ "$1" = "ssh" ]; then
-	#BUG: doesn't work in sequence. The next `expect` command hops onto the previous `expect` session no matter what.
-	#if [ "$(eww get openvpn_poll)" != "1" ]; then
-	#	vincent_connect &
-	#fi
-	vincent_ssh
-elif [ "$1" = "connect" ]; then
-	vincent_connect &
-elif [ "$1" = "kill" ]; then
-	sudo killall openvpn
-elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
-	printf "${README}\n"
-else
-	printf "${README}\n"
-	return 1
-fi
+	if [ -z "$1" ] || [ "$1" = "ssh" ]; then
+		#BUG: doesn't work in sequence. The next `expect` command hops onto the previous `expect` session no matter what.
+		#if [ "$(eww get openvpn_poll)" != "1" ]; then
+		#	vincent_connect &
+		#fi
+		vincent_ssh
+	elif [ "$1" = "connect" ]; then
+		vincent_connect &
+	elif [ "$1" = "kill" ]; then
+		sudo killall openvpn
+	elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
+		printf "${README}\n"
+	else
+		printf "${README}\n"
+		return 1
+	fi
 }
