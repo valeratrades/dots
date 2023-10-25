@@ -69,8 +69,9 @@ load() {
 	touch "${HOME}/.local.sh"
 	for dir in $dot_directories; do
 		from="$(pwd)$dir"
-		if [[ "$dir" == /home/v* ]]; then
-			to="${HOME}$(echo "$dir" | sed 's/^\/home\/v//')"
+		stripped=$(echo "$dir" | sed 's/^\/home\/v//')
+		if [[ $stripped != $dir ]]; then
+			to="${HOME}$stripped"
 		else
 			to="$dir"
 		fi
