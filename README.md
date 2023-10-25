@@ -20,5 +20,9 @@ To overwrite or add functionality, edit
 ${HOME}/.local.sh
 ```
 
+### Cli Philosophie
+Target length for general aliases is 2 characters, if they are important enough.
+One-letter cases are mostly reserved for custom scripts, local to the project, eg: commands initialized when I `cs` into a directory with `run.sh` in it.
+
 #### btw
 i use arch btw
