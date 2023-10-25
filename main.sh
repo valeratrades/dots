@@ -75,7 +75,7 @@ load() {
 		else
 			to="$dir"
 		fi
-		mkdir -p "$(dirname "$to")"
+		sudo mkdir -p "$(dirname "$to")"
 		rsync -u $from $(dirname "$to")
 	done
 }
