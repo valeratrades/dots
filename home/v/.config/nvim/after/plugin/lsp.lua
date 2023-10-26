@@ -28,6 +28,9 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("lo", "<cmd>lua vim.lsp.buf.open_floating()<cr>", "open float")
 	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
 	map("lh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "signature help")
+	map("lqw", "<cmd>lua vim.diagnostic.setqflist()<cr>", "put window diagnostics to qf")
+	--TODO: check if this thing works:
+	map("lqb", "<cmd>lua set_qflist({ bufnr })<cr>", "put buffer diagnostics to qf")
 
 	if client.supports_method('textDocument/formatting') then
 		require('lsp-format').on_attach(client)
@@ -35,7 +38,7 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- Language setups
-local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
+local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'pylsp', 'bashls' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
@@ -78,8 +81,12 @@ require('mason-lspconfig').setup({
 			staticcheck = true,
 		},
 		["pyright"] = {
+			autoImportCompletion = true,
 			analysis = {
 				typeCheckingMode = "strict",
+				autoSearchPaths = true,
+				diagnosticMode = 'openFilesOnly',
+				useLibraryCodeForTypes = true,
 			},
 			before_init = function(params)
 				params.initializationOptions = {
@@ -87,7 +94,6 @@ require('mason-lspconfig').setup({
 						"pyright-langserver",
 						"--stdio",
 					},
-					indentSize = 2,
 				}
 			end,
 		},
