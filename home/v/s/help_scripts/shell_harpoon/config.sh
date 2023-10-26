@@ -7,7 +7,7 @@
 }
 
 ,n() {
-	cs ~/s/_Testing/Go/site
+	cs ~/s/site
 }
 
 ,s() {
