@@ -3,7 +3,7 @@
 local README="""\
 #server ssh script
   do \033[34mserver\033[0m to ssh into vincent
-  do \033[34mserver kill\033[0m to close all sessions"""
+  do \033[34mserver disconnect\033[0m to close all sessions"""
 
 vincent_ssh() {
 	export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
@@ -35,7 +35,7 @@ server() {
 		vincent_ssh
 	elif [ "$1" = "connect" ]; then
 		vincent_connect &
-	elif [ "$1" = "kill" ]; then
+	elif [ "$1" = "disconnect" ]; then
 		sudo killall openvpn
 	elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf "${README}\n"

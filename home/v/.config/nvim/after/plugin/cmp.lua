@@ -3,6 +3,7 @@ local cmp_format = require('lsp-zero').cmp_format()
 local _ = { behavior = cmp.SelectBehavior.Select } -- somehow forces cmp into the right behavior.
 local cmp_action = require('lsp-zero').cmp_action()
 
+vim.keymap.set("n", "<C-t>", "<nop>", { desc = "have this on Alt+h" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 cmp.setup({

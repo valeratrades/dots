@@ -82,13 +82,11 @@ return require('lazy').setup({
 	"projekt0n/github-nvim-theme",
 	--
 
-
-
-
 	'lervag/vimtex',
 	--'jose-elias-alvarez/null-ls.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-media-files.nvim',
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
+	"notjedi/nvim-rooter.lua",
 })
