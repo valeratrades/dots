@@ -90,13 +90,23 @@ z() {
 	ending=".pdf"
 	zathura "$1$ending"
 }
-# Doesn't work
-vcp() {
-	scp "${1} ${VINCENT_SSH_HOST}:${2}"
+usb() {
+	mkdir -p /mnt/USB
+	sudo mount /dev/sdb1 /mnt/USB
+	cd /mnt/USB
+	lss -A
+}
+function lg() {
+	if [ $# = 1 ]; then
+		ls -A | rg $1
+	#TODO: fix. For some fucking reason it doesn't work.
+	elif [ $# = 2 ]; then
+		ls -A $1 | rg $2
+	fi
 }
 
 alias jn="jupyter notebook &"
-alias l="sudo ln -s"
+alias ln="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
 alias sr='source ~/.zshrc'
 alias gu='gitui'
@@ -124,14 +134,14 @@ alias lkeyd="sudo keyd -m"
 alias pS="sudo pacman -Su --noconfirm"
 alias pR="sudo pacman -R --noconfirm"
 alias pRn="sudo pacman -Rns --noconfirm"
-alias pQ="pacman -Q | rg"
+alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/system_sync.sh"
 #
 # # yay
 alias yS="yay -Su --noconfirm"
 alias yR="yay -R --noconfirm"
 alias yR="yay -Rns --noconfirm"
-alias yQ="yay -Q | rg"
+alias yG="yay -Q | rg"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 # # cargo
@@ -149,6 +159,7 @@ alias py="~/envs/Python/bin/python3"
 . ~/.config/nnn/setup.sh
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/init_projects.sh
+. ~/s/help_scripts/build.sh
 
 # last one, so local changes can overwrite global.
 if [ -f "${HOME}/.local.sh" ]; then
