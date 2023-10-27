@@ -91,10 +91,11 @@ z() {
 	zathura "$1$ending"
 }
 usb() {
-	mkdir -p /mnt/USB
+	sudo mkdir -p /mnt/USB
+	sudo chown $(whoami):$(whoami) /mnt/USB
 	sudo mount /dev/sdb1 /mnt/USB
 	cd /mnt/USB
-	lss -A
+	ls -A
 }
 function lg() {
 	if [ $# = 1 ]; then
@@ -131,14 +132,14 @@ alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"
 #
 # # pacman
-alias pS="sudo pacman -Su --noconfirm"
+alias pS="sudo pacman -S --noconfirm"
 alias pR="sudo pacman -R --noconfirm"
 alias pRn="sudo pacman -Rns --noconfirm"
 alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/system_sync.sh"
 #
 # # yay
-alias yS="yay -Su --noconfirm"
+alias yS="yay -S --noconfirm"
 alias yR="yay -R --noconfirm"
 alias yR="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
@@ -146,7 +147,16 @@ alias yG="yay -Q | rg"
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 # # cargo
 alias c="cargo"
-alias ck="stop_all_run_cargo.sh"
+# for super cargo
+sc() {
+	starttime=$(date +%s)
+	${HOME}/s/help_scripts/stop_all_run_cargo.sh $@
+	endtime=$(date +%s)
+	elapsedtime=$((endtime - starttime))
+	if [ $elapsedtime -gt 20 ]; then
+		mpv ${HOME}/Sounds/Notification.mp3
+	fi
+}
 #
 # # python
 alias pip="~/envs/Python/bin/pip"
