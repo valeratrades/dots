@@ -2,7 +2,7 @@ vim.g.maplocalleader = "\\"
 -- As pre usual, it doesn't work for shit, so using its value manually instead
 
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "c", "lua", "rust", "go", "python", "javascript", "typescript", "gitignore" },
+	ensure_installed = { "c", "lua", "rust", "go", "python", "javascript", "typescript", "gitignore", "markdown" },
 	sync_install = true,
 	auto_install = true,
 	indent = { enable = true },
