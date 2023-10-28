@@ -116,6 +116,9 @@ function lg() {
 		ls -A $1 | rg $2
 	fi
 }
+fz() {
+	fd $@ | jfind
+}
 
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py $@"
 alias jn="jupyter notebook &"

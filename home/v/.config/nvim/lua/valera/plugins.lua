@@ -82,6 +82,10 @@ return require('lazy').setup({
 	"projekt0n/github-nvim-theme",
 	--
 
+	{
+		'stevearc/oil.nvim',
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	'lervag/vimtex',
 	--'jose-elias-alvarez/null-ls.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
