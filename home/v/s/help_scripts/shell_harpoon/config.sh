@@ -3,7 +3,7 @@
 }
 
 ,t() {
-	cs ~/s/ValeraLib
+	cs ~/s/todo/my_todo
 }
 
 ,n() {
