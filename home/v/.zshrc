@@ -153,7 +153,7 @@ alias pS="sudo pacman -S --noconfirm"
 alias pR="sudo pacman -R --noconfirm"
 alias pRn="sudo pacman -Rns --noconfirm"
 alias pG="pacman -Q | rg"
-alias pY="${HOME}/s/help_scripts/system_sync.sh"
+alias pY="${HOME}/s/help_scripts/boring.sh"
 #
 # # yay
 alias yS="yay -S --noconfirm"
