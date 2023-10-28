@@ -3,6 +3,10 @@
 local lspconfig = require('lspconfig')
 local lsp_zero = require('lsp-zero')
 
+vim.diagnostic.config({
+	virtual_text = false,
+})
+
 -- Localleader doesn't work, so rawdogging everything for now.
 vim.g.maplocalleader = 'l'
 
@@ -13,6 +17,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	end
 
 	map("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "hover info")
+	map("lk", "<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<cr>", "open error like 'K'")
 	map("ld", "<cmd>lua vim.lsp.buf.definition()<cr>", "definition")
 	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
 	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
@@ -35,10 +40,15 @@ lsp_zero.on_attach(function(client, bufnr)
 	if client.supports_method('textDocument/formatting') then
 		require('lsp-format').on_attach(client)
 	end
+
+	vim.bo.tabstop = 2
+	vim.bo.softtabstop = 0
+	vim.bo.shiftwidth = 2
+	vim.bo.expandtab = false
 end)
 
 -- Language setups
-local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'pylsp', 'bashls' }
+local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
@@ -81,12 +91,10 @@ require('mason-lspconfig').setup({
 			staticcheck = true,
 		},
 		["pyright"] = {
-			autoImportCompletion = true,
 			analysis = {
 				typeCheckingMode = "strict",
 				autoSearchPaths = true,
 				diagnosticMode = 'openFilesOnly',
-				useLibraryCodeForTypes = true,
 			},
 			before_init = function(params)
 				params.initializationOptions = {

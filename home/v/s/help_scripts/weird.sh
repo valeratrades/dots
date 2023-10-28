@@ -1,6 +1,3 @@
-#!/bin/bash
-
-
 fuck() {
   if [[ $1 == "it" ]]; then
     echo "Nice. Let's do that"
@@ -23,23 +20,6 @@ function print_sturdy() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+gm() {
+	printf "\033[32mgm\033[0m\n"
+}

@@ -234,7 +234,7 @@ function _mnml_bind_widgets() {
 	done
 }
 
-# Setup
+# # Setup
 autoload -U colors && colors
 setopt prompt_subst
 
@@ -242,3 +242,21 @@ PROMPT='$(_mnml_wrap MNML_PROMPT) '
 RPROMPT='$(_mnml_wrap MNML_RPROMPT)'
 
 _mnml_bind_widgets
+#
+
+# # Autocompletion
+setopt nocaseglob
+setopt no_list_ambiguous
+setopt complete_in_word
+
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]} r:|?=**'
+
+complete-word() {
+  _main_complete
+  compstate[list]='list'
+  local word=$PREFIX$SUFFIX
+  (( compstate[unambiguous_cursor] <= ${#word} )) && compstate[insert]='menu'
+}
+bindkey '^Y' complete-word
+#

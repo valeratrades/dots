@@ -37,6 +37,7 @@ dot_directories="
 	/etc/systemd/system/getty@tty1.service.d/override.conf
 	/home/v/.config/zellij
 	/home/v/Wallpapers
+	/home/v/.config/jfind
 "
 
 exclude_gitignore() {
