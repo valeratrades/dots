@@ -9,4 +9,4 @@ sync()  {
 	(sudo chmod -R 777 ~/ && printf "\033[32mchmod -R 777 ~/\033[0m\n" || printf "\033[31mchmod -R 777 ~/\033[0m\n") &
 }
 
-sync > /dev/null &
+sync 2>&1 &
