@@ -76,6 +76,10 @@ cs() {
 	. "./run.sh" > /dev/null 2>&1
 	ls
 }
+# # python
+alias pip="~/envs/Python/bin/pip"
+alias py="~/envs/Python/bin/python3"
+#
 
 # ============================================================================
 # ABOVE THIS LINE WE RELY ON ALL THE APIS TO STAY CONSTANT, AS THEY ARE USED BY OTHER SH SCRIPTS.
@@ -106,6 +110,7 @@ function lg() {
 	fi
 }
 
+alias q="py ${HOME}/s/help_scripts/ask_gpt.py $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
 alias gc="cd ~/tmp && git clone --depth=1"
@@ -118,6 +123,7 @@ alias csh="cs ~/s/help_scripts"
 alias csv="cs ~/s/valera"
 alias csd="cs ~/Downloads"
 alias csa="cs ~/s/ai-news-trade-bot"
+alias cst="cs ~/s/tmp"
 #
 # # editor
 alias ec="e ~/.config/nvim"
@@ -157,10 +163,6 @@ sc() {
 		mpv ${HOME}/Sounds/Notification.mp3
 	fi
 }
-#
-# # python
-alias pip="~/envs/Python/bin/pip"
-alias py="~/envs/Python/bin/python3"
 #
 
 . ~/s/todo/functions.sh
