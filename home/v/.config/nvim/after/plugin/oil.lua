@@ -1,7 +1,7 @@
 require("oil").setup({
 	-- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
 	-- Set to false if you still want to use netrw.
-	default_file_explorer = false,
+	default_file_explorer = true,
 	-- Id is automatically added at the beginning, and name at the end
 	-- See :help oil-columns
 	columns = {
@@ -13,7 +13,7 @@ require("oil").setup({
 	-- Buffer-local options to use for oil buffers
 	buf_options = {
 		buflisted = false,
-		bufhidden = "show",
+		bufhidden = "hide",
 	},
 	-- Window-local options to use for oil buffers
 	win_options = {
@@ -26,10 +26,8 @@ require("oil").setup({
 		conceallevel = 3,
 		concealcursor = "nvic",
 	},
-	-- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
-	delete_to_trash = false,
 	-- Skip the confirmation popup for simple operations
-	skip_confirm_for_simple_edits = false,
+	skip_confirm_for_simple_edits = true,
 	-- Selecting a new/moved/renamed file or directory will prompt you to save changes first
 	prompt_save_on_select_new_entry = true,
 	-- Oil will automatically delete hidden buffers after this delay
@@ -47,7 +45,6 @@ require("oil").setup({
 		["-"] = "actions.parent",
 		["<A-s>"] = "actions.select",
 		["<A-h>"] = "actions.parent",
-
 		["g?"] = "actions.show_help",
 		["<C-s>"] = "actions.select_vsplit",
 		["<C-h>"] = "actions.select_split",
@@ -69,7 +66,7 @@ require("oil").setup({
 		show_hidden = false,
 		-- This function defines what is considered a "hidden" file
 		is_hidden_file = function(name, bufnr)
-			return name == "." or name == ".."
+			return name == "." or name == ".." or name == "Cargo.lock" or name == "rustfmt.toml"
 		end,
 		-- This function defines what will never be shown, even when `show_hidden` is set
 		is_always_hidden = function(name, bufnr)

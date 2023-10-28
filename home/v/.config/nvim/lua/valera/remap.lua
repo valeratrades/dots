@@ -3,7 +3,9 @@
 local k = vim.keymap.set
 
 vim.g.mapleader = " "
-k("n", "<space>pv", vim.cmd.Ex)
+--k("n", "<space>pv", vim.cmd.Ex)
+k("", "<space>v", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
+
 k("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
 -- -- "htns" Remaps and the Consequences

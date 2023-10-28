@@ -126,6 +126,8 @@ alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
 
 # # cd
+alias cc="cd && clear"
+
 alias csc="cs ~/.config"
 alias css="cs ~/s"
 alias csh="cs ~/s/help_scripts"

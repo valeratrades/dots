@@ -3,6 +3,12 @@
 alias gu='gitui'
 
 gc() {
+	if rg -q "://" <<< "$1"; then
+		url="$1"
+	else
+		url="https://github.com/$1" 
+	fi
+
 	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
 #git clone on rails
@@ -14,11 +20,11 @@ gc() {
 	elif [ "$#" = 1 ]; then
 		split_array=$(echo "$1" | tr "/" "\n")
 		filename=$(echo "$split_array" | tail -n 1)
-		cd /tmp && rm -rf ./${filename} && git clone --depth=1 "https://github.com/$1" 1>&2
+		cd /tmp && rm -rf ./${filename} && git clone --depth=1 "$url" 1>&2
 		cd "$filename"
 		echo $(pwd)
 	elif [ "$#" = 2 ]; then
-		git clone --depth=1 "https://github.com/$1" $2
+		git clone --depth=1 "$url" $2
 	fi
 }
 

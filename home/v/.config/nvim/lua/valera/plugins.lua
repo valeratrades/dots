@@ -45,6 +45,10 @@ return require('lazy').setup({
 		end,
 		opts = {}
 	},
+	{
+		'stevearc/oil.nvim',
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 	{ -- Cmp
 		'hrsh7th/nvim-cmp',
 		'hrsh7th/cmp-nvim-lsp',
@@ -82,10 +86,6 @@ return require('lazy').setup({
 	"projekt0n/github-nvim-theme",
 	--
 
-	{
-		'stevearc/oil.nvim',
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
 	'lervag/vimtex',
 	--'jose-elias-alvarez/null-ls.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
@@ -93,5 +93,4 @@ return require('lazy').setup({
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	"notjedi/nvim-rooter.lua",
-	--"ahmedkhalf/project.nvim",
 })

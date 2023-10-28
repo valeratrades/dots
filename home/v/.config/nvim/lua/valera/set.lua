@@ -50,6 +50,8 @@ o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "global
 o.showmode = false
 o.winminwidth = 5
 
+o.modifiable = true
+
 -- Add undo break-points
 k("i", ",", ",<c-g>u")
 k("i", ".", ".<c-g>u")
