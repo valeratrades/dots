@@ -3,8 +3,8 @@
 local k = vim.keymap.set
 
 vim.g.mapleader = " "
---k("n", "<space>pv", vim.cmd.Ex)
-k("", "<space>v", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
+--k("n", "<space>e", vim.cmd.Ex)
+k("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
 
 k("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
@@ -184,6 +184,25 @@ k("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
 k("n", ",ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
+-- select the pasted
+k("n", "gp", function()
+	return "`[" .. vim.fn.strpart(vim.fn.getregtype(), 0, 1) .. "`]"
+end, { expr = true })
+
+-- first non blank of the line
+k("", "gh", "^")
+-- end of line
+k("", "gl", "$") -- '0' for start of line
+-- matching paranthesis
+k("", "gm", "%")
+
+k("n", "H", "H^")
+k("n", "M", "M^")
+k("n", "L", "L^")
+
+-- tries to correct spelling of the word under the cursor
+k("n", "<leader>s", "1z=")
+
 local function toggle_diagnostics()
 	local state = vim.diagnostic.is_disabled()
 	if state then
@@ -205,10 +224,14 @@ k('n', '<space>clrb', 'vi""8di\\x1b[34m<esc>"8pa\\x1b[0m<Esc>', { desc = "add bl
 k('n', '<space>clrg', 'vi""8di\\x1b[32m<esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
 
 
-
 k('', '<space>.', '<cmd>tabe .<cr>')
 
 
 k('n', 'U', '<C-r>', { desc = "helix: redo" })
 k('n', '<C-r>', '<nop>')
 k('n', '<tab>', 'i<tab>')
+
+-- trying out:
+k("i", "<c-r><c-r>", "<c-r>\"");
+k("n", "<Space>`", "~hi");
+k("v", "<Space>`", "~gvI");

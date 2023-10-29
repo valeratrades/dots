@@ -86,6 +86,8 @@ return require('lazy').setup({
 	"projekt0n/github-nvim-theme",
 	--
 
+	'jake-stewart/recursive-macro.nvim',
+	'jake-stewart/normon.nvim',
 	'lervag/vimtex',
 	--'jose-elias-alvarez/null-ls.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',

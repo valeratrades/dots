@@ -120,6 +120,7 @@ fz() {
 	fd $@ | jfind
 }
 
+alias mr="py ${HOME}/s/help_scripts/massren/massren -d '!' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"

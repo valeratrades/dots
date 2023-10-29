@@ -18,8 +18,12 @@ o.wrap = true
 
 o.swapfile = false
 o.backup = false
-o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 o.undofile = true
+o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+-- ensure created
+if not vim.fn.isdirectory(vim.fn.expand(vim.o.undodir)) then
+	vim.fn.mkdir(vim.fn.expand(o.undodir), "p", 0770)
+end
 
 o.hlsearch = false
 o.incsearch = true
@@ -57,3 +61,6 @@ k("i", ",", ",<c-g>u")
 k("i", ".", ".<c-g>u")
 k("i", ";", ";<c-g>u")
 --
+
+o.showmatch = true
+o.joinspaces = false
