@@ -40,6 +40,15 @@ dot_directories="
 	/home/v/.config/jfind
 "
 
+commmit() {
+	local message=$(date +"%Y-%m-%d %H:%M:%S")
+	if [ -n "$1" ]; then
+		message="$1"
+	fi
+	notify-send message
+	git -C "$target_dir" add -A && git -C "$target_dir" commit -m "$message" && git -C "$target_dir" push
+}
+
 exclude_gitignore() {
 	local dir="$1"
 	local command="$2"
@@ -63,9 +72,6 @@ sync() {
 		mkdir -p "$(dirname "$to")"
 		$command "$dir" $(dirname "$to") || printf "\033[31merror\033[0m\n"
 	done
-
-	date=$(date +"%Y-%m-%d %H:%M:%S")
-	git -C "$target_dir" add -A && git -C "$target_dir" commit -m "$date" && git -C "$target_dir" push
 }
 
 load() {
@@ -86,6 +92,11 @@ load() {
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
 	sync
+	commmit
+elif [ "$1" = "-m" ]; then
+	sync
+	notify-send "${@:2}" 
+	commit -m "${@:2}"
 elif [ "$1" = "load" ]; then
 	load
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
