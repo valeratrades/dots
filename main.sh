@@ -88,10 +88,12 @@ load() {
 		rsync -ru $from $(dirname "$to")
 	done
 
-	# # load zsh plugins
+	# # load gits
 	mkdir -p ${HOME}/.config/zsh/plugins
-	git clone https://github.com/zsh-autosuggestions ${HOME}/.config/zsh/plugins/zsh-autosuggestions
-		git clone https://github.com/zsh-syntax-highlighting ${HOME}/.config/zsh/plugins/zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.config/zsh/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting ${HOME}/.config/zsh/plugins/zsh-syntax-highlighting
+	mkdir -p ${HOME}/clone
+	git clone https://github.com/jake-stewart/massren ${HOME}/clone/massren
 	#
 }
 
