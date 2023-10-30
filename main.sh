@@ -87,6 +87,12 @@ load() {
 		mkdir -p "$(dirname "$to")"
 		rsync -ru $from $(dirname "$to")
 	done
+
+	# # load zsh plugins
+	mkdir -p ${HOME}/.config/zsh/plugins
+	git clone https://github.com/zsh-autosuggestions ${HOME}/.config/zsh/plugins/zsh-autosuggestions
+		git clone https://github.com/zsh-syntax-highlighting ${HOME}/.config/zsh/plugins/zsh-syntax-highlighting
+	#
 }
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
