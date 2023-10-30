@@ -38,6 +38,7 @@ dot_directories="
 	/home/v/.config/zellij
 	/home/v/Wallpapers
 	/home/v/.config/jfind
+	/home/v/.lesskey
 "
 
 commit() {
