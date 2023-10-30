@@ -1,14 +1,4 @@
-fuck() {
-  if [[ $1 == "it" ]]; then
-    echo "Nice. Let's do that"
-  else
-    echo 'Agreed. Who the fuck does it like that?!'
-  fi
-}
-
-function motherfuckers() {
-	sh "cowsay Absolute Morons"
-}
+alias emacs="printf \"\033[31mno\033[0m\n\""
 
 function print_sturdy() {
     echo "+---+---+---+---+---++---+---+---+---+---+"

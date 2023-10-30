@@ -7,6 +7,12 @@
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
 . ~/.credentials.sh
 
+
+export EDITOR=nvim
+export PAGER=nvimpager_wrapper
+page() $PAGER
+edit() $EDITOR
+
 # currently it is 3,65Gb # And B is for bytes
 TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}')
 
@@ -121,7 +127,7 @@ fz() {
 }
 
 # script of jake-stewart/massren ; here to make it easier to pull new versions.
-alias mr="py /usr/lib/etc/massren/massren -d '!' $@"
+alias mr="py /usr/lib/etc/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
@@ -194,6 +200,8 @@ sc() {
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/init_projects.sh
 . ~/s/help_scripts/git.sh
+
+source ${HOME}/.config/zsh/other.zsh
 
 # last one, so local changes can overwrite global.
 if [ -f "${HOME}/.local.sh" ]; then
