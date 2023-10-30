@@ -40,12 +40,11 @@ dot_directories="
 	/home/v/.config/jfind
 "
 
-commmit() {
+commit() {
 	local message=$(date +"%Y-%m-%d %H:%M:%S")
 	if [ -n "$1" ]; then
 		message="$1"
 	fi
-	notify-send message
 	git -C "$target_dir" add -A && git -C "$target_dir" commit -m "$message" && git -C "$target_dir" push
 }
 
@@ -82,7 +81,7 @@ load() {
 		if [ "$stripped" != "$dir" ]; then
 			to="${HOME}${stripped}"
 		else
-			# normally, all the things outside ${HOME} are working on the dameon level, and should not be exported
+			# normally, all the things outside ${HOME} are working on the daemon level, and should not be exported
 			continue
 		fi
 		mkdir -p "$(dirname "$to")"
@@ -92,11 +91,11 @@ load() {
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
 	sync
-	commmit
-elif [ "$1" = "-m" ]; then
-	sync
-	notify-send "${@:2}" 
-	commit -m "${@:2}"
+	if [ "$2" = "-m" ]; then
+		commit "${@:2}"
+	else
+		commit
+	fi
 elif [ "$1" = "load" ]; then
 	load
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
