@@ -49,6 +49,48 @@ return require('lazy').setup({
 		'stevearc/oil.nvim',
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
+	{ -- Jake
+		-- 2q and then Q for recursive macro
+		'jake-stewart/recursive-macro.nvim',
+		-- helix for poor people
+		'jake-stewart/normon.nvim',
+		'jake-stewart/shnip.nvim',
+		-- adds <M-o> and <M-i> to jump across files
+		{
+			"jake-stewart/filestack.nvim",
+			config = function()
+				require("filestack").setup()
+			end
+		},
+	},
+	{ -- simple swap of items like (arg1, arg2, arg3)
+		'machakann/vim-swap',
+		keys = {
+			{ "g<", "<plug>(swap-prev)" },
+			{ "g>", "<plug>(swap-next)" },
+		},
+	},
+	{ -- https://github.com/tpope/vim-abolish/blob/master/doc/abolish.txt
+		'tpope/vim-abolish',
+		keys = {
+			{ "cr" },
+		},
+		-- ex: :%S/facilit{y,ies}/building{,s}/g
+		cmd = { "S", "Subvert" },
+	},
+	{ -- CamelCaseACRONYMWords_underscore1234
+		--w --->w-->w----->w---->w-------->w->w
+		--e -->e-->e----->e--->e--------->e-->e
+		--b < ---b<--b<-----b<----b<--------b<-b
+		'chaoren/vim-wordmotion',
+		keys = {
+			{ "w", mode = { "n", "v", "o", "x" } },
+			{ "b", mode = { "n", "v", "o", "x" } },
+			{ "e", mode = { "n", "v", "o", "x" } },
+		},
+	},
+	-- similar to helix's match
+	"wellle/targets.vim",
 	{ -- Cmp
 		'hrsh7th/nvim-cmp',
 		'hrsh7th/cmp-nvim-lsp',
@@ -77,17 +119,17 @@ return require('lazy').setup({
 			{ 'lukas-reineke/lsp-format.nvim' }   -- Auto-Formatting
 		}
 	},
+	{ -- Colorschemes
+		{ 'rose-pine/neovim',      name = 'rose-pine' },
+		{ "catppuccin/nvim",       name = "catppuccin" },
+		{ "folke/tokyonight.nvim", name = "tokyonight" },
+		"projekt0n/github-nvim-theme",
+	},
 	--
 
-	-- Colorschemes
-	{ 'rose-pine/neovim',      name = 'rose-pine' },
-	{ "catppuccin/nvim",       name = "catppuccin" },
-	{ "folke/tokyonight.nvim", name = "tokyonight" },
-	"projekt0n/github-nvim-theme",
-	--
+	-- If something breaks, it's likely below here:
 
-	'jake-stewart/recursive-macro.nvim',
-	'jake-stewart/normon.nvim',
+
 	'lervag/vimtex',
 	--'jose-elias-alvarez/null-ls.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',

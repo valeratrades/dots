@@ -7,8 +7,8 @@ vim.diagnostic.config({
 	virtual_text = false,
 })
 
--- Localleader doesn't work, so rawdogging everything for now.
-vim.g.maplocalleader = 'l'
+-- doesn't do anything and here only as a reminder (as vim.g.maplocalleader doesn't work for some reason).
+local leader = 'l'
 
 lsp_zero.on_attach(function(client, bufnr)
 	local function map(lhs, rhs, desc)
@@ -16,9 +16,11 @@ lsp_zero.on_attach(function(client, bufnr)
 		vim.keymap.set("n", lhs, rhs, opts)
 	end
 
+	-- can't change these two, as they have same functions without lsp
 	map("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "hover info")
+	map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "definition")
+
 	map("lk", "<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<cr>", "open error like 'K'")
-	map("ld", "<cmd>lua vim.lsp.buf.definition()<cr>", "definition")
 	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
 	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
 	map("li", "<cmd>lua vim.lsp.buf.implementation()<cr>", "implementation")
@@ -36,6 +38,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("lqw", "<cmd>lua vim.diagnostic.setqflist()<cr>", "put window diagnostics to qf")
 	--TODO: check if this thing works:
 	map("lqb", "<cmd>lua set_qflist({ bufnr })<cr>", "put buffer diagnostics to qf")
+	map('<c-r>', "<cmd>lua vim.cmd.LspRestart()<cr>", "lsp: restart")
 
 	if client.supports_method('textDocument/formatting') then
 		require('lsp-format').on_attach(client)

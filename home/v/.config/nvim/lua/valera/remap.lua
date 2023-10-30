@@ -169,8 +169,6 @@ k("", ":", "<nop>")
 
 
 k("n", "J", "mzJ`z")
--- I was very excited to map this to <cr> and <S-CR> as in normal Ctrl-F search, but nvim can't detect modifiers on Enter.
-
 
 k("n", "<space>y", "\"+y")
 k("v", "<space>y", "\"+y")
@@ -190,11 +188,11 @@ k("n", "gp", function()
 end, { expr = true })
 
 -- first non blank of the line
-k("", "gh", "^")
+--k("", "gh", "^")
 -- end of line
-k("", "gl", "$") -- '0' for start of line
+--k("", "gl", "$") -- '0' for start of line
 -- matching paranthesis
-k("", "gm", "%")
+--k("", "gm", "%")
 
 k("n", "H", "H^")
 k("n", "M", "M^")
@@ -233,5 +231,5 @@ k('n', '<tab>', 'i<tab>')
 
 -- trying out:
 k("i", "<c-r><c-r>", "<c-r>\"");
-k("n", "<Space>`", "~hi");
-k("v", "<Space>`", "~gvI");
+k("n", "<space>`", "~hi");
+k("v", "<space>`", "~gvI");

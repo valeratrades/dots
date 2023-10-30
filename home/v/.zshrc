@@ -128,6 +128,13 @@ alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
 
 # # cd
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+mvcd() {
+    mv $@ && cd "$@[-1]"
+}
+
 alias cc="cd && clear"
 
 alias csc="cs ~/.config"
