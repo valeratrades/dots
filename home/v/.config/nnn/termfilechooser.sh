@@ -1,7 +1,11 @@
 #!/bin/sh
-#notify-send "save: $3"
-#notify-send "suggestion: $4"
-#notify-send "out: $5"
+#dbg
+notify-send "save: $3"
+notify-send "suggestion: $4"
+notify-send "out: $5"
+
+# to see which xdg-desktop is being used, do:
+# dbus-monitor "interface=org.freedesktop.portal.FileChooser" | tee ~/xdg-portal.log
 
 # binary. If it's us sending, - `0`, otherwise `1`
 save="$3"

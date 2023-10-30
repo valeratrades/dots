@@ -11,7 +11,7 @@ export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib
 export EDITOR=nvim
 # if I go for it, will have to figure out the conceallevel and other things to make it readeble
 # export MANPAGER="nvim -c 'set ft=man' -"
-edit() $EDITOR
+# edit() $EDITOR
 
 # export PAGER=nvim_wrapper
 # pager() $PAGER

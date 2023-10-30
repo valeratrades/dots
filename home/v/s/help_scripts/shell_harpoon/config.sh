@@ -7,7 +7,7 @@
 }
 
 ,n() {
-	cs ~/s/site
+	e ~/.config/xdg-desktop-portal
 }
 
 ,s() {

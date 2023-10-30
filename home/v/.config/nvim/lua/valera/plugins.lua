@@ -137,4 +137,5 @@ return require('lazy').setup({
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	"notjedi/nvim-rooter.lua",
+	'jbyuki/instant.nvim',
 })
