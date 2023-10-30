@@ -126,6 +126,8 @@ alias q="py ${HOME}/s/help_scripts/ask_gpt.py $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
+# sync dots
+alias sd="${HOME}/.dots/main.sh sync"
 
 # # cd
 mkcd() {
