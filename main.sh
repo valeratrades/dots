@@ -1,4 +1,4 @@
-#!/bin/env sh
+#!/bin/sh
 
 README="""\
 #sync dots script
@@ -43,7 +43,7 @@ dot_directories="
 commit() {
 	local message=$(date +"%Y-%m-%d %H:%M:%S")
 	if [ -n "$1" ]; then
-		message="$1"
+		message="$@"
 	fi
 	git -C "$target_dir" add -A && git -C "$target_dir" commit -m "$message" && git -C "$target_dir" push
 }
@@ -91,8 +91,10 @@ load() {
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
 	sync
-	if [ "$2" = "-m" ]; then
-		commit "${@:2}"
+	shift
+	if [ "$1" = "-m" ]; then
+		shift
+		commit "$@"
 	else
 		commit
 	fi
