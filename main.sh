@@ -70,6 +70,9 @@ sync() {
 
 		to="$target_dir$dir"
 		mkdir -p "$(dirname "$to")"
+		if [ "$1" = "-r" ]; then
+			rm -rf $to
+		fi
 		$command "$dir" $(dirname "$to") || printf "\033[31merror\033[0m\n"
 	done
 }
@@ -99,8 +102,15 @@ load() {
 }
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
-	sync
 	shift
+
+	if [ "$1" = "-r" ]; then
+		shift
+		sync -r
+	else
+		sync
+	fi
+
 	if [ "$1" = "-m" ]; then
 		shift
 		commit "$@"
