@@ -72,7 +72,9 @@ sync() {
 
 		to="$target_dir$dir"
 		mkdir -p "$(dirname "$to")"
-		rm -rf $to
+		if [ -e "$to" ]; then
+			rm -rf $to
+		fi
 		$command "$dir" $(dirname "$to") || printf "\033[31merror\033[0m\n"
 	done
 }
