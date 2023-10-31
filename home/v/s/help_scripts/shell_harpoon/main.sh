@@ -13,4 +13,23 @@ mute() {
 	mute > /dev/null 2>&1
 }
 
+
+temp_file="${HOME}/tmp/shell_harpoon.sh"
+,add() {
+	mkdir -p $(dirname "$temp_file")
+	echo "export SHELL_HARPOON_CURRENT_DIR_DUMP=$(pwd)" > "$temp_file"
+	. $temp_file
+}
+,c() {
+	if [ -z $SHELL_HARPOON_CURRENT_DIR_DUMP ]; then
+		printf "first dump the current dir by doing \033[34m,add\033[0m\n"
+	else
+		cs $SHELL_HARPOON_CURRENT_DIR_DUMP
+	fi
+}
+
+
 . $config_path
+if [ -f $temp_file ]; then
+	. $temp_file
+fi
