@@ -2,7 +2,7 @@
 config_path=${HOME}/s/help_scripts/shell_harpoon/config.sh
 
 mute() {
-	nohup alacritty -e nvim ${HOME}/s/help_scripts/shell_harpoon/config.sh > /dev/null 2>&1 &
+	nohup alacritty -e nvim ${HOME}/s/help_scripts/shell_harpoon/config.sh -c 'nnoremap q :q<CR>' -c "nnoremap <esc> :q<CR>" > /dev/null 2>&1 &
 	sleep 0.3
 	swaymsg floating enable
 

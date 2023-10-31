@@ -47,7 +47,7 @@ o.titlestring = "nvim: %F"
 vim.cmd [[
   au BufWinLeave * silent! mkview
   au BufWinEnter * silent! loadview
-  autocmd FileType * :set formatoptions-=cro
+  autocmd FileType * :set formatoptions-=ro
 ]]
 
 vim.g.autoformat = true
