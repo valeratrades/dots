@@ -22,6 +22,3 @@ Connect `,c` to the current dir
 ```bash
 ,add
 ```
-
-## Requirements
-The tool is currently designed for personal use only, so `,c` will break in absence of the custom `cs` command (that does `cd` and then some things)

@@ -24,7 +24,11 @@ temp_file="${HOME}/tmp/shell_harpoon.sh"
 	if [ -z $SHELL_HARPOON_CURRENT_DIR_DUMP ]; then
 		printf "first dump the current dir by doing \033[34m,add\033[0m\n"
 	else
-		cs $SHELL_HARPOON_CURRENT_DIR_DUMP
+		if type "cs" &>/dev/null; then
+			cs $SHELL_HARPOON_CURRENT_DIR_DUMP
+		else
+			cd $SHELL_HARPOON_CURRENT_DIR_DUMP
+		fi
 	fi
 }
 
