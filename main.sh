@@ -79,6 +79,8 @@ sync() {
 	done
 }
 
+#TODO: `reverse()`, that would sync it back in place after I made changes on the side of the git repo, which I want to sync locally
+
 load() {
 	touch "${HOME}/.local.sh"
 	for dir in $dot_directories; do
