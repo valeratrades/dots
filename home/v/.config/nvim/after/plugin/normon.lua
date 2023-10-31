@@ -1,11 +1,11 @@
 local normon = require("normon")
 -- cgn on current word/selection
-normon("<leader>n", "cgn")
-normon("<leader>N", "cgN")
+normon("<space>n", "cgn")
+normon("<space>N", "cgN")
 
 -- macro on current word/selection
-normon("<leader>q", "qq")
-normon("<leader>Q", "qq", { backward = true })
+normon("<space>q", "qq")
+normon("<space>Q", "qq", { backward = true })
 
 -- improved * and #
 -- escapes special characters and does not ignore case

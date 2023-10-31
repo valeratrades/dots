@@ -1,6 +1,5 @@
 ,h() {
 	cs ~/s/valera
-	cowsay "moo"
 }
 
 ,t() {
@@ -8,7 +7,7 @@
 }
 
 ,n() {
-	cowsay "something new now"
+	cowsay "something else"
 }
 
 ,s() {

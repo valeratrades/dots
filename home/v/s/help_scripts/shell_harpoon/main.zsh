@@ -36,10 +36,7 @@ temp_file="${HOME}/tmp/shell_harpoon.sh"
 . $harpoon_config_path
 config_functions=("${(@f)$(awk '/\(\) {/ {gsub(/\(\)/, "", $1); print $1}' $harpoon_config_path)}")
 for func in "${config_functions[@]}"; do
-	unalias "$func" 2>/dev/null
-	eval '_wrapper_'"$func"'() {
-		. '"$harpoon_config_path"'
-		'"$func"' "$@"
-	}'
-	alias "$func"="_wrapper_$func"
+	# unalias "$func" 2>/dev/null
+	eval "$func(){(source '$harpoon_config_path'; '$func')}"
+	# alias "$func"="_wrapper_$func"
 done
