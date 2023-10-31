@@ -1,1 +1,0 @@
-/home/v/.zsh_custom/themes/minimal/minimal.zsh
