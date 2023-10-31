@@ -3,7 +3,7 @@ local config = {
 	padding = false,
 	sticky = true,
 	ignore = nil,
-	toggler = { line = 'gcc', block = 'gbc' },
+	toggler = { line = 'gcc', block = 'gbc' }, -- can't turn it off. So just a note to follow the good practice of doing 'Vgc' and 'Vgb' instead.
 	opleader = { line = 'gc', block = 'gb' },
 	extra = { above = 'gcO', below = 'gco', eol = 'gcA' },
 	mappings = { basic = true, extra = true },

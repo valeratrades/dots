@@ -1,4 +1,4 @@
-#!/bin/sh
+#POSIX
 config_path=${HOME}/s/help_scripts/shell_harpoon/config.sh
 
 mute() {
@@ -12,6 +12,5 @@ mute() {
 ,ui() {
 	mute > /dev/null 2>&1
 }
-#? Can I also do the `,add` thingie?
 
 . $config_path

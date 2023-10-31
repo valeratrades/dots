@@ -29,7 +29,7 @@ require("oil").setup({
 	-- Skip the confirmation popup for simple operations
 	skip_confirm_for_simple_edits = true,
 	-- Selecting a new/moved/renamed file or directory will prompt you to save changes first
-	prompt_save_on_select_new_entry = true,
+	prompt_save_on_select_new_entry = false,
 	-- Oil will automatically delete hidden buffers after this delay
 	-- You can set the delay to false to disable cleanup entirely
 	-- Note that the cleanup process only starts when none of the oil buffers are currently displayed
@@ -59,10 +59,8 @@ require("oil").setup({
 		["gx"] = "actions.open_external",
 		["g."] = "actions.toggle_hidden",
 	},
-	-- Set to false to disable all of the above keymaps
 	use_default_keymaps = true,
 	view_options = {
-		-- Show files and directories that start with "."
 		show_hidden = false,
 		-- This function defines what is considered a "hidden" file
 		is_hidden_file = function(name, bufnr)
@@ -79,9 +77,7 @@ require("oil").setup({
 			{ "name", "asc" },
 		},
 	},
-	-- Configuration for the floating window in oil.open_float
 	float = {
-		-- Padding around the floating window
 		padding = 0,
 		max_width = 0,
 		max_height = 0,
@@ -89,13 +85,10 @@ require("oil").setup({
 		win_options = {
 			winblend = 0,
 		},
-		-- This is the config that will be passed to nvim_open_win.
-		-- Change values here to customize the layout
 		override = function(conf)
 			return conf
 		end,
 	},
-	-- Configuration for the actions floating preview window
 	preview = {
 		-- Width dimensions can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
 		-- min_width and max_width can be a single value or a list of mixed integer/float types.

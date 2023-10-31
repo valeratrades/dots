@@ -1,0 +1,12 @@
+-- function DebugPrintTable(tbl)
+-- 	local str = "{"
+-- 	for k, v in pairs(tbl) do
+-- 		if type(v) == "table" then
+-- 			str = str .. "[" .. k .. "]=" .. DebugPrintTable(v) .. ","
+-- 		else
+-- 			str = str .. "[" .. k .. "]=" .. tostring(v) .. ","
+-- 		end
+-- 	end
+-- 	local table = str .. "}"
+-- 	print(table)
+-- end

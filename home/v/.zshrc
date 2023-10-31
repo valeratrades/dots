@@ -6,16 +6,9 @@
 [[ $- != *i* ]] && return
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
 . ~/.credentials.sh
-
-
 export EDITOR=nvim
-# if I go for it, will have to figure out the conceallevel and other things to make it readeble
-# export MANPAGER="nvim -c 'set ft=man' -"
-# edit() $EDITOR
-
-# export PAGER=nvim_wrapper
-# pager() $PAGER
-
+edit() $EDITOR
+export LESSHISTFILE="-" # don't save history
 # currently it is 3,65Gb # And B is for bytes
 TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}')
 
@@ -130,7 +123,8 @@ fz() {
 }
 
 alias mr="py ${HOME}/clone/massren/massren -d '' $@"
-alias q="py ${HOME}/s/help_scripts/ask_gpt.py $@"
+alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
+alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'

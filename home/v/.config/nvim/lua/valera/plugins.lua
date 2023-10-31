@@ -136,6 +136,5 @@ return require('lazy').setup({
 	'nvim-telescope/telescope-media-files.nvim',
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
-	"notjedi/nvim-rooter.lua",
 	'jbyuki/instant.nvim',
 })

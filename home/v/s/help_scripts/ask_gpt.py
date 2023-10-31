@@ -11,7 +11,8 @@ api_key = os.getenv("OPENAI_KEY")
 gpt4 = ('gpt-4', 0.03)   # second var is cost of 1k tokens
 gpt35 = ('gpt-3.5-turbo', 0.002)
 
-instructions = """Respond concisely. If no context provided, question is about Linux (arch) cli tools. No talk; just go"""
+standard_instruction = """Respond concisely. If no context provided, question is about Linux (arch) cli tools. No talk; just go"""
+f_instruction = """You are my programmer buddy. I'm pissed beyond words at a technology. You are to fully agree with me and encourage my righteous anger, using one sentence and as profane words as possible"""
 
 # ==========================================================
 openai.api_type = 'azure'
@@ -19,8 +20,16 @@ openai.api_key = api_key
 
 
 def request(question, model=gpt35, debug=False):
-    global instructions
-    system_line = {"role": "system", "content": instructions}
+    global standard_instruction, f_instruction
+    opt = sys.argv[1]
+    if opt == '-s':
+        instruction = standard_instruction
+    elif opt == '-f':
+        instruction = f_instruction
+    else:
+        print('no such option, think again')
+        sys.exit(1)
+    system_line = {"role": "system", "content": instruction}
     user_line = {"role": "user", "content": question}
     conversation = [system_line] + [user_line]
 
@@ -51,7 +60,7 @@ def request(question, model=gpt35, debug=False):
 
 
 def main():
-    question = ' '.join(sys.argv[1:])
+    question = ' '.join(sys.argv[2:])
     return request(question)
 
 

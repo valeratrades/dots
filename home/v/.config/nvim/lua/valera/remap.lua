@@ -7,6 +7,7 @@ vim.g.mapleader = " "
 k("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
 
 k("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
+k("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
 
 -- -- "htns" Remaps and the Consequences
 -- Basic Movement
@@ -36,6 +37,7 @@ k("", "<A-h>", "<C-o>")
 k("i", "<A-h>", "<esc><C-o>")
 k("", "<A-H>", "<C-t>")
 k("i", "<A-H>", "<esc><C-t>")
+k("", "<C-t>", "<nop>")
 k("", "<A-s>", "<C-i>")
 k("i", "<A-s>", "<esc><C-o>")
 
@@ -57,8 +59,6 @@ k('n', '<C-w><C-t>', '<C-W>j', { noremap = true })
 k('n', '<C-w><C-h>', '<C-W>h', { noremap = true })
 k('n', '<C-w><C-n>', '<C-W>k', { noremap = true })
 k('n', '<C-w><C-s>', '<C-W>l', { noremap = true })
-k('n', '<C-w><C-S>', '<C-W>s', { noremap = true })
-
 
 -- Consequences
 k("n", "j", "nzzzv")
@@ -201,18 +201,6 @@ k("n", "L", "L^")
 -- tries to correct spelling of the word under the cursor
 k("n", "<leader>s", "1z=")
 
-local function toggle_diagnostics()
-	local state = vim.diagnostic.is_disabled()
-	if state then
-		vim.diagnostic.enable()
-	else
-		vim.diagnostic.disable()
-	end
-end
-
-k("", "<C-d>", toggle_diagnostics)
-k("i", "<C-d>", toggle_diagnostics)
-
 k('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
 k('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
 k('n', '<space>clg', 'vi""8di\\033[32m<esc>"8pa\\033[0m<Esc>', { desc = "add green escapecode" })
@@ -224,8 +212,10 @@ k('n', '<space>clrg', 'vi""8di\\x1b[32m<esc>"8pa\\x1b[0m<Esc>', { desc = "add gr
 
 k('', '<space>.', '<cmd>tabe .<cr>')
 
+-- zero width space digraph
+vim.cmd.digraph("zs " .. 0x200b)
 
-k('n', 'U', '<C-r>', { desc = "helix: redo" })
+k('n', 'U', '<C-r>', { noremap = true, desc = "helix: redo" })
 k('n', '<C-r>', '<nop>')
 k('n', '<tab>', 'i<tab>')
 
@@ -233,3 +223,18 @@ k('n', '<tab>', 'i<tab>')
 k("i", "<c-r><c-r>", "<c-r>\"");
 k("n", "<space>`", "~hi");
 k("v", "<space>`", "~gvI");
+
+local function getPopups()
+	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
+		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
+end
+local function killPopups()
+	vim.fn.map(getPopups(), function(_, e)
+		vim.api.nvim_win_close(e, false)
+	end)
+end
+-- clear search highlight & kill popups
+k("n", "<space><space>", function()
+	vim.cmd.noh()
+	killPopups()
+end)
