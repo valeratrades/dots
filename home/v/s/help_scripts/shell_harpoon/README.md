@@ -22,3 +22,7 @@ Connect `,c` to the current dir
 ```bash
 ,add
 ```
+
+## Requirements
+`alacritty` terminal and `sway` wm.
+If not the case, rewrite the `,ui` function in `main.sh`
