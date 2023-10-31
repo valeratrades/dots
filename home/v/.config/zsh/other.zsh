@@ -61,24 +61,24 @@ bindkey '^I' complete-word
 #
 
 # # syntax highlighting
-source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-if [ -n "$ZSH_HIGHLIGHT_VERSION" ]; then
-    ZSH_HIGHLIGHT_STYLES[comment]='fg=red'
-    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=green'
-    ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=green'
-    ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]='fg=green'
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=green'
-    ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=green'
-    ZSH_HIGHLIGHT_STYLES[command]='none'
-    ZSH_HIGHLIGHT_STYLES[builtin]='none'
-    ZSH_HIGHLIGHT_STYLES[precommand]='fg=yellow'
-    ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=magenta'
-    ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan,bold'
-    ZSH_HIGHLIGHT_STYLES[arg0]='none'
-    ZSH_HIGHLIGHT_STYLES[path]='none'
-    ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-    ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=magenta'
-fi
+#source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+#if [ -n "$ZSH_HIGHLIGHT_VERSION" ]; then
+#    ZSH_HIGHLIGHT_STYLES[comment]='fg=red'
+#    ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=green'
+#    ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=green'
+#    ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]='fg=green'
+#    ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=green'
+#    ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=green'
+#    ZSH_HIGHLIGHT_STYLES[command]='none'
+#    ZSH_HIGHLIGHT_STYLES[builtin]='none'
+#    ZSH_HIGHLIGHT_STYLES[precommand]='fg=yellow'
+#    ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=magenta'
+#    ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan,bold'
+#    ZSH_HIGHLIGHT_STYLES[arg0]='none'
+#    ZSH_HIGHLIGHT_STYLES[path]='none'
+#    ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+#    ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=magenta'
+#fi
 #
 
 # # accept-line hooks

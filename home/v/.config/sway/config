@@ -57,7 +57,6 @@ exec bluetoothctl
 exec pipewire
 exec pipewire-pulse
 exec wireplumber
-# clipboard history
 exec greenclip daemon>/dev/null
 bindsym $mod+g exec rofi -modi "clipboard:greenclip print" -show clipboard
 bindsym $mod+Shift+g exec greenclip clear

@@ -1,5 +1,6 @@
 ,h() {
 	cs ~/s/valera
+	cowsay "moo"
 }
 
 ,t() {
@@ -7,7 +8,7 @@
 }
 
 ,n() {
-	e ~/.config/xdg-desktop-portal
+	cowsay "something new now"
 }
 
 ,s() {

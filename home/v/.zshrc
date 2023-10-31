@@ -191,7 +191,7 @@ sc() {
 
 . ~/s/todo/functions.sh
 . ~/s/help_scripts/weird.sh
-. ~/s/help_scripts/shell_harpoon/main.sh
+. ~/s/help_scripts/shell_harpoon/main.zsh
 . ~/.config/nnn/setup.sh
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/init_projects.sh
