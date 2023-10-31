@@ -61,7 +61,7 @@ exclude_gitignore() {
 }
 
 sync() {
-	#rm -rf the old sync first
+	#rm -rf the old sync first (to distinguish, we remove all dirs that are not '.git')
 	find "${HOME}/.dots/" -mindepth 1 -maxdepth 1 -type d ! -name '.git' -exec rm -rf {} +
 
 	for dir in $dot_directories; do
