@@ -61,6 +61,9 @@ exclude_gitignore() {
 }
 
 sync() {
+	#rm -rf the old sync first
+	find "${HOME}/.dots/" -mindepth 1 -maxdepth 1 -type d ! -name '.git' -exec rm -rf {} +
+
 	for dir in $dot_directories; do
 		printf "\033[34m%s\033[0m\n" "$dir"
 		command="rsync -au"
@@ -72,9 +75,6 @@ sync() {
 
 		to="$target_dir$dir"
 		mkdir -p "$(dirname "$to")"
-		if [ -e "$to" ]; then
-			rm -rf $to
-		fi
 		$command "$dir" $(dirname "$to") || printf "\033[31merror\033[0m\n"
 	done
 }
