@@ -1,5 +1,6 @@
 ,h() {
 	cs ~/s/valera
+	cowsay "mooo"
 }
 
 ,t() {
