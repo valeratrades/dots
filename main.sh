@@ -3,7 +3,9 @@
 README="""\
 #sync dots script
   \033[34msync\033[0m to upload local dots
-  \033[34mload\033[0m to load global dots"""
+  \033[34mload\033[0m to load global dots
+
+  -m to add a commit message"""
 
 
 target_dir="/home/v/.dots"
@@ -70,9 +72,7 @@ sync() {
 
 		to="$target_dir$dir"
 		mkdir -p "$(dirname "$to")"
-		if [ "$1" = "-r" ]; then
-			rm -rf $to
-		fi
+		rm -rf $to
 		$command "$dir" $(dirname "$to") || printf "\033[31merror\033[0m\n"
 	done
 }
@@ -103,14 +103,7 @@ load() {
 
 if [ -z "$1" ] || [ "$1" = "sync" ]; then
 	shift
-
-	if [ "$1" = "-r" ]; then
-		shift
-		sync -r
-	else
-		sync
-	fi
-
+	sync
 	if [ "$1" = "-m" ]; then
 		shift
 		commit "$@"
