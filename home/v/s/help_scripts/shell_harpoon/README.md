@@ -4,24 +4,24 @@
 ![image](https://github.com/Valera6/dots/assets/91695523/b11d9485-322b-4238-8c4b-5106ee93324c)
 
 ## Usage
+To edit binds
 ```bash
 ,ui
 ```
-to edit binds
 
+Execute the bound actions by simply calling the functions.
+Following are my names, but this can be changed in `,ui`
 ```bash
 ,h
 ,t
 ,n
 ,s
 ```
-or whatever else the chosen binds are to execute the actions bound to them
 
-And
+Connect `,c` to the current dir
 ```bash
 ,add
 ```
-to connect `,c` to the current dir
 
 ## Requirements
 The tool is currently designed for personal use only, so `,c` will break in absence of the custom `cs` command (that does `cd` and then some things)
