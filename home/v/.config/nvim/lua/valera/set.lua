@@ -34,7 +34,7 @@ vim.o.ttimeoutlen = 2
 o.termguicolors = true
 
 o.scrolloff = 8
-o.signcolumn = "yes"
+o.signcolumn = "yes" -- always show the sign column, so it doesn't jerk on lsp connection
 o.isfname:append("@-@")
 
 o.updatetime = 50
@@ -50,7 +50,8 @@ vim.cmd [[
   autocmd FileType * :set formatoptions-=ro
 ]]
 
-vim.g.autoformat = true
+-- might be the thing causing jerking
+-- vim.g.autoformat = true
 o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
 o.showmode = false
 o.winminwidth = 5

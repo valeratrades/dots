@@ -21,12 +21,26 @@ function ToggleDiagnostics()
 	end
 end
 
+function ToggleVirtualText()
+	local config = vim.diagnostic.config
+	local virtual_text = config().virtual_text
+
+	if virtual_text then
+		config({ virtual_text = false })
+	else
+		config({ virtual_text = true })
+	end
+end
+
 -- -- Open popup or jump to next problem
--- the solution with always showing all errors no the line is here:
--- https://github.com/jake-stewart/dotfiles/blob/main/.config/nvim/lua/plugins/nvim-lspconfig.lua
 local function getPopups()
 	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
 		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
+end
+local function killPopups()
+	vim.fn.map(getPopups(), function(_, e)
+		vim.api.nvim_win_close(e, false)
+	end)
 end
 local function popupOpen()
 	return #getPopups() > 0
@@ -45,40 +59,42 @@ function JumpToDiagnostic(direction, requestSeverity)
 	local bufnr = vim.api.nvim_get_current_buf()
 	local diagnostics = vim.diagnostic.get(bufnr)
 	local line = vim.fn.line(".") - 1
+	local popupOpenBool = popupOpen()
 	-- severity is [1:4], the lower the "worse"
-	local targetSeverity = { 1, 2, 3, 4 }
-	local selectedCasually = false
-	if requestSeverity ~= 'all' then -- '~=' is '!=' in this crazy language.
-		for _, d in pairs(diagnostics) do
-			if d.lnum == line then
-				selectedCasually = true
-			end
-			-- only navigate between errors, if there are any
-			if d.severity == 1 then
-				targetSeverity = { 1 }
-			end
+	local allSeverity = { 1, 2, 3, 4 }
+	local targetSeverity = allSeverity
+	for _, d in pairs(diagnostics) do
+		if d.lnum == line and not popupOpenBool then
+			-- meaning we selected casually
+			vim.diagnostic.open_float(floatOpts)
+			return
+		end
+		-- only navigate between errors, if there are any
+		if d.severity == 1 and requestSeverity ~= 'all' then
+			targetSeverity = { 1 }
 		end
 	end
 
-	local search = direction == 1 and "get_next_pos" or "get_prev_pos"
-	--TODO:
-	local pos = vim.diagnostic[search]()
-	print(pos.row)
-	--
-	local action = direction == 1 and "goto_next" or "goto_prev"
-	if popupOpen() then
-		vim.diagnostic[action]({ float = floatOpts, severity = targetSeverity })
-	elseif selectedCasually then
-		vim.diagnostic.open_float(floatOpts)
+
+	local go_action = direction == 1 and "goto_next" or "goto_prev"
+	local get_action = direction == 1 and "get_next" or "get_prev"
+	if targetSeverity ~= allSeverity then
+		vim.diagnostic[go_action]({ float = floatOpts, severity = targetSeverity })
+		return
 	else
-		vim.diagnostic[action]({
-			cursor_position = {
-				vim.fn.line("."),
-				direction == 1 and 0 or 9999
-			},
-			float = floatOpts,
-			severity = targetSeverity
-		})
+		-- jump over all on current line
+		local nextOnAnotherLine = false
+		while not nextOnAnotherLine do
+			local d = vim.diagnostic[get_action]({ severity = allSeverity })
+			if d.lnum ~= line then
+				nextOnAnotherLine = true
+			end
+			-- this piece of shit is waiting until the end of the function before execution for some reason
+			vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
+		end
+		-- can't do this, because nvim maintainers would sell their mother to keep vim compatibilty, so set_cursor api calls are blocking.
+		-- vim.diagnostic.open_float(floatOpts)
+		return
 	end
 end
 
@@ -94,12 +110,18 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "lsp: hover info")
 	map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "lsp: definition")
 
-	-- map("lk", "<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<cr>", "open error like 'K'")
-	map("<C-t>", "<cmd>lua JumpToDiagnostic(1, 'max')<cr>", "lsp: next diagnostic")
-	map("<C-n>", "<cmd>lua JumpToDiagnostic(-1, 'max')<cr>", "lsp: prev diagnostic")
-	map("<C-A-t>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "lsp: next diagnostic")
-	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "lsp: prev diagnostic")
-	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "lsp: toggle diagnostics visibility")
+	map("<C-t>", "<cmd>lua JumpToDiagnostic(1, 'max')<cr>", "lsp: next: errors only")
+	map("<C-n>", "<cmd>lua JumpToDiagnostic(-1, 'max')<cr>", "lsp: prev: errors only")
+	map("<C-A-t>",
+		"<cmd>lua JumpToDiagnostic(1, 'all')<cr>",
+		"lsp: next: whatever")
+	map("<C-A-n>",
+		"<cmd>lua JumpToDiagnostic(-1, 'all')<cr>",
+		"lsp: prev: whatever")
+
+	map("ld", "<cmd>lua ToggleDiagnostics()<cr>", "lsp: toggle diagnostics visibility")
+	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "lsp: toggle virtual text")
+
 	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "lsp: declaration")
 	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "lsp: type definition")
 	map("li", "<cmd>lua vim.lsp.buf.implementation()<cr>", "lsp: implementation")
