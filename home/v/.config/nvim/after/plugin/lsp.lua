@@ -22,6 +22,8 @@ function ToggleDiagnostics()
 end
 
 -- -- Open popup or jump to next problem
+-- the solution with always showing all errors no the line is here:
+-- https://github.com/jake-stewart/dotfiles/blob/main/.config/nvim/lua/plugins/nvim-lspconfig.lua
 local function getPopups()
 	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
 		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
@@ -29,19 +31,28 @@ end
 local function popupOpen()
 	return #getPopups() > 0
 end
+local floatOpts = {
+	format = function(diagnostic)
+		return vim.split(diagnostic.message, "\n")[1]
+	end,
+	-- source = true,
+	-- prefix = "",
+	-- suffix = "",
+	focusable = false,
+	header = ""
+}
 function JumpToDiagnostic(direction, requestSeverity)
 	local bufnr = vim.api.nvim_get_current_buf()
 	local diagnostics = vim.diagnostic.get(bufnr)
 	local line = vim.fn.line(".") - 1
 	-- severity is [1:4], the lower the "worse"
 	local targetSeverity = { 1, 2, 3, 4 }
-	local diagnosticOnCurrentLine = false
+	local selectedCasually = false
 	if requestSeverity ~= 'all' then -- '~=' is '!=' in this crazy language.
 		for _, d in pairs(diagnostics) do
 			if d.lnum == line then
-				diagnosticOnCurrentLine = true
+				selectedCasually = true
 			end
-
 			-- only navigate between errors, if there are any
 			if d.severity == 1 then
 				targetSeverity = { 1 }
@@ -49,23 +60,11 @@ function JumpToDiagnostic(direction, requestSeverity)
 		end
 	end
 
-	local floatOpts = {
-		format = function(diagnostic)
-			return vim.split(diagnostic.message, "\n")[1]
-		end,
-		-- source = true,
-		prefix = "",
-		suffix = "",
-		focusable = false,
-		header = ""
-	}
 	local action = direction == 1 and "goto_next" or "goto_prev"
 	if popupOpen() then
 		vim.diagnostic[action]({ float = floatOpts, severity = targetSeverity })
-	elseif diagnosticOnCurrentLine then
-		-- because there is no "goto_current"
-		vim.diagnostic["goto_next"]()
-		vim.diagnostic["goto_prev"]({ float = floatOpts, severity = { 1, 2, 3, 4 } })
+	elseif selectedCasually then
+		vim.diagnostic.open_float(floatOpts)
 	else
 		vim.diagnostic[action]({
 			cursor_position = {
