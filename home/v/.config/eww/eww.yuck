@@ -107,7 +107,7 @@
 ;; Notifications ;;
 (defpoll github_poll :initial "" :interval "1m" "./modules/github.sh")
 (defwidget github []
-	(icon-module :class "github" :icon "" :visible {github_poll != ""}
+	(icon-module :class "github" :icon "" :visible {github_poll != "" && github_poll != 0}
 		(label :text github_poll)))
 
 (deflisten notifications_listen :initial '{"show": "no", "content": ""}' "./modules/notifications.sh")
