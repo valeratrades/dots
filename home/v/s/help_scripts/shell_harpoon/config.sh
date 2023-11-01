@@ -1,15 +1,15 @@
-,h() {
+_h() {
 	cs ~/s/valera
 }
 
-,t() {
+_t() {
 	cs ~/s/todo/my_todo
 }
 
-,n() {
-	cowsay "something else"
+_n() {
+	cowsay "1"
 }
 
-,s() {
+_s() {
 	cs ~/s/PABreakdown
 }

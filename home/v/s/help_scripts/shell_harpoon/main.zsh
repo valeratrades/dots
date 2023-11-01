@@ -36,7 +36,13 @@ temp_file="${HOME}/tmp/shell_harpoon.sh"
 if [ -e "$temp_file" ]; then
 	. $temp_file
 fi	
-config_functions=("${(@f)$(awk '/\(\) {/ {gsub(/\(\)/, "", $1); print $1}' $harpoon_config_path)}")
-for func in "${config_functions[@]}"; do
-	eval "$func(){(source '$harpoon_config_path'; '$func')}"
-done
+# Does not work for the life of me. So doing the dumb way.
+# config_functions=("${(@f)$(awk '/\(\) {/ {gsub(/\(\)/, "", $1); print $1}' $harpoon_config_path)}")
+# for func in "${config_functions[@]}"; do
+# 	eval "$func(){(source '$harpoon_config_path'; '$func')}"
+# done
+
+alias ,h="source $harpoon_config_path && _h"
+alias ,t="source $harpoon_config_path && _t"
+alias ,n="source $harpoon_config_path && _n"
+alias ,s="source $harpoon_config_path && _s"
