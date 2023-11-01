@@ -60,6 +60,11 @@ function JumpToDiagnostic(direction, requestSeverity)
 		end
 	end
 
+	local search = direction == 1 and "get_next_pos" or "get_prev_pos"
+	--TODO:
+	local pos = vim.diagnostic[search]()
+	print(pos.row)
+	--
 	local action = direction == 1 and "goto_next" or "goto_prev"
 	if popupOpen() then
 		vim.diagnostic[action]({ float = floatOpts, severity = targetSeverity })
