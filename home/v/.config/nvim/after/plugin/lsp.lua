@@ -92,15 +92,9 @@ function JumpToDiagnostic(direction, requestSeverity)
 			-- this piece of shit is waiting until the end of the function before execution for some reason
 			vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
 		end
-		-- can't do this, because nvim maintainers would sell their mother to keep vim compatibilty, so set_cursor api calls are blocking.
-		-- vim.diagnostic.open_float(floatOpts)
+		-- if not, nvim_win_set_cursor will execute after it.
+		vim.defer_fn(function() vim.diagnostic.open_float(floatOpts) end, 10)
 		return
-	end
-end
-
-function HelpFunctionBecauseFuckMe()
-	if not popupOpen() then
-		vim.diagnostic.open_float(floatOpts)
 	end
 end
 
@@ -118,12 +112,8 @@ lsp_zero.on_attach(function(client, bufnr)
 
 	map("<C-t>", "<cmd>lua JumpToDiagnostic(1, 'max')<cr>", "next: errors only")
 	map("<C-n>", "<cmd>lua JumpToDiagnostic(-1, 'max')<cr>", "prev: errors only")
-	vim.keymap.set("n", "<C-A-t>",
-		"<cmd>lua JumpToDiagnostic(1, 'all')<cr>",
-		{ desc="lsp: next: whatever"})
-	vim.keymap.set("n", "<C-A-n>",
-		"<cmd>lua JumpToDiagnostic(-1, 'all')<cr>",
-		{ desc="lsp: prev: whatever"})
+	map("<C-A-t>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
+	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
 
 	map("ld", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
 	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
