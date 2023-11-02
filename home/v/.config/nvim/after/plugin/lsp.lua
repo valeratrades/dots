@@ -1,5 +1,3 @@
--- https://www.reddit.com/r/neovim/comments/og1cdv/neovim_lsp_how_do_you_get_diagnostic_mesages_to/
-
 local lspconfig = require('lspconfig')
 local lsp_zero = require('lsp-zero')
 
