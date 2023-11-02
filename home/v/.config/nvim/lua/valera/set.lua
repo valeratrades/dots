@@ -48,6 +48,7 @@ vim.cmd [[
   au BufWinLeave * silent! mkview
   au BufWinEnter * silent! loadview
   autocmd FileType * :set formatoptions-=ro
+	autocmd VimEnter * lua vim.fn.chdir(vim.env.PWD)
 ]]
 
 -- might be the thing causing jerking
@@ -66,3 +67,5 @@ k("i", ";", ";<c-g>u")
 
 o.showmatch = true
 o.joinspaces = false
+
+-- o.path = "**"

@@ -4,7 +4,8 @@ local k = vim.keymap.set
 
 vim.g.mapleader = " "
 --k("n", "<space>e", vim.cmd.Ex)
-k("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
+--k("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
+k("", "-", "<cmd>Oil<cr>")
 
 k("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 k("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })

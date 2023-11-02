@@ -129,7 +129,6 @@ return require('lazy').setup({
 
 	-- If something breaks, it's likely below here:
 
-
 	'lervag/vimtex',
 	--'jose-elias-alvarez/null-ls.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
