@@ -18,12 +18,27 @@ temp_file="${HOME}/tmp/shell_harpoon.sh"
 ,add() {
 	mkdir -p $(dirname "$temp_file")
 	echo "export SHELL_HARPOON_CURRENT_DIR_DUMP=$(pwd)" > "$temp_file"
+	. $temp_file
 }
+
+# # open nvim and cache the dir
+# Reliance on existence of `e` command for opening the said editor.
+,e() {
+	,add
+	e "$@"
+}
+e,() {
+	,c
+	e "$@"
+}
+#
+
 ,c() {
 	if [ -z $SHELL_HARPOON_CURRENT_DIR_DUMP ]; then
 		printf "Error: first dump the current dir by doing \033[34m,add\033[0m\n"
 		return 1
 	else
+		. $temp_file
 		if type "cs" &>/dev/null; then
 			cs $SHELL_HARPOON_CURRENT_DIR_DUMP
 		else
