@@ -139,7 +139,7 @@ bindsym $mod+r reload
 # I never actually want to exit sway; so just kill the pc on q. Shift+q is never supposed to be used.
 # the first command gracefully exits chrome, which is apparently very sensitive.
 bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
-bindsym $mod+Shift+q exec "${HOME}/s/help_scripts/boring.sh && pkill -TERM -x chrome; sudo shutdown -h now"
+bindsym $mod+Shift+q exec "eww update sway_mode=full_upgrade_before_shutdown && ${HOME}/s/help_scripts/boring.sh && pkill -TERM -x chrome; sudo shutdown -h now"
 
 #bindsym $mod+l exec $lock
 bindsym $mod+Escape exec $power
