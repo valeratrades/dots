@@ -61,14 +61,16 @@ K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove
 local function debugComment(action)
 	local cs = string.sub(vim.bo.commentstring, 1, -4)
 	if action == 'add' then
-		PersistCursor(Ft('A ' .. cs .. 'dbg' .. '<esc>'))
+		local save_cursor = vim.api.nvim_win_get_cursor(0)
+		Ft('A ' .. cs .. 'dbg' .. '<esc>')
+		vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, save_cursor) end, 1)
 	elseif action == 'remove' then
-		--TODO: search for all `cs .. 'dbg'` in the file, remove their lines.
+		vim.cmd("g/" .. " " .. cs .. "dbg$/d")
+		vim.cmd.noh()
 	end
 end
 K('n', 'gcda', function() debugComment('add') end, { desc = "comment: add dbg comment" })
 K('n', 'gcdr', function() debugComment('remove') end, { desc = "comment: remove all debug lines" })
-K('n', 'gtest', function() print('hi') end)
 
 --# Linewise
 --
