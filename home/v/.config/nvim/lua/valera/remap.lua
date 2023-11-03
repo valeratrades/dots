@@ -239,3 +239,7 @@ k("n", "<esc>", function()
 	vim.cmd.noh()
 	killPopups()
 end)
+
+-- this assumes we correctly did `vim.fn.chdir(vim.env.PWD)` in an autocmd earlier. Otherwise this will often try to execute commands one level in the filetree above.
+k("n", "<space>gp", "<cmd>!git add -A && git commit -m '.' && git push<cr>", { silent = true, desc = "git: just do it" })
+k("n", "<space>gr", "<cmd>!git reset --hard<cr>", { silent = true, desc = "git: hard reset" })
