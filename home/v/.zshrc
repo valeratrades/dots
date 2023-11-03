@@ -121,6 +121,10 @@ function lg() {
 fz() {
 	fd $@ | jfind
 }
+# sync dots
+sd() {
+	${HOME}/.dots/main.sh sync "$@" &
+}
 
 alias mr="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
@@ -128,8 +132,6 @@ alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
-# sync dots
-alias sd="${HOME}/.dots/main.sh sync"
 
 # # cd
 mkcd() {
@@ -147,7 +149,7 @@ alias csh="cs ~/s/help_scripts"
 alias csv="cs ~/s/valera"
 alias csd="cs ~/Downloads"
 alias csa="cs ~/s/ai-news-trade-bot"
-alias cst="cs ~/s/tmp"
+alias cst="cs ~/tmp"
 #
 # # editor
 alias ec="e ~/.config/nvim"
