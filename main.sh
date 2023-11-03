@@ -44,7 +44,8 @@ dot_directories="
 "
 
 commit() {
-	local message=$(date +"%Y-%m-%d %H:%M:%S")
+	# local message=$(date +"%Y-%m-%d %H:%M:%S")
+	local message="." # At this moment it makes more sense to me to auto-commit with '.', so other comments are easily searchable
 	if [ -n "$1" ]; then
 		message="$@"
 	fi
