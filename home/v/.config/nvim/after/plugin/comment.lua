@@ -61,9 +61,9 @@ K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove
 local function debugComment(action)
 	local cs = string.sub(vim.bo.commentstring, 1, -4)
 	if action == 'add' then
-		local save_cursor = vim.api.nvim_win_get_cursor(0)
-		Ft('A ' .. cs .. 'dbg' .. '<esc>')
-		vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, save_cursor) end, 1)
+		-- local save_cursor = vim.api.nvim_win_get_cursor(0)
+		PersistCursor(Ft, 'A ' .. cs .. 'dbg' .. '<esc>')
+		-- vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, save_cursor) end, 1)
 	elseif action == 'remove' then
 		vim.cmd("g/" .. " " .. cs .. "dbg$/d")
 		vim.cmd.noh()
