@@ -10,11 +10,9 @@ local config = {
 	pre_hook = nil,
 	post_hook = nil,
 }
-
-
-require('Comment').setup {
+require('Comment').setup({
 	config
-}
+})
 
 
 function OutlineCodeSection()
@@ -24,7 +22,7 @@ function OutlineCodeSection()
 	vim.api.nvim_feedkeys('O' .. cs .. ' ' .. cs .. ' ', 'n', false)
 end
 
-K("v", "gcs", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" }) -- s for surround
+K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" }) -- s for surround
 
 
 -- -- Draw a line thingie

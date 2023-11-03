@@ -20,7 +20,6 @@ o.swapfile = false
 o.backup = false
 o.undofile = true
 o.undodir = os.getenv("HOME") .. "/.vim/undodir"
--- ensure created
 if not vim.fn.isdirectory(vim.fn.expand(vim.o.undodir)) then
 	vim.fn.mkdir(vim.fn.expand(o.undodir), "p", 0770)
 end
@@ -34,7 +33,7 @@ vim.o.ttimeoutlen = 2
 o.termguicolors = true
 
 o.scrolloff = 8
-o.signcolumn = "yes" -- always show the sign column, so it doesn't jerk on lsp connection
+o.signcolumn = "yes"
 o.isfname:append("@-@")
 
 o.updatetime = 50
