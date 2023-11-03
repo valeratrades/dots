@@ -17,17 +17,17 @@ require('Comment').setup {
 }
 
 
--- -- Draw a line thingie
 function OutlineCodeSection()
 	local cs = string.sub(vim.bo.commentstring, 1, -4)
 	vim.api.nvim_feedkeys('o' .. cs, 'n', false)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>`<', true, true, true), 'n', false)
 	vim.api.nvim_feedkeys('O' .. cs .. ' ' .. cs .. ' ', 'n', false)
 end
+-- s for surround
+vim.keymap.set("v", "gcs", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
 
-vim.keymap.set("v", "ks", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
 
-
+-- -- Draw a line thingie
 function DrawABigBeautifulLine(symbol)
 	local cs = string.sub(vim.bo.commentstring, 1, -4)
 	local prefix = (#cs == 1 and cs .. symbol or cs)
@@ -36,12 +36,12 @@ function DrawABigBeautifulLine(symbol)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>0', true, true, true), 'n', false)
 end
 
-vim.keymap.set('n', '<space>-i', "i<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line" })
-vim.keymap.set('n', '<space>=i', "i<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line" })
-vim.keymap.set('n', '<space>-o', "o<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line" })
-vim.keymap.set('n', '<space>-O', "O<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line" })
-vim.keymap.set('n', '<space>=o', "o<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line" })
-vim.keymap.set('n', '<space>=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line" })
+vim.keymap.set('n', 'gc-i', "i<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line here" })
+vim.keymap.set('n', 'gc=i', "i<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line here" })
+vim.keymap.set('n', 'gc-o', "o<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line below" })
+vim.keymap.set('n', 'gc-O', "O<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line above" })
+vim.keymap.set('n', 'gc=o', "o<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line below" })
+vim.keymap.set('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line above" })
 --
 
 
