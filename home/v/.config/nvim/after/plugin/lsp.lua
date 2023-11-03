@@ -54,46 +54,48 @@ local floatOpts = {
 	header = ""
 }
 function JumpToDiagnostic(direction, requestSeverity)
-	local bufnr = vim.api.nvim_get_current_buf()
-	local diagnostics = vim.diagnostic.get(bufnr)
-	local line = vim.fn.line(".") - 1
-	local popupOpenBool = popupOpen()
-	-- severity is [1:4], the lower the "worse"
-	local allSeverity = { 1, 2, 3, 4 }
-	local targetSeverity = allSeverity
-	for _, d in pairs(diagnostics) do
-		if d.lnum == line and not popupOpenBool then
-			-- meaning we selected casually
-			vim.diagnostic.open_float(floatOpts)
+	pcall(function()
+		local bufnr = vim.api.nvim_get_current_buf()
+		local diagnostics = vim.diagnostic.get(bufnr)
+		local line = vim.fn.line(".") - 1
+		local popupOpenBool = popupOpen()
+		-- severity is [1:4], the lower the "worse"
+		local allSeverity = { 1, 2, 3, 4 }
+		local targetSeverity = allSeverity
+		for _, d in pairs(diagnostics) do
+			if d.lnum == line and not popupOpenBool then
+				-- meaning we selected casually
+				vim.diagnostic.open_float(floatOpts)
+				return
+			end
+			-- only navigate between errors, if there are any
+			if d.severity == 1 and requestSeverity ~= 'all' then
+				targetSeverity = { 1 }
+			end
+		end
+
+
+		local go_action = direction == 1 and "goto_next" or "goto_prev"
+		local get_action = direction == 1 and "get_next" or "get_prev"
+		if targetSeverity ~= allSeverity then
+			vim.diagnostic[go_action]({ float = floatOpts, severity = targetSeverity })
+			return
+		else
+			-- jump over all on current line
+			local nextOnAnotherLine = false
+			while not nextOnAnotherLine do
+				local d = vim.diagnostic[get_action]({ severity = allSeverity })
+				if d.lnum ~= line then
+					nextOnAnotherLine = true
+				end
+				-- this piece of shit is waiting until the end of the function before execution for some reason
+				vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
+			end
+			-- if not, nvim_win_set_cursor will execute after it.
+			vim.defer_fn(function() vim.diagnostic.open_float(floatOpts) end, 1)
 			return
 		end
-		-- only navigate between errors, if there are any
-		if d.severity == 1 and requestSeverity ~= 'all' then
-			targetSeverity = { 1 }
-		end
-	end
-
-
-	local go_action = direction == 1 and "goto_next" or "goto_prev"
-	local get_action = direction == 1 and "get_next" or "get_prev"
-	if targetSeverity ~= allSeverity then
-		vim.diagnostic[go_action]({ float = floatOpts, severity = targetSeverity })
-		return
-	else
-		-- jump over all on current line
-		local nextOnAnotherLine = false
-		while not nextOnAnotherLine do
-			local d = vim.diagnostic[get_action]({ severity = allSeverity })
-			if d.lnum ~= line then
-				nextOnAnotherLine = true
-			end
-			-- this piece of shit is waiting until the end of the function before execution for some reason
-			vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
-		end
-		-- if not, nvim_win_set_cursor will execute after it.
-		vim.defer_fn(function() vim.diagnostic.open_float(floatOpts) end, 1)
-		return
-	end
+	end)
 end
 
 --

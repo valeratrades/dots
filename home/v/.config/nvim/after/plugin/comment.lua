@@ -24,8 +24,7 @@ function OutlineCodeSection()
 	vim.api.nvim_feedkeys('O' .. cs .. ' ' .. cs .. ' ', 'n', false)
 end
 
--- s for surround
-K("v", "gcs", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
+K("v", "gcs", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" }) -- s for surround
 
 
 -- -- Draw a line thingie
