@@ -23,8 +23,9 @@ function OutlineCodeSection()
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>`<', true, true, true), 'n', false)
 	vim.api.nvim_feedkeys('O' .. cs .. ' ' .. cs .. ' ', 'n', false)
 end
+
 -- s for surround
-vim.keymap.set("v", "gcs", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
+K("v", "gcs", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
 
 
 -- -- Draw a line thingie
@@ -36,12 +37,12 @@ function DrawABigBeautifulLine(symbol)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>0', true, true, true), 'n', false)
 end
 
-vim.keymap.set('n', 'gc-i', "i<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line here" })
-vim.keymap.set('n', 'gc=i', "i<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line here" })
-vim.keymap.set('n', 'gc-o', "o<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line below" })
-vim.keymap.set('n', 'gc-O', "O<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line above" })
-vim.keymap.set('n', 'gc=o', "o<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line below" })
-vim.keymap.set('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line above" })
+K('n', 'gc-i', "i<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line here" })
+K('n', 'gc=i', "i<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line here" })
+K('n', 'gc-o', "o<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line below" })
+K('n', 'gc-O', "O<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line above" })
+K('n', 'gc=o', "o<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line below" })
+K('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: draw a '=' line above" })
 --
 
 
@@ -55,7 +56,19 @@ local function removeEndOfLineComment()
 	vim.defer_fn(function() vim.cmd.noh() end, 3)
 end
 -- Note that if no `<space>{comment_string}` found on the current line, it will go searching through the rest of the file with `?`
-vim.keymap.set('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove end-of-line comment" })
+K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove end-of-line comment" })
+
+local function debugComment(action)
+	local cs = string.sub(vim.bo.commentstring, 1, -4)
+	if action == 'add' then
+		PersistCursor(Ft('A ' .. cs .. 'dbg' .. '<esc>'))
+	elseif action == 'remove' then
+		--TODO: search for all `cs .. 'dbg'` in the file, remove their lines.
+	end
+end
+K('n', 'gcda', function() debugComment('add') end, { desc = "comment: add dbg comment" })
+K('n', 'gcdr', function() debugComment('remove') end, { desc = "comment: remove all debug lines" })
+K('n', 'gtest', function() print('hi') end)
 
 --# Linewise
 --
