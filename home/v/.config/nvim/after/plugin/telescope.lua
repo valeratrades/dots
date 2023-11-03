@@ -1,27 +1,28 @@
 local builtin = require('telescope.builtin')
--- "s" for "search"
+-- "s" for "search". Doesn't work, so adding it manually to each mapping
 vim.g.maplocalleader = "<Space>s"
 
--- Special mappings without the "s" prefix
-vim.keymap.set('n', '<Space>f', builtin.find_files, { desc = "telescope: project files" })
-vim.keymap.set('n', "<C-f>",
+K('n', '<Space>f', builtin.find_files, { desc = "telescope: project files" })
+K('n', "<C-f>",
 	"<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",
 	{ desc = "telescope: <C-f> remake" })
-vim.keymap.set('n', '<Space>map', builtin.keymaps, { desc = "telescope: keymaps" })
+
+-- -- standard mappings
+K('n', '<Space>sg', builtin.git_files, { desc = "telescope: git files" })
+K('n', '<Space>sd', builtin.diagnostics, { desc = "telescope: lsp diagnostics" })
+K('n', '<Space>sr', builtin.lsp_references, { desc = "telescope: lsp references" })
+K('n', "<Space>ss", builtin.live_grep, { desc = "telescope: live grep" })
+-- K('n', '<Space>sm', builtin.keymaps, { desc = "telescope: keymaps" }) -- Rather weird thing, less powerful than the built-in way
 --
 
--- following are meant to be prefixed by <localleader>, but it broke for some reason, so munaul for now.
-vim.keymap.set('n', '<Space>sg', builtin.git_files, { desc = "telescope: git files" })
-vim.keymap.set('n', '<Space>ss', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end, { desc = "telescope: grep string" })
-vim.keymap.set('n', '<Space>sd', builtin.diagnostics, { desc = "telescope: lsp diagnostics" })
-vim.keymap.set('n', '<Space>sr', builtin.lsp_references, { desc = "telescope: lsp references" })
-vim.keymap.set('n', "<Space>sf", "<cmd>Telescope live_grep<CR>", { desc = "telescope: live grep" })
+-- -- open new tab, then...
+K('n', '<Space>tf', "<cmd>tabe .<cr><cmd>Telescope find_files<cr>", { desc = "telescope + new tab: project files" })
+K('n', '<Space>tg', "<cmd>tabe .<cr><cmd>Telescope git_files<cr>", { desc = "telescope + new tab: git files" })
+K('n', '<Space>td', "<cmd>tabe .<cr><cmd>Telescope diagnostics<cr>", { desc = "telescope + new tab: lsp diagnostics" })
+K('n', '<Space>tr', "<cmd>tabe .<cr><cmd>Telescope lsp_references<cr>", { desc = "telescope + new tab: lsp references" })
+K('n', "<Space>ts", "<cmd>tabe .<cr><cmd>Telescope live_grep<cr>", { desc = "telescope + new tab: live grep" })
+--
 
--- Telescope File Browser
---TODO: setup
-local fb_actions = require "telescope".extensions.file_browser.actions
 require('telescope').load_extension('media_files')
 require("telescope").setup {
 	extensions = {
@@ -29,23 +30,6 @@ require("telescope").setup {
 			filetypes = { "png", "webp", "jpg", "jpeg" },
 			find_cmd = "rg"
 		},
-		file_browser = {
-			theme = "ivy",
-			-- disables netrw and use telescope-file-browser in its place
-			hijack_netrw = false,
-			mappings = {
-				["i"] = {
-					-- your custom insert mode mappings
-				},
-				["n"] = {
-					["<C-h>"] = fb_actions.goto_home_dir,
-					--["t"] = "j",
-					--["n"] = "k",
-					--["s"] = "l",
-				},
-			},
-		},
 	},
 }
-require("telescope").load_extension "file_browser"
 --

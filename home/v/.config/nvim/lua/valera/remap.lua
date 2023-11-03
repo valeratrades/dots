@@ -26,13 +26,6 @@ k("", "N", "<C-u>zz")
 k("", "H", "<C-b>zz")
 k("", "S", "<C-f>zz")
 
--- Quickfix and Location List
--- Defined in (`cmp.lua')
---k("n", "<C-t>", "<cmd>cnext<cr>zz")
---k("n", "<C-n>", "<cmd>cprev<cr>zz")
-k("n", "<space>t", "<cmd>lnext<cr>zz")
-k("n", "<space>n", "<cmd>lprev<cr>zz")
-
 -- Jump back, jump forward and tag-list back
 k("", "<A-h>", "<C-o>")
 k("i", "<A-h>", "<esc><C-o>")
