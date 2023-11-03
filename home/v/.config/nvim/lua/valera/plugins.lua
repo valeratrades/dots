@@ -136,4 +136,8 @@ return require('lazy').setup({
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	'jbyuki/instant.nvim',
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+	},
 })

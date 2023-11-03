@@ -91,7 +91,7 @@ function JumpToDiagnostic(direction, requestSeverity)
 			vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
 		end
 		-- if not, nvim_win_set_cursor will execute after it.
-		vim.defer_fn(function() vim.diagnostic.open_float(floatOpts) end, 10)
+		vim.defer_fn(function() vim.diagnostic.open_float(floatOpts) end, 1)
 		return
 	end
 end
