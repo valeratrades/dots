@@ -49,6 +49,10 @@ return require('lazy').setup({
 		opts = {}
 	},
 	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+	},
+	{
 		'stevearc/oil.nvim',
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
@@ -133,14 +137,10 @@ return require('lazy').setup({
 	-- If something breaks, it's likely below here:
 
 	'lervag/vimtex',
-	--'jose-elias-alvarez/null-ls.nvim',
+	'olimorris/persisted.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-media-files.nvim',
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	'jbyuki/instant.nvim',
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "VeryLazy",
-	},
 })

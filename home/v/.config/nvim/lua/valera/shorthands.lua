@@ -8,6 +8,10 @@ function Ft(s)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(s, true, true, true), 'n', false)
 end
 
+function Cs()
+	return string.sub(vim.bo.commentstring, 1, -4)
+end
+
 -- Note that this takes over 1ms defer
 function PersistCursor(fn, ...)
 	local args = ...

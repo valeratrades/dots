@@ -67,6 +67,15 @@ end
 K('n', 'gcda', function() debugComment('add') end, { desc = "comment: add dbg comment" })
 K('n', 'gcdr', function() debugComment('remove') end, { desc = "comment: remove all debug lines" })
 
+
+function AddTodoComment(n)
+	F('O' .. Cs() .. 'TODO' .. string.rep('!', n) .. ' ')
+end
+
+K("n", "!", [[v:count == 0 ? '!' : ':lua AddTodoComment(' . v:count . ')<cr>']],
+	{ noremap = true, expr = true, silent = true })
+
+
 --# Linewise
 --
 --`gcw` - Toggle from the current cursor position to the next word

@@ -70,8 +70,8 @@ k("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window wid
 
 -- Toggle Options
 -- local leader doesn't work, so doing manually. Otherwise it'd be "<space> u"
-k("n", "<space>uf", function() Util.format.toggle() end, { desc = "toggle: auto format (global)" })
-k("n", "<space>us", function() Util.toggle("spell") end, { desc = "toggle: Spelling" })
+--k("n", "<space>uf", function() Util.format.toggle() end, { desc = "toggle: auto format (global)" })
+--k("n", "<space>us", function() Util.toggle("spell") end, { desc = "toggle: Spelling" })
 --
 
 -- Terminal Mappings
@@ -142,10 +142,10 @@ k("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = t
 
 k("i", "<A-w>", "<esc>:w!<cr>")
 k("", "<A-w>", "<esc>:w!<cr>")
-k("", "<A-q>", ":q!<cr>")
-k("i", "<A-q>", "<esc>:q!<cr>")
-k("", "<A-a>", ":qa!<cr>")
-k("i", "<A-a>", "<esc>:qa!<cr>")
+k("", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
+k("i", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
+k("", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
+k("i", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
 
 --TODO at some point make this systemwide somehow
 k("i", "<A-o>", "<esc>o")
