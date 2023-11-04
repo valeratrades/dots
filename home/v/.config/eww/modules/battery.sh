@@ -9,5 +9,6 @@ status=$(cat "$battery/status")
 icon=""
 [ "$status" = "Charging" ] && icon=""
 [ "$status" = "Full" ] && adjusted_percent="100"
+[ "$status" = "Not charging" ] && adjusted_percent="100" # happens when we're fully charged but still plugged.
 
 echo "{\"content\": \"$adjusted_percent\", \"icon\": \"$icon\"}"
