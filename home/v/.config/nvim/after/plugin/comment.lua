@@ -10,9 +10,7 @@ local config = {
 	pre_hook = nil,
 	post_hook = nil,
 }
-require('Comment').setup({
-	config
-})
+require('Comment').setup(config)
 
 
 function OutlineCodeSection()
