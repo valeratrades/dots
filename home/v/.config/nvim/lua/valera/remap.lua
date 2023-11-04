@@ -228,7 +228,7 @@ local function killPopups()
 	end)
 end
 -- clear search highlight & kill popups
-k("n", "<esc>", function()
+K("n", "<esc>", function()
 	vim.cmd.noh()
 	killPopups()
 end)
