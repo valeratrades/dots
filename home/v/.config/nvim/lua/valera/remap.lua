@@ -99,6 +99,8 @@ for i = 1, 9 do
 end
 K({ "i", "" }, "<A-c>", "<esc><cmd>tabmove -<cr>")
 K({ "i", "" }, "<A-r>", "<esc><cmd>tabmove +<cr>")
+K({ "i", "" }, "<A-f>", "<esc><cmd>tabmove 0<cr>")
+K({ "i", "" }, "<A-g>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
 --
 
 -- -- Standards and the Consequences
