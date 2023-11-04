@@ -74,6 +74,7 @@ end
 
 K("n", "!", [[v:count == 0 ? '!' : ':lua AddTodoComment(' . v:count . ')<cr>']],
 	{ noremap = true, expr = true, silent = true })
+K('n', '<space>1', '<cmd>lua AddTodoComment(0)<cr>')
 
 
 --# Linewise

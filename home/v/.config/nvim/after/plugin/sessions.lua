@@ -11,3 +11,4 @@ require("persisted").setup({
 		reset_prompt_after_deletion = true,
 	},
 })
+K('n', '<space>sl', '<cmd>SessionLoad<cr>', { desc = "session: load" })
