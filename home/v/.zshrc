@@ -123,7 +123,7 @@ fz() {
 }
 # sync dots
 sd() {
-	${HOME}/.dots/main.sh sync "$@" & > /dev/null 2>&1
+	${HOME}/.dots/main.sh sync "$@" >/dev/null 2>&1 &
 }
 
 alias mr="py ${HOME}/clone/massren/massren -d '' $@"
