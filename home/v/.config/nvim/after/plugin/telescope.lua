@@ -9,12 +9,9 @@ K('n', "<C-f>",
 
 -- -- standard mappings
 K('n', '<Space>sg', builtin.git_files, { desc = "telescope: git files" })
-K('n', '<Space>sd', builtin.diagnostics, { desc = "telescope: lsp: diagnostics" })
-K('n', '<Space>sr', builtin.lsp_references, { desc = "telescope: lsp: references" })
-K('n', '<Space>si', builtin.lsp_implementations, { desc = "telescope: lsp: implementations" })
 K('n', "<Space>ss", builtin.live_grep, { desc = "telescope: live grep" })
 K('n', "<Space>sp", "<cmd>Telescope persisted<cr>", { desc = "telescope: persisted: sessions" })
--- K('n', '<Space>sm', builtin.keymaps, { desc = "telescope: keymaps" }) -- Rather weird thing, less powerful than the built-in way
+K('n', '<Space>sm', builtin.keymaps, { desc = "telescope: keymaps" })
 --
 
 -- -- open new tab, then...

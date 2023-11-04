@@ -1,222 +1,221 @@
 -- Notes for all mappings:
 -- 1) never use ':lua', instead use '<cmd>lua', for ':lua' forces us to normal mode.
-local k = vim.keymap.set
 
 vim.g.mapleader = " "
---k("n", "<space>e", vim.cmd.Ex)
---k("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
-k("", "-", "<cmd>Oil<cr>")
+--K("n", "<space>e", vim.cmd.Ex)
+--K("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
+K({ "n", "v" }, "-", "<cmd>Oil<cr>")
 
-k("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
-k("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
+K("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
 -- -- "htns" Remaps and the Consequences
 -- Basic Movement
-k("", "h", "h")
-k("", "t", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-k("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-k("", "s", "l")
-k("", "j", "<nop>")
-k("", "k", "<nop>")
-k("", "l", "<nop>")
+K("", "h", "h")
+K("", "t", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+K("", "s", "l")
+K("", "j", "<nop>")
+K("", "k", "<nop>")
+K("", "l", "<nop>")
 
 -- Jumps
-k("", "T", "<C-d>zz")
-k("", "N", "<C-u>zz")
-k("", "H", "<C-b>zz")
-k("", "S", "<C-f>zz")
+K("", "T", "<C-d>zz")
+K("", "N", "<C-u>zz")
+K("", "H", "<C-b>zz")
+K("", "S", "<C-f>zz")
 
 -- Jump back, jump forward and tag-list back
-k("", "<A-h>", "<C-o>")
-k("i", "<A-h>", "<esc><C-o>")
-k("", "<A-H>", "<C-t>")
-k("i", "<A-H>", "<esc><C-t>")
-k("", "<C-t>", "<nop>")
-k("", "<A-s>", "<C-i>")
-k("i", "<A-s>", "<esc><C-o>")
+K("", "<A-h>", "<C-o>")
+K("i", "<A-h>", "<esc><C-o>")
+K("", "<A-H>", "<C-t>")
+K("i", "<A-H>", "<esc><C-t>")
+K("", "<C-t>", "<nop>")
+K("", "<A-s>", "<C-i>")
+K("i", "<A-s>", "<esc><C-o>")
 
 -- Move line
-k("v", "<A-t>", ":m '>+1<cr>gv=gv", { noremap = true })
-k("v", "<A-n>", ":m '<-2<cr>gv=gv", { noremap = true })
-k("n", "<A-t>", "V:m '>+1<cr>gv=gv", { noremap = true })
-k("n", "<A-n>", "V:m '>-2<cr>gv=gv", { noremap = true })
-k("i", "<A-t>", "<esc>V:m '>+1<cr>gv=gv", { noremap = true })
-k("i", "<A-n>", "<esc>V:m '>-2<cr>gv=gv", { noremap = true })
+K("v", "<A-t>", ":m '>+1<cr>gv=gv", { noremap = true })
+K("v", "<A-n>", ":m '<-2<cr>gv=gv", { noremap = true })
+K("n", "<A-t>", "V:m '>+1<cr>gv=gv", { noremap = true })
+K("n", "<A-n>", "V:m '>-2<cr>gv=gv", { noremap = true })
+K("i", "<A-t>", "<esc>V:m '>+1<cr>gv=gv", { noremap = true })
+K("i", "<A-n>", "<esc>V:m '>-2<cr>gv=gv", { noremap = true })
 
 -- Windows
-k('n', '<C-w>h', '<C-W>h', { noremap = true })
-k('n', '<C-w>t', '<C-W>j', { noremap = true })
-k('n', '<C-w>n', '<C-W>k', { noremap = true })
-k('n', '<C-w>s', '<C-W>l', { noremap = true })
-k('n', '<C-w>S', '<C-W>s', { noremap = true })
-k('n', '<C-w><C-t>', '<C-W>j', { noremap = true })
-k('n', '<C-w><C-h>', '<C-W>h', { noremap = true })
-k('n', '<C-w><C-n>', '<C-W>k', { noremap = true })
-k('n', '<C-w><C-s>', '<C-W>l', { noremap = true })
+K('n', '<C-w>h', '<C-W>h', { noremap = true })
+K('n', '<C-w>t', '<C-W>j', { noremap = true })
+K('n', '<C-w>n', '<C-W>k', { noremap = true })
+K('n', '<C-w>s', '<C-W>l', { noremap = true })
+K('n', '<C-w>S', '<C-W>s', { noremap = true })
+K('n', '<C-w><C-t>', '<C-W>j', { noremap = true })
+K('n', '<C-w><C-h>', '<C-W>h', { noremap = true })
+K('n', '<C-w><C-n>', '<C-W>k', { noremap = true })
+K('n', '<C-w><C-s>', '<C-W>l', { noremap = true })
+
+K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
 
 -- Consequences
-k("n", "j", "nzzzv")
-k("n", "k", "Nzzzv")
+K("n", "j", "nzzzv")
+K("n", "k", "Nzzzv")
 --
 -- --
 
 
 -- Windows
-k("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-k("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-k("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-k("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+K("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 --
 
 -- Toggle Options
 -- local leader doesn't work, so doing manually. Otherwise it'd be "<space> u"
---k("n", "<space>uf", function() Util.format.toggle() end, { desc = "toggle: auto format (global)" })
---k("n", "<space>us", function() Util.toggle("spell") end, { desc = "toggle: Spelling" })
+--K("n", "<space>uf", function() Util.format.toggle() end, { desc = "toggle: auto format (global)" })
+--K("n", "<space>us", function() Util.toggle("spell") end, { desc = "toggle: Spelling" })
 --
 
+-- Just use tmux
 -- Terminal Mappings
 -- Is this the thing that kills my esc? (doesn't seem so)
-k("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
-k("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
-k("t", "<C-t>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
-k("t", "<C-n>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
-k("t", "<C-s>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
-k("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-k("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+--K("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+--K("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
+--K("t", "<C-t>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
+--K("t", "<C-n>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
+--K("t", "<C-s>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
+--K("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+--K("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 --
 
 -- Tabs
-k("", "<A-,>", "gT")
-k("", "<A-.>", "gt")
-k("", "<A-p>", "g<Tab>")
-k("", "<A-y>", "<cmd>tablast<cr>")
+K({ "i", "" }, "<A-,>", "<esc>gT")
+K({ "i", "" }, "<A-.>", "<esc>gt")
+K({ "i", "" }, "<A-p>", "<esc>g<Tab>")
+K({ "i", "" }, "<A-y>", "<esc><cmd>tablast<cr>")
 for i = 1, 9 do
-	vim.api.nvim_set_keymap('', '<A-' .. i .. '>', '<cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
+	K("", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
-k("i", "<A-,>", "<esc>gT")
-k("i", "<A-.>", "<esc>gt")
-k("i", "<A-p>", "<esc>g<Tab>")
-k("i", "<A-y>", "<esc><cmd>tablast<cr>")
 for i = 1, 9 do
-	vim.api.nvim_set_keymap('i', '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
+	K("i", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
+K({ "i", "" }, "<A-c>", "<esc><cmd>tabmove -<cr>")
+K({ "i", "" }, "<A-r>", "<esc><cmd>tabmove +<cr>")
 --
 
 -- -- Standards and the Consequences
-k("", "<C-j>", "\"+y")
-k("", "<C-q>", "\"+ygv\"_d")
+K("", "<C-j>", "\"+y")
+K("", "<C-q>", "\"+ygv\"_d")
 
 -- For some reason this just doesn't work!
-k("i", "<C-del>", "X<esc>ce") -- n mappings for <del> below rely on this
-k("v", "<bs>", "d")
-k("n", "<bs>", "i<bs>")
-k("n", "<del>", "i<del>")
-k("n", "<C-del>", "a<C-del>", { remap = true })
+K("i", "<C-del>", "X<esc>ce") -- n mappings for <del> below rely on this
+K("v", "<bs>", "d")
+K("n", "<bs>", "i<bs>")
+K("n", "<del>", "i<del>")
+K("n", "<C-del>", "a<C-del>", { remap = true })
 --test this thing is-it/actually() working?
 
-k('', '<C-a>', 'ggVG', { noremap = true, silent = true })
+K('', '<C-a>', 'ggVG', { noremap = true, silent = true })
 
-k('', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
-k('i', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
+K('', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
+K('i', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
 
 -- Consequences
-k('', '<C-S-a>', '<C-a>', { noremap = true, silent = true })
+K('', '<C-S-a>', '<C-a>', { noremap = true, silent = true })
 --
 -- --
 
 -- FIX
 -- Gitui
-local function start_gitui()
-	local handle = io.popen("git rev-parse --show-toplevel")
-	local result = handle:read("*a")
-	handle:close()
-	result = result:gsub("%s+", "")
-	if result ~= "" then
-		vim.cmd("term gitui -d " .. result)
-	else
-		print("Not inside a git repository.")
-	end
-end
-k("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = true })
+--local function start_gitui()
+--	local handle = io.popen("git rev-parse --show-toplevel")
+--	local result = handle:read("*a")
+--	handle:close()
+--	result = result:gsub("%s+", "")
+--	if result ~= "" then
+--		vim.cmd("term gitui -d " .. result)
+--	else
+--		print("Not inside a git repository.")
+--	end
+--end
+--K("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = true })
 --
 
-k("i", "<A-w>", "<esc>:w!<cr>")
-k("", "<A-w>", "<esc>:w!<cr>")
-k("", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
-k("i", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
-k("", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
-k("i", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
+K("i", "<A-w>", "<esc>:w!<cr>")
+K("", "<A-w>", "<esc>:w!<cr>")
+K("", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
+K("i", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
+K("", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
+K("i", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
 
 --TODO at some point make this systemwide somehow
-k("i", "<A-o>", "<esc>o")
-k("i", "<A-O>", "<esc>O")
+K("i", "<A-o>", "<esc>o")
+K("i", "<A-O>", "<esc>O")
 
-k("", ";", ":")
-k("", ":", "<nop>")
+K("", ";", ":")
+K("", ":", "<nop>")
 -- Apparently some of these are taken for something else. (Should I then remap those other things?)
---k("v", "i", "<esc>i")
---k("v", "a", "<esc>a")
---k("v", "I", "<esc>I")
---k("v", "A", "<esc>A")
---k("v", "o", "<esc>o")
---k("v", "O", "<esc>O")
+--K("v", "i", "<esc>i")
+--K("v", "a", "<esc>a")
+--K("v", "I", "<esc>I")
+--K("v", "A", "<esc>A")
+--K("v", "o", "<esc>o")
+--K("v", "O", "<esc>O")
 
 
-k("n", "J", "mzJ`z")
+K("n", "J", "mzJ`z")
 
-k("n", "<space>y", "\"+y")
-k("v", "<space>y", "\"+y")
-k("n", "<space>Y", "\"+Y")
-k("x", "<space>p", "\"_dP")
+K("n", "<space>y", "\"+y")
+K("v", "<space>y", "\"+y")
+K("n", "<space>Y", "\"+Y")
+K("x", "<space>p", "\"_dP")
 
-k("n", "<space>d", "\"_d")
-k("v", "<space>d", "\"_d")
+K("n", "<space>d", "\"_d")
+K("v", "<space>d", "\"_d")
 
-k("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
+K("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
-k("n", ",ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+K("n", ",ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
 -- select the pasted
-k("n", "gp", function()
+K("n", "gp", function()
 	return "`[" .. vim.fn.strpart(vim.fn.getregtype(), 0, 1) .. "`]"
 end, { expr = true })
 
 -- first non blank of the line
---k("", "gh", "^")
+--K("", "gh", "^")
 -- end of line
---k("", "gl", "$") -- '0' for start of line
+--K("", "gl", "$") -- '0' for start of line
 -- matching paranthesis
---k("", "gm", "%")
+--K("", "gm", "%")
 
-k("n", "H", "H^")
-k("n", "M", "M^")
-k("n", "L", "L^")
+K("n", "H", "H^")
+K("n", "M", "M^")
+K("n", "L", "L^")
 
 -- tries to correct spelling of the word under the cursor
-k("n", "<leader>s", "1z=")
+K("n", "<leader>s", "1z=")
 
-k('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
-k('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
-k('n', '<space>clg', 'vi""8di\\033[32m<esc>"8pa\\033[0m<Esc>', { desc = "add green escapecode" })
+K('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
+K('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
+K('n', '<space>clg', 'vi""8di\\033[32m<esc>"8pa\\033[0m<Esc>', { desc = "add green escapecode" })
 -- and now color rust, because they decided to have different escape codes...
-k('n', '<space>clrr', 'vi""8di\\x1b[31m<esc>"8pa\\x1b[0m<Esc>', { desc = "add red escapecode" })
-k('n', '<space>clrb', 'vi""8di\\x1b[34m<esc>"8pa\\x1b[0m<Esc>', { desc = "add blue escapecode" })
-k('n', '<space>clrg', 'vi""8di\\x1b[32m<esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
+K('n', '<space>clrr', 'vi""8di\\x1b[31m<esc>"8pa\\x1b[0m<Esc>', { desc = "add red escapecode" })
+K('n', '<space>clrb', 'vi""8di\\x1b[34m<esc>"8pa\\x1b[0m<Esc>', { desc = "add blue escapecode" })
+K('n', '<space>clrg', 'vi""8di\\x1b[32m<esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
 
 
-k('', '<space>.', '<cmd>tabe .<cr>')
+K('', '<space>.', '<cmd>tabe .<cr>')
 
 -- zero width space digraph
 vim.cmd.digraph("zs " .. 0x200b)
 
-k('n', 'U', '<C-r>', { noremap = true, desc = "helix: redo" })
-k('n', '<C-r>', '<nop>')
-k('n', '<tab>', 'i<tab>')
+K('n', 'U', '<C-r>', { noremap = true, desc = "helix: redo" })
+K('n', '<C-r>', '<nop>')
+K('n', '<tab>', 'i<tab>')
 
 -- trying out:
-k("i", "<c-r><c-r>", "<c-r>\"");
-k("n", "<space>`", "~hi");
-k("v", "<space>`", "~gvI");
+K("i", "<c-r><c-r>", "<c-r>\"");
+K("n", "<space>`", "~hi");
+K("v", "<space>`", "~gvI");
 
 local function getPopups()
 	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
@@ -234,5 +233,5 @@ K("n", "<esc>", function()
 end)
 
 -- this assumes we correctly did `vim.fn.chdir(vim.env.PWD)` in an autocmd earlier. Otherwise this will often try to execute commands one level in the filetree above.
-k("n", "<space>gp", "<cmd>!git add -A && git commit -m '.' && git push<cr>", { silent = true, desc = "git: just do it" })
-k("n", "<space>gr", "<cmd>!git reset --hard<cr>", { silent = true, desc = "git: hard reset" })
+K("n", "<space>gp", "<cmd>!git add -A && git commit -m '.' && git push<cr>", { silent = true, desc = "git: just do it" })
+K("n", "<space>gr", "<cmd>!git reset --hard<cr>", { silent = true, desc = "git: hard reset" })

@@ -106,7 +106,7 @@ lsp_zero.on_attach(function(client, bufnr)
 		vim.keymap.set("n", lhs, rhs, opts)
 	end
 
-	-- can't change these two, as they have same functions without lsp
+	-- can't change names of these two, as they have same functions without lsp
 	map("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "hover info")
 	map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "definition")
 
@@ -115,23 +115,20 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("<C-A-t>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
 	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
 
-	map("ld", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
+	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
 	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
 
 	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
 	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
-	map("li", "<cmd>lua vim.lsp.buf.implementation()<cr>", "implementation")
-	map("lr", "<cmd>lua vim.lsp.buf.references()<cr>", "references")
+	map("li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
+	map("lr", "<cmd>Telescope lsp_references<cr>", "references")
+	map("ld", "<cmd>Telescope diagnostics<cr>", "references")
 	map("lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
 	map("lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
 	map("lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
 	map("lo", "<cmd>lua vim.lsp.buf.open_floating()<cr>", "open float")
 	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
-	map("lh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "signature help")
-	-- The following is obsolete with the popup jumps available
-	-- map("lqw", "<cmd>lua vim.diagnostic.setqflist()<cr>", "put window diagnostics to qf")
-	-- --TODO: check if this thing works:
-	-- map("lqb", "<cmd>lua set_qflist({ bufnr })<cr>", "put buffer diagnostics to qf")
+	--map("lh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "signature help") -- is obsolete; being subset of `K` and what `signature.nvim` does
 	map('<c-r>', "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
 
 
