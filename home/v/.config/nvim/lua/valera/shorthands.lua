@@ -25,15 +25,20 @@ function PersistCursor(fn, ...)
 	return result
 end
 
--- function DebugPrintTable(tbl)
--- 	local str = "{"
--- 	for k, v in pairs(tbl) do
--- 		if type(v) == "table" then
--- 			str = str .. "[" .. k .. "]=" .. DebugPrintTable(v) .. ","
--- 		else
--- 			str = str .. "[" .. k .. "]=" .. tostring(v) .. ","
--- 		end
--- 	end
--- 	local table = str .. "}"
--- 	print(table)
--- end
+-- -- popups
+function GetPopups()
+	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
+		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
+end
+
+function KillPopups()
+	vim.fn.map(GetPopups(), function(_, e)
+		vim.api.nvim_win_close(e, false)
+	end)
+end
+
+function BoolPopupOpen()
+	return #GetPopups() > 0
+end
+
+--

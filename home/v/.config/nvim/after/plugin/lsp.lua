@@ -31,18 +31,6 @@ function ToggleVirtualText()
 end
 
 -- -- Open popup or jump to next problem
-local function getPopups()
-	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
-		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
-end
-local function killPopups()
-	vim.fn.map(getPopups(), function(_, e)
-		vim.api.nvim_win_close(e, false)
-	end)
-end
-local function popupOpen()
-	return #getPopups() > 0
-end
 local floatOpts = {
 	format = function(diagnostic)
 		return vim.split(diagnostic.message, "\n")[1]
@@ -58,12 +46,11 @@ function JumpToDiagnostic(direction, requestSeverity)
 		local bufnr = vim.api.nvim_get_current_buf()
 		local diagnostics = vim.diagnostic.get(bufnr)
 		local line = vim.fn.line(".") - 1
-		local popupOpenBool = popupOpen()
 		-- severity is [1:4], the lower the "worse"
 		local allSeverity = { 1, 2, 3, 4 }
 		local targetSeverity = allSeverity
 		for _, d in pairs(diagnostics) do
-			if d.lnum == line and not popupOpenBool then
+			if d.lnum == line and not BoolPopupOpen() then
 				-- meaning we selected casually
 				vim.diagnostic.open_float(floatOpts)
 				return
@@ -85,11 +72,15 @@ function JumpToDiagnostic(direction, requestSeverity)
 			local nextOnAnotherLine = false
 			while not nextOnAnotherLine do
 				local d = vim.diagnostic[get_action]({ severity = allSeverity })
-				if d.lnum ~= line then
-					nextOnAnotherLine = true
-				end
 				-- this piece of shit is waiting until the end of the function before execution for some reason
 				vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
+				if d.lnum ~= line then
+					nextOnAnotherLine = true
+					break
+				end
+				if #diagnostics == 1 then
+					return
+				end
 			end
 			-- if not, nvim_win_set_cursor will execute after it.
 			vim.defer_fn(function() vim.diagnostic.open_float(floatOpts) end, 1)
@@ -122,7 +113,8 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
 	map("li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
 	map("lr", "<cmd>Telescope lsp_references<cr>", "references")
-	map("ld", "<cmd>Telescope diagnostics<cr>", "references")
+	map("ld", "<cmd>Telescope diagnostics<cr>", "diagnostics")
+	map("ll", "<cmd>Telescope diagnostics bufnr=0<cr>", "local diagnostics")
 	map("lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
 	map("lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
 	map("lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
