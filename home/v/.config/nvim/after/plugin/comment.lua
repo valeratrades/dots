@@ -11,8 +11,23 @@ local config = {
 	post_hook = nil,
 }
 require('Comment').setup(config)
+--# Linewise
+--
+--`gcw` - Toggle from the current cursor position to the next word
+--`gc$` - Toggle from the current cursor position to the end of line
+--`gc}` - Toggle until the next blank line
+--`gc5j` - Toggle 5 lines after the current cursor position
+--`gc8k` - Toggle 8 lines before the current cursor position
+--`gcip` - Toggle inside of paragraph
+--`gca}` - Toggle around curly brackets
+--
+--# Blockwise
+--
+--`gb2}` - Toggle until the 2 next blank line
+--`gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
+--`gbac` - Toggle comment around a class (w/ LSP/treesitter support)
 
-
+-- -- Code Section comment
 function OutlineCodeSection()
 	local cs = Cs()
 	vim.api.nvim_feedkeys('o' .. cs, 'n', false)
@@ -21,6 +36,7 @@ function OutlineCodeSection()
 end
 
 K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" }) -- s for surround
+--
 
 
 -- -- Draw a line thingie
@@ -41,6 +57,7 @@ K('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: dr
 --
 
 
+-- -- Remove end of line
 local function removeEndOfLineComment()
 	local cs = Cs()
 	local save_cursor = vim.api.nvim_win_get_cursor(0)
@@ -52,7 +69,9 @@ local function removeEndOfLineComment()
 end
 -- Note that if no `<space>{comment_string}` found on the current line, it will go searching through the rest of the file with `?`
 K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove end-of-line comment" })
+--
 
+-- -- `//dbg` Commments
 local function debugComment(action)
 	local cs = Cs()
 	if action == 'add' then
@@ -66,97 +85,54 @@ local function debugComment(action)
 end
 K('n', 'gcda', function() debugComment('add') end, { desc = "comment: add dbg comment" })
 K('n', 'gcdr', function() debugComment('remove') end, { desc = "comment: remove all debug lines" })
+--
 
 
+-- -- `TODO{!*n}` Comments
 function AddTodoComment(n)
-	F('O' .. Cs() .. 'TODO' .. string.rep('!', n) .. ' ')
+	F('O' .. Cs() .. 'TODO' .. string.rep('!', n) .. ': ')
 end
 
 K("n", "!", [[v:count == 0 ? '!' : ':lua AddTodoComment(' . v:count . ')<cr>']],
 	{ noremap = true, expr = true, silent = true })
 K('n', '<space>1', '<cmd>lua AddTodoComment(0)<cr>')
 
+local function escape(buffer)
+	return string.gsub(buffer, "[%(%)%.%%%+%-%*%?%[%^%$%]]", "%%%1")
+end
 
---# Linewise
---
---`gcw` - Toggle from the current cursor position to the next word
---`gc$` - Toggle from the current cursor position to the end of line
---`gc}` - Toggle until the next blank line
---`gc5j` - Toggle 5 lines after the current cursor position
---`gc8k` - Toggle 8 lines before the current cursor position
---`gcip` - Toggle inside of paragraph
---`gca}` - Toggle around curly brackets
---
---# Blockwise
---
---`gb2}` - Toggle until the 2 next blank line
---`gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
---`gbac` - Toggle comment around a class (w/ LSP/treesitter support)
+local function split(s, delimiter)
+	local result = {};
+	for match in (s .. escape(delimiter)):gmatch("(.-)" .. delimiter) do
+		table.insert(result, match);
+	end
+	return result;
+end
+
+function FindTodo()
+	local regex = vim.fn.shellescape(Cs() .. "TODO")
+	local results = vim.fn.systemlist(
+		"rg -rn -- " .. regex
+		.. " | awk -F: -v OFS=: '{print gsub(/!/, \"&\"), $0}'"
+		.. " | sort -rn")
+	if vim.v.shell_error > 0 then
+		print("No TODOs found")
+		return
+	end
+	local qflist = vim.fn.map(results, function(_, x)
+		local parts = split(x, ":")
+		return {
+			filename = parts[2],
+			lnum = parts[3],
+			text = table.concat(parts, ":", 4)
+		}
+	end)
+	vim.fn.setqflist(qflist)
+end
+
+K('n', 'gct', function()
+	FindTodo()
+	vim.cmd.copen()
+end, { desc = "comment: find and sort project's TODOs" })
 
 --
---{
---    ---Add a space b/w comment and the line
---    padding = true,
---    ---Whether the cursor should stay at its position
---    sticky = true,
---    ---Lines to be ignored while (un)comment
---    ignore = nil,
---    ---LHS of toggle mappings in NORMAL mode
---    toggler = {
---        ---Line-comment toggle keymap
---        line = 'gcc',
---        ---Block-comment toggle keymap
---        block = 'gbc',
---    },
---    ---LHS of operator-pending mappings in NORMAL and VISUAL mode
---    opleader = {
---        ---Line-comment keymap
---        line = 'gc',
---        ---Block-comment keymap
---        block = 'gb',
---    },
---    ---LHS of extra mappings
---    extra = {
---        ---Add comment on the line above
---        above = 'gcO',
---        ---Add comment on the line below
---        below = 'gco',
---        ---Add comment at the end of line
---        eol = 'gcA',
---    },
---    ---Enable keybindings
---    ---NOTE: If given `false` then the plugin won't create any mappings
---    mappings = {
---        ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
---        basic = true,
---        ---Extra mapping; `gco`, `gcO`, `gcA`
---        extra = true,
---    },
---    ---Function to call before (un)comment
---    pre_hook = nil,
---    ---Function to call after (un)comment
---    post_hook = nil,
---}
---
---
---  Default:
---`gco` - Insert comment to the next line and enters INSERT mode
---`gcO` - Insert comment to the previous line and enters INSERT mode
---`gcA` - Insert comment to end of the current line and enters INSERT mode
---
---# Linewise
---
---`gcw` - Toggle from the current cursor position to the next word
---`gc$` - Toggle from the current cursor position to the end of line
---`gc}` - Toggle until the next blank line
---`gc5j` - Toggle 5 lines after the current cursor position
---`gc8k` - Toggle 8 lines before the current cursor position
---`gcip` - Toggle inside of paragraph
---
---`gca}` - Toggle around curly brackets
---
---# Blockwise
---
---`gb2}` - Toggle until the 2 next blank line
---`gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
---`gbac` - Toggle comment around a class (w/ LSP/treesitter support)

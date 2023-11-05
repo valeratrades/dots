@@ -9,15 +9,21 @@ K('n', "<C-f>",
 
 -- -- standard mappings
 K('n', '<Space>sg', builtin.git_files, { desc = "telescope: git files" })
-K('n', "<Space>ss", builtin.live_grep, { desc = "telescope: live grep" })
+K('n', "<Space>sf", builtin.live_grep, { desc = "telescope: live grep" })
 K('n', "<Space>sp", "<cmd>Telescope persisted<cr>", { desc = "telescope: persisted: sessions" })
 K('n', '<Space>sm', builtin.keymaps, { desc = "telescope: keymaps" })
+K({ 'n', 'v' }, '<Space>ss', builtin.grep_string, { desc = "telescope: grep visual selection or word under cursor" })
+-- This one is also done with `gct`, and with quickfix there; because it seems to be better for this purpose
+K('n', '<Space>st', function()
+	FindTodo()
+	require('telescope.builtin').quickfix()
+end, { desc = "telescope: find todos" })
 --
 
 -- -- open new tab, then...
 K('n', '<Space>tf', "<cmd>tabe .<cr><cmd>Telescope find_files<cr>", { desc = "telescope + new tab: project files" })
-K('n', '<Space>tg', "<cmd>tabe .<cr><cmd>Telescope git_files<cr>", { desc = "telescope + new tab: git files" })
 K('n', "<Space>ts", "<cmd>tabe .<cr><cmd>Telescope live_grep<cr>", { desc = "telescope + new tab: live grep" })
+K('n', '<Space>tg', "<cmd>tabe .<cr><cmd>Telescope git_files<cr>", { desc = "telescope + new tab: git files" })
 --
 
 require('telescope').load_extension('media_files')
@@ -30,3 +36,5 @@ require("telescope").setup {
 	},
 }
 --
+
+--TODO!: one in telescope

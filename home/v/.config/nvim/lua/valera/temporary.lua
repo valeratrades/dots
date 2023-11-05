@@ -26,4 +26,4 @@
 -- vim.api.nvim_set_keymap('n', "p", ':lua go_to_checkpoint()<CR>A<Esc>', { noremap = true, silent = true })
 --
 --
-----TODO: make a keybind to souce this file from normal mode, and remove its mention from the local init.lua.
+----TODO: make a keybind to source this file from normal mode, and remove its mention from the local init.lua.
