@@ -38,49 +38,45 @@ cmp.setup({
 
 			symbol_map = {
 				Text = "",
-				Method = "",
-				Function = "",
-				Constructor = "",
-				Field = "",
-				Variable = "",
-				Class = "",
-				Interface = "",
-				Module = "",
-				Property = "",
-				Unit = "ﳑ",
-				Value = "",
-				Enum = "",
-				Keyword = "",
+				Module = "",
 				File = "",
-				Reference = "",
 				Folder = "",
-				EnumMember = "",
-				Constant = "",
-				Struct = "",
-				Event = "",
-				Snippet = "",
-				Color = "",
 				Operator = "",
-				TypeParameter = "",
+				Color = "",
+				Snippet = "",
+				Value = "",
+				Constructor = "",
+				Event = "",
+				Constant = "'static",
+				Unit = "{}",
+				Method = "𝗠",
+				Function = "𝗙",
+				Field = "𝗳",
+				Variable = "𝘃",
+				Class = "𝗖",
+				Enum = "𝗘",
+				Keyword = "𝘄",
+				Reference = "𝗿",
+				EnumMember = "𝗲",
+				Struct = "𝗦",
+				TypeParameter = "𝗧",
+				Property = "𝗽",
+				Interface = "𝗶",
 			},
 
 			-- executes before the rest, to add on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-			before = function(entry, vim_item)
-				return vim_item
+			before = function(entry, item)
+				local n = entry.source.name
+				if n == 'nvim_lsp' then
+					item.menu = '[LSP]'
+				elseif n == 'nvim_lua' then
+					item.menu = '[nvim]'
+				else
+					item.menu = string.format('[%s]', n)
+				end
+				return item
 			end
 		})
-		-- -- These are the defaults of lsp_zero
-		--format = function(entry, item)
-		--    local n = entry.source.name
-		--    if n == 'nvim_lsp' then
-		--      item.menu = '[LSP]'
-		--    elseif n == 'nvim_lua'  then
-		--      item.menu = '[nvim]'
-		--    else
-		--      item.menu = string.format('[%s]', n)
-		--    end
-		--    return item
-		--  end,
 	},
 	snippet = {
 		expand = function(args)
@@ -119,4 +115,18 @@ cmp.setup({
 			"s",
 		}),
 	},
+})
+cmp.setup.cmdline({ '/', '?' }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = 'buffer' }
+	}
+})
+cmp.setup.cmdline(':', {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = 'path' }
+	}, {
+		{ name = 'cmdline' }
+	})
 })
