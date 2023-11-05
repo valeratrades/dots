@@ -35,18 +35,18 @@ K("", "<A-s>", "<C-i>")
 K("i", "<A-s>", "<esc><C-o>")
 
 -- Move line
-K("v", "<A-t>", ":m '>+1<cr>gv=gv", { noremap = true })
-K("v", "<A-n>", ":m '<-2<cr>gv=gv", { noremap = true })
-K("n", "<A-t>", "V:m '>+1<cr>gv=gv", { noremap = true })
-K("n", "<A-n>", "V:m '>-2<cr>gv=gv", { noremap = true })
-K("i", "<A-t>", "<esc>V:m '>+1<cr>gv=gv", { noremap = true })
-K("i", "<A-n>", "<esc>V:m '>-2<cr>gv=gv", { noremap = true })
+K("v", "<A-t>", ":m '>+1<cr>gv=gv")
+K("v", "<A-n>", ":m '<-2<cr>gv=gv")
+K("n", "<A-t>", "V:m '>+1<cr>gv=gv")
+K("n", "<A-n>", "V:m '>-2<cr>gv=gv")
+K("i", "<A-t>", "<esc>V:m '>+1<cr>gv=gv")
+K("i", "<A-n>", "<esc>V:m '>-2<cr>gv=gv")
 
 -- Windows
-K('n', '<C-w>h', '<C-W>h', { noremap = true })
-K('n', '<C-w>t', '<C-W>j', { noremap = true })
-K('n', '<C-w>n', '<C-W>k', { noremap = true })
-K('n', '<C-w>s', '<C-W>l', { noremap = true })
+K('n', '<C-w>h', '<C-W>h')
+K('n', '<C-w>t', '<C-W>j')
+K('n', '<C-w>n', '<C-W>k')
+K('n', '<C-w>s', '<C-W>l')
 
 -- Other
 K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
@@ -59,11 +59,12 @@ K("n", "k", "Nzzzv")
 
 
 -- Windows
-K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-K("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
-K("n", "<C-w><C-h>", "<C-w><C-s>", { desc = "Use C-h for new horizontal" }) -- <C-w><C-v> for vertical already exists
+K("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "windows: decrease width" })
+K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "windows: decrease height" })
+K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "windows: increase height" })
+K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "windows: increase width" })
+K("n", "<C-w><C-h>", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
+K("n", "<C-w><C-v>", "<C-w><C-v><C-w>w", { desc = "windows: new vertical and focus" })
 --
 
 -- Toggle Options
