@@ -6,7 +6,7 @@ local config = {
 	toggler = { line = 'gcc', block = 'gbc' }, -- can't turn it off. So just a note to follow the good practice of doing 'Vgc' and 'Vgb' instead.
 	opleader = { line = 'gc', block = 'gb' },
 	extra = { above = 'gcO', below = 'gco', eol = 'gcA' },
-	mappings = { basic = true, extra = true },
+	mappings = { basic = true, extra = false }, -- reimplementing `extra` myself, to have padding on these and not on others
 	pre_hook = nil,
 	post_hook = nil,
 }
@@ -27,12 +27,25 @@ require('Comment').setup(config)
 --`gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
 --`gbac` - Toggle comment around a class (w/ LSP/treesitter support)
 
+-- -- `extra` reimplementation
+local function commentExtraReimplementation(insert_leader)
+	return function()
+		F(insert_leader)
+		F(Cs() .. ' ')
+	end
+end
+
+K('n', 'gcO', commentExtraReimplementation('O'), { desc = "comment: reimplement `gcO`" })
+K('n', 'gco', commentExtraReimplementation('o'), { desc = "comment: reimplement `gco`" })
+K('n', 'gcA', commentExtraReimplementation('A '), { desc = "comment: reimplement `gcA`" })
+--
+
 -- -- Code Section comment
 function OutlineCodeSection()
 	local cs = Cs()
-	vim.api.nvim_feedkeys('o' .. cs, 'n', false)
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>`<', true, true, true), 'n', false)
-	vim.api.nvim_feedkeys('O' .. cs .. ' ' .. cs .. ' ', 'n', false)
+	F('o' .. cs)
+	Ft('<Esc>`<')
+	F('O' .. cs .. ' ' .. cs .. ' ')
 end
 
 K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" }) -- s for surround

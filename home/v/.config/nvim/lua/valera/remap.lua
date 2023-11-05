@@ -8,7 +8,7 @@ K({ "n", "v" }, "-", "<cmd>Oil<cr>")
 
 K("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
--- -- "htns" Remaps and the Consequences
+-- -- -- "hjkl" -> "htns" Remaps and the Consequences
 -- Basic Movement
 K("", "h", "h")
 K("", "t", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -25,6 +25,7 @@ K("", "H", "<C-b>zz")
 K("", "S", "<C-f>zz")
 
 -- Jump back, jump forward and tag-list back
+K({ "", "i" }, "<C-t>", "<nop>", { desc = "have this on Alt+h" })
 K("", "<A-h>", "<C-o>")
 K("i", "<A-h>", "<esc><C-o>")
 K("", "<A-H>", "<C-t>")
@@ -47,14 +48,11 @@ K('n', '<C-w>t', '<C-W>j', { noremap = true })
 K('n', '<C-w>n', '<C-W>k', { noremap = true })
 K('n', '<C-w>s', '<C-W>l', { noremap = true })
 K('n', '<C-w>S', '<C-W>s', { noremap = true })
-K('n', '<C-w><C-t>', '<C-W>j', { noremap = true })
-K('n', '<C-w><C-h>', '<C-W>h', { noremap = true })
-K('n', '<C-w><C-n>', '<C-W>k', { noremap = true })
-K('n', '<C-w><C-s>', '<C-W>l', { noremap = true })
 
+-- Other
 K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
 
--- Consequences
+-- -- Consequences
 K("n", "j", "nzzzv")
 K("n", "k", "Nzzzv")
 --
@@ -154,14 +152,6 @@ K("i", "<A-O>", "<esc>O")
 
 K("", ";", ":")
 K("", ":", "<nop>")
--- Apparently some of these are taken for something else. (Should I then remap those other things?)
---K("v", "i", "<esc>i")
---K("v", "a", "<esc>a")
---K("v", "I", "<esc>I")
---K("v", "A", "<esc>A")
---K("v", "o", "<esc>o")
---K("v", "O", "<esc>O")
-
 
 K("n", "J", "mzJ`z")
 
@@ -173,7 +163,7 @@ K("x", "<space>p", "\"_dP")
 K("n", "<space>d", "\"_d")
 K("v", "<space>d", "\"_d")
 
-K("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
+--K("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
 K("n", ",ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
@@ -182,19 +172,12 @@ K("n", "gp", function()
 	return "`[" .. vim.fn.strpart(vim.fn.getregtype(), 0, 1) .. "`]"
 end, { expr = true })
 
--- first non blank of the line
---K("", "gh", "^")
--- end of line
---K("", "gl", "$") -- '0' for start of line
--- matching paranthesis
---K("", "gm", "%")
-
 K("n", "H", "H^")
 K("n", "M", "M^")
 K("n", "L", "L^")
 
--- tries to correct spelling of the word under the cursor
-K("n", "<leader>s", "1z=")
+-- Tries to Correct spelling of the word under the cursor
+K("n", "<Leader>z", "1z=")
 
 K('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
 K('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
@@ -211,7 +194,7 @@ K('', '<space>.', '<cmd>tabe .<cr>')
 vim.cmd.digraph("zs " .. 0x200b)
 
 K('n', 'U', '<C-r>', { noremap = true, desc = "helix: redo" })
-K('n', '<C-r>', '<nop>')
+K('n', '<C-r>', '<nop>') -- later changed to `lsp refresh` in lsp.lua
 K('n', '<tab>', 'i<tab>')
 
 -- trying out:

@@ -3,8 +3,6 @@ local cmp_format = require('lsp-zero').cmp_format()
 local _ = { behavior = cmp.SelectBehavior.Select } -- somehow forces cmp into the right behavior.
 local cmp_action = require('lsp-zero').cmp_action()
 
-vim.keymap.set("n", "<C-t>", "<nop>", { desc = "have this on Alt+h" })
-
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 cmp.setup({
 	--timeout = cmp.config.performance.fetching_timeout({
@@ -30,7 +28,6 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		['<Tab>'] = cmp_action.luasnip_supertab(),
 		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-		['<C-e>'] = cmp.mapping.abort(),                  -- if esc in insert mode is not instantenious, change this (my estimation is this thing takes about 40ms)
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` to only confirm explicitly selected items.
 
 		['<C-t>'] = cmp.mapping(function()
