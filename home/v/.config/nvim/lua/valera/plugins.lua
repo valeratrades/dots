@@ -21,6 +21,7 @@ return require('lazy').setup({
 	{ -- Treesitter
 		{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
 	{
 		'nvim-telescope/telescope.nvim',
@@ -143,4 +144,15 @@ return require('lazy').setup({
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	'jbyuki/instant.nvim',
+	{
+		"jackMort/ChatGPT.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"folke/which-key.nvim",
+		},
+	},
+
 })

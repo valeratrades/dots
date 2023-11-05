@@ -1,21 +1,33 @@
 local cmp = require('cmp')
-local cmp_format = require('lsp-zero').cmp_format()
-local _ = { behavior = cmp.SelectBehavior.Select } -- somehow forces cmp into the right behavior.
+local _ = { behavior = cmp.SelectBehavior.Select } -- makes cmp not force feed me completeions on 'Enter'
 local cmp_action = require('lsp-zero').cmp_action()
+local ts_utils = require('nvim-treesitter.ts_utils')
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 cmp.setup({
-	--timeout = cmp.config.performance.fetching_timeout({
-	--	300
-	--}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
+		{
+			name = 'nvim_lsp',
+			entry_filter = function(entry, context)
+				local kind = entry:get_kind()
+				local node = ts_utils.get_node_at_cursor():type()
+				--log(node)
+				if node == "arguments" then
+					if kind == 6 then -- `6` corresponds to variables
+						return true
+					else
+						return false
+					end
+				end
+
+				return true
+			end,
+		},
 		{ name = 'luasnip' },
-	}, {
-		{ name = 'buffer', keyword_length = 5, option = { keyword_length = 5 } }, -- `option` is defined by the source itself, and currently is useless, as keyword_lenght is above 4. But keeping just in case.
+		{ name = 'buffer', keyword_length = 5 },
 	}),
 	-- Show source name in completion menu.
-	formatting = cmp_format,
+	formatting = require('lsp-zero').cmp_format(),
 	snippet = {
 		expand = function(args)
 			require('luasnip').lsp_expand(args.body)
@@ -25,7 +37,7 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-	mapping = cmp.mapping.preset.insert({
+	mapping = {
 		['<Tab>'] = cmp_action.luasnip_supertab(),
 		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` to only confirm explicitly selected items.
@@ -52,12 +64,5 @@ cmp.setup({
 			"i",
 			"s",
 		}),
-	}),
-})
-cmp.setup.filetype('gitcommit', {
-	sources = cmp.config.sources({
-		{ name = 'git', keyword_length = 5 }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-	}, {
-		{ name = 'buffer', keyword_length = 5, option = { keyword_length = 5 } },
-	})
+	},
 })
