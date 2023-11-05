@@ -57,7 +57,7 @@ K('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: dr
 --
 
 
--- -- Remove end of line
+-- -- Remove end of line comment
 local function removeEndOfLineComment()
 	local cs = Cs()
 	local save_cursor = vim.api.nvim_win_get_cursor(0)
