@@ -47,7 +47,6 @@ K('n', '<C-w>h', '<C-W>h', { noremap = true })
 K('n', '<C-w>t', '<C-W>j', { noremap = true })
 K('n', '<C-w>n', '<C-W>k', { noremap = true })
 K('n', '<C-w>s', '<C-W>l', { noremap = true })
-K('n', '<C-w>S', '<C-W>s', { noremap = true })
 
 -- Other
 K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
@@ -64,6 +63,7 @@ K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 K("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+K("n", "<C-w><C-h>", "<C-w><C-s>", { desc = "Use C-h for new horizontal" }) -- <C-w><C-v> for vertical already exists
 --
 
 -- Toggle Options

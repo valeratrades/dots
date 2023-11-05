@@ -26,15 +26,16 @@ cmp.setup({
 			end,
 		},
 		{ name = 'luasnip' },
-		{ name = 'buffer', keyword_length = 5 },
+		{ name = 'buffer',  keyword_length = 5 },
+		{ name = 'cmdline', keyword_length = 3 },
 	}),
 	formatting = {
 		fields = { 'abbr', 'kind', 'menu' },
 		format = lspkind.cmp_format({
-			mode = 'symbol_text', -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+			mode = 'symbol',
 			preset = 'codicons', -- can be either 'default' (requires nerd-fonts font) or 'codicons' for codicon preset (requires vscode-codicons font)
-			--maxwidth = 50,
-			ellipsis_char = '...', -- when exceeds maxwidth
+			maxwidth = 50,
+			ellipsis_char = '..', -- when exceeds maxwidth
 
 			symbol_map = {
 				Text = "",
@@ -68,11 +69,14 @@ cmp.setup({
 			before = function(entry, item)
 				local n = entry.source.name
 				if n == 'nvim_lsp' then
-					item.menu = '[LSP]'
+					item.menu = 'LSP'
 				elseif n == 'nvim_lua' then
-					item.menu = '[nvim]'
+					item.menu = 'nvim'
+				elseif n == 'cmdline' then
+					item.mune = ''
 				else
-					item.menu = string.format('[%s]', n)
+					--item.menu = string.format('[%s]', n)
+					item.menu = n
 				end
 				return item
 			end
@@ -92,7 +96,7 @@ cmp.setup({
 		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` to only confirm explicitly selected items.
 
-		['<C-t>'] = cmp.mapping(function()
+		['<C-u>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(4)
 			else
@@ -103,7 +107,7 @@ cmp.setup({
 			"i",
 			"s",
 		}),
-		['<C-n>'] = cmp.mapping(function()
+		['<C-d>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(-4)
 			else
