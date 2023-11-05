@@ -116,15 +116,16 @@ return require('lazy').setup({
 		'nvim-telescope/telescope-dap.nvim',
 		'jay-babu/mason-nvim-dap.nvim',
 	},
-	{
+	{ -- Lsp
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v3.x',
 		dependencies = {
 			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },          -- Cornerstone. lsp-zero is built on top of it.
-			{ 'williamboman/mason.nvim' },        -- lsp-servers file-manager
-			{ 'williamboman/mason-lspconfig.nvim' }, -- lsp-servers file-manager
-			{ 'lukas-reineke/lsp-format.nvim' }   -- Auto-Formatting
+			'neovim/nvim-lspconfig',          -- Cornerstone. lsp-zero is built on top of it.
+			'williamboman/mason.nvim',        -- lsp-servers file-manager
+			'williamboman/mason-lspconfig.nvim', -- lsp-servers file-manager
+			'lukas-reineke/lsp-format.nvim',  -- Auto-Formatting
+			'onsails/lspkind.nvim',
 		}
 	},
 	{ -- Colorschemes
