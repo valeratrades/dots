@@ -14,7 +14,7 @@ require('Comment').setup(config)
 
 
 function OutlineCodeSection()
-	local cs = string.sub(vim.bo.commentstring, 1, -4)
+	local cs = Cs()
 	vim.api.nvim_feedkeys('o' .. cs, 'n', false)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>`<', true, true, true), 'n', false)
 	vim.api.nvim_feedkeys('O' .. cs .. ' ' .. cs .. ' ', 'n', false)
@@ -25,7 +25,7 @@ K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline sema
 
 -- -- Draw a line thingie
 function DrawABigBeautifulLine(symbol)
-	local cs = string.sub(vim.bo.commentstring, 1, -4)
+	local cs = Cs()
 	local prefix = (#cs == 1 and cs .. symbol or cs)
 	local line = string.rep(symbol, 77)
 	vim.api.nvim_feedkeys(prefix .. line, 'n', false)
@@ -42,7 +42,7 @@ K('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: dr
 
 
 local function removeEndOfLineComment()
-	local cs = string.sub(vim.bo.commentstring, 1, -4)
+	local cs = Cs()
 	local save_cursor = vim.api.nvim_win_get_cursor(0)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("$?" .. " " .. cs .. "<cr>", true, true, true), 'n', false)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("vg_d", true, true, true), 'n', false)
@@ -54,7 +54,7 @@ end
 K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove end-of-line comment" })
 
 local function debugComment(action)
-	local cs = string.sub(vim.bo.commentstring, 1, -4)
+	local cs = Cs()
 	if action == 'add' then
 		-- local save_cursor = vim.api.nvim_win_get_cursor(0)
 		PersistCursor(Ft, 'A ' .. cs .. 'dbg' .. '<esc>')

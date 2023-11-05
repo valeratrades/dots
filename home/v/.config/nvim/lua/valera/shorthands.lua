@@ -10,7 +10,10 @@ function Ft(s)
 end
 
 function Cs()
-	return string.sub(vim.bo.commentstring, 1, -4)
+	local initial = vim.bo.commentstring
+	local without_percent_s = string.sub(initial, 1, -3)
+	local stripped = string.gsub(without_percent_s, "%s+", "")
+	return stripped
 end
 
 -- Note that this takes over 1ms defer
