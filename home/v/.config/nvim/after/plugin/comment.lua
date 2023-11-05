@@ -57,8 +57,8 @@ function DrawABigBeautifulLine(symbol)
 	local cs = Cs()
 	local prefix = (#cs == 1 and cs .. symbol or cs)
 	local line = string.rep(symbol, 77)
-	vim.api.nvim_feedkeys(prefix .. line, 'n', false)
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>0', true, true, true), 'n', false)
+	F(prefix .. line)
+	Ft('<Esc>0')
 end
 
 K('n', 'gc-i', "i<cmd>lua DrawABigBeautifulLine('-')<cr>", { desc = "comment: draw a '-' line here" })
@@ -72,10 +72,9 @@ K('n', 'gc=O', "O<cmd>lua DrawABigBeautifulLine('=')<cr>", { desc = "comment: dr
 
 -- -- Remove end of line comment
 local function removeEndOfLineComment()
-	local cs = Cs()
 	local save_cursor = vim.api.nvim_win_get_cursor(0)
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("$?" .. " " .. cs .. "<cr>", true, true, true), 'n', false)
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("vg_d", true, true, true), 'n', false)
+	Ft("$?" .. " " .. Cs() .. "<cr>")
+	Ft("vg_d")
 	vim.defer_fn(function() vim.cmd([[s/\s\+$//e]]) end, 1)
 	vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, save_cursor) end, 2)
 	vim.defer_fn(function() vim.cmd.noh() end, 3)
@@ -88,9 +87,7 @@ K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove
 local function debugComment(action)
 	local cs = Cs()
 	if action == 'add' then
-		-- local save_cursor = vim.api.nvim_win_get_cursor(0)
 		PersistCursor(Ft, 'A ' .. cs .. 'dbg' .. '<esc>')
-		-- vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, save_cursor) end, 1)
 	elseif action == 'remove' then
 		vim.cmd("g/" .. " " .. cs .. "dbg$/d")
 		vim.cmd.noh()
