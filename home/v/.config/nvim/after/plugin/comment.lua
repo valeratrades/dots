@@ -149,15 +149,18 @@ function FindTodo()
 		return {
 			filename = parts[2],
 			lnum = parts[3],
-			text = table.concat(parts, ":", 4)
+			text = table.concat(parts, ":", 4):gsub("\r$", "")
 		}
 	end)
 	vim.fn.setqflist(qflist)
+	vim.cmd("mark T")
 end
 
 K('n', 'gct', function()
 	FindTodo()
 	vim.cmd.copen()
 end, { desc = "comment: find and sort project's TODOs" })
+-- for navigation I'm just typing `:cp` and `:cn`. Can't do much better than that.
+-- To jump back, I do `T
 
 --

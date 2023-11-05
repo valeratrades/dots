@@ -96,23 +96,17 @@ cmp.setup({
 		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 		['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` to only confirm explicitly selected items.
 
-		['<C-u>'] = cmp.mapping(function()
+		['<C-n>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(4)
-			else
-				vim.api.nvim_command('cprev')
-				vim.api.nvim_command('normal zz')
 			end
 		end, {
 			"i",
 			"s",
 		}),
-		['<C-d>'] = cmp.mapping(function()
+		['<C-t>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(-4)
-			else
-				vim.api.nvim_command('cprev')
-				vim.api.nvim_command('normal zz')
 			end
 		end, {
 			"i",

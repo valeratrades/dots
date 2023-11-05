@@ -65,6 +65,7 @@ K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "windows: increase height" })
 K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "windows: increase width" })
 K("n", "<C-w><C-h>", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
 K("n", "<C-w><C-v>", "<C-w><C-v><C-w>w", { desc = "windows: new vertical and focus" })
+K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab split`" })
 --
 
 -- Toggle Options
@@ -106,13 +107,11 @@ K({ "i", "" }, "<A-g>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't wo
 K("", "<C-j>", "\"+y")
 K("", "<C-q>", "\"+ygv\"_d")
 
--- For some reason this just doesn't work!
 K("i", "<C-del>", "X<esc>ce") -- n mappings for <del> below rely on this
 K("v", "<bs>", "d")
 K("n", "<bs>", "i<bs>")
 K("n", "<del>", "i<del>")
 K("n", "<C-del>", "a<C-del>", { remap = true })
---test this thing is-it/actually() working?
 
 K('', '<C-a>', 'ggVG', { noremap = true, silent = true })
 
