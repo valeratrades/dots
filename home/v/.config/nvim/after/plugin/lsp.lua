@@ -92,6 +92,19 @@ function JumpToDiagnostic(direction, requestSeverity)
 	end)
 end
 
+function YankDiagnosticPopup()
+	local popups = GetPopups()
+	if #popups == 1 then
+		local popup_id = popups[1]
+		local bufnr = vim.api.nvim_win_get_buf(popup_id)
+		local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+		local content = table.concat(lines, "\n")
+		vim.fn.setreg('+', content)
+	else
+		return
+	end
+end
+
 --
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -109,9 +122,6 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("<C-A-t>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
 	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
 
-	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
-	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
-
 	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
 	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
 	map("li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
@@ -125,6 +135,10 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
 	--map("lh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "signature help") -- is obsolete; being subset of `K` and what `signature.nvim` does
 	map('<c-r>', "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
+
+	map("ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
+	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
+	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
 
 
 	if client.supports_method('textDocument/formatting') then

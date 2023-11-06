@@ -19,9 +19,9 @@ set $right s
 
 assign [class="Google-chrome"] 2
 assign [app_id="google-chrome"] 2
-assign [class="discord"] 3
-assign [app_id="org.telegram.desktop"] 3
-assign [app_id="org.pwmt.zathura"] 4
+assign [class="discord"] 4
+assign [app_id="org.telegram.desktop"] 4
+assign [app_id="org.pwmt.zathura"] 5
 # doesn't work, as netrw sets the title as "nvim: [No name]"
 #assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
 

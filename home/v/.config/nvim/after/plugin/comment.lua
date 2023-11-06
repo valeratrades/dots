@@ -63,7 +63,7 @@ function OutlineCodeSection()
 	F('O' .. cs .. ' ' .. cs .. ' ')
 end
 
-K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" }) -- s for surround
+K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
 --
 
 
@@ -100,16 +100,24 @@ K('n', 'gcr', function() removeEndOfLineComment() end, { desc = "comment: remove
 
 -- -- `//dbg` Commments
 local function debugComment(action)
-	local cs = Cs()
-	if action == 'add' then
-		PersistCursor(Ft, 'A ' .. cs .. 'dbg' .. '<esc>')
-	elseif action == 'remove' then
-		vim.cmd("g/" .. " " .. cs .. "dbg$/d")
-		vim.cmd.noh()
+	return function()
+		local cs = Cs()
+		if action == 'add' then
+			--PersistCursor(Ft, 'A ' .. cs .. 'dbg' .. '<esc>')
+			local dbg_comment = " " .. Cs() .. "dbg"
+			F(':')
+			F("s/$/" .. dbg_comment .. "/g")
+			PersistCursor(Ft, "<cr>")
+			vim.defer_fn(function() vim.cmd.noh() end, 3)
+			vim.defer_fn(function() Echo("") end, 4) -- can't make silent, so just overwrite the output
+		elseif action == 'remove' then
+			vim.cmd("g/" .. " " .. cs .. "dbg$/d")
+			vim.cmd.noh()
+		end
 	end
 end
-K('n', 'gcda', function() debugComment('add') end, { desc = "comment: add dbg comment" })
-K('n', 'gcdr', function() debugComment('remove') end, { desc = "comment: remove all debug lines" })
+K({ 'n', 'v' }, 'gsa', debugComment('add'), { desc = "comment: add dbg comment", silent = true })
+K('n', 'gsr', debugComment('remove'), { desc = "comment: remove all debug lines", silent = true })
 --
 
 
