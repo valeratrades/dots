@@ -32,7 +32,11 @@ return require('lazy').setup({
 	},
 	{
 		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }
+		dependencies = {
+			{ 'nvim-tree/nvim-web-devicons', lazy = true },
+				"lewis6991/gitsigns.nvim",
+				"nvim-lua/lsp-status.nvim",
+		}
 	},
 	{
 		'numToStr/Comment.nvim',
