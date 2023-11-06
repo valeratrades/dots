@@ -45,6 +45,9 @@ function JumpToDiagnostic(direction, requestSeverity)
 	pcall(function()
 		local bufnr = vim.api.nvim_get_current_buf()
 		local diagnostics = vim.diagnostic.get(bufnr)
+		if #diagnostics == 0 then
+			Echo("no diagnostics in 0", "Comment")
+		end
 		local line = vim.fn.line(".") - 1
 		-- severity is [1:4], the lower the "worse"
 		local allSeverity = { 1, 2, 3, 4 }

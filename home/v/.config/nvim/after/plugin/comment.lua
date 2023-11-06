@@ -134,12 +134,16 @@ local function split(s, delimiter)
 	return result;
 end
 
+--- to collect I do `gct`
+--- for navigation I'm just typing `:cp` and `:cn`. Can't do much better than that.
+--- To jump back, I do `T
 function FindTodo()
 	local regex = vim.fn.shellescape(Cs() .. "TODO")
 	local results = vim.fn.systemlist(
-		"rg -rn -- " .. regex
+		"rg --line-number -rn -- " .. regex
 		.. " | awk -F: -v OFS=: '{print gsub(/!/, \"&\"), $0}'"
-		.. " | sort -rn")
+		.. " | sort -rn"
+	)
 	if vim.v.shell_error > 0 then
 		print("No TODOs found")
 		return
@@ -149,7 +153,8 @@ function FindTodo()
 		return {
 			filename = parts[2],
 			lnum = parts[3],
-			text = table.concat(parts, ":", 4):gsub("\r$", "")
+			col = 0,
+			text = table.concat(parts, ":", 5):gsub("\r$", "")
 		}
 	end)
 	vim.fn.setqflist(qflist)
@@ -160,7 +165,16 @@ K('n', 'gct', function()
 	FindTodo()
 	vim.cmd.copen()
 end, { desc = "comment: find and sort project's TODOs" })
--- for navigation I'm just typing `:cp` and `:cn`. Can't do much better than that.
--- To jump back, I do `T
 
 --
+
+K('n', '<space>ch', function()
+	local normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
+	vim.cmd('highlight Comment guifg=' .. normal_bg .. ' guibg=' .. normal_bg)
+end, { desc = "comment: hide" })
+--TODO!!!: Make <space>cs work
+K('n', '<space>cs', function()
+	local comment_fg_default = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Comment")), "fg#")
+	local comment_bg_default = vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Comment")), "bg#")
+	vim.cmd('highlight Comment guifg=' .. comment_fg_default .. ' guibg=' .. comment_bg_default)
+end, { desc = "comment: undo hide" })

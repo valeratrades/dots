@@ -15,6 +15,9 @@ end
 
 function SetSystemTheme()
 	local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme")
+	if handle == nil then
+		return
+	end
 	local result = handle:read("*a")
 	handle:close()
 

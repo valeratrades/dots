@@ -25,6 +25,12 @@ function PersistCursor(fn, ...)
 	return result
 end
 
+function Echo(text, type)
+	type = type or "Comment"
+	type = (type:gsub("^%l", string.upper)) -- in case I forget they start from capital letter
+	vim.api.nvim_echo({ { text, type } }, false, {})
+end
+
 -- -- popups
 function GetPopups()
 	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
@@ -42,3 +48,15 @@ function BoolPopupOpen()
 end
 
 --
+
+function PrintQuickfixList()
+	local qf_list = vim.fn.getqflist()
+	for i, item in ipairs(qf_list) do
+		print(string.format("%d: %s", i, vim.inspect(item)))
+	end
+end
+
+function PNew(lines)
+	vim.cmd('new')
+	vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+end
