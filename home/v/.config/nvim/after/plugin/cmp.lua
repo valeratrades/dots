@@ -28,6 +28,7 @@ cmp.setup({
 		{ name = 'luasnip' },
 		{ name = 'buffer',  keyword_length = 5 },
 		{ name = 'cmdline', keyword_length = 3 },
+		{ name = "crates" },
 	}),
 	formatting = {
 		fields = { 'abbr', 'kind', 'menu' },

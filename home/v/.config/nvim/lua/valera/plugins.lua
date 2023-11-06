@@ -136,6 +136,9 @@ return require('lazy').setup({
 			'onsails/lspkind.nvim',
 		}
 	},
+	{ -- Rust
+		'Saecki/crates.nvim',
+	},
 	{ -- Colorschemes
 		{ 'rose-pine/neovim',      name = 'rose-pine' },
 		{ "catppuccin/nvim",       name = "catppuccin" },
