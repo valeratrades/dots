@@ -1,12 +1,13 @@
 K = vim.keymap.set
 G = vim.api.nvim_set_var
 
-function F(s)
-	vim.api.nvim_feedkeys(s, 'n', false)
+function F(s, mode)
+	mode = mode or "n"
+	vim.api.nvim_feedkeys(s, mode, false)
 end
 
-function Ft(s)
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(s, true, true, true), 'n', false)
+function Ft(s, mode)
+	F(vim.api.nvim_replace_termcodes(s, true, true, true), mode)
 end
 
 function Cs()

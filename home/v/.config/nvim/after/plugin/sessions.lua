@@ -2,7 +2,7 @@
 require("persisted").setup({
 	save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
 	silent = true,
-	autosave = false, -- what would you know, doesn't work properly. Currently manually adding `SessionSave` on my quit shortcuts
+	autosave = false,
 	autoload = false,
 	follow_cwd = true,
 	allowed_dirs = nil,
@@ -11,4 +11,9 @@ require("persisted").setup({
 		reset_prompt_after_deletion = true,
 	},
 })
-K('n', '<space>sl', '<cmd>SessionLoad<cr>', { desc = "session: load" })
+
+require("which-key").register({
+	name = "Session",
+	l = { "<cmd>SessionLoad<cr>", "Load" },
+	s = { "<cmd>SessionSave<cr>", "Save" },
+}, { prefix = "<space>se" })

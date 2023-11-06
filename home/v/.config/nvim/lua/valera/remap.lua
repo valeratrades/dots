@@ -139,18 +139,19 @@ K('', '<C-z>', '<C-a>')
 --K("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = true })
 --
 
-local function saveSession(cmd)
+local function saveSessionIfOpen(cmd)
 	return function()
 		if vim.g.persisting then
 			vim.cmd("SessionSave")
 		end
+		Ft('<esc>', 'm')
 		vim.cmd(cmd)
 	end
 end
-K({ "", "i" }, "<A-w>", "<esc>:w!<cr>")
+
 K({ "", "i" }, "<A-q>", "<cmd>q!<cr>")
-K({ "", "i" }, "<A-a>", saveSession('qa!'))
-K("n", "<space><A-a>", "<cmd>SessionSave<cr>qa!", { desc = "session: force save and quit" })
+K({ "", "i" }, "<A-a>", saveSessionIfOpen('qa!'))
+K({ "", "i" }, "<A-w>", saveSessionIfOpen('w!'))
 
 --TODO at some point make this systemwide somehow
 K("i", "<A-o>", "<esc>o")
@@ -183,7 +184,7 @@ K("n", "M", "M^")
 K("n", "L", "L^")
 
 -- Tries to Correct spelling of the word under the cursor
-K("n", "<Leader>z", "1z=")
+K("n", "<space>z", "1z=")
 
 K('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
 K('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
