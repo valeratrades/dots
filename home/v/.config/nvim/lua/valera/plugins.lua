@@ -17,6 +17,7 @@ return require('lazy').setup({
 	'theprimeagen/harpoon',
 	'mbbill/undotree',
 	'L3MON4D3/LuaSnip',
+	"lewis6991/gitsigns.nvim",
 	'lukas-reineke/indent-blankline.nvim',
 	{ -- Treesitter
 		{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
