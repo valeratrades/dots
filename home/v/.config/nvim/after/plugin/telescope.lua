@@ -13,11 +13,11 @@ K('n', "<Space>sf", builtin.live_grep, { desc = "telescope: live grep" })
 K('n', "<Space>sp", "<cmd>Telescope persisted<cr>", { desc = "telescope: persisted: sessions" })
 K('n', '<Space>sm', builtin.keymaps, { desc = "telescope: keymaps" })
 K({ 'n', 'v' }, '<Space>ss', builtin.grep_string, { desc = "telescope: grep visual selection or word under cursor" })
--- This one is also done with `gct`, and with quickfix there; because it seems to be better for this purpose
 K('n', '<Space>st', function()
 	FindTodo()
-	require('telescope.builtin').quickfix()
-end, { desc = "telescope: find todos" })
+	require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
+end, { desc = "telescope: project's TODOs" })
+
 --
 
 -- -- open new tab, then...

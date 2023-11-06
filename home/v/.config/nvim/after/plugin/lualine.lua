@@ -3,7 +3,7 @@ local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " }, -- E and W
+	symbols = { error = "", warn = "" },
 	always_visible = true,
 }
 local function hide_in_width()

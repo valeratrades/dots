@@ -142,7 +142,7 @@ local function split(s, delimiter)
 	return result;
 end
 
---- to collect I do `gct`
+--- The main keymap is in telescope.lua (`<space>st`)
 --- for navigation I'm just typing `:cp` and `:cn`. Can't do much better than that.
 --- To jump back, I do `T
 function FindTodo()
@@ -168,11 +168,6 @@ function FindTodo()
 	vim.fn.setqflist(qflist)
 	vim.cmd("mark T")
 end
-
-K('n', 'gct', function()
-	FindTodo()
-	vim.cmd.copen()
-end, { desc = "comment: find and sort project's TODOs" })
 
 --
 

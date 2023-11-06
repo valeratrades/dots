@@ -1,5 +1,4 @@
 vim.g.maplocalleader = "\\"
--- As pre usual, it doesn't work for shit, so using its value manually instead
 
 require('nvim-treesitter.configs').setup {
 	ensure_installed = { "c", "lua", "rust", "go", "python", "javascript", "typescript", "gitignore", "markdown" },
@@ -8,7 +7,6 @@ require('nvim-treesitter.configs').setup {
 	indent = { enable = true },
 	highlight = {
 		enable = true,
-		--disable = { 'rust', 'go' },
 		additional_vim_regex_highlighting = false,
 	},
 	incremental_selection = {
@@ -21,40 +19,38 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 	textobjects = {
+		select = {
+			enable = true,
+			lookahead = true,
+			keymaps = {
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
+				["aa"] = "@parameter.outer",
+				["ia"] = "@parameter.inner",
+			},
+		},
+		swap = {
+			enable = true,
+			swap_previous = {
+				["<space><left>"] = "@parameter.inner",
+			},
+			swap_next = {
+				["<space><right>"] = "@parameter.inner",
+			},
+		},
 		lsp_interop = {
 			enable = true,
 			border = 'none',
+			lookahead = true,
 			floating_preview_opts = {},
 			peek_definition_code = {
-				["\\f"] = "@function.outer",
-				["\\F"] = "@class.outer",
+				["\\f"] = "@function.inner",
+				["\\c"] = "@class.inner",
 			},
 		},
 	},
-	--textobjects = {
-	--	select = {
-	--		enable = true,
-	--
-	--		-- Automatically jump forward to textobj, similar to targets.vim
-	--		lookahead = true,
-	--
-	--		keymaps = {
-	--			-- You can use the capture groups defined in textobjects.scm
-	--			["af"] = "@function.outer",
-	--			["if"] = "@function.inner",
-	--			["ac"] = "@class.outer",
-	--			["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-	--			-- You can also use captures from other query groups like `locals.scm`
-	--			["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-	--		},
-	--	},
-	--	selection_modes = {
-	--		['@parameter.outer'] = 'v', -- charwise
-	--		['@function.outer'] = 'V', -- linewise
-	--		['@class.outer'] = '<c-v>', -- blockwise
-	--	},
-	--	include_surrounding_whitespace = false,
-	--}
 }
 
 
