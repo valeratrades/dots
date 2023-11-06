@@ -43,13 +43,6 @@ o.colorcolumn = "80"
 o.title = true
 o.titlestring = "nvim: %F"
 
-vim.cmd [[
-  au BufWinLeave * silent! mkview
-  au BufWinEnter * silent! loadview
-  autocmd FileType * :set formatoptions-=ro
-	autocmd VimEnter,WinNew,BufWinEnter * lua vim.fn.chdir(vim.env.PWD)
-]]
-
 vim.g.autoformat = true
 o.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp" }
 o.showmode = false

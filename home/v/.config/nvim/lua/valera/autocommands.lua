@@ -3,6 +3,8 @@ vim.cmd [[
   au BufWinEnter * silent! loadview
   autocmd FileType * :set formatoptions-=ro
 	autocmd VimEnter,WinNew,BufWinEnter * lua vim.fn.chdir(vim.env.PWD)
+	autocmd BufRead,BufNewFile *.md set conceallevel=3
+	autocmd BufRead,BufNewFile *.txt set conceallevel=3
 ]]
 
 -- Use 'q' to quit from common plugins
