@@ -113,13 +113,13 @@ K("n", "<bs>", "i<bs>")
 K("n", "<del>", "i<del>")
 K("n", "<C-del>", "a<C-del>", { remap = true })
 
-K('', '<C-a>', 'ggVG', { noremap = true, silent = true })
+K('', '<C-a>', 'ggVG')
 
 K('', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
 K('i', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
 
 -- Consequences
-K('', '<C-S-a>', '<C-a>', { noremap = true, silent = true })
+K('', '<C-z>', '<C-a>')
 --
 -- --
 
@@ -139,12 +139,17 @@ K('', '<C-S-a>', '<C-a>', { noremap = true, silent = true })
 --K("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = true })
 --
 
-K("i", "<A-w>", "<esc>:w!<cr>")
-K("", "<A-w>", "<esc>:w!<cr>")
-K("", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
-K("i", "<A-q>", "<cmd>SessionSave<cr><cmd>q!<cr>")
-K("", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
-K("i", "<A-a>", "<cmd>SessionSave<cr><cmd>qa!<cr>")
+local function saveSession(cmd)
+	return function()
+		if vim.g.persisting then
+			vim.cmd("SessionSave")
+		end
+		vim.cmd(cmd)
+	end
+end
+K({ "", "i" }, "<A-w>", "<esc>:w!<cr>")
+K({ "", "i" }, "<A-q>", "<cmd>q!<cr>")
+K({ "", "i" }, "<A-a>", saveSession('qa!'))
 
 --TODO at some point make this systemwide somehow
 K("i", "<A-o>", "<esc>o")
