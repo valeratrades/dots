@@ -22,6 +22,8 @@ return require('lazy').setup({
 		{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"JoosepAlviste/nvim-ts-context-commentstring",
+		"windwp/nvim-ts-autotag",
+		"windwp/nvim-autopairs",
 	},
 	{
 		'nvim-telescope/telescope.nvim',
@@ -34,8 +36,8 @@ return require('lazy').setup({
 		'nvim-lualine/lualine.nvim',
 		dependencies = {
 			{ 'nvim-tree/nvim-web-devicons', lazy = true },
-				"lewis6991/gitsigns.nvim",
-				"nvim-lua/lsp-status.nvim",
+			"lewis6991/gitsigns.nvim",
+			"nvim-lua/lsp-status.nvim",
 		}
 	},
 	{

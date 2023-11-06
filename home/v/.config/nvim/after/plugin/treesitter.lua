@@ -9,6 +9,12 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
+	autopairs = {
+		enable = true,
+	},
+	autotag = { -- html tags
+		enable = true,
+	},
 	incremental_selection = {
 		enable = true,
 		keymaps = {
@@ -52,32 +58,3 @@ require('nvim-treesitter.configs').setup {
 		},
 	},
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- -- I'm assuming this is taken care of already by the `auto_install = true`
--- local parsers = require'nvim-treesitter.parsers'
--- function _G.ensure_treesitter_language_installed()
---   local lang = parsers.get_buf_lang()
---   if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) then
---     vim.schedule_wrap(function()
---     vim.cmd("TSInstallSync "..lang)
---     vim.cmd[[e!]]
---     end)()
---   end
--- end
---
--- vim.cmd[[autocmd FileType * :lua ensure_treesitter_language_installed()]]

@@ -150,6 +150,7 @@ end
 K({ "", "i" }, "<A-w>", "<esc>:w!<cr>")
 K({ "", "i" }, "<A-q>", "<cmd>q!<cr>")
 K({ "", "i" }, "<A-a>", saveSession('qa!'))
+K("n", "<space><A-a>", "<cmd>SessionSave<cr>qa!", { desc = "session: force save and quit" })
 
 --TODO at some point make this systemwide somehow
 K("i", "<A-o>", "<esc>o")
