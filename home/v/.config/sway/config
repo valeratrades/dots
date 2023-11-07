@@ -10,7 +10,6 @@ set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.node
 #
 
 
-set $background ~/Wallpapers/AndreySakharov.jpg
 
 set $left h
 set $down t
@@ -76,8 +75,6 @@ input * {
 # Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
 # to get the code of the key, use xev or auto-hotkey
 bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
-
-output * bg $background fill
 
 # # Multimedia
 exec_always pamixer --default-source --set-volume 30
@@ -161,33 +158,6 @@ bindsym $mod+z floating toggle
 # 26 is a dot on my keyboard (look up with xev)
 bindcode $mod+26 sticky toggle
 
-
-# Screenshots
-set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
-bindsym Insert exec $throwaway_screenshot
-mode "screenshot" {
-	set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
-	set $fullscreen_screenshot grim ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
-	set $delayed_screenshot sleep 3 && slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
-	set $important_screenshot slurp | grim -g - ~/Images/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
-	set $open_last_screenshot swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
-
-	bindsym i exec $switch_out && $important_screenshot
-	# doesn't work for some reason
-	bindsym f exec $switch_out && $fullscrseen_screenshot
-	bindsym d exec $switch_out && $delayed_screenshot
-	bindsym o exec $switch_out && $open_last_screenshot
-	bindsym Insert exec $switch_out && throwaway_screenshot
-
-	bindsym $mod+Insert exec $switch_out
-	bindsym $mod+C exec $switch_out
-	bindsym Escape exec $switch_out
-	bindsym Ctrl+c exec $switch_out
-	bindsym q exec $switch_out
-}
-bindsym $mod+Insert exec "swaymsg mode screenshot && eww update sway_mode=screenshot"
-#
-
 bindsym $mod+m exec $menu
 bindsym $mod+Space exec makoctl dismiss --all
 bindsym $mod+o split toggle
@@ -221,3 +191,45 @@ bindcode $mod+Shift+34 output * dpms off
 
 
 #exec_always "swaymsg -t get_tree > ~/.config/sway/last_layout.json"
+
+# # Modes
+set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
+# Wallpapers
+output * bg ~/Wallpapers/AndreySakharov.jpg fill
+
+mode "circle_wallpapers" {
+	bindsym t exec ~/s/help_scripts/circle_wallpapers.sh f
+	bindsym n exec ~/s/help_scripts/circle_wallpapers.sh b
+
+	bindsym $mod+w exec $switch_out
+	bindsym $mod+c exec $switch_out
+	bindsym Ctrl+c exec $switch_out
+	bindsym Escape exec $switch_out
+	bindsym q exec $switch_out
+}
+bindsym $mod+w exec "swaymsg mode circle_wallpapers && eww update sway_mode=circle_wallpapers"
+
+# Screenshots
+set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
+bindsym Insert exec $throwaway_screenshot
+mode "screenshot" {
+	set $fullscreen_screenshot grim ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
+	set $delayed_screenshot sleep 3 && slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
+	set $important_screenshot slurp | grim -g - ~/Images/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
+	set $open_last_screenshot swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
+
+	bindsym i exec $switch_out && $important_screenshot
+	# doesn't work for some reason
+	bindsym f exec $switch_out && $fullscrseen_screenshot
+	bindsym d exec $switch_out && $delayed_screenshot
+	bindsym o exec $switch_out && $open_last_screenshot
+	bindsym Insert exec $switch_out && throwaway_screenshot
+
+	bindsym $mod+Insert exec $switch_out
+	bindsym $mod+c exec $switch_out
+	bindsym Ctrl+c exec $switch_out
+	bindsym Escape exec $switch_out
+	bindsym q exec $switch_out
+}
+bindsym $mod+Insert exec "swaymsg mode screenshot && eww update sway_mode=screenshot"
+#

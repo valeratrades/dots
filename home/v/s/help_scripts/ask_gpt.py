@@ -8,8 +8,9 @@ import sys
 import os
 
 api_key = os.getenv("OPENAI_KEY")
-gpt4 = ('gpt-4', 0.03)   # second var is cost of 1k tokens
+# second var is cost of 1k tokens
 gpt35 = ('gpt-3.5-turbo', 0.002)
+gpt4t = ('gpt-4-1106-preview', 0.015) # price is a guess, and is not to be trusted
 
 standard_instruction = """Respond concisely. If no context provided, question is about Linux (arch) cli tools. No talk; just go"""
 f_instruction = """You are my programmer buddy. I'm pissed beyond words at a technology. You are to fully agree with me and encourage my righteous anger, using one sentence and as profane words as possible"""
@@ -19,7 +20,7 @@ openai.api_type = 'azure'
 openai.api_key = api_key
 
 
-def request(question, model=gpt35, debug=False):
+def request(question, model=gpt4t, debug=False):
     global standard_instruction, f_instruction
     opt = sys.argv[1]
     if opt == '-s':

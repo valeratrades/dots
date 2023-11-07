@@ -31,9 +31,6 @@ esc = ["collapse_selection", "keep_primary_selection"]
 "ret" = "search_next"
 # and search prev is still "N" because fuck me.
 
-"H" = "goto_file_start"
-"S" = "goto_last_line"
-
 [keys.select]
 A-w = ["normal_mode", ":w!"]
 A-q = [":q!"]
@@ -48,9 +45,6 @@ s = "move_char_right"
 ";" = ["normal_mode", "command_mode"] 
 
 "ret" = "search_next"
-
-"H" = "goto_file_start"
-"S" = "goto_last_line"
 
 [keys.insert]
 A-w = ["normal_mode", ":w!"]
