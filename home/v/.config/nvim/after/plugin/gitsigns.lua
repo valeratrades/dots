@@ -23,3 +23,15 @@ register({
 	U = { "<cmd>Gitsigns reset_hunk<cr>", "Reset hunk" },
 	s = { "<cmd>Gitsigns stage_hunk<cr>", "Stage hunk" },
 }, { mode = { "n", "v" }, prefix = "<space>g" })
+
+K('n', 'gt', function()
+	if vim.wo.diff then return 'gt' end
+	vim.schedule(function() gs.next_hunk() end)
+	return '<Ignore>'
+end, { expr = true })
+
+K('n', 'gn', function()
+	if vim.wo.diff then return 'gn' end
+	vim.schedule(function() gs.prev_hunk() end)
+	return '<Ignore>'
+end, { expr = true })

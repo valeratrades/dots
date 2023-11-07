@@ -16,5 +16,6 @@ require("which-key").register({
 	name = "Session",
 	l = { "<cmd>SessionLoad<cr>", "Load" },
 	s = { "<cmd>SessionSave<cr>", "Save" },
+	i = { "<cmd>SessionStart<cr>", "Init" },
 	q = { "<cmd>SessionStop<cr>", "Quit" },
 }, { prefix = "<space>se" })

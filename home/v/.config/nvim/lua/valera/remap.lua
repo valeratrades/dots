@@ -101,6 +101,8 @@ K({ "i", "" }, "<A-c>", "<esc><cmd>tabmove -<cr>")
 K({ "i", "" }, "<A-r>", "<esc><cmd>tabmove +<cr>")
 K({ "i", "" }, "<A-f>", "<esc><cmd>tabmove 0<cr>")
 K({ "i", "" }, "<A-g>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
+
+K("n", "gt", "<nop>")
 --
 
 -- -- Standards and the Consequences
