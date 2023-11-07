@@ -29,6 +29,3 @@ function SetSystemTheme()
 end
 
 SetSystemTheme()
-
--- Is this standartised?
---local colors = require("catppuccin.palettes").get_palette()
