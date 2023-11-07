@@ -197,17 +197,20 @@ set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
 # Wallpapers
 output * bg ~/Wallpapers/AndreySakharov.jpg fill
 
-mode "circle_wallpapers" {
-	bindsym t exec ~/s/help_scripts/circle_wallpapers.sh f
-	bindsym n exec ~/s/help_scripts/circle_wallpapers.sh b
-
-	bindsym $mod+w exec $switch_out
-	bindsym $mod+c exec $switch_out
-	bindsym Ctrl+c exec $switch_out
-	bindsym Escape exec $switch_out
-	bindsym q exec $switch_out
-}
-bindsym $mod+w exec "swaymsg mode circle_wallpapers && eww update sway_mode=circle_wallpapers"
+#BUG: for some reason the script is called twice. Regardless of whether using mods or not.
+#mode "circle_wallpapers" {
+#	bindsym t exec ~/s/help_scripts/circle_wallpapers.sh f
+#	bindsym n exec ~/s/help_scripts/circle_wallpapers.sh b
+#
+#	bindsym $mod+w exec $switch_out
+#	bindsym $mod+c exec $switch_out
+#	bindsym Ctrl+c exec $switch_out
+#	bindsym Escape exec $switch_out
+#	bindsym q exec $switch_out
+#}
+#bindsym $mod+w exec "swaymsg mode circle_wallpapers && eww update sway_mode=circle_wallpapers"
+bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"
+bindsym $mod+Shift+w exec "~/s/help_scripts/circle_wallpapers.sh b"
 
 # Screenshots
 set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')

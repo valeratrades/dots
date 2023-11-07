@@ -14,20 +14,17 @@ fi
 
 wallpapers=$(ls "${wallpaper_dir}" | grep -v '^\.' | sort)
 
-wallpaper_count=0
-for wallpaper in $wallpapers; do
-  wallpaper_count=$((wallpaper_count + 1))
-done
+n_wallpapers=$(echo -e "$wallpapers" | awk 'END { print NR }')
 
 get_wallpaper_by_index() {
-    i=1
-    for wallpaper in $wallpapers; do
-        if [ $i -eq $CURRENT_WALLPAPER_ORDINAL ]; then
-            echo $wallpaper
-            return
-        fi
-        i=$((i + 1))
-    done
+	i=1
+	for wallpaper in $wallpapers; do
+		if [ $i -eq $CURRENT_WALLPAPER_ORDINAL ]; then
+			echo $wallpaper
+			return
+		fi
+		i=$((i + 1))
+	done
 }
 
 update_wallpaper() {
@@ -36,19 +33,19 @@ update_wallpaper() {
 	echo $CURRENT_WALLPAPER_ORDINAL > "$file_with_current_wallpaper_ordinal"
 }
 
-f() {
-	CURRENT_WALLPAPER_ORDINAL=$((CURRENT_WALLPAPER_ORDINAL % wallpaper_count + 1))
+next() {
+	CURRENT_WALLPAPER_ORDINAL=$((CURRENT_WALLPAPER_ORDINAL % n_wallpapers + 1))
 	update_wallpaper
 }
-b() {
+prev() {
 	CURRENT_WALLPAPER_ORDINAL=$((CURRENT_WALLPAPER_ORDINAL - 1))
 	if [ $CURRENT_WALLPAPER_ORDINAL -le 0 ]; then
-		CURRENT_WALLPAPER_ORDINAL=$wallpaper_count
+		CURRENT_WALLPAPER_ORDINAL=$n_wallpapers
 	fi
 	update_wallpaper
 }
 case "$1" in
-    f) f ;;
-    b) b ;;
-    *) printf "\033[31mPossible commands: [ f, b ]\033[0m\n" ;;
+	f) next ;;
+	b) prev ;;
+	*) printf "\033[31mPossible commands: [ f, b ]\033[0m\n"
 esac
