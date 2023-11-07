@@ -18,7 +18,6 @@ wallpaper_count=0
 for wallpaper in $wallpapers; do
   wallpaper_count=$((wallpaper_count + 1))
 done
-notify-send "hi"
 
 get_wallpaper_by_index() {
     i=1
