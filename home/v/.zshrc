@@ -208,3 +208,11 @@ else
 	ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
 	source $ZSH_THEME
 fi
+
+# pnpm
+export PNPM_HOME="/home/v/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

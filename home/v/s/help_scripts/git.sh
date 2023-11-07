@@ -9,6 +9,11 @@ gc() {
 		url="https://github.com/$1" 
 	fi
 
+	if [ "$2" = "-b" ]; then
+		printf "\n\033[34mtrying direct install with go\033[0m\n"
+		go install -v "${url}@latest" && printf "\033[32mSuccess\033[0m\n"|| :
+	fi
+
 	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
 #git clone on rails
@@ -46,7 +51,7 @@ gb() {
 	fi
 
 	initial_dir=$(pwd)
-	target_dir=$(gc "$target")
+	target_dir=$(gc "$target" "-b")
 	cd $target_dir
 
 	# # Try cmake
