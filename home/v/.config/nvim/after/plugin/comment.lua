@@ -116,10 +116,9 @@ local function debugComment(action)
 		end
 	end
 end
-K({ 'n', 'v' }, 'gsa', debugComment('add'), { desc = "comment: add dbg comment", silent = true })
-K('n', 'gsr', debugComment('remove'), { desc = "comment: remove all debug lines", silent = true })
+K({ 'n', 'v' }, '<space>cda', debugComment('add'), { desc = "comment: add dbg comment", silent = true })
+K('n', '<space>cdr', debugComment('remove'), { desc = "comment: remove all debug lines", silent = true })
 --
-
 
 -- -- `TODO{!*n}` Comments
 function AddTodoComment(n)
