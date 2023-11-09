@@ -209,5 +209,8 @@ require('mason-lspconfig').setup({
 				}
 			end,
 		},
+		['typst-lsp'] = {
+			exportPdf = "onType"
+		},
 	},
 })

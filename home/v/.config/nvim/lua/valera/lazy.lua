@@ -157,6 +157,11 @@ return require('lazy').setup({
 	"folke/todo-comments.nvim",
 	'jbyuki/instant.nvim',
 	{
+		'kaarmu/typst.vim',
+		ft = 'typst',
+		lazy = false,
+	},
+	{
 		'kawre/leetcode.nvim',
 		build = ":TSUpdate html",
 		dependencies = {

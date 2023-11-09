@@ -81,8 +81,8 @@ mkfile() {
 	touch "${file_path}"
 }
 cs() {
-	cd "$@"
-	. "./run.sh" > /dev/null 2>&1
+	cd "$@" || return 1
+	. "./run.sh" > /dev/null 2>&1 || :
 	sl
 }
 # # python
@@ -125,6 +125,15 @@ fz() {
 sd() {
 	${HOME}/.dots/main.sh sync "$@" > /tmp/dots_log.txt 2>&1 &
 }
+tw() {
+	try_from="${1}.typst"
+	try_to="${1}.pdf"
+	sudo killall typst
+	typst compile "$try_from" "$try_to"
+	typst watch "$try_from" "$try_to" > /dev/null 2>&1 &
+	zathura "$try_to" > /dev/null 2>&1 &
+	nvim "$try_from"
+}
 
 alias mr="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
@@ -132,6 +141,7 @@ alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
 alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
+alias tree="tree -I 'target|debug|_*'"
 
 # # cd
 mkcd() {
@@ -216,3 +226,5 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# you can use `export MANPAGER="nvim +Man!"` to see man pages in neovim

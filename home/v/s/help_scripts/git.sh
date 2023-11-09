@@ -9,11 +9,6 @@ gc() {
 		url="https://github.com/$1" 
 	fi
 
-	if [ "$2" = "-b" ]; then
-		printf "\n\033[34mtrying direct install with go\033[0m\n"
-		go install -v "${url}@latest" && printf "\033[32mSuccess\033[0m\n"|| :
-	fi
-
 	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
 #git clone on rails
@@ -51,13 +46,15 @@ gb() {
 	fi
 
 	initial_dir=$(pwd)
-	target_dir=$(gc "$target" "-b")
+	target_dir=$(gc "$target")
 	cd $target_dir
 
 	# # Try cmake
 	if printf "\n\033[34mtrying just cmake\033[0m\n" && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install; then
     :
   elif printf "\n\033[34mtrying -S .\033[0m\n" && cmake -S . -B ./build && cd ./build && sudo make install; then
+    :
+  elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release; then
     :
   else
     return 1

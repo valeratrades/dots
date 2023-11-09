@@ -75,6 +75,8 @@ cmp.setup({
 					item.menu = 'nvim'
 				elseif n == 'cmdline' then
 					item.mune = ''
+				elseif n == 'buffer' then
+					item.mune = 'B'
 				else
 					--item.menu = string.format('[%s]', n)
 					item.menu = n
