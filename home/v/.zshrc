@@ -125,15 +125,6 @@ fz() {
 sd() {
 	${HOME}/.dots/main.sh sync "$@" > /tmp/dots_log.txt 2>&1 &
 }
-tw() {
-	try_from="${1}.typst"
-	try_to="${1}.pdf"
-	sudo killall typst
-	typst compile "$try_from" "$try_to"
-	typst watch "$try_from" "$try_to" > /dev/null 2>&1 &
-	zathura "$try_to" > /dev/null 2>&1 &
-	nvim "$try_from"
-}
 
 alias mr="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
@@ -208,6 +199,7 @@ sc() {
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/init_projects.sh
 . ~/s/help_scripts/git.sh
+. ~/s/help_scripts/document_watch.sh
 
 source ${HOME}/.config/zsh/other.zsh
 

@@ -112,6 +112,7 @@ local function debugComment(action)
 			vim.defer_fn(function() Echo("") end, 4) -- can't make silent, so just overwrite the output
 		elseif action == 'remove' then
 			vim.cmd("g/" .. " " .. cs .. "dbg$/d")
+			vim.cmd([[g/\sdbg!(/d]])
 			vim.cmd.noh()
 		end
 	end
@@ -155,6 +156,16 @@ function FindTodo()
 		print("No TODOs found")
 		return
 	end
+	--TODO!!: rust todos
+	--local rust_todos_pattern = 'todo!()'
+	--local rust_todos = vim.fn.systemlist(
+	--	"rg --line-number -rn -- " .. rust_todos_pattern
+	--	.. " | awk -F: -v OFS=: '{print gsub(/!/, \"&\"), $0}'"
+	--	.. " | sort -rn"
+	--)
+	--for i, str in ipairs(rust_todos) do
+	--	table.insert(results, str .. rust_todos_pattern)
+	--end
 	local qflist = vim.fn.map(results, function(_, x)
 		local parts = split(x, ":")
 		return {

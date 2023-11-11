@@ -10,13 +10,22 @@ K("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by
 
 -- -- -- "hjkl" -> "htns" Remaps and the Consequences
 -- Basic Movement
-K("", "h", "h")
-K("", "t", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-K("", "s", "l")
+function MultiplySidewaysMovements(movement)
+	if vim.v.count == 0 then
+		F(movement)
+	else
+		local multiplied_count = vim.v.count * 10
+		F(multiplied_count .. movement)
+	end
+end
+
 K("", "j", "<nop>")
 K("", "k", "<nop>")
 K("", "l", "<nop>")
+K("", "h", "<cmd>lua MultiplySidewaysMovements('h')<cr>", { silent = true })
+K("", "t", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+K("", "s", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
 
 -- Jumps
 K("", "T", "<C-d>zz")
