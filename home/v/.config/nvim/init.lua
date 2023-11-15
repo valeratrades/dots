@@ -1,3 +1,3 @@
-require("valera")
+--NB: marks `x` and `X` are taken and not to be used by the user
 
---vim.cmd('source ~/.config/nvim/old_conf_parts.vim')
+require("valera")

@@ -22,7 +22,7 @@ fn main() {
 	assert!(args.len() == 2, "ERROR: provide one and only one argument, being the bedtime in format: '%H:%M'");
 	let bedtime: Bedtime = args[1].clone().into();
 
-	//PERF dancing with tambourine to get into the 30m cycle
+	// dancing with tambourine to get into the 30m cycle
 	let good_minutes_small = bedtime.minutes % 30;
 	let good_minutes_big = good_minutes_small + 30;
 	let m = Utc::now().minute();
@@ -58,7 +58,7 @@ fn set_redshift(bedtime: &Bedtime) {
 	if now_shifted <= 4 * 60 {
 		redshift = 20;
 	} else if now_shifted >= 20 * 60 {
-		redshift = ((now_shifted as f32 / 60.0 - 19.5) * 5.0) as u32;
+		redshift = ((now_shifted as f32 / 60.0 - 20 + 0.5) * 5.0) as u32;
 	}
 
 	if redshift != 0 {

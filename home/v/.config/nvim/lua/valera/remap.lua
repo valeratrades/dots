@@ -74,6 +74,7 @@ K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "windows: increase height" })
 K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "windows: increase width" })
 K("n", "<C-w><C-h>", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
 K("n", "<C-w><C-v>", "<C-w><C-v><C-w>w", { desc = "windows: new vertical and focus" })
+K("n", "<C-w>v", "<C-w>v<C-w>w", { desc = "windows: new vertical and focus" })
 K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab split`" })
 --
 
@@ -194,8 +195,8 @@ K("n", "H", "H^")
 K("n", "M", "M^")
 K("n", "L", "L^")
 
--- Tries to Correct spelling of the word under the cursor
-K("n", "<space>z", "1z=")
+-- Tries to Correct spelling of the word under the cursor misspelled
+K("n", "z1", "mx1z=`x", { silent = true })
 
 K('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
 K('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })

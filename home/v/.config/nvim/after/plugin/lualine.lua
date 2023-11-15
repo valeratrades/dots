@@ -4,11 +4,32 @@ local diagnostics = {
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
 	symbols = { error = "", warn = "" },
-	always_visible = true,
+	always_visible = false,
 }
 local function hide_in_width()
 	return vim.fn.winwidth(0) > 80
 end
+
+--local function countSpellingMistakes()
+--	local count = 0
+--	for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
+--		for word in line:gmatch("%w+") do
+--			if vim.fn.spellbadword(word)[2] == "bad" then
+--				count = count + 1
+--			end
+--		end
+--	end
+--	return count
+--end
+--local n_misspelled = function()
+--	---@diagnostic disable-next-line: undefined-field
+--	if vim.opt_local.spell:get() == true then
+--		local count = countSpellingMistakes()
+--		return count
+--	else
+--		return ""
+--	end
+--end
 
 local function diff_source()
 	local gitsigns = vim.b.gitsigns_status_dict
@@ -57,7 +78,7 @@ require('lualine').setup {
 	sections = {
 		lualine_a = { 'mode' },
 		lualine_b = { { "b:gitsigns_head", icon = "" } },
-		lualine_c = { diagnostics },
+		lualine_c = { diagnostics, --[[n_misspelled]] },
 		lualine_x = { diff, spaces, 'encoding', 'filename' },
 		lualine_y = { 'progress' },
 		lualine_z = { location }

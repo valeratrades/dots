@@ -29,3 +29,5 @@
 # in cased you did `git add .` before running `git diff`
 [alias]
 	ds = diff --staged
+[init]
+	defaultBranch = master
