@@ -1,27 +1,24 @@
 local builtin = require('telescope.builtin')
-vim.g.maplocalleader = "<Space>s"
-
-K('n', '<Space>f', builtin.find_files, { desc = "telescope: project files" })
-K('n', "<C-f>",
-	"<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",
-	{ desc = "telescope: <C-f> remake" })
-K({ 'n', 'v' }, '<Space>ss', builtin.grep_string, { desc = "telescope: grep visual selection or word under cursor" })
 
 require("which-key").register({
+	f = { builtin.find_files, "search files" },
 	s = {
 		name = "Telescope",
-		f = { builtin.live_grep, "Live grep" },
-		m = { builtin.keymaps, "Keymaps" },
-		g = { builtin.git_files, "Git files" },
+		f = { builtin.live_grep, "live grep" },
+		s = { builtin.grep_string, "grep visual selection or word under cursor", mode = { "n", "v" } },
+		m = { builtin.keymaps, "keymaps" },
+		g = { builtin.git_files, "git files" },
 		p = { "<cmd>Telescope persisted<cr>", "persisted: sessions" },
-		b = { builtin.buffers, "Find buffers" },
-		h = { builtin.help_tags, "Neovim documentation" },
+		b = { builtin.buffers, "find buffers" },
+		h = { builtin.help_tags, "neovim documentation" },
 		t = { function()
 			FindTodo()
 			require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
 		end, "Project's TODOs" },
 	},
 }, { prefix = "<space>" })
+K("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",
+	{ desc = "Ctrl+f remake" })
 
 
 -- -- open new tab, then...

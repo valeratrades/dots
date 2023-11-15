@@ -1,6 +1,8 @@
 # all general git shorthands
 
 alias gu='gitui'
+alias gg="git add -A && git commit -m '.' && git push"
+alias gr="git reset --hard"
 
 gc() {
 	if rg -q "://" <<< "$1"; then

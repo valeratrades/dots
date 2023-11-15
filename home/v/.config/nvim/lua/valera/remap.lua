@@ -151,18 +151,23 @@ K('', '<C-z>', '<C-a>')
 --K("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = true })
 --
 
-local function saveSessionIfOpen(cmd)
+local function saveSessionIfOpen(cmd, hook_before)
+	hook_before = hook_before or ""
 	return function()
 		if vim.g.persisting then
 			vim.cmd("SessionSave")
 		end
 		Ft('<esc>', 'm')
+		if hook_before ~= "" then
+			vim.cmd("wa!")
+		end
 		vim.cmd(cmd)
 	end
 end
 
 K({ "", "i" }, "<A-q>", "<cmd>q!<cr>")
-K({ "", "i" }, "<A-a>", saveSessionIfOpen('qa!'))
+K({ "", "i" }, "<A-a>", saveSessionIfOpen('qa!', 'wa!'), { desc = "save everything and exit" })
+K({ "", "i" }, "<A-;>", '<cmd>qa!<cr>')
 K({ "", "i" }, "<A-w>", saveSessionIfOpen('w!'))
 
 --TODO at some point make this systemwide somehow
@@ -235,7 +240,3 @@ K("n", "<esc>", function()
 	vim.cmd.noh()
 	killPopups()
 end)
-
--- this assumes we correctly did `vim.fn.chdir(vim.env.PWD)` in an autocmd earlier. Otherwise this will often try to execute commands one level in the filetree above.
-K("n", "<space>gp", "<cmd>!git add -A && git commit -m '.' && git push<cr>", { silent = true, desc = "git: just do it" })
-K("n", "<space>gr", "<cmd>!git reset --hard<cr>", { silent = true, desc = "git: hard reset" })

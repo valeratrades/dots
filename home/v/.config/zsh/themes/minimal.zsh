@@ -147,18 +147,23 @@ function mnml_status {
 
 	function mnml_files {
 		local _ls="$(env which ls)"
-		local _w="%{\e[0m%}"
-		local _g="%{\e[38;5;244m%}"
+		local _w="%{\e[0m%}" # resets to default color
+		local _g="%{\e[38;5;244m%}" # comment color
 
 		local a_files="$($_ls -1A | sed -n '$=')"
 		local v_files="$($_ls -1 | sed -n '$=')"
 		local h_files="$((a_files - v_files))"
-
+		
 		local output="${_w}[$_g${v_files:-0}"
 		if [ "${h_files:-0}" -gt 0 ]; then
-			output="$output $_w($_g$h_files$_w)"
+			output="${output} $_w($_g$h_files$_w)"
 		fi
-		output="$output${_w}]"
+
+		# apparently no way to do instantly from metadata only, so will take several seconds on some large directories
+		#local _du="$(du -sh . | awk '{print $1}')"
+		#output="${output}${_g}, ${_du}$_w"
+		
+		output="${output}${_w}]"
 
 		printf '%b' "$output"
 	}
@@ -194,17 +199,6 @@ zle reset-prompt
 # redraw prompt on keymap select
 function _mnml_zle-keymap-select {
 zle reset-prompt
-}
-
-# draw infoline if no command is given
-function _mnml_buffer-empty {
-if [ -z "$BUFFER" ]; then
-	_mnml_iline "$(_mnml_wrap MNML_INFOLN)"
-	_mnml_me
-	zle redisplay
-else
-	zle accept-line
-fi
 }
 
 # properly bind widgets

@@ -44,8 +44,8 @@ bindgesture pinch:inward exec xdotool key ctrl+minus
 
 # # Autostart
 exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
-exec "bash ~/.config/sway/restore_session.sh"
-#exec "bash ~/.config/sway/listen.sh"
+exec "~/.config/sway/restore_session.sh"
+#exec "~/.config/sway/listen.sh"
 
 exec mako
 exec libinput-gestures

@@ -14,7 +14,7 @@ require("persisted").setup({
 
 require("which-key").register({
 	name = "Session",
-	l = { "<cmd>SessionLoad<cr>", "Load" },
+	l = { "<cmd>SessionLoad<cr><cmd>SessionSave<cr>", "Load" }, -- Saving so vim.g.persisting == true
 	s = { "<cmd>SessionSave<cr>", "Save" },
 	i = { "<cmd>SessionStart<cr>", "Init" },
 	q = { "<cmd>SessionStop<cr>", "Quit" },

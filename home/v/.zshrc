@@ -27,7 +27,7 @@ e() {
 			nvim "$@" .
 		else
 			local could_fix=0
-			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt")
+			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" "typst" "tex")
 			# note that indexing starts at 1, as we're in a piece of shit shell.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
@@ -44,24 +44,48 @@ e() {
 				return 0
 			else
 				nvim "$@"
-				#return 1
 			fi
-		fi
-	
+		fi	
 		cd - > /dev/null
   else
     nvim .
   fi
 }
-#TODO: in a few days, given `e` works correctly, update this to be the same.
+# Problematic to do an inclusive script that could be ran with sudo too, so just copying manually; adding `sudo` to everything for now.
+#? make a macro with `sed`?
 se() {
   if [ -n "$1" ]; then
-    split_array=$(echo "$1" | tr "/" "\n")
-    last_element=$(echo "$split_array" | tail -n 1)
-
-    cd "$1" && shift && sudo -Es nvim "$@" . || cd "${1%$last_element}" && shift && sudo -Es nvim $last_element $@ 
-
-    cd - > /dev/null
+		if [ -f "$1" ]; then
+			cd $(dirname $1)
+			basename=$(basename $1)
+			shift
+			sudo -Es nvim $basename $@
+		elif [ -d "$1" ]; then
+			cd $1
+			shift
+			nvim "$@" .
+		else
+			local could_fix=0
+			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" "typst" "tex")
+			# note that indexing starts at 1, as we're in a piece of shit shell.
+			for i in {1..${#try_extensions[@]}}; do
+				local try_path="${1}${try_extensions[$i]}"
+				if [ -f "$try_path" ]; then
+					cd $(dirname $try_path)
+					basename=$(basename $try_path)
+					shift
+					sudo -Es nvim $basename $@
+					could_fix=1
+					break
+				fi
+			done
+			if [ $could_fix = 1 ]; then
+				return 0
+			else
+				sudo -Es nvim "$@"
+			fi
+		fi	
+		cd - > /dev/null
   else
     sudo -Es nvim .
   fi
