@@ -1,5 +1,5 @@
 local cmp = require('cmp')
-local _ = { behavior = cmp.SelectBehavior.Select } -- makes cmp not force feed me completeions on 'Enter'
+--local _ = { behavior = cmp.SelectBehavior.Select } -- makes cmp not force feed me completeions on 'Enter'
 local cmp_action = require('lsp-zero').cmp_action()
 local ts_utils = require('nvim-treesitter.ts_utils')
 local lspkind = require('lspkind')
@@ -9,6 +9,7 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{
 			name = 'nvim_lsp',
+			keyword_lenght = 1,
 			-- when inputting an argument, suggest only values with this in mind
 			entry_filter = function(entry, context)
 				local kind = entry:get_kind()
@@ -25,7 +26,7 @@ cmp.setup({
 				return true
 			end,
 		},
-		{ name = 'luasnip' },
+		{ name = 'luasnip', keyword_length = 1 },
 		{ name = 'buffer',  keyword_length = 5 },
 		{ name = 'cmdline', keyword_length = 3 },
 		{ name = "crates" },
@@ -95,10 +96,8 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = {
-		['<Tab>'] = cmp_action.luasnip_supertab(),
-		['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-		['<CR>'] = cmp.mapping.confirm({ select = false }), -- `select = false` to only confirm explicitly selected items.
-
+		['<C-s>'] = cmp_action.luasnip_supertab(),
+		['<C-y>'] = cmp.mapping.confirm({ select = true }), -- `select = false` to only confirm explicitly selected items.
 		['<C-n>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(4)

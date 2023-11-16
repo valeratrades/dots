@@ -9,9 +9,9 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 		additional_vim_regex_highlighting = false,
 	},
-	autopairs = {
-		enable = true,
-	},
+	-- autopairs = {
+	--  enable = true,
+	--},
 	autotag = { -- html tags
 		enable = true,
 	},
@@ -40,10 +40,10 @@ require('nvim-treesitter.configs').setup {
 		swap = {
 			enable = true,
 			swap_previous = {
-				["<space><left>"] = "@parameter.inner",
+				["g>"] = "@parameter.inner",
 			},
 			swap_next = {
-				["<space><right>"] = "@parameter.inner",
+				["g<"] = "@parameter.inner",
 			},
 		},
 		lsp_interop = {

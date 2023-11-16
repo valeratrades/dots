@@ -7,7 +7,7 @@ _t() {
 }
 
 _n() {
-	cowsay "2"
+	e ~/s/help_scripts/shell_harpoon/
 }
 
 _s() {

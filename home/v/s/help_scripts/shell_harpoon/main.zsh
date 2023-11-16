@@ -16,6 +16,10 @@ mute() {
 
 temp_file="${HOME}/tmp/shell_harpoon.sh"
 ,add() {
+	dir=$(pwd)
+	if [ -n "$1" ]; then
+		dir="${dir}/$1"
+	fi
 	mkdir -p $(dirname "$temp_file")
 	echo "export SHELL_HARPOON_CURRENT_DIR_DUMP=$(pwd)" > "$temp_file"
 	. $temp_file
@@ -24,12 +28,14 @@ temp_file="${HOME}/tmp/shell_harpoon.sh"
 # # open nvim and cache the dir
 # Reliance on existence of `e` command for opening the said editor.
 ,e() {
-	,add
+	,add "$@"
 	e "$@"
 }
 e,() {
+	_current_dir=$(pwd)
 	,c
-	e "$@"
+	e . "$@"
+	cd "$_current_dir"
 }
 #
 

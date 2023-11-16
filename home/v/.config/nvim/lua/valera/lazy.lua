@@ -78,13 +78,6 @@ return require('lazy').setup({
 			end
 		},
 	},
-	{ -- simple swap of items like (arg1, arg2, arg3)
-		'machakann/vim-swap',
-		keys = {
-			{ "g<", "<plug>(swap-prev)" },
-			{ "g>", "<plug>(swap-next)" },
-		},
-	},
 	{ -- https://github.com/tpope/vim-abolish/blob/master/doc/abolish.txt
 		'tpope/vim-abolish',
 		keys = {
