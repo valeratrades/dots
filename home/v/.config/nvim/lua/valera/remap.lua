@@ -126,10 +126,6 @@ K("n", "<del>", "i<del>")
 K("n", "<C-del>", "a<C-del>", { remap = true })
 
 K('', '<C-a>', 'ggVG')
-
-K('', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
-K('i', '<C-z>', '<cmd>undo<cr>', { desc = 'standarts: undo' })
-
 -- Consequences
 K('', '<C-z>', '<C-a>')
 --
@@ -200,8 +196,16 @@ K("n", "H", "H^")
 K("n", "M", "M^")
 K("n", "L", "L^")
 
--- Tries to Correct spelling of the word under the cursor misspelled
+-- Tries to correct spelling of the word under the cursor
 K("n", "z1", "mx1z=`x", { silent = true })
+K("n", "z2", "umx2z=`x", { silent = true })
+K("n", "z3", "umx3z=`x", { silent = true })
+K("n", "z4", "umx4z=`x", { silent = true })
+K("n", "z5", "umx5z=`x", { silent = true })
+K("n", "z6", "umx6z=`x", { silent = true })
+K("n", "z7", "umx7z=`x", { silent = true })
+K("n", "z8", "umx8z=`x", { silent = true })
+K("n", "z9", "umx9z=`x", { silent = true })
 
 K('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
 K('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
