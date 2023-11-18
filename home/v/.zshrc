@@ -63,7 +63,7 @@ se() {
 		elif [ -d "$1" ]; then
 			cd $1
 			shift
-			nvim "$@" .
+			sudo -Es nvim "$@" .
 		else
 			local could_fix=0
 			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" "typst" "tex")

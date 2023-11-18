@@ -17,3 +17,13 @@ params
 params
 enums
 enum
+struct
+Args
+endTime
+startTime
+the
+pacman
+TradesParams
+Timestamp
+func
+api's

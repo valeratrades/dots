@@ -23,8 +23,9 @@ c = copy
 v = paste
 delete = C-delete
 backspace = C-backspace
-	a = macro(C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right)
-	g = macro(C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left)
+# apparently completely useless, as `C-{arrow}` couldn't care less for the start of the line; and just goes right past it.
+a = macro(C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right)
+g = macro(C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left)
 s = macro(C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right enter)
 [vim_mode+shift]
 j = S-left
@@ -39,7 +40,7 @@ c = copy
 v = paste
 delete = C-delete
 backspace = C-backspace
-	a = macro(C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right)
+a = macro(C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right)
 g = macro(C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left)
 # would be nice to add `V` too; but macros crash if any more items provided. And with current n not all strings will be encapsulated If I go to the end, do Shift, and go back to the first char.
 s = macro(C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left enter up)

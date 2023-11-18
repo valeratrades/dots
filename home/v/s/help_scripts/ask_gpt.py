@@ -44,7 +44,7 @@ def request(question, model=gpt4t, debug=False):
         "model": f"{model[0]}",
         "messages": conversation,
         "temperature": 0,
-        "max_tokens": 100,
+        #"max_tokens": 100,
     }
     start_time = time.time()
     r = requests.post(url, headers=headers, data=json.dumps(data)).json()

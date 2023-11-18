@@ -183,6 +183,6 @@ end
 
 K('n', '<space>ch', function()
 	local normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
-	vim.cmd('highlight Comment guifg=' .. normal_bg .. ' guibg=' .. normal_bg)
+	vim.cmd('highlight Comment guifg=' .. normal_bg .. ' guibg=' .. "none")
 end, { desc = "comment: hide" })
 K('n', '<space>cs', '<cmd>lua SetSystemTheme()<cr>')

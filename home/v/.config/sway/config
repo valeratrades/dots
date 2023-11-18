@@ -24,7 +24,7 @@ assign [app_id="org.telegram.desktop"] 4
 #assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
 
 
-font pango:Sans 8
+font pango:Sans 6
 titlebar_padding 1 1
 titlebar_border_thickness 1
 focus_on_window_activation none
@@ -68,8 +68,8 @@ input * {
     tap enabled
     scroll_factor 1.43
 
-    repeat_delay 140
-    repeat_rate 65
+    repeat_delay 130
+    repeat_rate 70
 }
 # Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
 # to get the code of the key, use xev or auto-hotkey
@@ -103,28 +103,26 @@ exec_always sleep 2 && sudo killall auto_redshift && /home/v/s/help_scripts/auto
 #
 
 # # workspaces
-set $pin exec ~/.config/sway/pin_focused/move.sh
-
-bindsym $mod+1   workspace 1; $pin
-bindsym $mod+2   workspace 2; $pin
-bindsym $mod+3   workspace 3; $pin
-bindsym $mod+4   workspace 4; $pin
-bindsym $mod+5   workspace 5; $pin
-bindsym $mod+6   workspace 6; $pin
-bindsym $mod+7   workspace 7; $pin
-bindsym $mod+8   workspace 8; $pin
-bindsym $mod+9   workspace 9; $pin
-bindsym $mod+0   workspace 0; $pin
-bindsym $mod+Shift+1    move container to workspace 1; $pin
-bindsym $mod+Shift+2    move container to workspace 2; $pin
-bindsym $mod+Shift+3    move container to workspace 3; $pin
-bindsym $mod+Shift+4    move container to workspace 4; $pin
-bindsym $mod+Shift+5    move container to workspace 5; $pin
-bindsym $mod+Shift+6    move container to workspace 6; $pin
-bindsym $mod+Shift+7    move container to workspace 7; $pin
-bindsym $mod+Shift+8    move container to workspace 8; $pin
-bindsym $mod+Shift+9    move container to workspace 9; $pin
-bindsym $mod+Shift+0    move container to workspace 0; $pin
+bindsym $mod+1   workspace 1
+bindsym $mod+2   workspace 2
+bindsym $mod+3   workspace 3
+bindsym $mod+4   workspace 4
+bindsym $mod+5   workspace 5
+bindsym $mod+6   workspace 6
+bindsym $mod+7   workspace 7
+bindsym $mod+8   workspace 8
+bindsym $mod+9   workspace 9
+bindsym $mod+0   workspace 0
+bindsym $mod+Shift+1    move container to workspace 1
+bindsym $mod+Shift+2    move container to workspace 2
+bindsym $mod+Shift+3    move container to workspace 3
+bindsym $mod+Shift+4    move container to workspace 4
+bindsym $mod+Shift+5    move container to workspace 5
+bindsym $mod+Shift+6    move container to workspace 6
+bindsym $mod+Shift+7    move container to workspace 7
+bindsym $mod+Shift+8    move container to workspace 8
+bindsym $mod+Shift+9    move container to workspace 9
+bindsym $mod+Shift+0    move container to workspace 0
 
 bindsym Mod1+Tab focus prev
 bindsym Mod1+apostrophe focus next
@@ -193,7 +191,7 @@ bindcode $mod+Shift+34 output * dpms off
 # # Modes
 set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
 # Wallpapers
-output * bg ~/Wallpapers/AndreySakharov.jpg fill
+output * bg ~/Wallpapers/1_AndreySakharov.jpg fill
 
 #BUG: for some reason the script is called twice. Regardless of whether using mods or not.
 #mode "circle_wallpapers" {
