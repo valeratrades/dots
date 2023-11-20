@@ -150,7 +150,7 @@ sd() {
 	${HOME}/.dots/main.sh sync "$@" > /tmp/dots_log.txt 2>&1 &
 }
 
-alias mr="py ${HOME}/clone/massren/massren -d '' $@"
+alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
 alias jn="jupyter notebook &"
