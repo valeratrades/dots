@@ -61,8 +61,8 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-    xkb_layout "us,ru"
-    xkb_variant "dvorak,"
+    xkb_layout "us,ru,semimak"
+    xkb_variant "dvorak,,"
 
     natural_scroll enabled
     tap enabled

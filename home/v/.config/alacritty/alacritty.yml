@@ -40,7 +40,7 @@ font:
     family: monospace
   bold_italic:
     family: monospace
-  #size: 11.0
+  size: 9.5
 
   # If `true`, Alacritty will use a custom built-in font for box drawing
   # characters (Unicode points 2500 - 259f).

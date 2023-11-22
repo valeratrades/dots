@@ -179,7 +179,7 @@ alias cst="cs ~/tmp"
 # # editor
 alias ec="e ~/.config/nvim"
 alias es="e ~/.zshrc"
-alias ezt="e ~/.config/zsh/themes/minimal.zsh"
+alias ezt="e ~/.config/zsh/theme.zsh"
 #? can I do this for rust and go? (maybe something with relative paths there)
 alias ep="e ~/envs/Python/lib/python3.11/site-packages" 
 alias hx="helix"
@@ -188,18 +188,14 @@ alias hx="helix"
 alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"
 #
-# # pacman
-alias pS="sudo pacman -S --noconfirm"
-alias pR="sudo pacman -R --noconfirm"
-alias pRn="sudo pacman -Rns --noconfirm"
-alias pG="pacman -Q | rg"
-alias pY="${HOME}/s/help_scripts/boring.sh"
-#
-# # yay
+# # pm
+# these should be used for everything, as they are supersets of `pacman -S` and `pacman -R`
 alias yS="yay -S --noconfirm"
 alias yR="yay -R --noconfirm"
 alias yR="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
+alias pG="pacman -Q | rg"
+alias pY="${HOME}/s/help_scripts/boring.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 # # cargo
@@ -231,7 +227,7 @@ source ${HOME}/.config/zsh/other.zsh
 if [ -f "${HOME}/.local.sh" ]; then
 	source "${HOME}/.local.sh"
 else
-	ZSH_THEME="${HOME}/.config/zsh/themes/minimal.zsh"
+	ZSH_THEME="${HOME}/.config/zsh/theme.zsh"
 	source $ZSH_THEME
 fi
 
