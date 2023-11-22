@@ -141,8 +141,7 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+c kill
 bindsym $mod+Return exec alacritty
 bindsym $mod+z floating toggle
-# 26 is a dot on my keyboard (look up with xev)
-bindcode $mod+26 sticky toggle
+bindsym $mod+Shift+z sticky toggle
 # allows 1) moving by holding $mod + mouse_left_click + moving mouse 2) resizing by holding $mod + mouse_right_click + moving mouse
 floating_modifier $mod normal
 #

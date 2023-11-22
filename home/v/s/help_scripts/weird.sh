@@ -19,7 +19,7 @@ function print_dvorak() {
 	echo "+---+---+---+---+---++---+---+---+---+---+"
 }
 
-function print_semimak() {
+function print_semimak_original() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
     echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Q ┊ W ┊ U ┊ O ┊ Y ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
@@ -28,7 +28,7 @@ function print_semimak() {
     echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ , ┊ . ┊ / ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
-function print_semimak_my() {
+function print_semimak() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
     echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Qü┊ Wù┊ Uû┊ Oô┊ Y ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
