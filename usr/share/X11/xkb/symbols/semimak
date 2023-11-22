@@ -48,7 +48,7 @@ xkb_symbols "my" {
 		name[Group1] = "Valera Semimak";
 
 	//TODO!!!!!!!!!!!!!: This is hugely promising concept, but I can't get modifier status off of the old <RALT>
-	// key <RALT> { type="FOUR_LEVEL", [ ISO_Level3_Shift ] };
+	key <RALT> { type="FOUR_LEVEL", [ Alt_R ] };
 	key <LSGT> { type="ONE_LEVEL", [ ISO_Level3_Shift ] };
 	// modifier_map Mod1 { Alt_L, Alt_R, Meta_L, Meta_R };
 
@@ -57,7 +57,7 @@ xkb_symbols "my" {
 
 	key <AB08> {[ comma, less, egrave, Egrave ]};
 	key <AC09> {[ a, A, agrave, Agrave ]};
-	key <AD07> {[ q, Q, ugrave, Ugrave ]};
+	key <AD07> {[ w, W, ugrave, Ugrave ]};
 
 
 	key <AB09> {[ period, greater, acircumflex, Acircumflex ]};
@@ -68,7 +68,7 @@ xkb_symbols "my" {
 
 	key <AC06> {[ c, C, ccedilla, Ccedilla ]};
 
-	key <AD06> {[ w, W, udiaeresis, Udiaeresis ]};
+	key <AD06> {[ q, Q, udiaeresis, Udiaeresis ]};
 	//
 	
 	// // sign placement I'm used to from dvorak
