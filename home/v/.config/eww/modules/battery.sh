@@ -6,7 +6,7 @@ adjusted_percent=$(awk -v val=$percent 'BEGIN {printf "%d", int((val * 1.05) - 3
 
 status=$(cat "$battery/status")
 
-icon=""
+icon="   "
 [ "$status" = "Charging" ] && icon=""
 [ "$status" = "Full" ] && adjusted_percent="100"
 [ "$status" = "Not charging" ] && adjusted_percent="100" # happens when we're fully charged but still plugged.

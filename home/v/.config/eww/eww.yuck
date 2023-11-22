@@ -1,7 +1,4 @@
-; stolen from https://github.com/druskus20/dots/blob/master/eww/.config/eww/eww.yuck
 ; general docs are at https://elkowar.github.io/eww/configuration.html
-; another nice config and options showcase https://github.com/druskus20/eugh
-
 ; currently sitting on:
 ; gc -b tray-3 https://github.com/ralismark/eww
 ; that's a version with tray support. Will have to switch to main when it is merged.
@@ -58,57 +55,58 @@
 ;; Sway Mode ;;
 (defwidget sway_mode []
 	(icon-module	:class ""
-								:icon "#"
+								:icon ""
 								:visible {sway_mode != "default"}
-		(label :text sway_mode)))
+		(label :text "#${sway_mode}")))
 
 ;; Todo Timer ;;
 (defwidget todo_timer []
 	(icon-module	:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
-								:icon ""
+								:icon ""
 								:visible {todo_timer != "None"}
-		(label :text todo_timer)))
+		(label :text "${todo_timer}")))
 
 ;; Openvpn ;;
 (defpoll openvpn_poll :initial "0" :interval "1s" "./modules/openvpn.sh")
 (defwidget openvpn []
   (icon-module  :class "icons-openvpn"
-								:icon ""
-                :visible {openvpn_poll == "1"}))
+								:icon ""
+                :visible {openvpn_poll == "1"}
+		(label :text "")))
 
 ;; Battery ;;
 (defpoll battery_poll	:initial "{}" :interval "1s" "./modules/battery.sh")
 (defwidget battery []
 	(icon-module	:class {battery_poll.content < 10 && battery_poll.icon != "" ? "urgent" : battery_poll.content < 10 && battery_poll.icon == "" ? "problematic" : ""}
-								:icon {battery_poll.icon}
+								:icon ""
 								:visible {battery_poll.content < 99}
-		(label :text {battery_poll.content})))
+		(label :text "${battery_poll.icon}${battery_poll.content}")))
 
 ;; Time ;;
 (defpoll time_poll :interval "1s" "date +\"%Y/%m/%d %H:%M:%S\"")
 (defwidget time []
- (icon-module :class "time" :icon "" 
-	(label :text time_poll)))
+ (icon-module :class "time" :icon "" 
+	(label :text "${time_poll}")))
 
 ;; Bluetooth ;;
 (defwidget bluetooth []
-	(icon-module :class "bluetooth" :icon "" :visible {bluetooth_connection != ""}
-		(label :text bluetooth_connection)))
+	(icon-module :class "bluetooth" :icon "" :visible {bluetooth_connection != ""}
+		(label :text "${bluetooth_connection}")))
 (defpoll bluetooth_connection :interval "2s" "./modules/bluetooth.sh")
 
 ;; System Utilization ;;
 (defwidget cpu []
-	(icon-module :class {"${round(EWW_CPU.avg, 0)}" > 90 ? "problematic" : ""} :icon "" 
-		(label :text "${round(EWW_CPU.avg, 0)}%")))
+	(icon-module :class {"${round(EWW_CPU.avg, 0)}" > 90 ? "problematic" : ""} :icon "" 
+		(label :text " ${round(EWW_CPU.avg, 0)}%")))
 (defwidget ram []
-	(icon-module :class "ram" :icon "" :visible {EWW_RAM.used_mem_perc != ""}
-		(label :text "${round(EWW_RAM.used_mem_perc, 0)}%")))
+	(icon-module :class "ram" :icon "" :visible {EWW_RAM.used_mem_perc != ""}
+		(label :text "${round(EWW_RAM.used_mem_perc, 0)}%")))
 
 ;; Notifications ;;
 (defpoll github_poll :initial "" :interval "1m" "./modules/github.sh")
 (defwidget github []
-	(icon-module :class "github" :icon "" :visible {github_poll != "" && github_poll != 0}
-		(label :text github_poll)))
+	(icon-module :class "github" :icon "" :visible {github_poll != "" && github_poll != 0}
+		(label :text "${github_poll}")))
 
 (deflisten notifications_listen :initial '{"show": "no", "content": ""}' "./modules/notifications.sh")
 (defwidget notifications []
@@ -118,15 +116,15 @@
 ;; Network ;;
 (defpoll ping_poll :interval "10s" "./modules/ping.sh")
 (defwidget ping []
-	(icon-module :class {ping_poll > 100 || ping_poll == "None" ? "problematic" : ""} :icon ""
-		(label :text {ping_poll == "None" ? "No WiFi" : ping_poll == "Some" ? "Some WiFi" : "${ping_poll} ms"}))) 
+	(icon-module :class {ping_poll > 100 || ping_poll == "None" ? "problematic" : ""} :icon ""
+		(label :text "${ping_poll == "None" ? "No WiFi" : ping_poll == "Some" ? "Some WiFi" : "${ping_poll} ms"}"))) 
 
 ;; Volume ;;
 (defpoll speaker_poll :initial "{}" :interval "1s" "./modules/speaker.sh")
 (defwidget speaker []
 	(icon-module :class "speaker" 
-							 :icon {speaker_poll.icon}
-	 (label :text {speaker_poll.content})))
+							 :icon ""
+	 (label :text "${speaker_poll.icon} ${speaker_poll.content}")))
 
 (defpoll microphone_poll :initial "{}" :interval "1s" "./modules/microphone.sh")
 (defwidget microphone []
