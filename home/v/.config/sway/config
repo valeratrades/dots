@@ -126,17 +126,6 @@ bindsym $mod+Shift+0    move container to workspace 0
 
 bindsym Mod1+Tab focus prev
 bindsym Mod1+apostrophe focus next
-#
-
-bindsym $mod+c kill
-bindsym $mod+r reload
-# the first command gracefully exits chrome, which is apparently very sensitive.
-bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
-bindsym $mod+Shift+q exec "eww update sway_mode=full_upgrade_before_shutdown && ${HOME}/s/help_scripts/boring.sh && sleep 1 && pkill -TERM -x chrome; sudo shutdown -h now"
-
-#bindsym $mod+l exec $lock
-bindsym $mod+Escape exec $power
-bindsym $mod+End exec $wifi
 
 bindsym $mod+$left resize grow width 6ppt
 bindsym $mod+$down resize shrink height 6ppt
@@ -148,11 +137,26 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
+bindsym $mod+c kill
 bindsym $mod+Return exec alacritty
 bindsym $mod+z floating toggle
-
 # 26 is a dot on my keyboard (look up with xev)
 bindcode $mod+26 sticky toggle
+# allows 1) moving by holding $mod + mouse_left_click + moving mouse 2) resizing by holding $mod + mouse_right_click + moving mouse
+floating_modifier $mod normal
+#
+
+bindsym $mod+r reload
+# the first command gracefully exits chrome, which is apparently very sensitive.
+bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
+bindsym $mod+Shift+q exec "eww update sway_mode=full_upgrade_before_shutdown && ${HOME}/s/help_scripts/boring.sh && sleep 1 && pkill -TERM -x chrome; sudo shutdown -h now"
+
+#bindsym $mod+l exec $lock
+bindsym $mod+Escape exec $power
+bindsym $mod+End exec $wifi
+
+
+
 
 bindsym $mod+m exec $menu
 bindsym $mod+Space exec makoctl dismiss --all
@@ -181,12 +185,6 @@ exec sleep 3 && my_todo
 bindcode $mod+34 output * dpms on
 bindcode $mod+Shift+34 output * dpms off
 #bindcode $mod+Control+34 exec ~/.config/sway/toggle_screen.sh DP-1
-
-
-#exec bash ~/.config/sway/try_connect_headphones.sh
-
-
-#exec_always "swaymsg -t get_tree > ~/.config/sway/last_layout.json"
 
 # # Modes
 set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
