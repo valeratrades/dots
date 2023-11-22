@@ -30,11 +30,11 @@ function print_semimak() {
 }
 function print_semimak_my() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
-    echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Q ┊ W ┊ U ┊ O ┊ Y ┊"
+    echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Qü┊ Wù┊ Uû┊ Oô┊ Y ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
-    echo "┊ S ┊ R ┊ N ┊ T ┊ K    C ┊ D ┊ E ┊ A ┊ I ┊"
+    echo "┊ S ┊ R ┊ N ┊ T ┊ K    Cç┊ Dê┊ Eé┊ Aà┊ Iî┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
-    echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ , ┊ . ┊ ; ┊"
+    echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ ,è┊ .â┊ ; ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
 

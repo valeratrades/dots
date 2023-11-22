@@ -47,10 +47,29 @@ xkb_symbols "my" {
 	
 		name[Group1] = "Valera Semimak";
 
-	// supposed to indicate that old <RALT> is now not a modifier, and old <LSGT> is. However, does not work for shit.
-	key <RALT> { type="FOUR_LEVEL", [ BackSpace ] };
-	key <LSGT> { type="ONE_LEVEL", [ Alt_R ] };
-	modifier_map Mod1 { Alt_L, Alt_R, Meta_L, Meta_R };
+	//TODO!!!!!!!!!!!!!: This is hugely promising concept, but I can't get modifier status off of the old <RALT>
+	// key <RALT> { type="FOUR_LEVEL", [ ISO_Level3_Shift ] };
+	key <LSGT> { type="ONE_LEVEL", [ ISO_Level3_Shift ] };
+	// modifier_map Mod1 { Alt_L, Alt_R, Meta_L, Meta_R };
+
+	// // French stuff
+	key <AC08> { [ e, E, eacute, Eacute ] };
+
+	key <AB08> {[ comma, less, egrave, Egrave ]};
+	key <AC09> {[ a, A, agrave, Agrave ]};
+	key <AD07> {[ q, Q, ugrave, Ugrave ]};
+
+
+	key <AB09> {[ period, greater, acircumflex, Acircumflex ]};
+	key <AC07> {[ d, D, ecircumflex, Ecircumflex ]};
+	key <AC10> {[ i, I, icircumflex, Icircumflex ]};
+	key <AD08> {[ u, U, ucircumflex, Ucircumflex ]};
+	key <AD09> {[ o, O, ocircumflex, Ocircumflex]};
+
+	key <AC06> {[ c, C, ccedilla, Ccedilla ]};
+
+	key <AD06> {[ w, W, udiaeresis, Udiaeresis ]};
+	//
 	
 	// // sign placement I'm used to from dvorak
 	key <AE11>	{[ bracketleft,  braceleft  ]};

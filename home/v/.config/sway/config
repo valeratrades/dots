@@ -161,7 +161,8 @@ bindsym $mod+End exec $wifi
 
 bindsym $mod+m exec $menu
 bindsym $mod+Space exec makoctl dismiss --all
-bindsym $mod+o split toggle
+bindsym $mod+o split vertical
+bindsym $mod+Shift+o split horizontal
 bindsym $mod+Ctrl+t layout tabbed
 bindsym $mod+f fullscreen
 bindsym $mod+p focus parent
@@ -174,6 +175,7 @@ bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 exec "eww daemon; eww open bar"
 # toggle visibility
 bindsym $mod+e exec ~/.config/sway/eww_visibility_toggle.sh
+#bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
 bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
 # restart properly
 bindsym $mod+Shift+e exec "eww kill; eww open bar"
