@@ -41,6 +41,9 @@ dot_directories="
 	/home/v/Wallpapers
 	/home/v/.config/jfind
 	/home/v/.lesskey
+	/usr/share/X11/xkb/symbols/semimak
+	/usr/share/X11/xkb/symbols/ru
+	/usr/share/X11/xkb/symbols/us
 "
 
 commit() {

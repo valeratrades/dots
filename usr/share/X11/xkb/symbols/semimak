@@ -1,0 +1,63 @@
+// Standard Semimak for ANSI and ISO keyboards
+
+default partial
+xkb_symbols "basic" {
+	include "us(basic)"
+
+		name[Group1] = "Semimak";
+
+	key <AD01> {[ f,         F         ]};
+	key <AD02> {[ l,         L         ]};
+	key <AD03> {[ h,         H         ]};
+	key <AD04> {[ v,         V         ]};
+	key <AD05> {[ z,         Z         ]};
+	key <AD06> {[ q,         Q         ]};
+	key <AD07> {[ w,         W         ]};
+	key <AD08> {[ u,         U         ]};
+	key <AD09> {[ o,         O         ]};
+	key <AD10> {[ y,         Y         ]};
+
+	key <AC01> {[ s,         S         ]};
+	key <AC02> {[ r,         R         ]};
+	key <AC03> {[ n,         N         ]};
+	key <AC04> {[ t,         T         ]};
+	key <AC05> {[ k,         K         ]};
+	key <AC06> {[ c,         C         ]};
+	key <AC07> {[ d,         D         ]};
+	key <AC08> {[ e,         E         ]};
+	key <AC09> {[ a,         A         ]};
+	key <AC10> {[ i,         I         ]};
+
+	key <AB01> {[ x,         X         ]};
+	key <AB02> {[ apostrophe, quotedbl ]};
+	key <AB03> {[ b,         B         ]};
+	key <AB04> {[ m,         M	       ]};
+	key <AB05> {[ j,         J         ]};
+	key <AB06> {[ p,         P         ]};
+	key <AB07> {[ g,         G         ]};
+	key <AB08> {[ comma,     less      ]};
+	key <AB09> {[ period,    greater   ]};
+	key <AB10> {[ slash,     question  ]};
+	key <AC11> {[ semicolon, colon     ]};
+};
+
+partial
+xkb_symbols "my" {
+	include "semimak"
+	
+		name[Group1] = "Valera Semimak";
+
+	// supposed to indicate that old <RALT> is now not a modifier, and old <LSGT> is. However, does not work for shit.
+	key <RALT> { type="FOUR_LEVEL", [ BackSpace ] };
+	key <LSGT> { type="ONE_LEVEL", [ Alt_R ] };
+	modifier_map Mod1 { Alt_L, Alt_R, Meta_L, Meta_R };
+	
+	// // sign placement I'm used to from dvorak
+	key <AE11>	{[ bracketleft,  braceleft  ]};
+	key <AE12>	{[bracketright,  braceright,    dead_tilde]};
+	key <AD11>	{[     slash,    question   ]};
+	key <AB10>	{[ semicolon,    colon,         dead_ogonek,  dead_doubleacute ]};
+	key <AD12>	{[     equal,    plus       ]};
+	key <AC11>	{[     minus,    underscore ]};
+	//
+};
