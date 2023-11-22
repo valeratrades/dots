@@ -177,6 +177,7 @@ alias csv="cs ~/s/valera"
 alias csd="cs ~/Downloads"
 alias csa="cs ~/s/ai-news-trade-bot"
 alias cst="cs ~/tmp"
+alias csl="cs /usr/share/X11/xkb/symbols/"
 #
 # # editor
 alias ec="e ~/.config/nvim"

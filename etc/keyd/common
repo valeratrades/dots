@@ -1,5 +1,6 @@
 # do remember that it just converts the sentletters according to the dvorak layout
 capslock = overload(ctrl_vim, esc)
+shift = oneshot(shift)
 
 [ctrl_vim:C]
 space = swap(vim_mode)

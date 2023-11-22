@@ -9,26 +9,38 @@ function print_sturdy() {
     echo "┊ Z ┊ K ┊ Q ┊ G ┊ W    B ┊ H ┊ ' ┊ ; ┊ , ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
+function print_dvorak() {
+	echo "+---+---+---+---+---++---+---+---+---+---+"
+	echo "┊ ' ┊ , ┊ . ┊ P ┊ Y    F ┊ G ┊ C ┊ R ┊ L ┊"
+	echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
+	echo "┊ A ┊ O ┊ E ┊ U ┊ I    D ┊ H ┊ T ┊ N ┊ S ┊"
+	echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
+	echo "┊ ; ┊ Q ┊ J ┊ K ┊ X    B ┊ M ┊ W ┊ V ┊ Z ┊"
+	echo "+---+---+---+---+---++---+---+---+---+---+"
+}
 
-# this is Semimak JQ. Cretor says it's objectively better, and he swapped to it due to having easier time with `you'll`, `you're` and such. https://semilin.github.io/
 function print_semimak() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
-    echo "┊ F ┊ L ┊ H ┊ V ┊ Z    ' ┊ W ┊ U ┊ O ┊ Y ┊"
+    echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Q ┊ W ┊ U ┊ O ┊ Y ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
     echo "┊ S ┊ R ┊ N ┊ T ┊ K    C ┊ D ┊ E ┊ A ┊ I ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
-    echo "┊ X ┊ J ┊ B ┊ M ┊ Q    P ┊ G ┊ , ┊ . ┊ / ┊"
+    echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ , ┊ . ┊ / ┊"
+    echo "+---+---+---+---+---++---+---+---+---+---+"
+}
+function print_semimak_my() {
+    echo "+---+---+---+---+---++---+---+---+---+---+"
+    echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Q ┊ W ┊ U ┊ O ┊ Y ┊"
+    echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
+    echo "┊ S ┊ R ┊ N ┊ T ┊ K    C ┊ D ┊ E ┊ A ┊ I ┊"
+    echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
+    echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ , ┊ . ┊ ; ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
 
-function print_dvorak() {
-    echo "+---+---+---+---+---++---+---+---+---+---+"
-    echo "┊ ' ┊ , ┊ . ┊ P ┊ Y    F ┊ G ┊ C ┊ R ┊ L ┊"
-    echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
-    echo "┊ A ┊ O ┊ E ┊ U ┊ I    D ┊ H ┊ T ┊ N ┊ S ┊"
-    echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
-    echo "┊ ; ┊ Q ┊ J ┊ K ┊ X    B ┊ M ┊ W ┊ V ┊ Z ┊"
-    echo "+---+---+---+---+---++---+---+---+---+---+"
+
+function typing_guide() {
+	google-chrome-stable "https://docs.google.com/document/d/1L-P68VDSGlpLM5A9tfRvWFohaR2NzPbkUT0ok34rsFU/edit"
 }
 
 gm() {

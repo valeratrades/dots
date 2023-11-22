@@ -62,7 +62,8 @@ bindsym $mod+Shift+g exec greenclip clear
 
 input * {
     xkb_layout "us,ru,semimak"
-    xkb_variant "dvorak,,"
+    xkb_variant "dvorak,,my"
+		xkb_options "grp:win_space_toggle"
 
     natural_scroll enabled
     tap enabled
@@ -71,9 +72,9 @@ input * {
     repeat_delay 130
     repeat_rate 70
 }
-# Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
-# to get the code of the key, use xev or auto-hotkey
-bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
+## Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
+## to get the code of the key, use xev or auto-hotkey
+#bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
 
 # # Multimedia
 exec_always pamixer --default-source --set-volume 30
