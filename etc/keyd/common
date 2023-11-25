@@ -1,4 +1,4 @@
-# do remember that it just converts the sentletters according to the dvorak layout
+# do remember that it just converts the sentletters according to the semimak layout
 capslock = overload(ctrl_vim, esc)
 shift = oneshot(shift)
 
@@ -12,36 +12,33 @@ backspace = C-backspace
 
 [vim_mode:C]
 space = swap(ctrl_vim)
-j = left
-k = down
-l = up
-; = right
-n = C-left
-d = C-right
-, = macro(C-right right)
+a = left
+s = down
+d = up
+f = right
+c = C-left
+k = C-right
+u = macro(C-right right)
 x = cut
 c = copy
 v = paste
 delete = C-delete
 backspace = C-backspace
-# apparently completely useless, as `C-{arrow}` couldn't care less for the start of the line; and just goes right past it.
-a = macro(C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right)
-g = macro(C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left)
-s = macro(C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right enter)
+# apparently almost completely useless, as `C-{arrow}` couldn't care less for the start of the line; and just goes right past it.
+l = macro(C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right C-right)
+; = macro(C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left)
 [vim_mode+shift]
-j = S-left
-k = S-down
-l = S-up
-; = S-right
-n = C-S-left
-d = C-S-right
-, = macro(C-S-right S-right)
+a = S-left
+s = S-down
+d = S-up
+f = S-right
+c = C-S-left
+k = C-S-right
+u = macro(C-S-right S-right)
 x = cut
 c = copy
 v = paste
 delete = C-delete
 backspace = C-backspace
-a = macro(C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right)
-g = macro(C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left)
-# would be nice to add `V` too; but macros crash if any more items provided. And with current n not all strings will be encapsulated If I go to the end, do Shift, and go back to the first char.
-s = macro(C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left C-left enter up)
+l = macro(C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right C-S-right)
+; = macro(C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left C-S-left)

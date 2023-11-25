@@ -22,47 +22,49 @@ end
 K("", "j", "<nop>")
 K("", "k", "<nop>")
 K("", "l", "<nop>")
-K("", "h", "<cmd>lua MultiplySidewaysMovements('h')<cr>", { silent = true })
-K("", "t", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+K("", "h", "<nop>")
+K("", "s", "<cmd>lua MultiplySidewaysMovements('h')<cr>", { silent = true })
+K("", "r", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-K("", "s", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
+K("", "t", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
+K("n", "c", "r")
+K("n", "C", "R")
 
 -- Jumps
-K("", "T", "<C-d>zz")
+K("", "R", "<C-d>zz")
 K("", "N", "<C-u>zz")
-K("", "H", "<C-b>zz")
-K("", "S", "<C-f>zz")
 
 -- Jump back, jump forward and tag-list back
 K({ "", "i" }, "<C-t>", "<nop>", { desc = "have this on Alt+h" })
-K("", "<A-h>", "<C-o>")
-K("i", "<A-h>", "<esc><C-o>")
-K("", "<A-H>", "<C-t>")
-K("i", "<A-H>", "<esc><C-t>")
-K("", "<C-t>", "<nop>")
-K("", "<A-s>", "<C-i>")
+K("", "<A-s>", "<C-o>")
 K("i", "<A-s>", "<esc><C-o>")
+K("", "<C-t>", "<nop>")
+K("", "<A-S>", "<C-t>")
+K("i", "<A-S>", "<esc><C-t>")
+K("", "<A-t>", "<C-i>")
+K("i", "<A-t>", "<esc><C-o>")
 
 -- Move line
-K("v", "<A-t>", ":m '>+1<cr>gv=gv")
+K("", "<A-r>", "<nop>")
+K("v", "<A-r>", ":m '>+1<cr>gv=gv")
 K("v", "<A-n>", ":m '<-2<cr>gv=gv")
-K("n", "<A-t>", "V:m '>+1<cr>gv=gv")
+K("n", "<A-r>", "V:m '>+1<cr>gv=gv")
 K("n", "<A-n>", "V:m '>-2<cr>gv=gv")
-K("i", "<A-t>", "<esc>V:m '>+1<cr>gv=gv")
+K("i", "<A-r>", "<esc>V:m '>+1<cr>gv=gv")
 K("i", "<A-n>", "<esc>V:m '>-2<cr>gv=gv")
 
 -- Windows
-K('n', '<C-w>h', '<C-W>h')
-K('n', '<C-w>t', '<C-W>j')
+K('n', '<C-w>s', '<C-W>h')
+K('n', '<C-w>r', '<C-W>j')
 K('n', '<C-w>n', '<C-W>k')
-K('n', '<C-w>s', '<C-W>l')
+K('n', '<C-w>t', '<C-W>l')
 
 -- Other
 K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
 
 -- -- Consequences
-K("n", "j", "nzzzv")
-K("n", "k", "Nzzzv")
+K("n", "l", "nzzzv")
+K("n", "h", "Nzzzv")
 --
 -- --
 
@@ -97,27 +99,28 @@ K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab
 --
 
 -- Tabs
-K({ "i", "" }, "<A-,>", "<esc>gT")
-K({ "i", "" }, "<A-.>", "<esc>gt")
+K("n", "gt", "<nop>")
+K("n", "gT", "<nop>")
+K({ "i", "" }, "<A-l>", "<esc>gT")
+K({ "i", "" }, "<A-h>", "<esc>gt")
 K({ "i", "" }, "<A-p>", "<esc>g<Tab>")
-K({ "i", "" }, "<A-y>", "<esc><cmd>tablast<cr>")
+K({ "i", "" }, "<A-0>", "<esc><cmd>tablast<cr>")
 for i = 1, 9 do
 	K("", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
 for i = 1, 9 do
 	K("i", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
-K({ "i", "" }, "<A-c>", "<esc><cmd>tabmove -<cr>")
-K({ "i", "" }, "<A-r>", "<esc><cmd>tabmove +<cr>")
-K({ "i", "" }, "<A-f>", "<esc><cmd>tabmove 0<cr>")
-K({ "i", "" }, "<A-g>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
+K({ "i", "" }, "<A-u>", "<esc><cmd>tabmove -<cr>")
+K({ "i", "" }, "<A-o>", "<esc><cmd>tabmove +<cr>")
+K({ "i", "" }, "<A-U>", "<esc><cmd>tabmove 0<cr>")
+K({ "i", "" }, "<A-O>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
 
-K("n", "gt", "<nop>")
 --
 
 -- -- Standards and the Consequences
-K("", "<C-j>", "\"+y")
-K("", "<C-q>", "\"+ygv\"_d")
+K("", "<C-'>", "\"+ygv\"_d")
+K("", "<C-b>", "\"+y")
 
 K("i", "<C-del>", "X<esc>ce") -- n mappings for <del> below rely on this
 K("v", "<bs>", "d")

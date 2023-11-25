@@ -81,7 +81,7 @@ return require('lazy').setup({
 	{ -- https://github.com/tpope/vim-abolish/blob/master/doc/abolish.txt
 		'tpope/vim-abolish',
 		keys = {
-			{ "cr" },
+			{ "<Space>cr" },
 		},
 		-- ex: :%S/facilit{y,ies}/building{,s}/g
 		cmd = { "S", "Subvert" },

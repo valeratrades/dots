@@ -11,10 +11,10 @@ set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.node
 
 
 
-set $left h
-set $down t
+set $left s
+set $down r
 set $up n
-set $right s
+set $right t
 
 assign [class="Google-chrome"] 2
 assign [app_id="google-chrome"] 2
@@ -61,8 +61,8 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-    xkb_layout "us,ru,semimak"
-    xkb_variant "my_dvorak,my,my"
+    xkb_layout "semimak,ru,us"
+    xkb_variant "my,my,my_dvorak"
 		xkb_options "grp:win_space_toggle"
 
     natural_scroll enabled
@@ -126,7 +126,7 @@ bindsym $mod+Shift+9    move container to workspace 9
 bindsym $mod+Shift+0    move container to workspace 0
 
 bindsym Mod1+Tab focus prev
-bindsym Mod1+apostrophe focus next
+bindsym Mod1+f focus next
 
 bindsym $mod+$left resize grow width 6ppt
 bindsym $mod+$down resize shrink height 6ppt
@@ -146,7 +146,7 @@ bindsym $mod+Shift+z sticky toggle
 floating_modifier $mod normal
 #
 
-bindsym $mod+r reload
+bindsym $mod+apostrophe reload
 # the first command gracefully exits chrome, which is apparently very sensitive.
 bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
 bindsym $mod+Shift+q exec "eww update sway_mode=full_upgrade_before_shutdown && ${HOME}/s/help_scripts/boring.sh && sleep 1 && pkill -TERM -x chrome; sudo shutdown -h now"
