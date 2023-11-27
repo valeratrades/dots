@@ -103,7 +103,7 @@ K("n", "gt", "<nop>")
 K("n", "gT", "<nop>")
 K({ "i", "" }, "<A-l>", "<esc>gT")
 K({ "i", "" }, "<A-h>", "<esc>gt")
-K({ "i", "" }, "<A-p>", "<esc>g<Tab>")
+K({ "i", "" }, "<A-v>", "<esc>g<Tab>")
 K({ "i", "" }, "<A-0>", "<esc><cmd>tablast<cr>")
 for i = 1, 9 do
 	K("", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })

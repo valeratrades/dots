@@ -15,16 +15,30 @@ TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}')
 # nvim shortcut, that does cd first, to allow for harpoon to detect project directory correctly
 # e stands for editor
 e() {
+	need_cd_out=0
+	nvim_commands=""
+	if [ "$1" = "flag_load_session" ]; then
+		nvim_commands="-c SessionLoad"
+		shift
+	fi
   if [ -n "$1" ]; then
 		if [ -f "$1" ]; then
-			cd $(dirname $1)
+			_t=$(dirname "$1")
+			if [ $_t != $(pwd) ]; then
+				cd $_t
+				need_cd_out=1
+			fi
 			basename=$(basename $1)
 			shift
-			nvim $basename $@
+			nvim $basename $@ "$nvim_commands"
 		elif [ -d "$1" ]; then
-			cd $1
+			_t="$1"
+			if [ $_t != $(pwd) ]; then
+				cd $_t
+				need_cd_out=1
+			fi
 			shift
-			nvim "$@" .
+			nvim "$@" . "$nvim_commands"
 		else
 			local could_fix=0
 			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typst" ".tex" ".html" ".js")
@@ -32,10 +46,14 @@ e() {
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
 				if [ -f "$try_path" ]; then
-					cd $(dirname $try_path)
+					_t=$(dirname $try_path)
+					if [ _t != $(pwd) ]; then
+						cd $_t
+						need_cd_out=1
+					fi
 					basename=$(basename $try_path)
 					shift
-					nvim $basename $@
+					nvim $basename $@ $nvim_commands
 					could_fix=1
 					break
 				fi
@@ -43,16 +61,18 @@ e() {
 			if [ $could_fix = 1 ]; then
 				return 0
 			else
-				nvim "$@"
+				nvim "$@" "$nvim_commands"
 			fi
-		fi	
-		cd - > /dev/null
+		fi
+		if [ $need_cd_out -eq 1 ]; then
+			cd - > /dev/null
+		fi
   else
-    nvim .
+    nvim . "$nvim_commands"
   fi
 }
 ep() {
-	e "$@" -c SessionLoad
+	e flag_load_session "$@"
 }
 # Problematic to do an inclusive script that could be ran with sudo too, so just copying manually; adding `sudo` to everything for now.
 #? make a macro with `sed`?
