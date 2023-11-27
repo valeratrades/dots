@@ -2,7 +2,7 @@ local builtin = require('telescope.builtin')
 
 require("which-key").register({
 	f = { builtin.find_files, "search files" },
-	g = { builtin.live_grep, "live grep" },
+	z = { builtin.live_grep, "live grep" },
 	s = {
 		name = "Telescope",
 		s = { builtin.grep_string, "grep visual selection or word under cursor", mode = { "n", "v" } },

@@ -51,6 +51,9 @@ e() {
     nvim .
   fi
 }
+ep() {
+	e "$@" -c SessionLoad
+}
 # Problematic to do an inclusive script that could be ran with sudo too, so just copying manually; adding `sudo` to everything for now.
 #? make a macro with `sed`?
 se() {
@@ -184,7 +187,7 @@ alias ec="e ~/.config/nvim"
 alias es="e ~/.zshrc"
 alias ezt="e ~/.config/zsh/theme.zsh"
 #? can I do this for rust and go? (maybe something with relative paths there)
-alias ep="e ~/envs/Python/lib/python3.11/site-packages" 
+alias epy="e ~/envs/Python/lib/python3.11/site-packages" 
 alias hx="helix"
 #
 # # keyd

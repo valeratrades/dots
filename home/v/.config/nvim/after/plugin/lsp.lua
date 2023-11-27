@@ -117,9 +117,9 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "hover info")
 	map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "definition")
 
-	map("<C-t>", "<cmd>lua JumpToDiagnostic(1, 'max')<cr>", "next: errors only")
+	map("<C-r>", "<cmd>lua JumpToDiagnostic(1, 'max')<cr>", "next: errors only")
 	map("<C-n>", "<cmd>lua JumpToDiagnostic(-1, 'max')<cr>", "prev: errors only")
-	map("<C-A-t>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
+	map("<C-A-r>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
 	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
 
 	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
@@ -133,8 +133,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
 	map("lo", "<cmd>lua vim.lsp.buf.open_floating()<cr>", "open float")
 	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
-	--map("lh", "<cmd>lua vim.lsp.buf.signature_help()<cr>", "signature help") -- is obsolete; being subset of `K` and what `signature.nvim` does
-	map('<c-r>', "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
+	map("lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
 
 	map("ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
 	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
