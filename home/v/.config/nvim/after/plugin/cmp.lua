@@ -1,5 +1,5 @@
 local cmp = require('cmp')
---local _ = { behavior = cmp.SelectBehavior.Select } -- makes cmp not force feed me completeions on 'Enter'
+local _ = { behavior = cmp.SelectBehavior.Select } -- makes cmp not force feed me completeions on 'Enter'
 local cmp_action = require('lsp-zero').cmp_action()
 local ts_utils = require('nvim-treesitter.ts_utils')
 local lspkind = require('lspkind')

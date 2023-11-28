@@ -229,6 +229,12 @@ mode "size_presets" {
 	bindsym 4 resize set 992px 768px
 	bindsym 5 resize set 1200px 768px
 
+	bindsym $left move left
+	bindsym $down move down
+	bindsym $up move up
+	bindsym $right move right
+
+
 	bindsym $mod+apostrophe exec $switch_out
 	bindsym $mod+c exec $switch_out
 	bindsym Ctrl+c exec $switch_out

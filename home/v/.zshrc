@@ -173,6 +173,7 @@ alias jn="jupyter notebook &"
 alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
+alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 
 # # cd
 mkcd() {
