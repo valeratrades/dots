@@ -207,13 +207,15 @@ alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"
 #
 # # pm
-# these should be used for everything, as they are supersets of `pacman -S` and `pacman -R`
 alias yS="yay -S --noconfirm"
 alias yR="yay -R --noconfirm"
-alias yR="yay -Rns --noconfirm"
+alias yRn="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
 alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/boring.sh"
+alias pS="yay -S --noconfirm"
+alias pR="yay -R --noconfirm"
+alias pRn="yay -Rns --noconfirm"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 # # cargo

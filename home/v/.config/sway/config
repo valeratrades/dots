@@ -36,7 +36,7 @@ default_border pixel 1
 smart_gaps off
 gaps inner 0
 xwayland enable
-smart_borders on
+smart_borders off
 hide_edge_borders both
 
 bindgesture pinch:outward exec xdotool key ctrl+plus
@@ -146,9 +146,9 @@ bindsym $mod+Shift+z sticky toggle
 floating_modifier $mod normal
 #
 
-bindsym $mod+apostrophe reload
+bindsym $mod+j reload
 # the first command gracefully exits chrome, which is apparently very sensitive.
-bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
+#bindsym $mod+q exec "pkill -TERM -x chrome; sudo shutdown -h now"
 bindsym $mod+Shift+q exec "eww update sway_mode=full_upgrade_before_shutdown && ${HOME}/s/help_scripts/boring.sh && sleep 1 && pkill -TERM -x chrome; sudo shutdown -h now"
 
 #bindsym $mod+l exec $lock
@@ -193,18 +193,7 @@ set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
 # Wallpapers
 output * bg ~/Wallpapers/1_AndreySakharov.jpg fill
 
-#BUG: for some reason the script is called twice. Regardless of whether using mods or not.
-#mode "circle_wallpapers" {
-#	bindsym t exec ~/s/help_scripts/circle_wallpapers.sh f
-#	bindsym n exec ~/s/help_scripts/circle_wallpapers.sh b
-#
-#	bindsym $mod+w exec $switch_out
-#	bindsym $mod+c exec $switch_out
-#	bindsym Ctrl+c exec $switch_out
-#	bindsym Escape exec $switch_out
-#	bindsym q exec $switch_out
-#}
-#bindsym $mod+w exec "swaymsg mode circle_wallpapers && eww update sway_mode=circle_wallpapers"
+
 bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"
 bindsym $mod+Shift+w exec "~/s/help_scripts/circle_wallpapers.sh b"
 
@@ -231,4 +220,20 @@ mode "screenshot" {
 	bindsym q exec $switch_out
 }
 bindsym $mod+Insert exec "swaymsg mode screenshot && eww update sway_mode=screenshot"
+
+# Set window sizes
+mode "size_presets" {
+	bindsym 1 resize set 350px 650px
+	bindsym 2 resize set 576px 768px
+	bindsym 3 resize set 768px 768px
+	bindsym 4 resize set 992px 768px
+	bindsym 5 resize set 1200px 768px
+
+	bindsym $mod+apostrophe exec $switch_out
+	bindsym $mod+c exec $switch_out
+	bindsym Ctrl+c exec $switch_out
+	bindsym Escape exec $switch_out
+	bindsym q exec $switch_out
+}
+bindsym $mod+apostrophe exec "swaymsg mode size_presets && eww update sway_mode=size_presets"
 #
