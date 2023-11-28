@@ -22,16 +22,7 @@ e() {
 		shift
 	fi
   if [ -n "$1" ]; then
-		if [ -f "$1" ]; then
-			_t=$(dirname "$1")
-			if [ $_t != $(pwd) ]; then
-				cd $_t
-				need_cd_out=1
-			fi
-			basename=$(basename $1)
-			shift
-			nvim $basename $@ "$nvim_commands"
-		elif [ -d "$1" ]; then
+		if [ -d "$1" ]; then
 			_t="$1"
 			if [ $_t != $(pwd) ]; then
 				cd $_t
@@ -41,7 +32,7 @@ e() {
 			nvim "$@" . "$nvim_commands"
 		else
 			local could_fix=0
-			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typst" ".tex" ".html" ".js")
+			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typst" ".tex" ".html" ".js")
 			# note that indexing starts at 1, as we're in a piece of shit shell.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
@@ -200,7 +191,8 @@ alias csv="cs ~/s/valera"
 alias csd="cs ~/Downloads"
 alias csa="cs ~/s/ai-news-trade-bot"
 alias cst="cs ~/tmp"
-alias csl="cs /usr/share/X11/xkb/symbols/"
+alias csl="cs ~/s/l"
+alias csk="cs /usr/share/X11/xkb/symbols/"
 #
 # # editor
 alias ec="e ~/.config/nvim"

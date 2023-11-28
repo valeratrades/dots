@@ -48,6 +48,7 @@ xkb_symbols "my" {
 		name[Group1] = "Valera Semimak";
 
 	//TODO!!!!!!!!!!!!!: This is hugely promising concept, but I can't get modifier status off of the old <RALT>
+	// Also would be cool to remap <RALT> to act as ISO_Level3_Shift when held and backspace when tapped
 	key <RALT> { type="FOUR_LEVEL", [ BackSpace ] };
 	key <LSGT> { type="ONE_LEVEL", [ ISO_Level3_Shift ] };
 	// modifier_map Mod1 { Alt_L, Alt_R, Meta_L, Meta_R };

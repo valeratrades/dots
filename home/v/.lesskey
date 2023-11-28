@@ -1,20 +1,18 @@
 #command
-t        forw-line
+s        left-scroll
+r        forw-line
 n        back-line
-h        left-scroll
-s        right-scroll
-j        repeat-search
-k        reverse-search
-T        forw-scroll
+t        right-scroll
+l        repeat-search
+h        reverse-search
+R        forw-scroll
 N        back-scroll
 
 d        forw-scroll
 u        back-scroll
 \r        forw-line
-\n        forw-line
 \kd    forw-line
 ^E        forw-line
-^N        forw-line
 y        back-line
 ^Y        back-line
 ^K        back-line
@@ -37,8 +35,6 @@ z        forw-window
 w        back-window
 \e\40        forw-screen-force
 F        forw-forever
-R        repaint-flush
-r        repaint
 ^R        repaint
 ^L        repaint
 \eu        undo-hilite
@@ -82,13 +78,10 @@ E        examine
 ^X^V        examine
 :n        next-file
 :p        prev-file
-t        next-tag
-T        prev-tag
 :x        index-file
 :d        remove-file
 -        toggle-option
 :t        toggle-option t
-s        toggle-option o
 _        display-option
 |        pipe
 v        visual

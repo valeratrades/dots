@@ -27,8 +27,8 @@ K("", "s", "<cmd>lua MultiplySidewaysMovements('h')<cr>", { silent = true })
 K("", "r", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 K("", "t", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
-K("n", "c", "r")
-K("n", "C", "R")
+K("n", "j", "r")
+K("n", "<Space>j", "R")
 
 -- Jumps
 K("", "R", "<C-d>zz")

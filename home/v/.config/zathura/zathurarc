@@ -5,23 +5,28 @@
 # quit on q
 # zoom in or out on + and -
 
-map h scroll left
-map t scroll down
+map s scroll left
+map r scroll down
 map n scroll up
-map s scroll right
+map t scroll right
+
+map j rotate
+map z reload
 
 map <C-\=> zoom in
+map \= zoom in
 map <C-\-> zoom out
 map <A-q> quit
+map <A-;> quit
 
-map T scroll half-down
+map R scroll half-down
 map N scroll half-up
 
-map <A-h> jumplist backward
-map <A-s> jumplist forward
+map <A-s> jumplist backward
+map <A-t> jumplist forward
 
 
-# Genaral
+# General
 set selection-clipboard clipboard
 set adjust-open "best-fit"
 
