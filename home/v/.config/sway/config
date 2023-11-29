@@ -61,8 +61,8 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-    xkb_layout "semimak,ru,us"
-    xkb_variant "my,my,my_dvorak"
+    xkb_layout "semimak,ru"
+    xkb_variant "my,my"
 		xkb_options "grp:win_space_toggle"
 
     natural_scroll enabled
