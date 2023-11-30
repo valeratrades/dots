@@ -1,7 +1,13 @@
 # all general git shorthands
 
 alias gu='gitui'
-alias gg="git add -A && git commit -m '.' && git push"
+gg() {
+	message="."
+	if [ -n "$1" ]; then
+		message="$@"
+	fi
+	git add -A && git commit -m "$message" && git push
+}
 alias gr="git reset --hard"
 
 gc() {

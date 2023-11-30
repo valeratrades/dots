@@ -15,13 +15,13 @@ vincent_ssh() {
 	"
 }
 vincent_connect() {
-	export VINCENT_SERVER_USERNAME VINCENT_SERVER_PASSWORD
+	export VINCENT_VPN_USERNAME VINCENT_VPN_PASSWORD
 	expect -c "
 	spawn sudo openvpn --config ${HOME}/.config/openvpn/client.ovpn;
 	expect \"Enter Auth Username: \";
-	send \"\$env(VINCENT_SERVER_USERNAME)\r\";
+	send \"\$env(VINCENT_VPN_USERNAME)\r\";
 	expect \"Enter Auth Password: \";
-	send \"\$env(VINCENT_SERVER_PASSWORD)\r\";
+	send \"\$env(VINCENT_VPN_PASSWORD)\r\";
 	interact
 	"
 }

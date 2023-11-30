@@ -72,7 +72,7 @@
   (icon-module  :class "icons-openvpn"
 								:icon ""
                 :visible {openvpn_poll == "1"}
-		(label :text "")))
+		(label :text " ")))
 
 ;; Battery ;;
 (defpoll battery_poll	:initial "{}" :interval "1s" "./modules/battery.sh")
