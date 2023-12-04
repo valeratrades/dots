@@ -107,7 +107,7 @@ end
 
 --
 
-lsp_zero.on_attach(function(client, bufnr)
+local on_attach = function(client, bufnr)
 	local function map(lhs, rhs, desc)
 		local opts = { buffer = bufnr, noremap = true, desc = "lsp: " .. desc }
 		vim.keymap.set("n", lhs, rhs, opts)
@@ -131,7 +131,6 @@ lsp_zero.on_attach(function(client, bufnr)
 	map("lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
 	map("lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
 	map("lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
-	map("lo", "<cmd>lua vim.lsp.buf.open_floating()<cr>", "open float")
 	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
 	map("lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
 
@@ -148,7 +147,11 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.bo.softtabstop = 0
 	vim.bo.shiftwidth = 2
 	vim.bo.expandtab = false
-end)
+end
+
+
+lsp_zero.on_attach(on_attach)
+
 
 -- Language setups
 local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
@@ -160,7 +163,12 @@ vim.g.rust_recommended_style = false
 
 local lua_opts = lsp_zero.nvim_lua_ls()
 lspconfig.lua_ls.setup(lua_opts)
-lspconfig.htmx.setup {}
+lspconfig.htmx.setup {
+	on_attach = on_attach,
+}
+lspconfig.leanls.setup {
+	on_attach = on_attach,
+}
 
 require('mason').setup({})
 require('mason-lspconfig').setup({

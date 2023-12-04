@@ -132,6 +132,15 @@ return require('lazy').setup({
 	{ -- Rust
 		'Saecki/crates.nvim',
 	},
+	{ -- Math
+		'Julian/lean.nvim',
+		event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+
+		dependencies = {
+			'neovim/nvim-lspconfig',
+			'nvim-lua/plenary.nvim',
+		},
+	},
 	{ -- Colorschemes
 		{ 'rose-pine/neovim',      name = 'rose-pine' },
 		{ "catppuccin/nvim",       name = "catppuccin" },
