@@ -44,5 +44,12 @@ require("shnip").setup({
 				["<c-j>"] = "#[derive(Debug, Serialize, Deserialize)]<CR>struct  {<CR>}<esc>k$hi"
 			},
 		},
+		go = {
+			extra = {
+				["<c-r>"] = "if err!=nil {<CR>}",
+				["<c-p>"] = "if err!=nil {<CR>panic!(\"1) What\")<CR>}",
+			},
+		},
+
 	},
 })
