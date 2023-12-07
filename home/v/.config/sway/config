@@ -172,12 +172,9 @@ bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
 bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 
 exec "eww daemon; eww open bar"
-# toggle visibility
-bindsym $mod+e exec ~/.config/sway/eww_visibility_toggle.sh
-#bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
-bindsym Mod1+e exec ~/.config/sway/eww_zoom_toggle.sh
-# restart properly
-bindsym $mod+Shift+e exec "eww kill; eww open bar"
+bindsym $mod+e exec ~/.config/sway/eww_zoom_toggle.sh
+bindsym $mod+Shift+e exec ~/.config/sway/eww_visibility_toggle.sh
+bindsym $mod+Ctrl+e exec "eww kill; eww open bar"
 
 # check if any task was cut short during the last session
 exec sleep 3 && my_todo

@@ -37,5 +37,12 @@ require("shnip").setup({
 		["struct"]   = "<c-h>",
 		["try"]      = "<c-t>",
 		["enum"]     = "<c-n>"
-	}
+	},
+	overrides = {
+		rust = {
+			extra = {
+				["<c-j>"] = "#[derive(Debug, Serialize, Deserialize)]<CR>struct  {<CR>}<esc>k$hi"
+			},
+		},
+	},
 })

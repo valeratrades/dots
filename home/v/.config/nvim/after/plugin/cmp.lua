@@ -12,18 +12,14 @@ cmp.setup({
 			keyword_lenght = 1,
 			-- when inputting an argument, suggest only values with this in mind
 			entry_filter = function(entry, context)
-				local kind = entry:get_kind()
-				local node = ts_utils.get_node_at_cursor():type()
-				--log(node)
-				if node == "arguments" then
-					if kind == 6 then -- `6` corresponds to variables
-						return true
-					else
-						return false
+				local success = pcall(function()
+					local node = ts_utils.get_node_at_cursor():type()
+					if node == "arguments" then
+						local kind = entry:get_kind()
+						return kind == 6
 					end
-				end
-
-				return true
+				end)
+				return success or true
 			end,
 		},
 		{ name = 'luasnip', keyword_length = 1 },

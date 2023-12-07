@@ -137,10 +137,7 @@ eval "$(jump shell)" # binds to j
 chh() {
 	sudo chmod -R 777 ~/
 }
-z() {
-	ending=".pdf"
-	zathura "$1$ending"
-}
+
 usb() {
 	sudo mkdir -p /mnt/USB
 	sudo chown $(whoami):$(whoami) /mnt/USB
@@ -164,6 +161,7 @@ sd() {
 	${HOME}/.dots/main.sh sync "$@" > /tmp/dots_log.txt 2>&1 &
 }
 
+alias z="zathura"
 alias senable="sudo systemctl enable"
 alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
