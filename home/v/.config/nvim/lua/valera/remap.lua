@@ -247,10 +247,3 @@ K("n", "<esc>", function()
 	vim.cmd.noh()
 	killPopups()
 end)
-
-local function addImport()
-	return function()
-		PersistCursor(F, "gg\"+p")
-	end
-end
-K("n", "<Space>i", addImport(), { desc = "Copy + register at the top of the file" }) -- intended for 'add import' but not sure that's descriptive, considering you need the full import declaration to be in the + buffer already.
