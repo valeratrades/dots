@@ -5,7 +5,7 @@ env:
   TERM: xterm-256color
 # Position of the import line does not matter. Main alacritty.yml always overwrites all the imports.
 import:
-  - ~/.config/alacritty/themes/catppuccin-latte.yml
+  - ~/.config/alacritty/themes/rose-pine.yml
 tabspaces: 2 # doesn't work.
 window:
   padding:
@@ -14,7 +14,6 @@ window:
   decorations: none
 
   #NB: opacity is defined separately in the colorschemes
-  #opacity: 0.9
 
   title: Alacritty
   dynamic_title: true

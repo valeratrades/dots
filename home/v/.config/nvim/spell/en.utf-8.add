@@ -71,3 +71,5 @@ localhost
 www
 80
 cmp
+tokio
+appendable

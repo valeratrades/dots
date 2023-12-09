@@ -7,6 +7,14 @@ vim.cmd [[
 	autocmd BufRead,BufNewFile *.txt set conceallevel=3
 ]]
 
+-- lean doesn't allow tabs
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "lean" },
+	callback = function()
+		vim.opt_local.expandtab = true
+	end,
+})
+
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },

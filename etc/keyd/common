@@ -1,6 +1,7 @@
 # do remember that it just converts the sentletters according to the semimak layout
 capslock = overload(ctrl_vim, esc)
 shift = oneshot(shift)
+alt = oneshot(alt)
 
 [ctrl_vim:C]
 space = swap(vim_mode)

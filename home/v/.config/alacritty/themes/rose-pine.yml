@@ -1,5 +1,5 @@
 window:
-  opacity: 0.95
+  opacity: 0.99
 colors:
   primary:
     background: "0x191724"
