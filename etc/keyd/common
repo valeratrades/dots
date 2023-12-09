@@ -21,7 +21,7 @@ c = C-left
 k = C-right
 u = macro(C-right right)
 x = cut
-c = copy
+# copy is overwritten by now 'b' (on semimak), so you'd switch back or use the actual 'c' on semimak for this
 v = paste
 delete = C-delete
 backspace = C-backspace
@@ -37,7 +37,7 @@ c = C-S-left
 k = C-S-right
 u = macro(C-S-right S-right)
 x = cut
-c = copy
+# copy is overwritten by now 'b' (on semimak), so you'd switch back or use the actual 'c' on semimak for this
 v = paste
 delete = C-delete
 backspace = C-backspace
