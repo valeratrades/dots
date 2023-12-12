@@ -48,6 +48,7 @@
   "persisted.nvim": { "branch": "main", "commit": "deae7ab2021abe31418ff7b088048054fbe79c45" },
   "persistence.nvim": { "branch": "main", "commit": "ad538bfd5336f1335cdb6fd4e0b0eebfa6e12f32" },
   "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
+  "presence.nvim": { "branch": "main", "commit": "87c857a56b7703f976d3a5ef15967d80508df6e6" },
   "recursive-macro.nvim": { "branch": "main", "commit": "9ecf0f9967975a61611791525e51bbc97bfff137" },
   "rose-pine": { "branch": "main", "commit": "92762f4fa2144c05db760ea254f4c399a56a7ef5" },
   "shnip.nvim": { "branch": "main", "commit": "93c54a7167e83af5aebc4e612a97805c1ba895d1" },

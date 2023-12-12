@@ -110,7 +110,7 @@ sl() {
 	if [ -f "$1" ]; then
 		cat $1
 	else
-		ls -A $@
+		ls -Ah $@
 	fi
 }
 mkfile() {
@@ -160,6 +160,11 @@ fz() {
 sd() {
 	${HOME}/.dots/main.sh sync "$@" > /tmp/dots_log.txt 2>&1 &
 }
+chess() {
+	source ${HOME}/envs/Python/bin/activate
+	py -m cli_chess --token lip_sjCnAuNz1D3PM5plORrC
+}
+
 
 alias z="zathura"
 alias senable="sudo systemctl enable"
@@ -172,6 +177,7 @@ alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
+
 
 # # cd
 mkcd() {
@@ -192,6 +198,7 @@ alias csa="cs ~/s/ai-news-trade-bot"
 alias cst="cs ~/tmp"
 alias csl="cs ~/s/l"
 alias csk="cs /usr/share/X11/xkb/symbols/"
+alias csg="cs ~/s/g"
 #
 # # editor
 alias ec="e ~/.config/nvim"

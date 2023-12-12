@@ -158,6 +158,7 @@ return require('lazy').setup({
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	'jbyuki/instant.nvim',
+	"andweeb/presence.nvim",
 	{
 		'kaarmu/typst.vim',
 		ft = 'typst',

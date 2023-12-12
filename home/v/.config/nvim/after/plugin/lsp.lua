@@ -138,6 +138,9 @@ local on_attach = function(client, bufnr)
 	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
 	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
 
+	map("l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr>", "tab := 2")
+	map("l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr>", "tab := 4")
+
 
 	if client.supports_method('textDocument/formatting') then
 		require('lsp-format').on_attach(client)
