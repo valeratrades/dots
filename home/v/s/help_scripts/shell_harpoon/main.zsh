@@ -63,7 +63,7 @@ fi
 # 	eval "$func(){(source '$harpoon_config_path'; '$func')}"
 # done
 
-alias ,h="source $harpoon_config_path && _h"
-alias ,t="source $harpoon_config_path && _t"
-alias ,n="source $harpoon_config_path && _n"
 alias ,s="source $harpoon_config_path && _s"
+alias ,r="source $harpoon_config_path && _r"
+alias ,n="source $harpoon_config_path && _n"
+alias ,t="source $harpoon_config_path && _t"

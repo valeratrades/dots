@@ -1,15 +1,15 @@
-_h() {
-	cs ~/s/valera
+_s() {
+	cs ~/s/g/booktyping
 }
 
-_t() {
-	cs ~/s/todo/my_todo
+_r() {
+	
 }
 
 _n() {
 	e ~/s/help_scripts/shell_harpoon/
 }
 
-_s() {
-	cs ~/s/PABreakdown
+_t() {
+	cs ~/s/todo/my_todo
 }

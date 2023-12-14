@@ -160,6 +160,11 @@ return require('lazy').setup({
 	'jbyuki/instant.nvim',
 	"andweeb/presence.nvim",
 	{
+		"kylechui/nvim-surround",
+		version = "*",
+		event = "VeryLazy",
+	},
+	{
 		'kaarmu/typst.vim',
 		ft = 'typst',
 		lazy = false,
