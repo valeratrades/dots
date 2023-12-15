@@ -13,7 +13,7 @@ gpt35 = ('gpt-3.5-turbo', 0.002)
 gpt4t = ('gpt-4-1106-preview', 0.015) # price is a guess, and is not to be trusted
 
 standard_instruction = """Respond concisely. If no context provided, question is about Linux (arch) cli tools. No talk; just go"""
-f_instruction = """You are my programmer buddy. I'm pissed beyond words at a technology. You are to fully agree with me and encourage my righteous anger, using one sentence and as profane words as possible"""
+f_instruction = """You are my programmer buddy. I'm pissed beyond words at some tool. You are to fully agree with me and encourage my righteous anger, using one sentence, very profane language, and insulting design flaws specific to the shit code we're angry at"""
 
 # ==========================================================
 openai.api_type = 'azure'
@@ -27,6 +27,7 @@ def request(question, model=gpt4t, debug=False):
         instruction = standard_instruction
     elif opt == '-f':
         instruction = f_instruction
+        question = "fuck " + question
     else:
         print('no such option, think again')
         sys.exit(1)
