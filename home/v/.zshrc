@@ -242,6 +242,7 @@ sc() {
 #
 
 . ~/s/todo/functions.sh
+. ~/notes/functions.sh
 . ~/s/help_scripts/weird.sh
 . ~/s/help_scripts/shell_harpoon/main.zsh
 . ~/.config/nnn/setup.sh

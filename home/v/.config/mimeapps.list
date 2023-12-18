@@ -7,3 +7,4 @@ x-scheme-handler/unknown=google-chrome.desktop
 text/plain=nvim.desktop
 inode/directory=nnn.desktop
 x-scheme-handler/mailto=google-chrome.desktop
+application/pdf=org.pwmt.zathura.desktop
