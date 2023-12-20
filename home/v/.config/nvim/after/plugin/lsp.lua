@@ -122,24 +122,24 @@ local on_attach = function(client, bufnr)
 	map("<C-A-r>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
 	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
 
-	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
-	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
-	map("li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
-	map("lr", "<cmd>Telescope lsp_references<cr>", "references")
-	map("ld", "<cmd>Telescope diagnostics<cr>", "diagnostics")
-	map("ll", "<cmd>Telescope diagnostics bufnr=0<cr>", "local diagnostics")
-	map("lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
-	map("lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
-	map("lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
-	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
-	map("lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
+	map("<Space>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
+	map("<Space>lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
+	map("<Space>li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
+	map("<Space>lr", "<cmd>Telescope lsp_references<cr>", "references")
+	map("<Space>ld", "<cmd>Telescope diagnostics<cr>", "diagnostics")
+	map("<Space>ll", "<cmd>Telescope diagnostics bufnr=0<cr>", "local diagnostics")
+	map("<Space>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
+	map("<Space>lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
+	map("<Space>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
+	map("<Space>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
+	map("<Space>lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
 
-	map("ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
-	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
-	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
+	map("<Space>ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
+	map("<Space>ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
+	map("<Space>lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
 
-	map("l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr>", "tab := 2")
-	map("l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr>", "tab := 4")
+	map("<Space>l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr>", "tab := 2")
+	map("<Space>l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr>", "tab := 4")
 
 
 	if client.supports_method('textDocument/formatting') then
@@ -172,6 +172,13 @@ lspconfig.htmx.setup {
 lspconfig.leanls.setup {
 	on_attach = on_attach,
 }
+--lspconfig.typst_lsp.setup {
+--	on_attach = on_attach,
+--	settinsg = {
+--		exportPdf = "onType",
+--		serverPath = "/usr/local/bin/typst-lsp",
+--	}
+--}
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -219,9 +226,6 @@ require('mason-lspconfig').setup({
 					},
 				}
 			end,
-		},
-		['typst-lsp'] = {
-			exportPdf = "onType"
 		},
 	},
 })

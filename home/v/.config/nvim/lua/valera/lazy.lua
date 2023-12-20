@@ -164,11 +164,7 @@ return require('lazy').setup({
 		version = "*",
 		event = "VeryLazy",
 	},
-	{
-		'kaarmu/typst.vim',
-		ft = 'typst',
-		lazy = false,
-	},
+	'kaarmu/typst.vim',
 	{
 		'kawre/leetcode.nvim',
 		build = ":TSUpdate html",

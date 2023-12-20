@@ -71,9 +71,9 @@ cmp.setup({
 				elseif n == 'nvim_lua' then
 					item.menu = 'nvim'
 				elseif n == 'cmdline' then
-					item.mune = ''
+					item.menu = ''
 				elseif n == 'buffer' then
-					item.mune = 'B'
+					item.menu = 'B'
 				else
 					--item.menu = string.format('[%s]', n)
 					item.menu = n
@@ -93,8 +93,8 @@ cmp.setup({
 	},
 	mapping = {
 		['<C-s>'] = cmp_action.luasnip_supertab(),
-		['<C-y>'] = cmp.mapping.confirm({ select = true }), -- `select = false` to only confirm explicitly selected items.
-		['<C-n>'] = cmp.mapping(function()
+		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<C-r>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(4)
 			end
@@ -102,7 +102,7 @@ cmp.setup({
 			"i",
 			"s",
 		}),
-		['<C-t>'] = cmp.mapping(function()
+		['<C-n>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(-4)
 			end
