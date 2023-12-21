@@ -61,3 +61,16 @@ o.showmatch = true
 o.joinspaces = false
 
 -- o.path = "**"
+
+-- -- LaTeX
+vim.g.tex_flavor = 'latex'
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_quickfix_mode = 0
+vim.o.conceallevel = 1
+vim.g.tex_conceal = 'abdmg'
+vim.g.vimtex_compiler_latexmk = { options = { 'notes.tex', '-shell-escape', '-interaction=nonstopmode' } }
+vim.g.vimtex_complete_enabled = 1
+vim.g.vimtex_complete_close_braces = 1
+vim.g.vimtex_complete_ignore_case = 1
+vim.g.vimtex_complete_smart_case = 1
+--

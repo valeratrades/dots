@@ -13,8 +13,8 @@ dw() {
 		name="$1"
 	fi
 
-	if [ -f "${name}.typst" ]; then
-		try_from="${name}.typst"
+	if [ -f "${name}.typ" ]; then
+		try_from="${name}.typ"
 		try_to="${name}.pdf"
 		sudo killall typst
 		typst compile "$try_from" "$try_to"

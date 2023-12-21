@@ -3,8 +3,8 @@ s        left-scroll
 r        forw-line
 n        back-line
 t        right-scroll
-l        repeat-search
-h        reverse-search
+j        repeat-search
+k        reverse-search
 R        forw-scroll
 N        back-scroll
 

@@ -32,7 +32,7 @@ e() {
 			nvim "$@" . "$nvim_commands"
 		else
 			local could_fix=0
-			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typst" ".tex" ".html" ".js")
+			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js")
 			# note that indexing starts at 1, as we're in a piece of shit shell.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
@@ -80,7 +80,7 @@ se() {
 			sudo -Es nvim "$@" .
 		else
 			local could_fix=0
-			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" "typst" "tex")
+			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" "typ" "tex")
 			# note that indexing starts at 1, as we're in a piece of shit shell.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"

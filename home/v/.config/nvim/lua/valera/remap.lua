@@ -27,8 +27,8 @@ K("", "s", "<cmd>lua MultiplySidewaysMovements('h')<cr>", { silent = true })
 K("", "r", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 K("", "t", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
-K("n", "j", "r")
-K("n", "<Space>j", "R")
+K("n", "h", "r")
+K("n", "<Space>h", "R")
 
 -- Jumps
 K("", "R", "<C-d>zz")
@@ -63,8 +63,8 @@ K('n', '<C-w>t', '<C-W>l')
 K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
 
 -- -- Consequences
-K("n", "l", "nzzzv")
-K("n", "h", "Nzzzv")
+K("n", "j", "nzzzv")
+K("n", "k", "Nzzzv")
 --
 -- --
 
