@@ -111,6 +111,8 @@ end
 for i = 1, 9 do
 	K("i", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
+K("", "<A-o>", "<nop>")
+K("", "<A-O>", "<nop>")
 K({ "i", "" }, "<A-u>", "<esc><cmd>tabmove -<cr>")
 K({ "i", "" }, "<A-o>", "<esc><cmd>tabmove +<cr>")
 K({ "i", "" }, "<A-U>", "<esc><cmd>tabmove 0<cr>")

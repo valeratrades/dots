@@ -103,6 +103,7 @@ bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /
 exec sleep 2 && /home/v/s/help_scripts/auto_redshift/target/release/auto_redshift 23:00
 #
 
+#TODO!: 1) assign [7,8,9] to the second monitor specifically, regardless if it's connected, 2) is there a way to explicitly bind ws0 to the tasks that are kept visible only for their log, but are not expected to fail? (or should I just make a bash command to record these into some automatically named log file in tmp? Should be 2-4 extra characters to evoke max)
 # # workspaces
 bindsym $mod+1   workspace 1
 bindsym $mod+2   workspace 2

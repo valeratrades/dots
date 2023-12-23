@@ -4,12 +4,14 @@ local cmp_action = require('lsp-zero').cmp_action()
 local ts_utils = require('nvim-treesitter.ts_utils')
 local lspkind = require('lspkind')
 
+-- max_item_count doesn't seem to work
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 cmp.setup({
 	sources = cmp.config.sources({
 		{
 			name = 'nvim_lsp',
 			keyword_lenght = 1,
+			max_item_count = 8,
 			-- when inputting an argument, suggest only values with this in mind
 			entry_filter = function(entry, context)
 				local success = pcall(function()
@@ -22,9 +24,9 @@ cmp.setup({
 				return success or true
 			end,
 		},
-		{ name = 'luasnip', keyword_length = 1 },
-		{ name = 'buffer',  keyword_length = 5 },
-		{ name = 'cmdline', keyword_length = 3 },
+		{ name = 'luasnip', keyword_length = 1, max_item_count = 8 },
+		{ name = 'buffer',  keyword_length = 5, max_item_count = 8 },
+		{ name = 'cmdline', keyword_length = 3, max_item_count = 8 },
 		{ name = "crates" },
 	}),
 	formatting = {

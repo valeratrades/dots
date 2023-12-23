@@ -1,9 +1,10 @@
 # https://manpages.ubuntu.com/manpages/xenial/man5/zathurarc.5.html
 # https://manpages.ubuntu.com/manpages/xenial/man1/zathura.1.html
 
-# reload on R
+# reload on z
 # quit on q
 # zoom in or out on + and -
+# <C-r> to recolor
 
 map s scroll left
 map r scroll down
