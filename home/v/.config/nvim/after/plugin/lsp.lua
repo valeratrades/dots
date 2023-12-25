@@ -157,7 +157,7 @@ lsp_zero.on_attach(on_attach)
 
 
 -- Language setups
-local lspconfig_servers = { 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
+local lspconfig_servers = { 'typst_lsp', 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
@@ -226,6 +226,10 @@ require('mason-lspconfig').setup({
 					},
 				}
 			end,
+		},
+		['typst_lsp'] = {
+			exportPdf = "checkOnSave",
+			--serverPath = "/usr/local/bin/typst-lsp",
 		},
 	},
 })
