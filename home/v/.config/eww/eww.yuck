@@ -15,6 +15,12 @@
 	:vexpand false
 	:geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
 	(bar))
+(defwindow bar1
+	:monitor 1
+	:hexpand false
+	:vexpand false
+	:geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
+	(bar))
 
 (defwidget bar []
 	(box :orientation "h"

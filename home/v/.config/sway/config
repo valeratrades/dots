@@ -8,6 +8,8 @@ set $mod Mod4
 set $wifi ~/.config/rofi/modi/nmcli
 set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
 #
+set $output_laptop "eDP-1"
+set $output_monitor "HDMI-A-1"
 
 
 
@@ -104,7 +106,9 @@ exec sleep 2 && /home/v/s/help_scripts/auto_redshift/target/release/auto_redshif
 #
 
 #TODO!: 1) assign [7,8,9] to the second monitor specifically, regardless if it's connected, 2) is there a way to explicitly bind ws0 to the tasks that are kept visible only for their log, but are not expected to fail? (or should I just make a bash command to record these into some automatically named log file in tmp? Should be 2-4 extra characters to evoke max)
-# # workspaces
+# # Workspaces
+workspace 8 output $output_laptop
+workspace 9 output $output_laptop
 bindsym $mod+1   workspace 1
 bindsym $mod+2   workspace 2
 bindsym $mod+3   workspace 3
@@ -172,23 +176,27 @@ bindsym Ctrl+Shift+Escape exec alacritty --class btm-float -e btm -u; for_window
 bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
 bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 
-exec "eww daemon; eww open bar"
+exec "eww daemon; eww open bar; eww open bar1"
 bindsym $mod+e exec ~/.config/sway/eww_zoom_toggle.sh
 bindsym $mod+Shift+e exec ~/.config/sway/eww_visibility_toggle.sh
-bindsym $mod+Ctrl+e exec "eww kill; eww open bar"
+bindsym $mod+Ctrl+e exec "eww kill; eww open bar; eww open bar1"
 
 # check if any task was cut short during the last session
 exec sleep 3 && my_todo
 
 #TODO: make into a toggle
 #bindcode $mod+34 exec ~/.config/sway/toggle_screen.sh
-bindcode $mod+34 output * dpms on
-bindcode $mod+Shift+34 output * dpms off
+bindcode $mod+34 output $output_laptop dpms on
+bindcode $mod+Shift+34 output $output_laptop dpms off
 #bindcode $mod+Control+34 exec ~/.config/sway/toggle_screen.sh DP-1
 
 # # Modes
 set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
-# Wallpapers
+
+# Outputs
+output $output_monitor pos 0 0 scale 1
+output $output_laptop pos 277 1080
+
 output * bg ~/Wallpapers/1_AndreySakharov.jpg fill
 
 

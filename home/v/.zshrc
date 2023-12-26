@@ -202,6 +202,7 @@ alias cst="cs ~/tmp"
 alias csl="cs ~/s/l"
 alias csk="cs /usr/share/X11/xkb/symbols/"
 alias csg="cs ~/s/g"
+alias csb="cs ~/Documents/Books"
 #
 # # editor
 alias ec="e ~/.config/nvim"
@@ -250,6 +251,7 @@ sc() {
 . ~/s/help_scripts/init_projects.sh
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/document_watch.sh
+. ~/s/help_scripts/std_convert/functions.sh
 
 source ${HOME}/.config/zsh/other.zsh
 
