@@ -65,6 +65,10 @@ K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
 -- -- Consequences
 K("n", "j", "nzzzv")
 K("n", "k", "Nzzzv")
+
+K("", "L", "<nop>")
+K("", "l", "t")
+K("", "L", "T")
 --
 -- --
 

@@ -7,9 +7,6 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
--- doesn't do anything and here only as a reminder (as vim.g.maplocalleader doesn't work for some reason).
-local leader = 'l'
-
 function ToggleDiagnostics()
 	local state = vim.diagnostic.is_disabled()
 	if state then
@@ -122,24 +119,24 @@ local on_attach = function(client, bufnr)
 	map("<C-A-r>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
 	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
 
-	map("lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
-	map("lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
-	map("li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
-	map("lr", "<cmd>Telescope lsp_references<cr>", "references")
-	map("ld", "<cmd>Telescope diagnostics<cr>", "diagnostics")
-	map("ll", "<cmd>Telescope diagnostics bufnr=0<cr>", "local diagnostics")
-	map("lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
-	map("lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
-	map("lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
-	map("la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
-	map("lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
+	map("<space>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
+	map("<space>lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
+	map("<space>li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
+	map("<space>lr", "<cmd>Telescope lsp_references<cr>", "references")
+	map("<space>ld", "<cmd>Telescope diagnostics<cr>", "diagnostics")
+	map("<space>ll", "<cmd>Telescope diagnostics bufnr=0<cr>", "local diagnostics")
+	map("<space>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
+	map("<space>lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
+	map("<space>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
+	map("<space>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
+	map("<space>lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
 
-	map("ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
-	map("ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
-	map("lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
+	map("<space>ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
+	map("<space>ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
+	map("<space>lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
 
-	map("l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr>", "tab := 2")
-	map("l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr>", "tab := 4")
+	map("<space>l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr>", "tab := 2")
+	map("<space>l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr>", "tab := 4")
 
 
 	if client.supports_method('textDocument/formatting') then
