@@ -185,8 +185,9 @@ K("v", "<space>y", "\"+y")
 K("n", "<space>Y", "\"+Y")
 K("x", "<space>p", "\"_dP")
 
-K("n", "<space>d", "\"_d")
-K("v", "<space>d", "\"_d")
+K({ "n", "v" }, "<space>d", "\"_d")
+K("n", "x", "\"_x")
+K("n", "X", "\"_X")
 
 --K("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 

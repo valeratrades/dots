@@ -10,6 +10,8 @@ set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.node
 #
 set $output_laptop "eDP-1"
 set $output_monitor "HDMI-A-1"
+# sway circles through this space-delimited list when the first element is not found.
+set $primary "HDMI-A-1" "eDP-1"
 
 
 
@@ -105,10 +107,18 @@ bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /
 exec sleep 2 && /home/v/s/help_scripts/auto_redshift/target/release/auto_redshift 23:00
 #
 
-#TODO!: 1) assign [7,8,9] to the second monitor specifically, regardless if it's connected, 2) is there a way to explicitly bind ws0 to the tasks that are kept visible only for their log, but are not expected to fail? (or should I just make a bash command to record these into some automatically named log file in tmp? Should be 2-4 extra characters to evoke max)
+#TODO!: is there a way to explicitly bind ws0 to the tasks that are kept visible only for their log, but are not expected to fail? (or should I just make a bash command to record these into some automatically named log file in tmp? Should be 2-4 extra characters to evoke max)
 # # Workspaces
+workspace 1 output $primary
+workspace 2 output $primary
+workspace 3 output $primary
+workspace 4 output $primary
+workspace 5 output $primary
+workspace 6 output $primary
+workspace 7 output $primary
 workspace 8 output $output_laptop
 workspace 9 output $output_laptop
+workspace 0 output $primary
 bindsym $mod+1   workspace 1
 bindsym $mod+2   workspace 2
 bindsym $mod+3   workspace 3
@@ -176,16 +186,17 @@ bindsym Ctrl+Shift+Escape exec alacritty --class btm-float -e btm -u; for_window
 bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
 bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 
-exec "eww daemon; eww open bar; eww open bar1"
+set $refresh_eww "eww kill; eww open bar; eww open bar1"
+exec_always $refresh_eww
 bindsym $mod+e exec ~/.config/sway/eww_zoom_toggle.sh
 bindsym $mod+Shift+e exec ~/.config/sway/eww_visibility_toggle.sh
-bindsym $mod+Ctrl+e exec "eww kill; eww open bar; eww open bar1"
+bindsym $mod+Ctrl+e exec $refresh_eww
 
 # check if any task was cut short during the last session
 exec sleep 3 && my_todo
 
 #TODO: make into a toggle
-#bindcode $mod+34 exec ~/.config/sway/toggle_screen.sh
+#bindcode $mod+34 exec ~/.configlsway/toggle_screen.sh
 bindcode $mod+34 output $output_laptop dpms on
 bindcode $mod+Shift+34 output $output_laptop dpms off
 #bindcode $mod+Control+34 exec ~/.config/sway/toggle_screen.sh DP-1
@@ -194,7 +205,7 @@ bindcode $mod+Shift+34 output $output_laptop dpms off
 set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
 
 # Outputs
-output $output_monitor pos 0 0 scale 1
+output $output_monitor pos 0 0 scale 0.73684
 output $output_laptop pos 277 1080
 
 output * bg ~/Wallpapers/1_AndreySakharov.jpg fill

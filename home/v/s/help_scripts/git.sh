@@ -1,6 +1,7 @@
 # all general git shorthands
 
 alias gu='gitui'
+#TODO!: change so commit message needs -m flag, and the unnamed argument is assumed to be the dir of the project to push.
 gg() {
 	message="."
 	if [ -n "$1" ]; then

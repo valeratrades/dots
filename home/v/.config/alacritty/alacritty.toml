@@ -16,7 +16,7 @@ TERM = "xterm-256color"
 
 [font]
 builtin_box_drawing = true
-size = 9
+size = 9.5
 
 [font.bold]
 family = "monospace"
