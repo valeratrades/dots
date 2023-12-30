@@ -59,9 +59,6 @@ K('n', '<C-w>r', '<C-W>j')
 K('n', '<C-w>n', '<C-W>k')
 K('n', '<C-w>t', '<C-W>l')
 
--- Other
-K("i", "<C-v>", "<C-k>", { desc = "Dvorak things" })
-
 -- -- Consequences
 K("n", "j", "nzzzv")
 K("n", "k", "Nzzzv")
