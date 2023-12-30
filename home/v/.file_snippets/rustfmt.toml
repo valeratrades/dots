@@ -1,7 +1,7 @@
 # Cornerstone options
 unstable_options = true
 hard_tabs = true
-max_width = 190
+max_width = 150
 
 # Experimental
 format_strings = false

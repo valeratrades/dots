@@ -106,3 +106,5 @@ Q        quit
 ZZ        quit
 \eq       quit
 \ea       quit
+^[;       quit
+^[a       quit

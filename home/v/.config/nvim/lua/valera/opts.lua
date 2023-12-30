@@ -38,7 +38,7 @@ o.isfname:append("@-@")
 
 o.updatetime = 50
 
-o.colorcolumn = "105"
+o.colorcolumn = "120"
 
 o.title = true
 o.titlestring = "nvim: %F"

@@ -28,7 +28,8 @@ K("", "r", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 K("", "t", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
 K("n", "h", "r")
-K("n", "<Space>h", "R")
+K("n", "H", "<nop>")
+K("n", "H", "R")
 
 -- Jumps
 K("", "R", "<C-d>zz")
@@ -189,6 +190,8 @@ K("x", "<space>p", "\"_dP")
 K({ "n", "v" }, "<space>d", "\"_d")
 K("n", "x", "\"_x")
 K("n", "X", "\"_X")
+K("", "c", "\"_c")
+K("", "C", "\"_C")
 
 --K("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 

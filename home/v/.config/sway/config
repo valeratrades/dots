@@ -20,14 +20,6 @@ set $down r
 set $up n
 set $right t
 
-assign [class="Google-chrome"] 2
-assign [app_id="google-chrome"] 2
-assign [class="discord"] 4
-assign [app_id="org.telegram.desktop"] 4
-# doesn't work, as netrw sets the title as "nvim: [No name]"
-#assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
-
-
 font pango:Sans 6
 titlebar_padding 1 1
 titlebar_border_thickness 1
@@ -48,7 +40,6 @@ bindgesture pinch:inward exec xdotool key ctrl+minus
 
 # # Autostart
 exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
-exec "~/.config/sway/restore_session.sh"
 #exec "~/.config/sway/listen.sh"
 
 exec mako
@@ -104,7 +95,7 @@ bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoi
 bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
 bindsym $mod+Shift+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
 bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
-exec sleep 2 && /home/v/s/help_scripts/auto_redshift/target/release/auto_redshift 23:00
+exec_always sleep 2 && sudo killall auto_redshift; auto_redshift 7:00
 #
 
 #TODO!: is there a way to explicitly bind ws0 to the tasks that are kept visible only for their log, but are not expected to fail? (or should I just make a bash command to record these into some automatically named log file in tmp? Should be 2-4 extra characters to evoke max)
@@ -139,6 +130,14 @@ bindsym $mod+Shift+7    move container to workspace 7
 bindsym $mod+Shift+8    move container to workspace 8
 bindsym $mod+Shift+9    move container to workspace 9
 bindsym $mod+Shift+0    move container to workspace 0
+
+assign [class="Google-chrome"] 2
+assign [app_id="google-chrome"] 2
+assign [class="discord"] 4
+assign [app_id="org.telegram.desktop"] 4
+# doesn't work, as netrw sets the title as "nvim: [No name]"
+#assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
+exec "~/.config/sway/restore_session.sh"
 
 bindsym Mod1+Tab focus prev
 bindsym Mod1+f focus next
@@ -207,8 +206,6 @@ set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
 # Outputs
 output $output_monitor pos 0 0 scale 0.73684
 output $output_laptop pos 277 1080
-
-output * bg ~/Wallpapers/1_AndreySakharov.jpg fill
 
 
 bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"

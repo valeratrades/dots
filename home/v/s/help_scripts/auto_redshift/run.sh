@@ -1,4 +1,3 @@
 #!/bin/sh
 
-alias a="cargo build --release && ./target/release/auto_redshift"
-alias b="cargo build --release"
+alias b="cargo build --release && sudo mv ./target/release/auto_redshift /usr/local/bin/"

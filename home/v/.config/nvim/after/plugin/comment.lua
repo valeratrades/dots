@@ -63,7 +63,7 @@ function OutlineCodeSection()
 	F('O' .. cs .. ' ' .. cs .. ' ')
 end
 
-K("v", "gsc", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
+K("v", "gcp", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
 --
 
 
