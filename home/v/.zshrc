@@ -9,8 +9,10 @@ export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib
 export EDITOR=nvim
 edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
-# currently it is 3,65Gb # And B is for bytes
-TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}')
+
+export WAKETIME="7:00"
+export DAY_SECTIONS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
+export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
 # nvim shortcut, that does cd first, to allow for harpoon to detect project directory correctly
 # e stands for editor
