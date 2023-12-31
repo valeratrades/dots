@@ -3,7 +3,7 @@ _s() {
 }
 
 _r() {
-	
+	cs ~/s/todo/activity_monitor	
 }
 
 _n() {

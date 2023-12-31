@@ -12,7 +12,6 @@ swaymsg "workspace 2, exec QT_QPA_PLATFORMTHEME=flatpak google-chrome-stable" #-
 #swaymsg "exec GTK_USE_PORTAL=1 QT_QPA_PLATFORMTHEME=flatpak discord &" # --enable-features=UseOzonePlatform --ozone-platform=wayland &"
 swaymsg "workspace 1, exec alacritty"
 
-#TODO: switch to running it in a minimzed system tray.
 #sleep 30
 # discord had time to load and refresh notifs. Now kill the greedy beast.
 #swaymsg exec "~/.config/sway/discord_toggle.sh"

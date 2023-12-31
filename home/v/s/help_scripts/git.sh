@@ -74,3 +74,25 @@ gb() {
 	cd $initial_dir
 	rm -rf $target_dir
 }
+
+gn() {
+	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
+		printf """\
+#git create new repo
+	arg1: repository name
+	arg2: --private or --public
+
+	ex: gn my_new_repo --private
+"""
+		return 0
+	elif [ "$#" = 2 ]; then
+		git init
+		git add .
+		git commit -m "Initial Commit"
+		gh repo create ${1} ${2} --source=.
+		git remote add origin https://github.com/Valera6/${1}.git
+		git push -u origin master
+	else
+		return 1
+	fi
+}

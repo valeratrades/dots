@@ -1,6 +1,9 @@
 #[allow(unused_variables)]
 use chrono::prelude::*;
-use std::process::{Command, Output};
+use std::{
+	ffi::OsStr,
+	process::{Command, Output},
+};
 
 #[derive(Debug)]
 struct Waketime {
@@ -57,7 +60,7 @@ fn set_redshift(waketime: &Waketime) {
 	// I guess I could be taking the day section borders as args
 	let day_section: String = match now_shifted {
 		t if (t > 20 * 60) || (t <= 150) => "morning".to_owned(),
-		t if t <= 150 + 8 * 60 => "8h".to_owned(),
+		t if t <= 150 + 8 * 60 => "day".to_owned(),
 		t if t <= 16 * 60 => "evening".to_owned(),
 		_ => "night".to_owned(),
 	};
@@ -122,7 +125,10 @@ fn set_redshift(waketime: &Waketime) {
 	}
 }
 
-fn cmd(command: String) -> Output {
+fn cmd<S>(command: S) -> Output
+where
+	S: AsRef<OsStr>,
+{
 	let output = Command::new("sh").arg("-c").arg(command).output().unwrap();
 	output
 }
