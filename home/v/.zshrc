@@ -11,7 +11,7 @@ edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
 
 export WAKETIME="7:00"
-export DAY_SECTIONS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
+export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
 # nvim shortcut, that does cd first, to allow for harpoon to detect project directory correctly
@@ -167,6 +167,7 @@ chess() {
 	py -m cli_chess --token lip_sjCnAuNz1D3PM5plORrC
 }
 
+#alias t="todo"
 alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
@@ -241,6 +242,10 @@ sc() {
 	if [ $elapsedtime -gt 20 ]; then
 		mpv ${HOME}/Sounds/Notification.mp3
 	fi
+}
+cb() {
+	guess_name=$(basename $(pwd))
+	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
 }
 #
 

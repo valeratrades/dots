@@ -11,5 +11,5 @@ _n() {
 }
 
 _t() {
-	cs ~/s/todo/my_todo
+	cs ~/s/todo
 }

@@ -95,12 +95,13 @@ bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoi
 bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
 bindsym $mod+Shift+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
 bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
-exec_always sleep 2 && sudo killall auto_redshift; auto_redshift 7:00
+exec_always sudo killall auto_redshift
+exec_always sleep 2 && auto_redshift 7:00
 #
 
 #TODO!: is there a way to explicitly bind ws0 to the tasks that are kept visible only for their log, but are not expected to fail? (or should I just make a bash command to record these into some automatically named log file in tmp? Should be 2-4 extra characters to evoke max)
 # # Workspaces
-#TODO!: get rid of this \
+# bug on sway's side; can't set wallpaper if it's not preset.
 output * bg ~/Wallpapers/AndreySakharov.jpg fill
 workspace 1 output $primary
 workspace 2 output $primary
