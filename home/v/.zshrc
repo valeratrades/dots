@@ -34,7 +34,7 @@ e() {
 			nvim "$@" . "$nvim_commands"
 		else
 			local could_fix=0
-			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js")
+			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js" ".toml")
 			# note that indexing starts at 1, as we're in a piece of shit shell.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
@@ -149,10 +149,10 @@ usb() {
 }
 function lg() {
 	if [ $# = 1 ]; then
-		ls -A | rg $1
+		ls -lA | rg $1
 	#TODO: fix. For some fucking reason it doesn't work.
 	elif [ $# = 2 ]; then
-		ls -A $1 | rg $2
+		ls -lA $1 | rg $2
 	fi
 }
 fz() {

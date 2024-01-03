@@ -1,5 +1,5 @@
 _s() {
-	cs ~/s/g/booktyping
+	nvim ~/s/help_scripts/auto_redshift/src/main.rs
 }
 
 _r() {
