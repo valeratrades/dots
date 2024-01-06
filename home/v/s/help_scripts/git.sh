@@ -8,6 +8,7 @@ gg() {
 		message="$@"
 	fi
 	git add -A && git commit -m "$message" && git push
+	cb > /dev/null 2>&1 || :
 }
 alias gr="git reset --hard"
 
@@ -63,6 +64,8 @@ gb() {
     :
   elif printf "\n\033[34mtrying -S .\033[0m\n" && cmake -S . -B ./build && cd ./build && sudo make install; then
     :
+	elif printf "\n\033[34mtrying go build ./cmd/main.go and save to /usr/local/bin/\033[0m\n" && sudo go build -o /usr/local/bin/ ./cmd/main.go; then
+		:
   elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release; then
     :
   else

@@ -4,6 +4,7 @@ use std::{
 	ffi::OsStr,
 	process::{Command, Output},
 };
+use todo::*;
 
 #[derive(Debug)]
 struct Waketime {

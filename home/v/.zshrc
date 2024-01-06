@@ -130,6 +130,13 @@ alias pip="~/envs/Python/bin/pip"
 alias py="~/envs/Python/bin/python3"
 #
 
+# # cargo
+cb() {
+	guess_name=$(basename $(pwd))
+	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
+}
+#
+
 # ============================================================================
 # ABOVE THIS LINE WE RELY ON ALL THE APIS TO STAY CONSTANT, AS THEY ARE USED BY OTHER SH SCRIPTS.
 # ----------------------------------------------------------------------------
@@ -167,7 +174,6 @@ chess() {
 	py -m cli_chess --token lip_sjCnAuNz1D3PM5plORrC
 }
 
-#alias t="todo"
 alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
@@ -183,6 +189,7 @@ alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
+alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 
 
 # # cd
@@ -242,10 +249,6 @@ sc() {
 	if [ $elapsedtime -gt 20 ]; then
 		mpv ${HOME}/Sounds/Notification.mp3
 	fi
-}
-cb() {
-	guess_name=$(basename $(pwd))
-	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
 }
 #
 

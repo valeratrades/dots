@@ -1,9 +1,9 @@
 _s() {
-	nvim ~/s/help_scripts/auto_redshift/src/main.rs
+	cs ~/s/help_scripts/auto_redshift
 }
 
 _r() {
-	cs ~/s/todo/activity_monitor	
+	cowsay "wha"
 }
 
 _n() {

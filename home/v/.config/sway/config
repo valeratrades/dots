@@ -194,7 +194,7 @@ bindsym $mod+Shift+e exec ~/.config/sway/eww_visibility_toggle.sh
 bindsym $mod+Ctrl+e exec $refresh_eww
 
 # check if any task was cut short during the last session
-exec sleep 3 && my_todo
+exec_always sleep 3 && todo do continue_ongoing
 
 #TODO: make into a toggle
 #bindcode $mod+34 exec ~/.configlsway/toggle_screen.sh
@@ -210,6 +210,8 @@ output $output_monitor pos 0 0 scale 0.73684
 #output $output_laptop pos 277 1080
 # these are scaled by 1/0.73684 (which is the current `scale` on the large monitor screen)
 output $output_laptop pos 376 1466
+
+exec_always "sh -c -- pkill -f 'todo_monitor' && todo monitor || todo monitor"
 
 
 bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"

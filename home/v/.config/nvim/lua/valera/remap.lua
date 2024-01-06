@@ -173,10 +173,6 @@ K({ "", "i" }, "<A-a>", saveSessionIfOpen('qa!', 'wa!'), { desc = "save everythi
 K({ "", "i" }, "<A-;>", '<cmd>qa!<cr>')
 K({ "", "i" }, "<A-w>", saveSessionIfOpen('w!'))
 
---TODO at some point make this systemwide somehow
-K("i", "<A-o>", "<esc>o")
-K("i", "<A-O>", "<esc>O")
-
 K("", ";", ":")
 K("", ":", ";")
 
@@ -254,3 +250,14 @@ K("n", "<esc>", function()
 	vim.cmd.noh()
 	killPopups()
 end)
+
+-- gf and if it doesn't exist, create it
+local function forceGoFile()
+	local fname = vim.fn.expand("<cfile>")
+	local path = vim.fn.expand("%:p:h") .. "/" .. fname
+	if vim.fn.filereadable(path) ~= 1 then
+		vim.cmd("silent! !touch " .. path)
+	end
+	vim.cmd.norm("gf")
+end
+K("n", "<Space>gf", forceGoFile);

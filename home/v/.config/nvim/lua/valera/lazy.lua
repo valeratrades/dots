@@ -70,13 +70,6 @@ return require('lazy').setup({
 		-- helix for poor people
 		'jake-stewart/normon.nvim',
 		'jake-stewart/shnip.nvim',
-		-- adds <M-o> and <M-i> to jump across files
-		{
-			"jake-stewart/filestack.nvim",
-			config = function()
-				require("filestack").setup()
-			end
-		},
 	},
 	{ -- https://github.com/tpope/vim-abolish/blob/master/doc/abolish.txt
 		'tpope/vim-abolish',
@@ -92,9 +85,9 @@ return require('lazy').setup({
 		--b < ---b<--b<-----b<----b<--------b<-b
 		'chaoren/vim-wordmotion',
 		keys = {
-			{ "w", mode = { "n", "v", "o", "x" } },
-			{ "b", mode = { "n", "v", "o", "x" } },
-			{ "e", mode = { "n", "v", "o", "x" } },
+			{ "<Space>w", mode = { "n", "v", "o", "x" } },
+			{ "<Space>b", mode = { "n", "v", "o", "x" } },
+			{ "<Space>e", mode = { "n", "v", "o", "x" } },
 		},
 	},
 	-- similar to helix's match
