@@ -5,7 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
-. ~/.credentials.sh
+. ~/.private/credentials.sh
 export EDITOR=nvim
 edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
@@ -15,8 +15,10 @@ export WAKETIME="7:00"
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
+
 # nvim shortcut, that does cd first, to allow for harpoon to detect project directory correctly
 # e stands for editor
+#NB: $1 nvim arg has to be the path
 e() {
 	nvim_commands=""
 	if [ "$1" = "--flag_load_session" ]; then
@@ -28,6 +30,12 @@ e() {
 		nvim_evocation="sudo -Es -- nvim"
 		shift
 	fi
+	#git_push_after="false"
+	#if [ "$1" = "--git_sync" ]; then
+	#	git_push_after="true"
+	#	shift
+	#	git -C "$1" pull > /dev/null 2>&1
+	#fi
 	local full_command="${nvim_evocation} ."
 	if [ -n "$1" ]; then
 		if [ -d "$1" ]; then
@@ -41,12 +49,14 @@ e() {
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
 				if [ -f "$try_path" ]; then
-					printf "$try_path\n"
-					pushd $(dirname $try_path)
+					pushd $(dirname $try_path) &> /dev/null
 					shift
 					full_command="${nvim_evocation} $(basename $try_path) ${@} ${nvim_commands}"
 					eval ${full_command}
-					popd
+					popd &> /dev/null
+					#if git_push_after; then
+					#	push ${1}
+					#fi
 					return 0
 				fi
 			done
@@ -60,6 +70,11 @@ e() {
 	# clean the whole dir stack, which would drop back if `pushd` was executed, and do nothing otherwise.
 	# hopefuly I'm not breaking anything by doing so.
 	while [ "$(dirs -v | wc -l)" -gt 1 ]; do popd; done > /dev/null 2>&1
+
+	
+	#if [ "$git_push_after" = "true" ]; then
+	#	push ${1}
+	#fi
 }
 ep() {
 	e --flag_load_session "$@"
@@ -114,6 +129,12 @@ usb() {
 	sudo mount /dev/sdb1 /mnt/USB
 	cd /mnt/USB
 	ls -A
+}
+creds() {
+	_dir="${HOME}/.private/"
+	git -C "$1" pull > /dev/null 2>&1
+	nvim "${_dir}/credentials.sh"
+	git -C "$_dir" add -A && git -C "$_dir" commit -m "." && git -C "$_dir" push
 }
 function lg() {
 	if [ $# = 1 ]; then

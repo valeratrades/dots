@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 chrono = "0.4.31"
-todo = { "git" = "https://github.com/Valera6/todo.git" }
+#todo = { "git" = "https://github.com/Valera6/todo.git" }

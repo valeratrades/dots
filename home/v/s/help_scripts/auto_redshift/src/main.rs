@@ -4,7 +4,6 @@ use std::{
 	ffi::OsStr,
 	process::{Command, Output},
 };
-use todo::*;
 
 #[derive(Debug)]
 struct Waketime {
@@ -58,6 +57,7 @@ fn set_redshift(waketime: &Waketime) {
 		now_shifted += 24 * 60;
 	}
 
+	dbg!(&now_shifted);
 	// I guess I could be taking the day section borders as args
 	let day_section: String = match now_shifted {
 		t if (t > 20 * 60) || (t <= 150) => "morning".to_owned(),
@@ -116,14 +116,11 @@ fn set_redshift(waketime: &Waketime) {
 			.parse()
 			.unwrap();
 
-		// // Set things
 		if temperature < current_temperature && brightness < current_brightness {
 			let _ = cmd(format!("gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set {} && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set {}", temperature, brightness));
 		}
-
-		let _ = cmd(format!("swaymsg output '*' bg ~/Wallpapers/{} fill", wallpaper));
-		//
 	}
+	let _ = cmd(format!("swaymsg output '*' bg ~/Wallpapers/{} fill", wallpaper));
 }
 
 fn cmd<S>(command: S) -> Output
