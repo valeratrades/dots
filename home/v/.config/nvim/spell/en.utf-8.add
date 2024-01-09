@@ -126,3 +126,6 @@ stdin
 pandoc's
 toml
 cmd
+fullscreen
+coord
+pos

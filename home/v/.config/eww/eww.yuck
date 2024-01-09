@@ -22,6 +22,14 @@
 	:geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
 	(bar))
 
+(defwindow test
+	:monitor 0
+	:heexpaad false
+	:vexpand false
+	:geometry (geometry :anchor "bottom right" :x 0 :y 0 :width "0%" :height "17px")
+	(color-chooser)
+)
+
 (defwidget bar []
 	(box :orientation "h"
 			 :space-evenly false
