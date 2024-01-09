@@ -9,6 +9,7 @@ export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib
 export EDITOR=nvim
 edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
+export HISTCONTROL=ignorespace # doesn't append command to history if first character is space, so `cd /` is recorded, but ` cd /` is not.
 
 export WAKETIME="7:00"
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
@@ -17,94 +18,54 @@ export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # cur
 # nvim shortcut, that does cd first, to allow for harpoon to detect project directory correctly
 # e stands for editor
 e() {
-	need_cd_out=0
 	nvim_commands=""
-	if [ "$1" = "flag_load_session" ]; then
+	if [ "$1" = "--flag_load_session" ]; then
 		nvim_commands="-c SessionLoad"
 		shift
 	fi
-  if [ -n "$1" ]; then
+	nvim_evocation="nvim"
+	if [ "$1" = "--use_sudo_env" ]; then
+		nvim_evocation="sudo -Es -- nvim"
+		shift
+	fi
+	local full_command="${nvim_evocation} ."
+	if [ -n "$1" ]; then
 		if [ -d "$1" ]; then
-			_t="$1"
-			if [ $_t != $(pwd) ]; then
-				cd $_t
-				need_cd_out=1
-			fi
+			pushd ${1} &> /dev/null
 			shift
-			nvim "$@" . "$nvim_commands"
+			full_command="${nvim_evocation} ${@} ."
 		else
 			local could_fix=0
 			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js" ".toml")
-			# note that indexing starts at 1, as we're in a piece of shit shell.
+			# note that indexing starts at 1, as we're in a piece of shit zsh.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
 				if [ -f "$try_path" ]; then
-					_t=$(dirname $try_path)
-					if [ _t != $(pwd) ]; then
-						cd $_t
-						need_cd_out=1
-					fi
-					basename=$(basename $try_path)
+					printf "$try_path\n"
+					pushd $(dirname $try_path)
 					shift
-					nvim $basename $@ $nvim_commands
-					could_fix=1
-					break
+					full_command="${nvim_evocation} $(basename $try_path) ${@} ${nvim_commands}"
+					eval ${full_command}
+					popd
+					return 0
 				fi
 			done
-			if [ $could_fix = 1 ]; then
-				return 0
-			else
-				nvim "$@" "$nvim_commands"
-			fi
+			full_command="${nvim_evocation} ${@}"
 		fi
-		if [ $need_cd_out -eq 1 ]; then
-			cd - > /dev/null
-		fi
-  else
-    nvim . "$nvim_commands"
-  fi
+	fi
+
+	full_command+=" ${nvim_commands}"
+	eval ${full_command}
+
+	# clean the whole dir stack, which would drop back if `pushd` was executed, and do nothing otherwise.
+	# hopefuly I'm not breaking anything by doing so.
+	while [ "$(dirs -v | wc -l)" -gt 1 ]; do popd; done > /dev/null 2>&1
 }
 ep() {
-	e flag_load_session "$@"
+	e --flag_load_session "$@"
 }
-# Problematic to do an inclusive script that could be ran with sudo too, so just copying manually; adding `sudo` to everything for now.
-#? make a macro with `sed`?
 se() {
-  if [ -n "$1" ]; then
-		if [ -f "$1" ]; then
-			cd $(dirname $1)
-			basename=$(basename $1)
-			shift
-			sudo -Es nvim $basename $@
-		elif [ -d "$1" ]; then
-			cd $1
-			shift
-			sudo -Es nvim "$@" .
-		else
-			local could_fix=0
-			local try_extensions=(".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" "typ" "tex")
-			# note that indexing starts at 1, as we're in a piece of shit shell.
-			for i in {1..${#try_extensions[@]}}; do
-				local try_path="${1}${try_extensions[$i]}"
-				if [ -f "$try_path" ]; then
-					cd $(dirname $try_path)
-					basename=$(basename $try_path)
-					shift
-					sudo -Es nvim $basename $@
-					could_fix=1
-					break
-				fi
-			done
-			if [ $could_fix = 1 ]; then
-				return 0
-			else
-				sudo -Es nvim "$@"
-			fi
-		fi	
-		cd - > /dev/null
-  else
-    sudo -Es nvim .
-  fi
+	e --use_sudo_env ${@}
 }
 
 # for super ls
