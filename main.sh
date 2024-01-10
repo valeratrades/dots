@@ -10,43 +10,43 @@ README="""\
 
 target_dir="/home/v/.dots"
 dot_directories="
-	/home/v/.zshrc
-	/home/v/.zprofile
-	/home/v/.config/zsh
-	/usr/bin/start_sway.sh
-	/home/v/s/help_scripts
-	/home/v/.config/sway
-	/home/v/.config/eww
-	/home/v/.config/nvim
-	/home/v/.config/keyd
 	/etc/keyd
-	/home/v/.config/helix
-	/home/v/.config/git
-	/home/v/.config/greenclip.toml
-	/home/v/.config/foot
+	/etc/systemd/system/getty@tty1.service.d/override.conf
 	/home/v/.config/alacritty
 	/home/v/.config/cargo
-	/home/v/.config/zathura
+	/home/v/.config/dconf/user
+	/home/v/.config/eww
+	/home/v/.config/foot
+	/home/v/.config/git
+	/home/v/.config/greenclip.toml
+	/home/v/.config/helix
+	/home/v/.config/jfind
+	/home/v/.config/keyd
 	/home/v/.config/mimeapps.list
+	/home/v/.config/nnn/setup.sh
+	/home/v/.config/nnn/termfilechooser.sh
+	/home/v/.config/nvim
+	/home/v/.config/openvpn
+	/home/v/.config/sway
+	/home/v/.config/xdg-desktop-portal-termfilechooser/config
+	/home/v/.config/zathura
+	/home/v/.config/zellij
+	/home/v/.config/zsh
+	/home/v/.file_snippets
+	/home/v/.lesskey
 	/home/v/.local/share/applications/nnn.desktop
 	/home/v/.local/share/applications/nvim.desktop
-	/home/v/.config/dconf/user
-	/home/v/.config/nnn/termfilechooser.sh
-	/home/v/.config/nnn/setup.sh
-	/home/v/.config/xdg-desktop-portal-termfilechooser/config
-	/home/v/.file_snippets
-	/home/v/.config/openvpn
-	/etc/systemd/system/getty@tty1.service.d/override.conf
-	/home/v/.config/zellij
+	/home/v/.zprofile
+	/home/v/.zshrc
 	/home/v/Wallpapers
-	/home/v/.config/jfind
-	/home/v/.lesskey
-	/usr/share/X11/xkb/symbols/semimak
-	/usr/share/X11/xkb/symbols/ru
-	/usr/share/X11/xkb/symbols/us
 	/home/v/g/README.md
 	/home/v/s/g/README.md	
+	/home/v/s/help_scripts
 	/home/v/s/l/README.md
+	/usr/bin/start_sway.sh
+	/usr/share/X11/xkb/symbols/ru
+	/usr/share/X11/xkb/symbols/semimak
+	/usr/share/X11/xkb/symbols/us
 "
 
 commit() {
