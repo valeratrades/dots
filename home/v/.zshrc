@@ -4,7 +4,7 @@
 #
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/"
+export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/"
 . ~/.private/credentials.sh
 export EDITOR=nvim
 edit() $EDITOR
@@ -101,10 +101,6 @@ cs() {
 	. "./run.sh" > /dev/null 2>&1 || :
 	sl
 }
-# # python
-alias pip="~/envs/Python/bin/pip"
-alias py="~/envs/Python/bin/python3"
-#
 
 # # cargo
 cb() {
@@ -112,6 +108,10 @@ cb() {
 	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
 }
 #
+alias py="python3"
+gpip() {
+	pip ${@} --break-system-packagess
+}
 
 # ============================================================================
 # ABOVE THIS LINE WE RELY ON ALL THE APIS TO STAY CONSTANT, AS THEY ARE USED BY OTHER SH SCRIPTS.
@@ -160,6 +160,7 @@ alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignor
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
 alias rf="rm -rf"
+alias srf="sudo rm -rf"
 alias z="zathura"
 alias zp="zathura --mode presentation"
 alias senable="sudo systemctl enable"
@@ -173,7 +174,6 @@ alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
-
 
 # # cd
 mkcd() {
