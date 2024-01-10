@@ -183,4 +183,5 @@ return require('lazy').setup({
 			"folke/which-key.nvim",
 		},
 	},
+	"smoka7/hop.nvim",
 })
