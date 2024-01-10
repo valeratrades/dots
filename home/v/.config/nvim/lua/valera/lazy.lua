@@ -19,6 +19,7 @@ return require('lazy').setup({
 	'L3MON4D3/LuaSnip',
 	"lewis6991/gitsigns.nvim",
 	'lukas-reineke/indent-blankline.nvim',
+	"github/copilot.vim",
 	{ -- Treesitter
 		{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -182,5 +183,4 @@ return require('lazy').setup({
 			"folke/which-key.nvim",
 		},
 	},
-
 })
