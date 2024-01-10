@@ -1,6 +1,7 @@
 # https://manpages.ubuntu.com/manpages/xenial/man5/zathurarc.5.html
 # https://manpages.ubuntu.com/manpages/xenial/man1/zathura.1.html
 
+# s to fill width of the window
 # reload on z
 # quit on q
 # zoom in or out on + and -
@@ -26,12 +27,14 @@ map N scroll half-up
 map <A-s> jumplist backward
 map <A-t> jumplist forward
 
+map j search next
+map k search prev
+
+map f zoom width
 
 # General
 set selection-clipboard clipboard
 set adjust-open "best-fit"
+set recolor true
 
-#TODO: make it respect gtk-theme-preference
 #set font "{{ font.monospace }} {{ font.size }}"
-#set recolor true
-#set guioptions=csh

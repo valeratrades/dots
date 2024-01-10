@@ -7,13 +7,13 @@ vim.g.copilot_filetypes = {
 	text = false,
 }
 
-K('i', '<Left>', 'copilot#Accept("<CR>")', {
+K('i', '<Right>', 'copilot#Accept("<Up>")', {
 	expr = true,
 	replace_keycodes = false,
 	silent = true,
 })
-vim.g.copilot_no_tab_map = true -- currently doesn't work, hence the mapping below
+vim.g.copilot_no_tab_map = true -- currently doesn't work, hence the next line
 K("i", "<Tab>", "<Tab>")
 
-K("i", "<Right>", "<Plug>(copilot-accept-word)")
+K("i", "<Up>", "<Plug>(copilot-accept-word)")
 K("i", "<Down>", "<Plug>(copilot-accept-line)")
