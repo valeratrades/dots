@@ -161,6 +161,7 @@ alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
 alias rf="rm -rf"
 alias z="zathura"
+alias zp="zathura --mode presentation"
 alias senable="sudo systemctl enable"
 alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
