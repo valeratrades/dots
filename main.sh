@@ -44,6 +44,9 @@ dot_directories="
 	/usr/share/X11/xkb/symbols/semimak
 	/usr/share/X11/xkb/symbols/ru
 	/usr/share/X11/xkb/symbols/us
+	/home/v/g/README.md
+	/home/v/s/g/README.md	
+	/home/v/s/l/README.md
 "
 
 commit() {

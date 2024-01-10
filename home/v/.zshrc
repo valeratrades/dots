@@ -193,7 +193,8 @@ alias csa="cs ~/s/ai-news-trade-bot"
 alias cst="cs ~/tmp"
 alias csl="cs ~/s/l"
 alias csk="cs /usr/share/X11/xkb/symbols/"
-alias csg="cs ~/s/g"
+alias csg="cs ~/g"
+alias cssg="cs ~/s/g"
 alias csb="cs ~/Documents/Books"
 #
 # # editor
