@@ -1,14 +1,16 @@
 # all general git shorthands
 
 alias gu='gitui'
-#TODO!: change so commit message needs -m flag, and the unnamed argument is assumed to be the dir of the project to push.
 gg() {
 	message="."
 	if [ -n "$1" ]; then
 		message="$@"
 	fi
 	git add -A && git commit -m "$message" && git push
-	cb > /dev/null 2>&1 || :
+
+	if [ -f "./Cargo.toml" ]; then
+		cb > /dev/null 2>&1
+	fi
 }
 alias gr="git reset --hard"
 
