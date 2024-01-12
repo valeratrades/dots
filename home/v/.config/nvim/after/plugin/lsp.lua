@@ -154,7 +154,7 @@ lsp_zero.on_attach(on_attach)
 
 
 -- Language setups
-local lspconfig_servers = { 'typst_lsp', 'lua_ls', 'gopls', 'rust_analyzer', 'pyright', 'bashls' }
+local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'rust_analyzer', 'bashls' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
@@ -209,20 +209,30 @@ require('mason-lspconfig').setup({
 			},
 			staticcheck = true,
 		},
-		["pyright"] = {
-			analysis = {
-				typeCheckingMode = "strict",
-				autoSearchPaths = true,
-				diagnosticMode = 'openFilesOnly',
-			},
-			before_init = function(params)
-				params.initializationOptions = {
-					cmd = {
-						"pyright-langserver",
-						"--stdio",
-					},
+		--["pyright"] = {
+		--	analysis = {
+		--		typeCheckingMode = "strict",
+		--		autoSearchPaths = true,
+		--		diagnosticMode = 'openFilesOnly',
+		--	},
+		--	before_init = function(params)
+		--		params.initializationOptions = {
+		--			cmd = {
+		--				"pyright-langserver",
+		--				"--stdio",
+		--			},
+		--		}
+		--	end,
+		--},
+		["ruff-lsp"] = {
+			cmd = { 'ruff-lsp' },
+			filetypes = { 'python' },
+			root_dir = require('lspconfig').util.find_git_ancestor,
+			init_options = {
+				settings = {
+					args = {}
 				}
-			end,
+			}
 		},
 		['typst_lsp'] = {
 			exportPdf = "checkOnSave",

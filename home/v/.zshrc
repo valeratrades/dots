@@ -91,6 +91,7 @@ sl() {
 		ls -Ah $@
 	fi
 }
+alias ll="ls -lA"
 mkfile() {
   file_path="$1"
   mkdir -p "$(dirname "${file_path}")"
@@ -109,8 +110,8 @@ cb() {
 }
 #
 alias py="python3"
-gpip() {
-	pip ${@} --break-system-packagess
+pp() {
+	pip ${@} --break-system-packages
 }
 
 # ============================================================================
@@ -169,7 +170,6 @@ alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
 alias jn="jupyter notebook &"
-alias ln="sudo ln -s"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
@@ -211,15 +211,23 @@ alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"
 #
 # # pm
-alias yS="yay -S --noconfirm"
+#alias yS="yay -S --noconfirm"
+yS() {
+	yay -S ${@} --noconfirm && return 0
+	sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak && sudo sh -c "rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist" && yay -S ${@} --noconfirm
+}
+
 alias yR="yay -R --noconfirm"
 alias yRn="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
 alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/boring.sh"
-alias pS="yay -S --noconfirm"
-alias pR="yay -R --noconfirm"
-alias pRn="yay -Rns --noconfirm"
+#alias pS="yay -S --noconfirm"
+#pS() {
+#	'yay -S ${@} --noconfirm' || 'sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak && sudo sh -c "rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist" && yay -S ${@} --noconfirm'
+#}
+#alias pR="yay -R --noconfirm"
+#alias pRn="yay -Rns --noconfirm"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 # # cargo

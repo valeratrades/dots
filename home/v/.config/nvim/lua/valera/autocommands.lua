@@ -50,3 +50,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.opt_local.undofile = false
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "BufWrite" }, {
+	pattern = { "python" },
+	callback = function()
+		vim.lsp.buf.format { async = true }
+	end,
+})

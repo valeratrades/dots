@@ -3,7 +3,8 @@ _s() {
 }
 
 _r() {
-	cowsay "wha"
+	cs ~/tmp/btc_line_bak
+	nvim main.py
 }
 
 _n() {
