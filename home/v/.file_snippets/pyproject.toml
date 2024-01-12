@@ -1,5 +1,5 @@
 [tool.ruff]
-line-length = 200
+line-length = 210 # it's python, I don't care
 indent-width = 2
 
 # Allow fix for all enabled rules (when `--fix`) is provided.

@@ -20,7 +20,7 @@
 require("shnip").setup({
 	leader = "<c-s>",
 	keys = {
-		["print"]    = "<down>",
+		["print"]    = "<c-p>",
 		["debug"]    = "<c-d>",
 		["error"]    = "<c-x>",
 		["while"]    = "<c-w>",
@@ -43,16 +43,21 @@ require("shnip").setup({
 			extra = {
 				["<c-j>"] = "#[derive(Debug, Serialize, Deserialize)]<CR>struct  {<CR>}<Esc>kg_hi",
 				["<c-u>"] = "loop {<CR>}<Esc>ko",
-				["<c-p>"] = "impl  {<CR>}<Esc>kg_hi",
+				["<down>"] = "impl  {<CR>}<Esc>kg_hi",
 				["<c-r>"] = "#[derive()]<Esc>hi",
 			},
 		},
 		go = {
 			extra = {
 				["<c-r>"] = "if err!=nil {<CR>}",
-				["<c-p>"] = "if err!=nil {<CR>panic!(\"1) What\")<CR>}",
+				["<down>"] = "if err!=nil {<CR>panic!(\"1) What\")<CR>}",
+				["<c-u>"] = "while true {<CR>}<Esc>ko",
 			},
 		},
-
+		python = {
+			extra = {
+				["<c-u>"] = "while True:<CR>",
+			}
+		}
 	},
 })

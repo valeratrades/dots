@@ -64,7 +64,8 @@ require("oil").setup({
 		show_hidden = false,
 		-- This function defines what is considered a "hidden" file
 		is_hidden_file = function(name, bufnr)
-			return name == "." or name == ".." or name == "Cargo.lock" or name == "rustfmt.toml"
+			return name == "." or name == ".." or name == "Cargo.lock"
+			--or name == "rustfmt.toml"
 		end,
 		-- This function defines what will never be shown, even when `show_hidden` is set
 		is_always_hidden = function(name, bufnr)
