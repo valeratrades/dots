@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 --K("", "<space>e", "<cmd>Oil<cr>", { desc = "Oil equivalent to vim.cmd.Ex" })
 K({ "n", "v" }, "-", "<cmd>Oil<cr>")
 
-K("i", "<Esc>", "<Esc><Esc>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
+K("i", "<Esc>", "<Esc><Esc><cmd>Copilot enable<cr>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
 -- -- -- "hjkl" -> "htns" Remaps and the Consequences
 -- Basic Movement

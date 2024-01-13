@@ -45,6 +45,7 @@ require('Comment').setup(config)
 -- -- `extra` reimplementation
 local function commentExtraReimplementation(insert_leader)
 	return function()
+		vim.cmd("Copilot disable")
 		F(insert_leader)
 		F(Cs() .. ' ')
 	end
@@ -57,6 +58,7 @@ K('n', 'gcA', commentExtraReimplementation('A '), { desc = "comment: reimplement
 
 -- -- Code Section comment
 function OutlineCodeSection()
+	vim.cmd("Copilot disable")
 	local cs = Cs()
 	F('o' .. cs)
 	Ft('<Esc>`<')
@@ -123,6 +125,7 @@ K('n', '<space>cdr', debugComment('remove'), { desc = "comment: remove all debug
 
 -- -- `TODO{!*n}` Comments
 function AddTodoComment(n)
+	vim.cmd("Copilot disable")
 	F('O' .. Cs() .. 'TODO' .. string.rep('!', n) .. ': ')
 end
 
