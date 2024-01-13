@@ -67,7 +67,7 @@ input * {
     tap enabled
     scroll_factor 1.43
 
-    repeat_delay 130
+    repeat_delay 170
     repeat_rate 70
 }
 ## Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds

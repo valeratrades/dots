@@ -198,6 +198,7 @@ require('mason-lspconfig').setup({
 			},
 			checkOnSave = {
 				enable = true,
+				--TODO!!: think how to toggle clippy
 				command = "clippy",
 			}
 		},
