@@ -5,6 +5,7 @@ gg() {
 	message="."
 	if [ -n "$1" ]; then
 		message="$@"
+		#TODO!!!!!!: squash all the previous sequential commits with "." into one here.
 	fi
 	git add -A && git commit -m "$message" && git push
 

@@ -8,3 +8,5 @@
 .cargo/config
 **/.vscode
 **/_*
+**/TODO.md
+run.sh

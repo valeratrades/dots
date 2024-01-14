@@ -10,12 +10,24 @@ K("i", "<Esc>", "<Esc><Esc><cmd>Copilot enable<cr>", { desc = "Allow quick exit 
 
 -- -- -- "hjkl" -> "htns" Remaps and the Consequences
 -- Basic Movement
-function MultiplySidewaysMovements(movement)
-	if vim.v.count == 0 then
-		F(movement)
-	else
-		local multiplied_count = vim.v.count * 10
-		F(multiplied_count .. movement)
+local function multiplySidewaysMovements(movement)
+	return function()
+		if vim.v.count == 0 then
+			F(movement)
+		else
+			local multiplied_count = vim.v.count * 10
+			F(multiplied_count .. movement)
+		end
+	end
+end
+
+local function appendNewline()
+	local function do_the_did()
+		vim.cmd("s/\\n/\\r\\r/")
+		vim.cmd.noh()
+	end
+	return function()
+		PersistCursor(do_the_did)
 	end
 end
 
@@ -23,10 +35,11 @@ K("", "j", "<nop>")
 K("", "k", "<nop>")
 K("", "l", "<nop>")
 K("", "h", "<nop>")
-K("", "s", "<cmd>lua MultiplySidewaysMovements('h')<cr>", { silent = true })
+K("", "s", multiplySidewaysMovements('h'), { silent = true })
 K("", "r", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-K("", "t", "<cmd>lua MultiplySidewaysMovements('l')<cr>", { silent = true })
+K("", "t", multiplySidewaysMovements('l'), { silent = true })
+K('i', '<C-CR>', appendNewline(), { silent = true })
 K("n", "h", "r")
 K("n", "H", "<nop>")
 K("n", "H", "R")
@@ -38,12 +51,12 @@ K("", "N", "<C-u>zz")
 -- Jump back, jump forward and tag-list back
 K({ "", "i" }, "<C-t>", "<nop>", { desc = "have this on Alt+h" })
 K("", "<A-s>", "<C-o>")
-K("i", "<A-s>", "<esc><C-o>")
+K("i", "<A-s>", "<Esc><C-o>")
 K("", "<C-t>", "<nop>")
 K("", "<A-S>", "<C-t>")
-K("i", "<A-S>", "<esc><C-t>")
+K("i", "<A-S>", "<Esc><C-t>")
 K("", "<A-t>", "<C-i>")
-K("i", "<A-t>", "<esc><C-o>")
+K("i", "<A-t>", "<Esc><C-o>")
 
 -- Move line
 K("", "<A-r>", "<nop>")
@@ -51,8 +64,8 @@ K("v", "<A-r>", ":m '>+1<cr>gv=gv")
 K("v", "<A-n>", ":m '<-2<cr>gv=gv")
 K("n", "<A-r>", "V:m '>+1<cr>gv=gv")
 K("n", "<A-n>", "V:m '>-2<cr>gv=gv")
-K("i", "<A-r>", "<esc>V:m '>+1<cr>gv=gv")
-K("i", "<A-n>", "<esc>V:m '>-2<cr>gv=gv")
+K("i", "<A-r>", "<Esc>V:m '>+1<cr>gv=gv")
+K("i", "<A-n>", "<Esc>V:m '>-2<cr>gv=gv")
 
 -- Windows
 K('n', '<C-w>s', '<C-W>h')
@@ -91,7 +104,7 @@ K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab
 -- Just use tmux
 -- Terminal Mappings
 -- Is this the thing that kills my esc? (doesn't seem so)
---K("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+--K("t", "<Esc><Esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 --K("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
 --K("t", "<C-t>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
 --K("t", "<C-n>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
@@ -103,22 +116,22 @@ K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab
 -- Tabs
 K("n", "gt", "<nop>")
 K("n", "gT", "<nop>")
-K({ "i", "" }, "<A-l>", "<esc>gT")
-K({ "i", "" }, "<A-h>", "<esc>gt")
-K({ "i", "" }, "<A-v>", "<esc>g<Tab>")
-K({ "i", "" }, "<A-0>", "<esc><cmd>tablast<cr>")
+K({ "i", "" }, "<A-l>", "<Esc>gT")
+K({ "i", "" }, "<A-h>", "<Esc>gt")
+K({ "i", "" }, "<A-v>", "<Esc>g<Tab>")
+K({ "i", "" }, "<A-0>", "<Esc><cmd>tablast<cr>")
 for i = 1, 9 do
-	K("", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
+	K("", '<A-' .. i .. '>', '<Esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
 for i = 1, 9 do
-	K("i", '<A-' .. i .. '>', '<esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
+	K("i", '<A-' .. i .. '>', '<Esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
 K("", "<A-o>", "<nop>")
 K("", "<A-O>", "<nop>")
-K({ "i", "" }, "<A-u>", "<esc><cmd>tabmove -<cr>")
-K({ "i", "" }, "<A-o>", "<esc><cmd>tabmove +<cr>")
-K({ "i", "" }, "<A-U>", "<esc><cmd>tabmove 0<cr>")
-K({ "i", "" }, "<A-O>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
+K({ "i", "" }, "<A-u>", "<Esc><cmd>tabmove -<cr>")
+K({ "i", "" }, "<A-o>", "<Esc><cmd>tabmove +<cr>")
+K({ "i", "" }, "<A-U>", "<Esc><cmd>tabmove 0<cr>")
+K({ "i", "" }, "<A-O>", "<Esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
 
 --
 
@@ -126,7 +139,7 @@ K({ "i", "" }, "<A-O>", "<esc><cmd>tabmove $<cr>") -- for some reason doesn't wo
 K("", "<C-'>", "\"+ygv\"_d")
 K("", "<C-b>", "\"+y")
 
-K("i", "<C-del>", "X<esc>ce") -- n mappings for <del> below rely on this
+K("i", "<C-del>", "X<Esc>ce") -- n mappings for <del> below rely on this
 K("v", "<bs>", "d")
 K("n", "<bs>", "i<bs>")
 K("n", "<del>", "i<del>")
@@ -160,7 +173,7 @@ local function saveSessionIfOpen(cmd, hook_before)
 		if vim.g.persisting then
 			vim.cmd("SessionSave")
 		end
-		Ft('<esc>', 'm')
+		Ft('<Esc>', 'm')
 		if hook_before ~= "" then
 			vim.cmd("wa!")
 		end
@@ -213,13 +226,13 @@ K("n", "z7", "u7z=`x", { silent = true })
 K("n", "z8", "u8z=`x", { silent = true })
 K("n", "z9", "u9z=`x", { silent = true })
 
-K('n', '<space>clr', 'vi""8di\\033[31m<esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
-K('n', '<space>clb', 'vi""8di\\033[34m<esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
-K('n', '<space>clg', 'vi""8di\\033[32m<esc>"8pa\\033[0m<Esc>', { desc = "add green escapecode" })
+K('n', '<space>clr', 'vi""8di\\033[31m<Esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
+K('n', '<space>clb', 'vi""8di\\033[34m<Esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
+K('n', '<space>clg', 'vi""8di\\033[32m<Esc>"8pa\\033[0m<Esc>', { desc = "add green escapecode" })
 -- and now color rust, because they decided to have different escape codes...
-K('n', '<space>clrr', 'vi""8di\\x1b[31m<esc>"8pa\\x1b[0m<Esc>', { desc = "add red escapecode" })
-K('n', '<space>clrb', 'vi""8di\\x1b[34m<esc>"8pa\\x1b[0m<Esc>', { desc = "add blue escapecode" })
-K('n', '<space>clrg', 'vi""8di\\x1b[32m<esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
+K('n', '<space>clrr', 'vi""8di\\x1b[31m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add red escapecode" })
+K('n', '<space>clrb', 'vi""8di\\x1b[34m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add blue escapecode" })
+K('n', '<space>clrg', 'vi""8di\\x1b[32m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
 
 
 K('', '<space>.', '<cmd>tabe .<cr>')
@@ -246,7 +259,7 @@ local function killPopups()
 	end)
 end
 -- clear search highlight & kill popups
-K("n", "<esc>", function()
+K("n", "<Esc>", function()
 	vim.cmd.noh()
 	killPopups()
 end)

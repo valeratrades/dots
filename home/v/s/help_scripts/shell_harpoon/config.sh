@@ -8,7 +8,7 @@ _r() {
 }
 
 _n() {
-	e ~/s/help_scripts/shell_harpoon/
+	cs ~/s/btc_line
 }
 
 _t() {

@@ -1,11 +1,4 @@
 #!/bin/sh
-# Following is a standard set of rust run shortcuts
+# File is source on `cs` into the project's root. Allows to define a set of project-specific commands and aliases.
 
-alias b="cargo build --release"
-alias r="cargo run"
-alias t="cargo test"
-
-# f for full
-alias f="cargo build --release && my_todo"
-## e for executable
-#alias e="my_todo"
+#alias r="cargo crun -- start"
