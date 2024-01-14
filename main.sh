@@ -32,6 +32,8 @@ dot_directories="
 	/home/v/.config/zathura
 	/home/v/.config/zellij
 	/home/v/.config/zsh
+	/home/v/.config/todo.toml
+	/home/v/.config/btc_line.toml
 	/home/v/.file_snippets
 	/home/v/.lesskey
 	/home/v/.local/share/applications/nnn.desktop
