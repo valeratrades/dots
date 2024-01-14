@@ -3,9 +3,9 @@
 #? do I actually want the `run` thing?
 
 can() {
-	cargo new "$@"
-	project_name="${!#}"
-	cd "$project_name" || printf "\033[31m'can' assumes project_name being the last argument\033[0m\n"
+	cargo new "${@}"
+	project_name="${1}"
+	cd "$project_name" || printf "\033[31m'can' assumes project_name being the first argument\033[0m\n"
 	cp ${HOME}/.file_snippets/run.sh ./run.sh
 	ln ${HOME}/.file_snippets/rustfmt.toml ./rustfmt.toml
 	ln ${HOME}/.file_snippets/rust_gitignore ./.gitignore

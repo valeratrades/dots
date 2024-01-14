@@ -5,6 +5,8 @@ vim.g.copilot_filetypes = {
 	latex = false,
 	json = false,
 	text = false,
+	toml = false,
+	yuck = false,
 }
 
 K('i', '<Right>', 'copilot#Accept("<Up>")', {

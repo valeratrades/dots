@@ -9,6 +9,10 @@
 (defvar todo_timer "None")
 (defvar sway_mode "default")
 
+(defvar btc_line_main_str "")
+(defvar btc_line_spy_str "")
+(defvar btc_line_additional_str "")
+
 (defwindow bar 
 	:monitor 0
 	:hexpand false
@@ -22,14 +26,6 @@
 	:geometry (geometry :anchor "top right" :x 0 :y 0 :width "0%" :height "17px")
 	(bar))
 
-(defwindow test
-	:monitor 0
-	:heexpaad false
-	:vexpand false
-	:geometry (geometry :anchor "bottom right" :x 0 :y 0 :width "0%" :height "17px")
-	(color-chooser)
-)
-
 (defwidget bar []
 	(box :orientation "h"
 			 :space-evenly false
@@ -42,6 +38,7 @@
 				 :space-evenly false
 			(sway_mode)
 			(todo_timer)
+			(btc_line_main)
 			(openvpn)
 			(notifications)
 			(github)
@@ -145,3 +142,10 @@
 	(icon-module :class {microphone_poll.content <= 15 ? "problematic" : ""}
 							 :icon {microphone_poll.icon}
 		(label :text {microphone_poll.content})))
+
+
+;; BTC Line Things ;(defwidget notifications []
+;;TODO!!!: move into a separate defwindow, and place it on the left
+(defwidget btc_line_main []
+	(icon-module :class "btc_line_main" :icon "" :visible {btc_line_main_str != ""}
+		(label :text {btc_line_main_str})))
