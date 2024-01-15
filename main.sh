@@ -13,6 +13,7 @@ dot_directories="
 	/etc/keyd
 	/etc/systemd/system/getty@tty1.service.d/override.conf
 	/home/v/.config/alacritty
+	/home/v/.config/btc_line.toml
 	/home/v/.config/cargo
 	/home/v/.config/dconf/user
 	/home/v/.config/eww
@@ -28,12 +29,12 @@ dot_directories="
 	/home/v/.config/nvim
 	/home/v/.config/openvpn
 	/home/v/.config/sway
+	/home/v/.config/tmux/tmux.conf
+	/home/v/.config/todo.toml
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config
 	/home/v/.config/zathura
 	/home/v/.config/zellij
 	/home/v/.config/zsh
-	/home/v/.config/todo.toml
-	/home/v/.config/btc_line.toml
 	/home/v/.file_snippets
 	/home/v/.lesskey
 	/home/v/.local/share/applications/nnn.desktop
