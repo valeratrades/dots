@@ -9,7 +9,7 @@ K({ "n", "v" }, "-", "<cmd>Oil<cr>")
 K("i", "<Esc>", "<Esc><Esc><cmd>Copilot enable<cr>", { desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
 -- -- -- "hjkl" -> "htns" Remaps and the Consequences
--- Basic Movement
+-- Basic Movement {{{
 local function multiplySidewaysMovements(movement)
 	return function()
 		if vim.v.count == 0 then
@@ -82,7 +82,7 @@ K("", "L", "<nop>")
 K("", "l", "t")
 K("", "L", "T")
 --
--- --
+--,}}}
 
 
 -- Windows

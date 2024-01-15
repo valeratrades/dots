@@ -174,7 +174,6 @@ alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
-alias tmux="tmux -2"
 
 # # cd
 mkcd() {

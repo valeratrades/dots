@@ -166,8 +166,6 @@ bindsym $mod+Escape exec $power
 bindsym $mod+End exec $wifi
 
 
-
-
 bindsym $mod+m exec $menu
 bindsym $mod+Space exec makoctl dismiss --all
 bindsym $mod+o split vertical
@@ -205,8 +203,7 @@ output $output_monitor pos 0 0 scale 0.73684
 # these are scaled by 1/0.73684 (which is the current `scale` on the large monitor screen)
 output $output_laptop pos 376 1466
 
-exec_always "sh -c -- pkill -f 'todo_monitor' && todo monitor || todo monitor"
-
+exec_always "sh -c -- pkill -f 'todo monitor' && todo monitor || todo monitor"
 
 bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"
 bindsym $mod+Shift+w exec "~/s/help_scripts/circle_wallpapers.sh b"

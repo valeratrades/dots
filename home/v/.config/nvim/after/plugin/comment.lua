@@ -4,7 +4,7 @@ local config = {
 	padding = false,
 	sticky = true,
 	ignore = nil,
-	toggler = { line = 'gcc', block = 'gbc' }, -- can't turn it off. So just a note to follow the good practice of doing 'Vgc' and 'Vgb' instead.
+	toggler = { line = 'gcc', block = 'gbc' },
 	opleader = { line = 'gc', block = 'gb' },
 	extra = { above = 'gcO', below = 'gco', eol = 'gcA' },
 	mappings = { basic = true, extra = false }, -- reimplementing `extra` myself, to have padding on these and not on others
@@ -26,21 +26,6 @@ local config = {
 	post_hook = nil,
 }
 require('Comment').setup(config)
---# Linewise
---
---`gcw` - Toggle from the current cursor position to the next word
---`gc$` - Toggle from the current cursor position to the end of line
---`gc}` - Toggle until the next blank line
---`gc5j` - Toggle 5 lines after the current cursor position
---`gc8k` - Toggle 8 lines before the current cursor position
---`gcip` - Toggle inside of paragraph
---`gca}` - Toggle around curly brackets
---
---# Blockwise
---
---`gb2}` - Toggle until the 2 next blank line
---`gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
---`gbac` - Toggle comment around a class (w/ LSP/treesitter support)
 
 -- -- `extra` reimplementation
 local function commentExtraReimplementation(insert_leader)
@@ -57,15 +42,16 @@ K('n', 'gcA', commentExtraReimplementation('A '), { desc = "comment: reimplement
 --
 
 -- -- Code Section comment
-function OutlineCodeSection()
+function FoldMarkerComment()
 	vim.cmd("Copilot disable")
 	local cs = Cs()
-	F('o' .. cs)
+	F('o' .. cs .. ',}}}')
 	Ft('<Esc>`<')
-	F('O' .. cs .. ' ' .. cs .. ' ')
+	F('O' .. cs .. '  ' .. '{{{')
+	Ft('<Esc>hhhi')
 end
 
-K("v", "gcp", "<esc>`><cmd>lua OutlineCodeSection()<cr>", { desc = "outline semantic code section" })
+K("v", "gzf", "<esc>`><cmd>lua FoldMarkerComment()<cr>", { desc = "Add a fold marker around the selection" })
 --
 
 
