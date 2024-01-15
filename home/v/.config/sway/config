@@ -145,18 +145,8 @@ assign [app_id="org.telegram.desktop"] 4
 #assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
 exec "~/.config/sway/restore_session.sh"
 
-bindsym Mod1+Tab focus prev
-bindsym Mod1+f focus next
-
-bindsym $mod+$left resize grow width 6ppt
-bindsym $mod+$down resize shrink height 6ppt
-bindsym $mod+$up resize grow height 6ppt
-bindsym $mod+$right resize shrink width 6ppt
-
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Tab focus prev
+bindsym $mod+Tab focus next
 
 bindsym $mod+c kill
 bindsym $mod+Return exec alacritty
@@ -239,6 +229,7 @@ mode "screenshot" {
 
 	bindsym $mod+Insert exec $switch_out
 	bindsym $mod+c exec $switch_out
+	bindsym $mod+q exec $switch_out
 	bindsym Ctrl+c exec $switch_out
 	bindsym Escape exec $switch_out
 	bindsym q exec $switch_out
@@ -261,9 +252,33 @@ mode "size_presets" {
 
 	bindsym $mod+apostrophe exec $switch_out
 	bindsym $mod+c exec $switch_out
+	bindsym $mod+q exec $switch_out
 	bindsym Ctrl+c exec $switch_out
 	bindsym Escape exec $switch_out
 	bindsym q exec $switch_out
 }
 bindsym $mod+apostrophe exec "swaymsg mode size_presets && eww update sway_mode=size_presets"
+#
+
+# # Move and resize
+mode "move_or_resize" {
+	bindsym $left resize grow width 6ppt
+	bindsym $down resize shrink height 6ppt
+	bindsym $up resize grow height 6ppt
+	bindsym $right resize shrink width 6ppt
+
+	bindsym Shift+$left move left
+	bindsym Shift+$down move down
+	bindsym Shift+$up move up
+	bindsym Shift+$right move right
+
+	bindsym $mod+k exec $switch_out
+	bindsym $mod+c exec $switch_out
+	bindsym $mod+q exec $switch_out
+	bindsym Ctrl+c exec $switch_out
+	bindsym Escape exec $switch_out
+	bindsym q exec $switch_out
+
+}
+bindsym $mod+k exec "swaymsg mode move_or_resize && eww update sway_mode=move_or_resize"
 #
