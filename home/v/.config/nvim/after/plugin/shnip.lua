@@ -41,7 +41,6 @@ require("shnip").setup({
 	overrides = {
 		rust = {
 			extra = {
-				["<c-j>"] = "#[derive(Debug, Serialize, Deserialize)]<CR>struct  {<CR>}<Esc>kg_hi",
 				["<c-u>"] = "loop {<CR>}<Esc>ko",
 				["<down>"] = "impl  {<CR>}<Esc>kg_hi",
 				["<c-r>"] = "#[derive()]<Esc>hi",
