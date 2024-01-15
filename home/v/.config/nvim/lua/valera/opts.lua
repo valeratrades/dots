@@ -30,7 +30,7 @@ o.incsearch = true
 vim.o.timeoutlen = 700
 vim.o.ttimeoutlen = 2
 
-o.termguicolors = true
+--o.termguicolors = true
 
 o.scrolloff = 8
 o.signcolumn = "yes"

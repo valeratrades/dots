@@ -31,6 +31,7 @@ local function appendNewline()
 	end
 end
 
+K("", "<C-e>", "<nop>") -- used as prefix in my tmux
 K("", "j", "<nop>")
 K("", "k", "<nop>")
 K("", "l", "<nop>")
