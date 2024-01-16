@@ -47,11 +47,11 @@ gb() {
 	elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
 #build from source helper
-	Does git clone into /tmp, and then tries to build with cmake.
+	Does git clone into /tmp, and then tries to build until it works.
 
 	ex: build neovim/neovim
 
-	some repositories have shorthands, eg: build nvim would work.
+	some repositories have shorthands, eg: `build nvim` would work.
 """
 		return 0
 	else
@@ -62,7 +62,12 @@ gb() {
 	target_dir=$(gc "$target")
 	cd $target_dir
 
-	# # Try cmake
+	if printf "\n\033[34mfuck this, asking chat gpt\033[0m\n" && ~/s/help_scripts/gpt_build.py ${target_dir}; then
+		:
+	fi
+	printf "\nshouldn't print this"
+	return 1
+
 	if printf "\n\033[34mtrying just cmake\033[0m\n" && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install; then
     :
   elif printf "\n\033[34mtrying -S .\033[0m\n" && cmake -S . -B ./build && cd ./build && sudo make install; then
@@ -71,11 +76,11 @@ gb() {
 		:
   elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release; then
     :
+  elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
+    :
   else
     return 1
   fi
-	#
-	return 1
 
 	cd $initial_dir
 	rm -rf $target_dir
