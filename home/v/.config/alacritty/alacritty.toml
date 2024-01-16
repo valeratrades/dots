@@ -7,7 +7,6 @@ live_config_reload = true
 [cursor]
 blink_interval = 500
 blink_timeout = 0
-#blinking = "Off"
 thickness = 0.4
 unfocused_hollow = true
 

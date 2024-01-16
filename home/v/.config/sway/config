@@ -13,8 +13,6 @@ set $output_monitor "HDMI-A-1"
 # sway circles through this space-delimited list when the first element is not found.
 set $primary "HDMI-A-1" "eDP-1"
 
-
-
 set $left s
 set $down r
 set $up n

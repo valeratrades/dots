@@ -24,8 +24,8 @@ gc() {
 
 	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
-#git clone on rails
-  for more info, cat ~/s/help_scripts/git.sh
+#git clone on rails.
+	give repo name, it clones into /tmp or provided directory.
 
   ex: gc neovim/neovim
 """
