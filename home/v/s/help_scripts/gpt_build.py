@@ -146,15 +146,22 @@ Apache 2.0 license, except for contributions copied from Vim (identified by the
 
 <!-- vim: set tw=80: -->"""
 # }}}
-
+ex_name = "neovim"
 ex_response = """```sh
 make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
 ```"""
 
 
+def formulate_request(name, readme):
+    question = f"""On my arch linux I have copied source code of {name}, and cd'ed into it. Give me one exact command to build and then install it, based on their README: ````md
+    {readme}````"""
+
+    return question
+
+
 def request(question, model=gpt4t):
     system_line = {"role": "system", "content": bulid_instruction}
-    ex_1_user = {"role": "user", "content": ex_readme}
+    ex_1_user = {"role": "user", "content": formulate_request(ex_name, ex_readme)}
     ex_1_assistant = {"role": "assistant", "content": ex_response}
     user_line = {"role": "user", "content": question}
     conversation = [system_line] + [ex_1_user] + [ex_1_assistant] + [user_line]
@@ -179,10 +186,9 @@ def main():
     source_path = sys.argv[1]
     if source_path[-1] == "/":
         source_path = source_path[:-1]
-    name = source_path.split("/")[-1]
     readme = open(source_path + "/README.md").read()
-    question = f"""On my arch linux I have copied source code of {name}, and cd'ed into it. Give me one exact command to build and then install it, based on their README: ````md
-    {readme}````"""
+    name = source_path.split("/")[-1]
+    question = formulate_request(name, readme)
 
     response = request(question)
     n_commands = response.count("```sh")
@@ -192,11 +198,15 @@ def main():
         command = command.strip()
     else:
         print("We did a fucky wakky and returned multiple commands")
+        print(f"Here is the full response:\n{response}")
         return 1
 
-    confirm = input(f"gonna run: `{command}`. [Y/n] ")
-    if confirm.lower() == "y":
-        os.system(command)
+    if len(sys.argv) == 3 and sys.argv[2] == "--noconfirm":
+        print(f"running: `{command}`")
+    else:
+        confirm = input(f"gonna run: `{command}`. [Y/n] ")
+        if confirm.lower() == "y":
+            os.system(command)
 
 
 if __name__ == "__main__":

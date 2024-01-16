@@ -62,25 +62,21 @@ gb() {
 	target_dir=$(gc "$target")
 	cd $target_dir
 
-	if printf "\n\033[34mfuck this, asking chat gpt\033[0m\n" && ~/s/help_scripts/gpt_build.py ${target_dir}; then
-		:
-	fi
-	printf "\nshouldn't print this"
-	return 1
-
 	if printf "\n\033[34mtrying just cmake\033[0m\n" && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install; then
-    :
-  elif printf "\n\033[34mtrying -S .\033[0m\n" && cmake -S . -B ./build && cd ./build && sudo make install; then
-    :
+		:
+	elif printf "\n\033[34mtrying -S .\033[0m\n" && cmake -S . -B ./build && cd ./build && sudo make install; then
+		:
 	elif printf "\n\033[34mtrying go build ./cmd/main.go and save to /usr/local/bin/\033[0m\n" && sudo go build -o /usr/local/bin/ ./cmd/main.go; then
 		:
-  elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release; then
-    :
-  elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
-    :
-  else
-    return 1
-  fi
+	elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release; then
+		:
+	elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
+		:
+	elif printf "\n\033[34mfuck this, asking chat gpt\033[0m\n" && ~/s/help_scripts/gpt_build.py ${target_dir}; then
+		:
+	else
+		return 1
+	fi
 
 	cd $initial_dir
 	rm -rf $target_dir
