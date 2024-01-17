@@ -106,6 +106,9 @@ cs() {
 # # cargo
 cb() {
 	guess_name=$(basename $(pwd))
+	if [ -f "./src/lib.rs" ]; then
+		return 0
+	fi
 	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
 }
 #
@@ -198,6 +201,7 @@ alias csk="cs /usr/share/X11/xkb/symbols/"
 alias csg="cs ~/g"
 alias cssg="cs ~/s/g"
 alias csb="cs ~/Documents/Books"
+alias csu="cs ~/s/utils"
 #
 # # editor
 alias ec="e ~/.config/nvim"

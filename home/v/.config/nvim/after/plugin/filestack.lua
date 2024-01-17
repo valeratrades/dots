@@ -67,10 +67,10 @@ end
 
 local setup = function()
 	setupAutocmd()
-	vim.keymap.set({ "n", "v" }, "<m-s>", function() jump(1, 1) end)
-	vim.keymap.set({ "n", "v" }, "<m-t>", function() jump(-1, 1) end)
-	vim.keymap.set({ "n", "v" }, "<c-i>", function() navigate(1) end)
+	vim.keymap.set({ "n", "v" }, "<m-s>", function() jump(-1, 1) end)
+	vim.keymap.set({ "n", "v" }, "<m-t>", function() jump(1, 1) end)
 	vim.keymap.set({ "n", "v" }, "<c-o>", function() navigate(-1) end)
+	vim.keymap.set({ "n", "v" }, "<c-i>", function() navigate(1) end)
 end
 
 setup()
