@@ -235,6 +235,8 @@ alias pY="${HOME}/s/help_scripts/boring.sh"
 #alias pRn="yay -Rns --noconfirm"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
+alias notification="mpv ${HOME}/Sounds/Notification.mp3"
+
 # # cargo
 alias c="cargo"
 # for super cargo

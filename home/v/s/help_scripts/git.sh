@@ -14,6 +14,10 @@ gg() {
 	fi
 }
 alias gr="git reset --hard"
+alias ggf="gg fix:"
+alias ggc="gg chore:"
+alias ggp="gg perf:"
+alias ggd="gg docs:"
 
 gc() {
 	if rg -q "://" <<< "$1"; then

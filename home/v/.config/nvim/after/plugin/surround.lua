@@ -12,3 +12,6 @@ require("nvim-surround").setup({
 		change = "cs",
 	}
 })
+
+--TODO!: add functionality for interpreting things like `Option<>` and `Result<>` as singular surrounding construct.
+-- Could use: https://github.com/nvim-treesitter/nvim-treesitter-textobjects

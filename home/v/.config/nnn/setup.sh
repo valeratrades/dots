@@ -20,5 +20,4 @@ export NNN_PLUG='g:dragdrop;u:davecloud;f:finder;o:fzopen;j:jump;c:fcd;d:diffs;m
 export NNN_OPTS="H" # hiddden files shown. (toggle with `.`)
 export NNN_PREFER_SELECTION=1
 export NNN_PREVIEWIMGPROG="feh"
-alias n="nnn -e"
-
+alias nnn="nnn -e"
