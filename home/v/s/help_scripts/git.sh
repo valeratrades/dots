@@ -13,9 +13,12 @@ gg() {
 		cb > /dev/null 2>&1
 	fi
 }
-alias gr="git reset --hard"
-alias ggf="gg fix:"
+alias ggf="gg feat:"
+alias ggx="gg fix:"
 alias ggc="gg chore:"
+alias ggs="gg style:"
+alias ggt="gg test:"
+alias ggr="gg refactor:"
 alias ggp="gg perf:"
 alias ggd="gg docs:"
 
