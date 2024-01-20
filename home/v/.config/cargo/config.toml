@@ -1,0 +1,10 @@
+[build]
+rustc-wrapper = "sccache"
+
+[target.x86_64-unknown-linux-gnu]
+# the following is assumed with modern gcc. Keeping in case something brakes.
+# linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=/path/to/mold"]
+
+[doc]
+browser = "google-chrome-stable"
