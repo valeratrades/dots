@@ -178,6 +178,7 @@ alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias tmux="TERM='alacritty-direct' tmux"
+alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
 
 # # cd
 mkcd() {
@@ -260,7 +261,6 @@ sc() {
 . ~/s/help_scripts/init_projects.sh
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/document_watch.sh
-. ~/s/help_scripts/std_convert/functions.sh
 
 source ${HOME}/.config/zsh/other.zsh
 
