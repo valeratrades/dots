@@ -244,7 +244,7 @@ K('', '<space>.', '<cmd>tabe .<cr>')
 vim.cmd.digraph("zs " .. 0x200b)
 
 K('n', 'U', '<C-r>', { noremap = true, desc = "helix: redo" })
-K('n', '<C-r>', '<nop>') -- later changed to `lsp refresh` in lsp.lua
+K('', '<C-r>', '<nop>') -- later changed to `lsp refresh` in lsp.lua
 K('n', '<tab>', 'i<tab>')
 
 -- trying out:

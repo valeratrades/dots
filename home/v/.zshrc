@@ -261,6 +261,8 @@ sc() {
 . ~/s/help_scripts/init_projects.sh
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/document_watch.sh
+# what the fuck they're doing other there
+. /etc/profile.d/google-cloud-cli.sh
 
 source ${HOME}/.config/zsh/other.zsh
 
