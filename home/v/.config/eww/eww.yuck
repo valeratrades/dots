@@ -16,7 +16,6 @@
 	:vexpand false
 	:geometry (geometry :anchor "top right" :y 0 :width "0%" :height "17px")
 	(box
-		:hexpand true
 		:space-evenly false
 		(sway_mode)
 		(todo_timer)
