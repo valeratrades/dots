@@ -179,7 +179,7 @@ bindsym Ctrl+Shift+Escape exec alacritty --class btm-float -e btm -u; for_window
 bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
 bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 
-set $refresh_eww "eww kill; eww open bar; eww open bar1"
+set $refresh_eww "eww kill; eww open bar; eww open btc_line_upper; eww open btc_line_lower"
 exec_always $refresh_eww
 bindsym $mod+e exec ~/.config/sway/eww_zoom_toggle.sh
 bindsym $mod+Shift+e exec ~/.config/sway/eww_visibility_toggle.sh

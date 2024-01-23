@@ -128,9 +128,9 @@
 		"${microphone_poll.icon}${microphone_poll.content}"))
 ;; }}}
 
-(defvar btc_line_main_str "main")
-(defvar btc_line_additional_str "additional")
-(defvar btc_line_spy_str "spy")
+(defvar btc_line_main_str "")
+(defvar btc_line_additional_str "")
+(defvar btc_line_spy_str "")
 
 (defwindow btc_line_upper
 	:monitor 0
