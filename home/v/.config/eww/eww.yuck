@@ -84,7 +84,7 @@
 	(box
 		:class "text"
 		:class {"${round(EWW_CPU.avg, 0)}" > 90 ?: "problematic"}
-		"${round(EWW_CPU.avg, 0)}%"))
+		" ${round(EWW_CPU.avg, 0)}%"))
 (defwidget ram []
 	(box
 		:visible {EWW_RAM.used_mem_perc != ""}
