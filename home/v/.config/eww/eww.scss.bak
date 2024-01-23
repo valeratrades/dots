@@ -21,17 +21,18 @@ $test: #ba6e3d;
 }
 
 window {
-	font-family: "Noto Sans";
-	background: $background;
-	font-size: 12px;
-	margin: 0 0px;
-	color: $black;
-	.myopia {
-		font-size: 29px;
-	}
+  background: $background;
+//  background: rgba(0, 0, 0, 0.2);
 }
 
 .bar {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  margin: 0 0px;
+  color: $black;
+	.myopia {
+		font-size: 29px;
+	}
   .urgent {
     color: $red;
   }
@@ -40,19 +41,13 @@ window {
   }
 }
 
-.text-module {
+.icon-module {
   margin: 0 3px;
   color: $black;
-}
 
-.text {
-	margin: 0 3px;
-	color: $black;
-  .urgent {
-    color: $red;
-  }
-  .problematic {
-    color: $brown;
+  & > &__icon {
+    margin-right: 0px;
+    font-family: "Font Awesome 5 Free Solid";
   }
 }
 

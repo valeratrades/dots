@@ -11,6 +11,3 @@ else
 fi
 
 echo "{\"content\": \"$volume\", \"icon\": \"$icon\"}"
-
-
-
