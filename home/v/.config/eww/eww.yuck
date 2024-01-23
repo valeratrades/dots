@@ -10,13 +10,13 @@
 (defvar sway_mode "default")
 
 
+
 (defwindow bar 
 	:monitor 0
-	:hexpand false
-	:vexpand false
 	:geometry (geometry :anchor "top right" :y 0 :width "0%" :height "17px")
 	(box
 		:space-evenly false
+		:visible {bar_visible == "true"}
 		(sway_mode)
 		(todo_timer)
 		(openvpn)
@@ -29,43 +29,9 @@
 		(ram)
 		(cpu)
 		(time)
-		(battery)
-	)
-)
+		(battery)))
 
-(defwindow btc_line_upper
-	:monitor 0
-	:hexpand false
-	:vexpand false
-	:geometry (geometry :anchor "top right" :y 17 :width "0%" :height "17px")
-	(box
-		:hexpand true
-		:space-evenly false
-		(btc_line_main)
-		(btc_line_additional)
-	)
-)
-(defwindow btc_line_lower
-	:monitor 0
-	:hexpand false
-	:vexpand false
-	:geometry (geometry :anchor "top right" :y 34 :width "0%" :height "17px")
-	(btc_line_lower)
-)
-
-
-
-(defvar btc_line_main_str "main")
-(defvar btc_line_spy_str "spy")
-(defvar btc_line_additional_str "additional")
-;;(defwidget line_spy []
-;;	"test"
-;;)
-;; btc-main
-;; btc-additional
-
-;; ----------------------------------------------------------------------------
-
+;; bar modules {{{
 ;; Sway Mode ;;
 (defwidget sway_mode []
 	(box
@@ -118,7 +84,7 @@
 	(box
 		:class "text"
 		:class {"${round(EWW_CPU.avg, 0)}" > 90 ?: "problematic"}
-		" ${round(EWW_CPU.avg, 0)}%"))
+		"${round(EWW_CPU.avg, 0)}%"))
 (defwidget ram []
 	(box
 		:visible {EWW_RAM.used_mem_perc != ""}
@@ -145,7 +111,7 @@
 	(box
 		:class "text"
 		:class {ping_poll > 100 || ping_poll == "None" ?: "problematic"}
-		"${ping_poll == "None" ? "No WiFi" : ping_poll == "Some" ? "Some WiFi" : "${ping_poll} ms"}")) 
+		"${ping_poll == "None" ? "No WiFi" : ping_poll == "Some" ? "Some WiFi" : "${ping_poll}ms"}")) 
 
 ;; Volume ;;
 (defpoll speaker_poll :initial "{}" :interval "1s" "./modules/speaker.sh")
@@ -160,3 +126,30 @@
 		:class "text"
 		:class {microphone_poll.content <= 15 ? "problematic" : ""}
 		"${microphone_poll.icon}${microphone_poll.content}"))
+;; }}}
+
+(defvar btc_line_main_str "main")
+(defvar btc_line_additional_str "additional")
+(defvar btc_line_spy_str "spy")
+
+(defwindow btc_line_upper
+	:monitor 0
+	:geometry (geometry :anchor "top right" :y 17 :width "0%" :height "17px")
+	(box
+		:visible {bar_visible == "true"}
+		:space-evenly false
+		(box
+			:class "text"
+			btc_line_additional_str)
+		;;TODO!: add border betwen these // can't do here, because the space is owned by the window. And if I create a new one for additional_line, how do I make it horiizontally stack with the main?
+		(box
+			:class "text"
+			"${btc_line_main_str}")))
+
+(defwindow btc_line_lower
+	:monitor 0
+	:geometry (geometry :anchor "top right" :y 34 :width "0%" :height "17px")
+	(box
+		:visible {bar_visible == "true"}
+		:class "text"
+		btc_line_spy_str))
