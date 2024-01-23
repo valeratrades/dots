@@ -24,71 +24,20 @@ window {
 	font-family: "Noto Sans";
 	background: $background;
 	font-size: 12px;
-	margin: 0 0px;
 	color: $black;
 	.myopia {
 		font-size: 29px;
 	}
 }
 
-.bar {
-  .urgent {
-    color: $red;
-  }
-  .problematic {
-    color: $brown;
-  }
+.urgent {
+	color: $red;
 }
-
-.text-module {
-  margin: 0 3px;
-  color: $black;
+.problematic {
+	color: $brown;
 }
 
 .text {
 	margin: 0 3px;
 	color: $black;
-  .urgent {
-    color: $red;
-  }
-  .problematic {
-    color: $brown;
-  }
 }
-
-// // could reuse for other icons
-// .workspaces {
-//   font-family: "Font Awesome 5 Free Solid";
-//   font-size: 12px;
-//   margin-right: 20px;
-//
-//   button {
-//     margin: 0px 3px;
-//   }
-//   .occupied {
-//     color: $grey;
-//   }
-//
-//   .focused {
-//     color: $white;
-//   }
-//
-//   .urgent {
-//     color: $red; 
-//   }
-//
-//   .empty {
-//     padding-top: 2px;
-//     color: $foreground-alt;
-//     font-size: 10px;
-// //  font-family: "Font Awesome 5 Free Regular"
-//   }
-// }
-
-// .revealer-on-hover .eventbox {
-//   color: $grey;
-// }
-// .revealer-on-hover .eventbox:hover {
-//   color: $foreground;
-// }
-//
