@@ -1,5 +1,6 @@
 output = "eww"
 comparison_offset_h = 24
+label = false
 
 [spy]
 alpaca_key = "PKTJYTJNKYSBHAZYT3CO"

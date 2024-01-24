@@ -189,21 +189,100 @@ mvcd() {
 }
 
 alias cc="cd && clear"
+# cs{} aliases {{{
+csc() {
+	_path="${HOME}/.config/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+css() {
+	_path="${HOME}/s/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csh() {
+	_path="${HOME}/s/help_scripts/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csv() {
+	_path="${HOME}/s/valera/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csd() {
+	_path="${HOME}/Downloads/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csa() {
+	_path="${HOME}/s/ai-news-trade-bot/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+cst() {
+	_path="${HOME}/tmp/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csl() {
+	_path="${HOME}/s/l/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csk() {
+	_path="/usr/share/X11/xkb/symbols/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csg() {
+	_path="${HOME}/g/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+cssg() {
+	_path="${HOME}/s/g/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csb() {
+	_path="${HOME}/Documents/Books/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csu() {
+	_path="${HOME}/s/utils/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+# }}}
 
-alias csc="cs ~/.config"
-alias css="cs ~/s"
-alias csh="cs ~/s/help_scripts"
-alias csv="cs ~/s/valera"
-alias csd="cs ~/Downloads"
-alias csa="cs ~/s/ai-news-trade-bot"
-alias cst="cs ~/tmp"
-alias csl="cs ~/s/l"
-alias csk="cs /usr/share/X11/xkb/symbols/"
-alias csg="cs ~/g"
-alias cssg="cs ~/s/g"
-alias csb="cs ~/Documents/Books"
-alias csu="cs ~/s/utils"
-#
 # # editor
 alias ec="e ~/.config/nvim"
 alias es="e ~/.zshrc"
