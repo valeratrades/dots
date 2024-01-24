@@ -1,5 +1,5 @@
 _s() {
-	cs ~/s/help_scripts/auto_redshift
+	cs ~/s/discretionary_engine
 }
 
 _r() {
