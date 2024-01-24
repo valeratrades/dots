@@ -9,12 +9,13 @@
 (defvar todo_timer "None")
 (defvar sway_mode "default")
 
-
+;;TODO!: fix the thing with overlapping on myopia=true
 
 (defwindow bar 
 	:monitor 0
 	:geometry (geometry :anchor "top right" :y 0 :width "0%" :height "17px")
 	(box
+		:class {myopia == "true" ? "myopia" : ""}
 		:space-evenly false
 		:visible {bar_visible == "true"}
 		(sway_mode)
@@ -43,7 +44,7 @@
 (defwidget todo_timer []
 	(box
 		:class "text"
-		:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ?: "problematic"}
+		:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
 		:visible {todo_timer != "None"}
 		"${todo_timer}"))
 
@@ -60,7 +61,7 @@
 (defwidget battery []
 	(box
 		:class "text"
-		:class {battery_poll.content < 10 && battery_poll.icon != "" ? "urgent" : battery_poll.content < 10 && battery_poll.icon == "" ?: "problematic"}
+		:class {battery_poll.content < 10 && battery_poll.icon != "" ? "urgent" : battery_poll.content < 10 && battery_poll.icon == "" ? "problematic" : ""}
 		:visible {battery_poll.content < 99}
 		"${battery_poll.icon}${battery_poll.content}"))
 
@@ -83,7 +84,7 @@
 (defwidget cpu []
 	(box
 		:class "text"
-		:class {"${round(EWW_CPU.avg, 0)}" > 90 ?: "problematic"}
+		:class {"${round(EWW_CPU.avg, 0)}" > 90 ? "problematic" : ""}
 		" ${round(EWW_CPU.avg, 0)}%"))
 (defwidget ram []
 	(box
@@ -110,7 +111,7 @@
 (defwidget ping []
 	(box
 		:class "text"
-		:class {ping_poll > 100 || ping_poll == "None" ?: "problematic"}
+		:class {ping_poll > 100 || ping_poll == "None" ? "problematic" : ""}
 		"${ping_poll == "None" ? "No WiFi" : ping_poll == "Some" ? "Some WiFi" : "${ping_poll}ms"}")) 
 
 ;; Volume ;;
@@ -134,8 +135,9 @@
 
 (defwindow btc_line_upper
 	:monitor 0
-	:geometry (geometry :anchor "top right" :y 17 :width "0%" :height "17px")
+	:geometry (geometry :anchor "top right" :y 20 :width "0%" :height "14px")
 	(box
+		:class {myopia == "true" ? "myopia" : ""}
 		:visible {bar_visible == "true"}
 		:space-evenly false
 		(box
@@ -148,8 +150,9 @@
 
 (defwindow btc_line_lower
 	:monitor 0
-	:geometry (geometry :anchor "top right" :y 34 :width "0%" :height "17px")
+	:geometry (geometry :anchor "top right" :y 34 :width "0%" :height "14px")
 	(box
+		:class {myopia == "true" ? "myopia" : ""}
 		:visible {bar_visible == "true"}
 		:class "text"
 		btc_line_spy_str))

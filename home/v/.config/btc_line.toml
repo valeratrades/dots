@@ -1,6 +1,6 @@
 output = "eww"
+comparison_offset_h = 24
 
 [spy]
 alpaca_key = "PKTJYTJNKYSBHAZYT3CO"
 alpaca_secret = "dP9AhnaIkikX84ZRC4ue4OhK5xGDao92c74TkYwg"
-
