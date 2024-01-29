@@ -65,7 +65,7 @@ input * {
     tap enabled
     scroll_factor 1.43
 
-    repeat_delay 170
+    repeat_delay 210
     repeat_rate 70
 }
 ## Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
@@ -76,11 +76,11 @@ input * {
 exec_always pamixer --default-source --set-volume 30
 exec_always pamixer --set-volume 45
 bindsym $mod+F5 exec pamixer --toggle-mute
-bindsym $mod+Shift+F5 exec pamixer --set-volume 45
+bindsym $mod+Shift+F5 exec pamixer --unmuute && pamixer --set-volume 45
 bindsym $mod+F6 exec pamixer --decrease 5
 bindsym $mod+F7 exec pamixer --increase 5
 bindsym $mod+F8 exec pamixer --default-source -t
-bindsym $mod+Shift+F8 exec pamixer --default-source --set-volume 30
+bindsym $mod+Shift+F8 exec pamixer --default-source --unmute && pamixer --default-source --set-volume 30
 bindsym $mod+Shift+F6 exec pamixer --default-source --decrease 5
 bindsym $mod+Shift+F7 exec pamixer --default-source --increase 5
 bindsym XF86AudioPlay exec playerctl play-pause

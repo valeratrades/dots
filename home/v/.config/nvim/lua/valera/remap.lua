@@ -52,7 +52,7 @@ K("", "R", "<C-d>zz")
 K("", "N", "<C-u>zz")
 
 -- Jump back, jump forward and tag-list back
-K({ "", "i" }, "<C-t>", "<nop>", { desc = "have this on Alt+h" })
+--K({ "", "i" }, "<C-t>", "<nop>", { desc = "have this on Alt+h" })
 K("", "<A-s>", "<C-o>")
 K("i", "<A-s>", "<Esc><C-o>")
 K("", "<C-t>", "<nop>")

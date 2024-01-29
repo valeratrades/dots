@@ -86,7 +86,7 @@ se() {
 # for super ls
 sl() {
 	if [ -f "$1" ]; then
-		cat $1
+		bat $1
 	else
 		ls -Ah $@
 	fi
