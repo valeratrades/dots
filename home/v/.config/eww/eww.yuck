@@ -153,6 +153,6 @@
 	:geometry (geometry :anchor "top right" :y 34 :width "0%" :height "14px")
 	(box
 		:class {myopia == "true" ? "myopia" : ""}
-		:visible {bar_visible == "true" && btc_line_main_str != ""}
+		:visible {bar_visible == "true" && btc_line_spy_str != ""}
 		:class "text"
 		btc_line_spy_str))
