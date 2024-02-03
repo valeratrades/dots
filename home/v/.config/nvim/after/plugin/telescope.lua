@@ -21,12 +21,6 @@ K("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascen
 	{ desc = "Ctrl+f remake" })
 
 
--- -- open new tab, then...
-K('n', '<Space>tf', "<cmd>tabe .<cr><cmd>Telescope find_files<cr>", { desc = "telescope + new tab: project files" })
-K('n', "<Space>ts", "<cmd>tabe .<cr><cmd>Telescope live_grep<cr>", { desc = "telescope + new tab: live grep" })
-K('n', '<Space>tg', "<cmd>tabe .<cr><cmd>Telescope git_files<cr>", { desc = "telescope + new tab: git files" })
---
-
 require('telescope').load_extension('media_files')
 require("telescope").setup {
 	extensions = {
@@ -37,3 +31,19 @@ require("telescope").setup {
 	},
 }
 --
+
+-- Default mappings reference {{{
+--<C-n>/<Down>	Next item
+--<C-p>/<Up>	Previous item
+--j/k	Next/previous (in normal mode)
+--<cr>	Confirm selection
+--<C-q>	Confirm selection and open quickfix window
+--<C-x>	Go to file selection as a split
+--<C-v>	Go to file selection as a vsplit
+--<C-t>	Go to a file in a new tab
+--<C-u>	Scroll up in preview window
+--<C-d>	Scroll down in preview window
+--<C-/>/?	Show picker mappings (in insert & normal mode, respectively)
+--<C-c>	Close telescope
+--<Esc>	Close telescope (in normal mode)
+-- }}}
