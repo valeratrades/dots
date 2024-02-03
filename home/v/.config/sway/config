@@ -76,7 +76,7 @@ input * {
 exec_always pamixer --default-source --set-volume 30
 exec_always pamixer --set-volume 45
 bindsym $mod+F5 exec pamixer --toggle-mute
-bindsym $mod+Shift+F5 exec pamixer --unmuute && pamixer --set-volume 45
+bindsym $mod+Shift+F5 exec pamixer --unmute && pamixer --set-volume 45
 bindsym $mod+F6 exec pamixer --decrease 5
 bindsym $mod+F7 exec pamixer --increase 5
 bindsym $mod+F8 exec pamixer --default-source -t

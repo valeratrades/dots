@@ -315,7 +315,21 @@ alias pY="${HOME}/s/help_scripts/boring.sh"
 #alias pRn="yay -Rns --noconfirm"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
-alias beep="mpv ${HOME}/Sounds/Notification.mp3"
+beep() {	
+	mute=$(pamixer --get-mute)
+	if [ "$mute" = "true" ]; then
+		pamixer --unmute
+	fi
+
+	volume=$(pamixer --get-volume)
+	pamixer --set-volume 100
+	mpv ${HOME}/Sounds/Notification.mp3
+	pamixer --set-volume $volume
+
+	if [ "$mute" = "true" ]; then
+		pamixer --mute
+	fi
+}	
 
 # # cargo
 alias c="cargo"
