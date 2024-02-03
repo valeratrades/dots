@@ -51,16 +51,6 @@ K("n", "H", "R")
 K("", "R", "<C-d>zz")
 K("", "N", "<C-u>zz")
 
--- Jump back, jump forward and tag-list back
---K({ "", "i" }, "<C-t>", "<nop>", { desc = "have this on Alt+h" })
-K("", "<A-s>", "<C-o>")
-K("i", "<A-s>", "<Esc><C-o>")
-K("", "<C-t>", "<nop>")
-K("", "<A-S>", "<C-t>")
-K("i", "<A-S>", "<Esc><C-t>")
-K("", "<A-t>", "<C-i>")
-K("i", "<A-t>", "<Esc><C-i>")
-
 -- Move line
 K("", "<A-r>", "<nop>")
 K("v", "<A-r>", ":m '>+1<cr>gv=gv")
@@ -86,7 +76,6 @@ K("", "L", "T")
 --
 --,}}}
 
-
 -- Windows
 K("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "windows: decrease width" })
 K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "windows: decrease height" })
@@ -102,18 +91,6 @@ K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab
 -- local leader doesn't work, so doing manually. Otherwise it'd be "<space> u"
 --K("n", "<space>uf", function() Util.format.toggle() end, { desc = "toggle: auto format (global)" })
 --K("n", "<space>us", function() Util.toggle("spell") end, { desc = "toggle: Spelling" })
---
-
--- Just use tmux
--- Terminal Mappings
--- Is this the thing that kills my esc? (doesn't seem so)
---K("t", "<Esc><Esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
---K("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window" })
---K("t", "<C-t>", "<cmd>wincmd j<cr>", { desc = "Go to lower window" })
---K("t", "<C-n>", "<cmd>wincmd k<cr>", { desc = "Go to upper window" })
---K("t", "<C-s>", "<cmd>wincmd l<cr>", { desc = "Go to right window" })
---K("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
---K("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 --
 
 -- Tabs
@@ -132,9 +109,9 @@ end
 K("", "<A-o>", "<nop>")
 K("", "<A-O>", "<nop>")
 K({ "i", "" }, "<A-u>", "<Esc><cmd>tabmove -<cr>")
-K({ "i", "" }, "<A-o>", "<Esc><cmd>tabmove +<cr>")
+K({ "i", "" }, "<A-y>", "<Esc><cmd>tabmove +<cr>")
 K({ "i", "" }, "<A-U>", "<Esc><cmd>tabmove 0<cr>")
-K({ "i", "" }, "<A-O>", "<Esc><cmd>tabmove $<cr>") -- for some reason doesn't work.
+K({ "i", "" }, "<A-Y>", "<Esc><cmd>tabmove $<cr>")
 
 --
 
