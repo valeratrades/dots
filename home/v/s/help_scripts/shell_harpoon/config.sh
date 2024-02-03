@@ -13,5 +13,4 @@ _n() {
 
 _t() {
 	cs ~/s/todo
-	cowsay moo
 }

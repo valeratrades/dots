@@ -91,7 +91,6 @@ sl() {
 		ls -Ah $@
 	fi
 }
-alias ll="ls -lA"
 mkfile() {
   file_path="$1"
   mkdir -p "$(dirname "${file_path}")"
@@ -179,6 +178,7 @@ alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias tmux="TERM='alacritty-direct' tmux"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
+alias mvt="ls -t | head -n 1 | xargs -I {} mv {}" # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
 
 # # cd
 mkcd() {
