@@ -47,7 +47,15 @@ function print_qwerty() {
     echo "┊ Z ┊ X ┊ C ┊ V ┊ B    N ┊ M ┊ , ┊ . ┊ / ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
-
+function print_ru() {
+    echo "+---+---+---+---+---++---+---+---+---+---+---+---+"
+    echo "┊ Й ┊ Ц ┊ У ┊ К ┊ Е    Н ┊ Г ┊ Ш ┊ Щ ┊ З ┊ Х | Ъ ┊"
+    echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊---┊---+"
+    echo "┊ Ф ┊ Ы ┊ В ┊ А ┊ П    Р ┊ О ┊ Л ┊ Д ┊ Ж ┊ Э ┊"
+    echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊---+"
+    echo "┊ Я ┊ Ч ┊ С ┊ М ┊ И    Т ┊ Ь ┊ Б ┊ Ю ┊ . ┊"
+    echo "+---+---+---+---+---++---+---+---+---+---+"
+}
 
 function typing_guide() {
 	google-chrome-stable "https://docs.google.com/document/d/1L-P68VDSGlpLM5A9tfRvWFohaR2NzPbkUT0ok34rsFU/edit"

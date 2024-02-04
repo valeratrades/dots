@@ -66,7 +66,7 @@
 		"${battery_poll.icon}${battery_poll.content}"))
 
 ;; Time ;;
-(defpoll time_poll :interval "1s" "date +\"%Y/%m/%d %H:%M:%S\"")
+(defpoll time_poll :interval "1s" "date +\"%Y/%m/%d%a%H:%M:%S\"")
 (defwidget time []
  (box
 	:class "text"
