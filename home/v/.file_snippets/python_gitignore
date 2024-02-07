@@ -11,8 +11,3 @@
 **/TODO.md
 run.sh
 **/tmp/
-
-
-# Added by cargo
-
-/target
