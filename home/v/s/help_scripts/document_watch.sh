@@ -1,3 +1,5 @@
+#TODO!: create pdf in a named /tmp pipe
+
 # for document watch
 dw() {
 	if [ -z "$1" ]; then

@@ -258,16 +258,6 @@ xkb_symbols "dvorak" {
     key <AB10>	{[         z,    Z          ]};
 };
 
-partial alphanumeric_keys
-xkb_symbols "my_dvorak" {
-	name[Group1]= "English (Valera Dvorak)";
-
-	include "us(dvorak)"
-	
-	key <RALT> { [ BackSpace ] };
-	key <LSGT> { [ Alt_R ] };
-};
-
 // Dvorak intl., with dead keys
 // Olivier Mehani (shtrom-xorg@ssji.net)
 // Reproduce the per-key mapping of us(intl) for the dvorak layout

@@ -17,7 +17,10 @@
 --}
 -- Probably no reason to fork the thing; the api is sufficient.
 
-require("shnip").setup({
+local shnip = require("shnip")
+
+
+shnip.setup({
 	leader = "<c-s>",
 	keys = {
 		["print"]    = "<c-p>",
@@ -31,7 +34,7 @@ require("shnip").setup({
 		["switch"]   = "<c-s>",
 		["case"]     = "<c-c>",
 		["default"]  = "<c-b>",
-		["function"] = "<c-m>",
+		["function"] = "<c-z>",
 		["lambda"]   = "<c-l>",
 		["class"]    = "<c-k>",
 		["struct"]   = "<c-h>",
@@ -57,6 +60,25 @@ require("shnip").setup({
 			extra = {
 				["<c-u>"] = "while True:<CR>",
 			}
-		}
+		},
 	},
+})
+
+
+shnip.addFtSnippets("typst", {
+	["print"] = "",
+	["debug"] = "",
+	["while"] = "",
+	["for"] = "",
+	["if"] = "",
+	["elseif"] = "",
+	["else"] = "",
+	["switch"] = "",
+	["case"] = "",
+	["default"] = "",
+	["function"] = "",
+	["lambda"] = "$  $<Esc>hi",
+	["class"] = "",
+	["struct"] = "$<Esc>O$ ",
+	["try"] = "",
 })

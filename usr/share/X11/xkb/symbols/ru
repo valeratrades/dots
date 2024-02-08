@@ -83,17 +83,6 @@ xkb_symbols "common" {
 };
 
 partial alphanumeric_keys
-xkb_symbols "my" {
-	include "ru(common)"
-
-		name[Group1]= "Valera Russian";
-	
-	// move altgr on my kbd:
-	key <RALT> { [ BackSpace ] };
-	key <LSGT> { [ Alt_R ] };
-};
-
-partial alphanumeric_keys
 xkb_symbols "legacy" {
 
     include "ru(common)"

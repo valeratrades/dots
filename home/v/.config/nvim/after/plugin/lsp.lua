@@ -237,7 +237,8 @@ require('mason-lspconfig').setup({
 			}
 		},
 		['typst_lsp'] = {
-			exportPdf = "checkOnSave",
+			--exportPdf = "checkOnSave",
+			exportPdf = "onType",
 			--serverPath = "/usr/local/bin/typst-lsp",
 		},
 	},
