@@ -48,8 +48,8 @@ register({
 	F = { _F, "Hop back to char" },
 	l = { _t, "Hop forward before char" },
 	L = { _T, "Hop back before char" },
-	["<leader>w"] = { next_word, "Hop forward to word" },
-	["<leader>W"] = { prev_word, "Hop back to word" },
+	["<leader>/"] = { next_word, "Hop forward to word" },
+	["<leader>?"] = { prev_word, "Hop back to word" },
 })
 
 hop.setup()

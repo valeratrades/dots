@@ -136,8 +136,15 @@ local on_attach = function(client, bufnr)
 	map("<space>ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
 	map("<space>lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
 
-	map("<space>l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr>", "tab := 2")
-	map("<space>l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr>", "tab := 4")
+	map("<space>l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr><cmd>lua vim.opt.expandtab=true<cr>",
+		"tab := 2")
+	map("<space>l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr><cmd>lua vim.opt.expandtab=true<cr>",
+		"tab := 4")
+	map("<space>l8", "<cmd>lua vim.opt.shiftwidth=8<cr><cmd>lua vim.opt.tabstop=8<cr><cmd>lua vim.opt.expandtab=true<cr>",
+		"tab := 8")
+	map("<space>l0",
+		"<cmd>lua vim.opt.expandtab=false<cr><cmd>lua vim.opt.tabsstop=2<cr><cmd>vim.opt.shiftwidth=2<cr><cmd>vim.opt.softtabstop=0<cr>",
+		"reset tab settings")
 
 
 	if client.supports_method('textDocument/formatting') then

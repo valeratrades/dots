@@ -19,6 +19,7 @@ pyn() {
 	cp ${HOME}/.file_snippets/run.sh ./run.sh
 	ln ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
 	ln ${HOME}/.file_snippets/python_gitignore ./.gitignore
+	cp ${HOME}/.file_snippets/main_py ./main.py
 	git init
 	git add -A
 	git commit -m "-- New Project Snippet --"

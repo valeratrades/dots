@@ -275,7 +275,7 @@ csb() {
 	cs $_path
 }
 csu() {
-	_path="${HOME}/s/utils/"
+	_path="${HOME}/uni/"
 	if [ -n "$1" ]; then
 		_path+="${1}"
 	fi
