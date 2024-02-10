@@ -180,6 +180,12 @@ alias tmux="TERM='alacritty-direct' tmux"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
 alias mvt="ls -t | head -n 1 | xargs -I {} mv {}" # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
 
+# # cli_translate
+alias ttf="cli_translate -f"
+alias tte="cli_translate -e"
+alias ttr="cli_translate -r"
+#
+
 # # cd
 mkcd() {
     mkdir -p "$1" && cd "$1"
