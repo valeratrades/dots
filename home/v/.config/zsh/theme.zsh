@@ -153,12 +153,13 @@ function mnml_status {
 		local a_files="$($_ls -1A | sed -n '$=')"
 		local v_files="$($_ls -1 | sed -n '$=')"
 		local h_files="$((a_files - v_files))"
-		local _size="$(ls -lAh . | awk 'NR == 1 {n=split($0, words, " "); print words[n]; exit}')"
+		#local _size="$(ls -lAh . | awk 'NR == 1 {n=split($0, words, " "); print words[n]; exit}')"
 		
 		local output="${_w}[$_g${v_files:-0}"
 		if [ "${h_files:-0}" -gt 0 ]; then
-			output="${output} $_w($_g$h_files$_w) $_g${_size}"
+			output="${output} $_w($_g$h_files$_w)"
 		fi
+		#output="${output} $_g${_size}"
 	
 		output="${output}${_w}]"
 
