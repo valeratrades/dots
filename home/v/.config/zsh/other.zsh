@@ -47,7 +47,8 @@ setopt nocaseglob
 setopt no_list_ambiguous
 setopt complete_in_word
 
-autoload -Uz compinit && compinit
+fpath+="$HOME/.config/zsh/completions"
+autoload -Uz compinit && compinit -u
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]} r:|?=**'
 
 complete-word() {

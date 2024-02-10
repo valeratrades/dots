@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/"
+fpath+="${HOME}/.config/zsh/.zfunc"
 . ~/.private/credentials.sh
 export EDITOR=nvim
 edit() $EDITOR
@@ -180,6 +181,7 @@ alias tmux="TERM='alacritty-direct' tmux"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
 alias mvt="ls -t | head -n 1 | xargs -I {} mv {}" # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
 alias ll="exa -lA"
+alias sound="qpwgraph"
 
 # # cli_translate
 alias ttf="cli_translate -f"
