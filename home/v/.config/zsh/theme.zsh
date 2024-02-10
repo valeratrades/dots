@@ -15,8 +15,8 @@ MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 [ "${+MNML_INFOLN}" -eq 0 ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
 
 #NB: subset dirs have to be earlier, as I would break on them in `mnml_cmd` otherwise. (eg: `s/valera` has to be before `s`)
-local special_dirs=("s/help_scripts" "s/valera" "tmp" "Downloads" "s/ai-news-trade-bot" "s/l" "g" ".config" "s/utils" "s" "Documents/Books")
-local special_chars=("h" "v" "t" "d" "a" "l" "g" "c" "u" "s" "b")
+local special_dirs=("s/help_scripts" "s/valera" "tmp" "Downloads" "s/ai-news-trade-bot" "s/l" "g" ".config" "s" "Documents/Books")
+local special_chars=("h" "v" "t" "d" "a" "l" "g" "c" "s" "b")
 
 function custom_cwd {
 	#NB: "%~" returns a name with non-standard ~ character. The following special_dir spec contains it as well.
@@ -153,16 +153,13 @@ function mnml_status {
 		local a_files="$($_ls -1A | sed -n '$=')"
 		local v_files="$($_ls -1 | sed -n '$=')"
 		local h_files="$((a_files - v_files))"
+		local _size="$(ls -lAh . | awk 'NR == 1 {n=split($0, words, " "); print words[n]; exit}')"
 		
 		local output="${_w}[$_g${v_files:-0}"
 		if [ "${h_files:-0}" -gt 0 ]; then
-			output="${output} $_w($_g$h_files$_w)"
+			output="${output} $_w($_g$h_files$_w) $_g${_size}"
 		fi
-
-		# apparently no way to do instantly from metadata only, so will take several seconds on some large directories
-		#local _du="$(du -sh . | awk '{print $1}')"
-		#output="${output}${_g}, ${_du}$_w"
-		
+	
 		output="${output}${_w}]"
 
 		printf '%b' "$output"

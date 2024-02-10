@@ -19,4 +19,4 @@ K("i", "<Tab>", "<Tab>")
 
 K("i", "<Down>", "<Plug>(copilot-accept-word)")
 K("i", "<Left>", "<Plug>(copilot-accept-line)")
-K("i", "<M-\\>", "<Plug>(copilot-suggest)")
+K("i", "<M-/>", "<Plug>(copilot-suggest)")
