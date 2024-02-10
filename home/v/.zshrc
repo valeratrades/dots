@@ -88,7 +88,7 @@ sl() {
 	if [ -f "$1" ]; then
 		bat $1
 	else
-		ls -Ah $@
+		exa -Ah $@
 	fi
 }
 mkfile() {
@@ -131,7 +131,7 @@ usb() {
 	sudo chown $(whoami):$(whoami) /mnt/USB
 	sudo mount /dev/sdb1 /mnt/USB
 	cd /mnt/USB
-	ls -A
+	exa -A
 }
 creds() {
 	_dir="${HOME}/.private/"
