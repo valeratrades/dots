@@ -64,3 +64,7 @@ function typing_guide() {
 gm() {
 	printf "\033[32mgm\033[0m\n"
 }
+
+print_moto() {
+	printf "Iteration Speed\n"
+}

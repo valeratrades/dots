@@ -17,7 +17,7 @@ pyn() {
 	mkdir "$1"
 	cd "$1"
 	cp ${HOME}/.file_snippets/run.sh ./run.sh
-	ln ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
+	cp ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
 	ln ${HOME}/.file_snippets/python_gitignore ./.gitignore
 	cp ${HOME}/.file_snippets/main_py ./main.py
 	git init
@@ -34,4 +34,10 @@ gon() {
 	git init
 	git add -A
 	git commit -m "-- New Project Snippet --"
+}
+
+lnn() {
+	lake new "$@"
+	cd "$1"
+	cp -f ${HOME}/.file_snippets/leanpkg.toml ./leanpkg.toml
 }

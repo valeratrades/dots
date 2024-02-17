@@ -8,7 +8,7 @@ _r() {
 }
 
 _n() {
-	cs ~/s/btc_line
+	cs ~/uni/math/td/F2
 }
 
 _t() {

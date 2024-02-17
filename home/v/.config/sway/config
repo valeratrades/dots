@@ -61,7 +61,6 @@ input * {
     xkb_variant "my,,"
 		xkb_options "grp:win_space_toggle"
 
-    natural_scroll enabled
     tap enabled
     scroll_factor 1.43
 
@@ -71,6 +70,9 @@ input * {
 ## Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
 ## to get the code of the key, use xev or auto-hotkey
 #bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
+input type:touchpad {
+    natural_scroll enabled
+}
 
 # # Multimedia
 exec_always pamixer --default-source --set-volume 30
@@ -191,7 +193,6 @@ bindsym $mod+Shift+l exec echo "false" > /tmp/btc_line_additional_line
 # check if any task was cut short during the last session
 exec_always sleep 3 && todo do continue_ongoing
 
-#TODO: make into a toggle
 #bindcode $mod+34 exec ~/.configlsway/toggle_screen.sh
 bindcode $mod+34 output $output_laptop dpms on
 bindcode $mod+Shift+34 output $output_laptop dpms off
@@ -204,7 +205,9 @@ set $switch_out swaymsg mode \"default\" && eww update sway_mode=default
 output $output_monitor pos 0 0 scale 0.73684
 #output $output_laptop pos 277 1080
 # these are scaled by 1/0.73684 (which is the current `scale` on the large monitor screen)
-output $output_laptop pos 376 1466
+#output $output_laptop pos 376 1466
+# pretty sure a bug on their side, so need to scale twice or something.
+output $output_laptop pos 560 1466
 
 exec_always "sh -c -- pkill -f 'todo monitor' && todo monitor || todo monitor"
 

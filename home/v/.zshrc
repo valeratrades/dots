@@ -332,12 +332,14 @@ beep() {
 
 	volume=$(pamixer --get-volume)
 	pamixer --set-volume 100
-	mpv ${HOME}/Sounds/Notification.mp3
+	mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
 	pamixer --set-volume $volume
 
 	if [ "$mute" = "true" ]; then
 		pamixer --mute
 	fi
+
+	notify-send "beep"
 }	
 
 # # cargo
