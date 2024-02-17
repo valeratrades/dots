@@ -180,6 +180,8 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym Ctrl+Shift+Escape exec alacritty --class btm-float -e btm -u; for_window [app_id="btm-float"] floating enable
 bindsym $mod+d exec ~/.config/sway/discord_toggle.sh
 bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
+# Ctrl suffix because it will often be used after `Ctrl+l` in chrome.
+bindsym $mod+Ctrl+g exec tg $(greenclip print | awk 'NR==1 {print}')
 
 set $refresh_eww "eww kill; eww open bar; eww open btc_line_upper; eww open btc_line_lower"
 exec_always $refresh_eww
