@@ -293,11 +293,12 @@ csu() {
 # }}}
 
 # # editor
-alias ec="e ~/.config/nvim"
-alias es="e ~/.zshrc"
-alias ezt="e ~/.config/zsh/theme.zsh"
+alias ec="nvim ~/.config/nvim"
+alias es="nvim ~/.zshrc"
+alias ezt="nvim ~/.config/zsh/theme.zsh"
 #? can I do this for rust and go? (maybe something with relative paths there)
 alias epy="e ~/envs/Python/lib/python3.11/site-packages" 
+alias et="nvim /tmp/a_temporary_note.md -c 'nnoremap q gg^vG^g_\"+y:qa!<CR>' -c 'startinsert'"
 alias hx="helix"
 #
 # # keyd
