@@ -4,7 +4,8 @@
 #
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/"
+export MODULAR_HOME="$HOME/.modular"
+export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/:$MODULAR_HOME/pkg/packages.modular.com_mojo/bin"
 fpath+="${HOME}/.config/zsh/.zfunc"
 . ~/.private/credentials.sh
 export EDITOR=nvim

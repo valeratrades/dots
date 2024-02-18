@@ -1,6 +1,5 @@
 alias emacs="printf \"\033[31mno\033[0m\n\""
 alias nano="printf \"\033[31mno\033[0m\n\""
-alias vscode="printf \"\033[31mno\033[0m\n\""
 
 function print_sturdy() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
