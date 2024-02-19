@@ -209,4 +209,5 @@ return require('lazy').setup({
 		},
 	},
 	"smoka7/hop.nvim",
+	"nanotee/zoxide.vim",
 })

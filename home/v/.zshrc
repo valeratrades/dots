@@ -123,7 +123,6 @@ pp() {
 # ----------------------------------------------------------------------------
 # BELOW THIS LINE ARE THINGS WE NEVER USE RECURSIVELY.
 # ============================================================================
-eval "$(jump shell)" # binds to j
 chh() {
 	sudo chmod -R 777 ~/
 }
@@ -166,8 +165,9 @@ alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
 alias rf="rm -rf"
 alias srf="sudo rm -rf"
-alias z="zathura"
+alias za="zathura"
 alias zp="zathura --mode presentation"
+alias z="zoxide"
 alias senable="sudo systemctl enable"
 alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
@@ -294,9 +294,9 @@ csu() {
 # }}}
 
 # # editor
-alias ec="nvim ~/.config/nvim"
+alias ec="e ~/.config/nvim"
 alias es="nvim ~/.zshrc"
-alias ezt="nvim ~/.config/zsh/theme.zsh"
+alias ezt="e ~/.config/zsh/theme.zsh"
 #? can I do this for rust and go? (maybe something with relative paths there)
 alias epy="e ~/envs/Python/lib/python3.11/site-packages" 
 alias et="nvim /tmp/a_temporary_note.md -c 'nnoremap q gg^vG^g_\"+y:qa!<CR>' -c 'startinsert'"

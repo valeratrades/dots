@@ -108,3 +108,5 @@ fi
 }
 zle -N accept-line accept-line
 #
+
+eval "$(zoxide init zsh)" # to get completions
