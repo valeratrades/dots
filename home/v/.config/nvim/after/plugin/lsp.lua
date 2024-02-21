@@ -105,46 +105,37 @@ end
 --
 
 local on_attach = function(client, bufnr)
-	local function map(lhs, rhs, desc)
-		local opts = { buffer = bufnr, noremap = true, desc = "lsp: " .. desc }
-		vim.keymap.set("n", lhs, rhs, opts)
-	end
-
-	-- can't change names of these two, as they have same functions without lsp
-	map("K", "<cmd>lua vim.lsp.buf.hover()<cr>", "hover info")
-	map("gd", "<cmd>lua vim.lsp.buf.definition()<cr>", "definition")
-
-	map("<C-r>", "<cmd>lua JumpToDiagnostic(1, 'max')<cr>", "next: errors only")
-	map("<C-n>", "<cmd>lua JumpToDiagnostic(-1, 'max')<cr>", "prev: errors only")
-	map("<C-A-r>", "<cmd>lua JumpToDiagnostic(1, 'all')<cr>", "next: whatever")
-	map("<C-A-n>", "<cmd>lua JumpToDiagnostic(-1, 'all')<cr>", "prev: whatever")
-
-	map("<space>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", "declaration")
-	map("<space>lt", "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type definition")
-	map("<space>li", "<cmd>Telescope lsp_implementations<cr>", "implementations")
-	map("<space>lr", "<cmd>Telescope lsp_references<cr>", "references")
-	map("<space>ld", "<cmd>Telescope diagnostics<cr>", "diagnostics")
-	map("<space>ll", "<cmd>Telescope diagnostics bufnr=0<cr>", "local diagnostics")
-	map("<space>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", "rename")
-	map("<space>lw", "<cmd>Telescope lsp_document_symbols<cr>", "workspace symbol")
-	map("<space>lW", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "workspace symbol")
-	map("<space>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "format")
-	map("<space>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action")
-	map("<space>lz", "<cmd>lua vim.cmd.LspRestart()<cr>", "restart")
-
-	map("<space>ly", "<cmd>lua YankDiagnosticPopup()<cr>", "\"+y the popup")
-	map("<space>ls", "<cmd>lua ToggleDiagnostics()<cr>", "toggle diagnostics on/off")
-	map("<space>lv", "<cmd>lua ToggleVirtualText()<cr>", "toggle virtual text")
-
-	map("<space>l2", "<cmd>lua vim.opt.shiftwidth=2<cr><cmd>lua vim.opt.tabstop=2<cr><cmd>lua vim.opt.expandtab=true<cr>",
-		"tab := 2")
-	map("<space>l4", "<cmd>lua vim.opt.shiftwidth=4<cr><cmd>lua vim.opt.tabstop=4<cr><cmd>lua vim.opt.expandtab=true<cr>",
-		"tab := 4")
-	map("<space>l8", "<cmd>lua vim.opt.shiftwidth=8<cr><cmd>lua vim.opt.tabstop=8<cr><cmd>lua vim.opt.expandtab=true<cr>",
-		"tab := 8")
-	map("<space>l0",
-		"<cmd>lua vim.opt.expandtab=false<cr><cmd>lua vim.opt.tabsstop=2<cr><cmd>vim.opt.shiftwidth=2<cr><cmd>vim.opt.softtabstop=0<cr>",
-		"reset tab settings")
+	local telescope_builtin = require("telescope.builtin")
+	require("which-key").register({
+		K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover Info" },
+		gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to Definition" },
+		["<C-r>"] = { "<cmd>lua JumpToDiagnostic(1, 'max')<CR>", "Next Error" },
+		["<C-n>"] = { "<cmd>lua JumpToDiagnostic(-1, 'max')<CR>", "Previous Error" },
+		["<C-A-r>"] = { "<cmd>lua JumpToDiagnostic(1, 'all')<CR>", "Next Diagnostic" },
+		["<C-A-n>"] = { "<cmd>lua JumpToDiagnostic(-1, 'all')<CR>", "Previous Diagnostic" },
+		["<space>l"] = {
+			name = "LSP",
+			D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
+			t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type Definition" },
+			i = { "<cmd>Telescope lsp_implementations<CR>", "Implementations" },
+			r = { "<cmd>Telescope lsp_references<CR>", "References" },
+			d = { function() telescope_builtin.diagnostics({ sort_by = "severity" }) end, "Diagnostics" },
+			l = { function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end, "Local Diagnostics" },
+			R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+			w = { "<cmd>Telescope lsp_document_symbols<CR>", "Workspace Symbol" },
+			W = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic Workspace Symbol" },
+			f = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
+			a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
+			z = { "<cmd>lua vim.cmd.LspRestart()<CR>", "Restart LSP" },
+			y = { "<cmd>lua YankDiagnosticPopup()<CR>", "Yank Diagnostic Popup" },
+			s = { "<cmd>lua ToggleDiagnostics()<CR>", "Toggle Diagnostics" },
+			v = { "<cmd>lua ToggleVirtualText()<CR>", "Toggle Virtual Text" },
+			["2"] = { "<cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 2" },
+			["4"] = { "<cmd>lua vim.opt.shiftwidth=4<CR><cmd>lua vim.opt.tabstop=4<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 4" },
+			["8"] = { "<cmd>lua vim.opt.shiftwidth=8<CR><cmd>lua vim.opt.tabstop=8<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 8" },
+			["0"] = { "<cmd>lua vim.opt.expandtab=false<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>vim.opt.shiftwidth=2<CR><cmd>vim.opt.softtabstop=0<CR>", "Reset Tab Settings" },
+		},
+	}, { buffer = bufnr })
 
 
 	if client.supports_method('textDocument/formatting') then

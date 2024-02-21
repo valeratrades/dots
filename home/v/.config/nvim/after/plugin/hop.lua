@@ -44,10 +44,10 @@ end
 
 local register = require("which-key").register
 register({
-	f = { _f, "Hop forward to char" },
-	F = { _F, "Hop back to char" },
-	l = { _t, "Hop forward before char" },
-	L = { _T, "Hop back before char" },
+	--f = { _f, "Hop forward to char" },
+	--F = { _F, "Hop back to char" },
+	--l = { _t, "Hop forward before char" },
+	--L = { _T, "Hop back before char" },
 	["<leader>/"] = { next_word, "Hop forward to word" },
 	["<leader>?"] = { prev_word, "Hop back to word" },
 })
