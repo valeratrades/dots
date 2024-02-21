@@ -91,10 +91,11 @@ return require('lazy').setup({
 		--e -->e-->e----->e--->e--------->e-->e
 		--b < ---b<--b<-----b<----b<--------b<-b
 		'chaoren/vim-wordmotion',
+		-- default prefix is already <Space>
 		keys = {
-			{ "<Space>w", mode = { "n", "v", "o", "x" } },
-			{ "<Space>b", mode = { "n", "v", "o", "x" } },
-			{ "<Space>e", mode = { "n", "v", "o", "x" } },
+			{ "w", mode = { "n", "v", "o", "x" } },
+			{ "b", mode = { "n", "v", "o", "x" } },
+			{ "e", mode = { "n", "v", "o", "x" } },
 		},
 	},
 	-- similar to helix's match
