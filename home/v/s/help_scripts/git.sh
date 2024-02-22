@@ -10,7 +10,10 @@ gg() {
 	git add -A && git commit -m "$message" && git push
 
 	if [ -f "./Cargo.toml" ]; then
-		cb > /dev/null 2>&1
+		current_branch=$(git branch --show-current)
+		if [ "$current_branch" = "master" ] || [ "$current_branch" = "release" ] || [ "$current_branch" = "stable" ]; then
+			cb > /dev/null 2>&1
+		fi
 	fi
 }
 alias ggf="gg feat:"
