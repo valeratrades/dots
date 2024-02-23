@@ -106,11 +106,26 @@ cs() {
 
 # # cargo
 cb() {
+	cargo machete
 	guess_name=$(basename $(pwd))
 	if [ -f "./src/lib.rs" ]; then
 		return 0
 	fi
 	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
+}
+cq() {
+	local stderr_temp_file=$(mktemp)
+	cargo --color always --quiet $@ 2>"$stderr_temp_file"
+	local exit_status=$?
+	printf "$exit_status\n"
+
+	if [ $exit_status!=0 ]; then
+		# note that when running `cargo check`, the warnings are piped to stdout, so still will be printed. However, we probably want that for `check`.
+		cat "$stderr_temp_file" 1>&2
+	fi
+
+	rm -f "$stderr_temp_file"
+	return $exit_status
 }
 #
 alias py="python3"

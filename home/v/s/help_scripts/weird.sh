@@ -66,5 +66,9 @@ gm() {
 }
 
 print_moto() {
-	printf "Iteration Speed\n"
+	printf "\033[32mIteration Speed\033[0m\n"
+}
+
+function what() {
+	cat ~/s/help_scripts/weird/sbf_tweet.txt | py ~/s/help_scripts/weird/what.py
 }
