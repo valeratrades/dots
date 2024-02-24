@@ -197,3 +197,6 @@ async
 orderbook
 vec
 Aggr
+tmp
+perp
+bybit

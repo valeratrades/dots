@@ -3,8 +3,7 @@ _s() {
 }
 
 _r() {
-	cs ~/tmp/btc_line_bak
-	nvim main.py
+	cs ~/s/aggregated_orderbook
 }
 
 _n() {
