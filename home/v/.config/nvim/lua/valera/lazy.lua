@@ -211,4 +211,11 @@ return require('lazy').setup({
 	},
 	"smoka7/hop.nvim",
 	"nanotee/zoxide.vim",
+	{
+		"ziontee113/color-picker.nvim",
+		config = function()
+			require("color-picker").setup()
+		end
+
+	}
 })

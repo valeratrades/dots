@@ -100,7 +100,7 @@ mkfile() {
 }
 cs() {
 	cd "$@" || return 1
-	. "./run.sh" > /dev/null 2>&1 || :
+	. "./.local.sh" > /dev/null 2>&1 || :
 	sl
 }
 
@@ -363,12 +363,28 @@ alias c="cargo"
 # for super cargo
 sc() {
 	starttime=$(date +%s)
-	${HOME}/s/help_scripts/stop_all_run_cargo.sh $@
+	run_after="false"
+
+	if [ $1 = "c" ]; then
+		shift
+		${HOME}/s/help_scripts/stop_all_run_cargo.sh lcheck ${@}
+	elif [ $1 = "r" ]; then
+		shift
+		${HOME}/s/help_scripts/stop_all_run_cargo.sh lbuild ${@}
+		run_after="true"
+	else
+		printf "Only takes \"c\" or \"r\". Provided: $1\n"
+	fi
 	endtime=$(date +%s)
+
 	elapsedtime=$((endtime - starttime))
 	if [ $elapsedtime -gt 20 ]; then
 		mpv ${HOME}/Sounds/Notification.mp3
 		notify-send "cargo compiled"
+	fi
+
+	if [ "$run_after" = "true" ]; then
+		cargo run ${@}
 	fi
 }
 #

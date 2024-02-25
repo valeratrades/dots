@@ -43,6 +43,8 @@ bindgesture pinch:inward exec xdotool key ctrl+minus
 exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
 #exec "~/.config/sway/listen.sh"
 
+exec "~/.config/sway/cardio_break_reminder.sh"
+
 exec mako
 exec libinput-gestures
 exec wlr-gamma-service
