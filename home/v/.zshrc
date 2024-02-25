@@ -368,6 +368,7 @@ sc() {
 	elapsedtime=$((endtime - starttime))
 	if [ $elapsedtime -gt 20 ]; then
 		mpv ${HOME}/Sounds/Notification.mp3
+		notify-send "cargo compiled"
 	fi
 }
 #
