@@ -341,29 +341,41 @@ alias pY="${HOME}/s/help_scripts/boring.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 beep() {	
-	mute=$(pamixer --get-mute)
-	if [ "$mute" = "true" ]; then
-		pamixer --unmute
+	if [ $# = 1 ]; then
+		if [ "$1" = "l" ] || [ "$1" = "-l" ] || [ "$1" = "loud" ]; then # loud beep
+			mute=$(pamixer --get-mute)
+			if [ "$mute" = "true" ]; then
+				pamixer --unmute
+			fi
+
+			volume=$(pamixer --get-volume)
+			pamixer --set-volume 100
+			mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
+			pamixer --set-volume $volume
+
+			if [ "$mute" = "true" ]; then
+				pamixer --mute
+			fi
+
+			notify-send "beep"
+			return 0
+		else
+			printf "Only takes \"l\" || \"loud\" || \"-l\". Provided: $1\n"
+			return 1
+		fi
+	else # normal beep
+		mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
+		return 0
 	fi
-
-	volume=$(pamixer --get-volume)
-	pamixer --set-volume 100
-	mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
-	pamixer --set-volume $volume
-
-	if [ "$mute" = "true" ]; then
-		pamixer --mute
-	fi
-
-	notify-send "beep"
 }	
 
 # # cargo
 alias c="cargo"
-# for super cargo
-sc() {
+# for cargo timed
+ct() {
 	starttime=$(date +%s)
 	run_after="false"
+	eww update cargo_compiling=true
 
 	if [ $1 = "c" ]; then
 		shift
@@ -376,10 +388,11 @@ sc() {
 		printf "Only takes \"c\" or \"r\". Provided: $1\n"
 	fi
 	endtime=$(date +%s)
+	eww update cargo_compiling=false
 
 	elapsedtime=$((endtime - starttime))
 	if [ $elapsedtime -gt 20 ]; then
-		mpv ${HOME}/Sounds/Notification.mp3
+		beep
 		notify-send "cargo compiled"
 	fi
 

@@ -8,6 +8,7 @@
 (defvar myopia "false")
 (defvar todo_timer "None")
 (defvar sway_mode "default")
+(defvar cargo_compiling "false")
 
 ;;TODO!: fix the thing with overlapping on myopia=true
 
@@ -20,6 +21,7 @@
 		:visible {bar_visible == "true"}
 		(sway_mode)
 		(todo_timer)
+		(cargo)
 		(openvpn)
 		(notifications)
 		(github)
@@ -47,6 +49,14 @@
 		:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
 		:visible {todo_timer != "None"}
 		"${todo_timer}"))
+
+;; Cargo ;;
+(defwidget cargo []
+	(box
+		:class "text"
+		:class "problematic"
+		:visible {cargo_compiling == "true"}
+		""))
 
 ;; Openvpn ;;
 (defpoll openvpn_poll :initial "0" :interval "1s" "./modules/openvpn.sh")
