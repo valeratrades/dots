@@ -111,7 +111,7 @@ cb() {
 	if [ -f "./src/lib.rs" ]; then
 		return 0
 	fi
-	sc build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
+	cargo build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
 }
 cq() {
 	local stderr_temp_file=$(mktemp)
@@ -373,6 +373,11 @@ beep() {
 alias c="cargo"
 # for cargo timed
 ct() {
+	cleanup() {
+		eww update cargo_compiling=false
+	}
+	trap cleanup EXIT
+
 	starttime=$(date +%s)
 	run_after="false"
 	eww update cargo_compiling=true
@@ -388,7 +393,6 @@ ct() {
 		printf "Only takes \"c\" or \"r\". Provided: $1\n"
 	fi
 	endtime=$(date +%s)
-	eww update cargo_compiling=false
 
 	elapsedtime=$((endtime - starttime))
 	if [ $elapsedtime -gt 20 ]; then
