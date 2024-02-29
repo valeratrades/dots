@@ -7,7 +7,7 @@ _r() {
 }
 
 _n() {
-	cs ~/uni/math/td/F2
+	cs ~/s/l/ml/introduction
 }
 
 _t() {

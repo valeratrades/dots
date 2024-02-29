@@ -298,6 +298,13 @@ csb() {
 	fi
 	cs $_path
 }
+csp() {
+	_path="${HOME}/Documents/Papers"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
 csu() {
 	_path="${HOME}/uni/"
 	if [ -n "$1" ]; then
