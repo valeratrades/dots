@@ -9,7 +9,7 @@
 **/.vscode
 **/_*
 **/TODO.md
-run.sh
+.local.sh
 **/tmp/
 
 
