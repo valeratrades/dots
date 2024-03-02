@@ -70,5 +70,5 @@ print_moto() {
 }
 
 function what() {
-	cat ~/s/help_scripts/weird/sbf_tweet.txt | py ~/s/help_scripts/weird/what.py
+	cat ~/s/help_scripts/weird/sbf_tweet.txt | py ~/s/help_scripts/weird/what.py | figlet
 }
