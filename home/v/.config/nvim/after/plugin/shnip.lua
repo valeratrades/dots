@@ -52,7 +52,7 @@ shnip.setup({
 		go = {
 			extra = {
 				["<c-r>"] = "if err!=nil {<CR>}",
-				["<down>"] = "if err!=nil {<CR>panic!(\"1) What\")<CR>}",
+				["<down>"] = "if err!=nil {<CR>return err<CR>}",
 				["<c-u>"] = "while true {<CR>}<Esc>ko",
 			},
 		},

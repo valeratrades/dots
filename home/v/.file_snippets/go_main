@@ -6,5 +6,5 @@ import (
 
 func main() {
 	world := "World"
-	fmt.Printf("Hello %s\n", world)
+	fmt.Printf("Hello %s!\n", world)
 }

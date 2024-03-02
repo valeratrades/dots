@@ -148,6 +148,7 @@ assign [app_id="org.telegram.desktop"] 4
 # doesn't work, as netrw sets the title as "nvim: [No name]"
 #assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
 exec "~/.config/sway/restore_session.sh"
+exec "~/.config/sway/start_doc_scraper.sh"
 
 bindsym $mod+l focus prev
 bindsym $mod+h focus next
@@ -166,12 +167,11 @@ bindsym $mod+j reload
 bindsym $mod+Shift+q exec "eww update sway_mode=full_upgrade_before_shutdown && ${HOME}/s/help_scripts/boring.sh && sleep 1 && pkill -TERM -x chrome; sudo shutdown -h now"
 
 #bindsym $mod+l exec $lock
-bindsym $mod+Escape exec $power
+bindsym $mod+Escape exec makoctl dismiss --all
 bindsym $mod+End exec $wifi
 
 
 bindsym $mod+m exec $menu
-bindsym $mod+Space exec makoctl dismiss --all
 bindsym $mod+o split vertical
 bindsym $mod+Shift+o split horizontal
 bindsym $mod+Ctrl+t layout tabbed

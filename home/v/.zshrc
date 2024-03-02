@@ -177,7 +177,7 @@ chess() {
 alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
-alias rf="rm -rf"
+alias rf="sudo rm -rf"
 alias srf="sudo rm -rf"
 alias za="zathura"
 alias zp="zathura --mode presentation"

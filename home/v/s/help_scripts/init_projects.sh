@@ -36,6 +36,7 @@ gon() {
 	git init
 	git add -A
 	git commit -m "-- New Project Snippet --"
+	go mod init "github.com/${GITHUB_NAME}/$1"
 }
 
 lnn() {
