@@ -1,7 +1,5 @@
 ## Copy
-```bash
-#!/bin/sh
-
+```sh
 dots() {
     current_dir=$(pwd)
     cd /tmp
@@ -13,6 +11,7 @@ dots() {
     rm -rf ./dots
     cd $current_dir
 }
+dots
 ```
 ## Configure
 To overwrite or add functionality, edit
