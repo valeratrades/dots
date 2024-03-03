@@ -384,6 +384,7 @@ ct() {
 		eww update cargo_compiling=false
 	}
 	trap cleanup EXIT
+	trap cleanup INT
 
 	starttime=$(date +%s)
 	run_after="false"
@@ -400,6 +401,7 @@ ct() {
 		printf "Only takes \"c\" or \"r\". Provided: $1\n"
 	fi
 	endtime=$(date +%s)
+	cleanup
 
 	elapsedtime=$((endtime - starttime))
 	if [ $elapsedtime -gt 20 ]; then
