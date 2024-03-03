@@ -204,3 +204,5 @@ notif
 util
 init
 stderr
+dir
+stdout

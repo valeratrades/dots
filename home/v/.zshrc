@@ -349,7 +349,7 @@ alias pY="${HOME}/s/help_scripts/boring.sh"
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 beep() {	
 	if [ $# = 1 ]; then
-		if [ "$1" = "l" ] || [ "$1" = "-l" ] || [ "$1" = "loud" ]; then # loud beep
+		if [ "$1" = "-l" ] || [ "$1" = "--loud" ]; then
 			mute=$(pamixer --get-mute)
 			if [ "$mute" = "true" ]; then
 				pamixer --unmute
@@ -367,7 +367,7 @@ beep() {
 			notify-send "beep"
 			return 0
 		else
-			printf "Only takes \"l\" || \"loud\" || \"-l\". Provided: $1\n"
+			printf "Only takes \"-l\"/\"--loud\". Provided: $1\n"
 			return 1
 		fi
 	else # normal beep
@@ -390,13 +390,15 @@ ct() {
 	run_after="false"
 	eww update cargo_compiling=true
 
-	if [ $1 = "c" ]; then
-		shift
-		${HOME}/s/help_scripts/stop_all_run_cargo.sh lcheck ${@}
+	if [ "$#" = "0" ]; then
+		ct r
 	elif [ $1 = "r" ]; then
 		shift
 		${HOME}/s/help_scripts/stop_all_run_cargo.sh lbuild ${@}
 		run_after="true"
+	elif [ $1 = "c" ]; then
+		shift
+		${HOME}/s/help_scripts/stop_all_run_cargo.sh lcheck ${@}
 	else
 		printf "Only takes \"c\" or \"r\". Provided: $1\n"
 	fi
