@@ -59,21 +59,21 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-    xkb_layout "semimak,ru,fr,us"
-    xkb_variant "my,,,"
-		xkb_options "grp:win_space_toggle"
+	xkb_layout "semimak,ru,fr,us"
+	xkb_variant "my,,,"
+	xkb_options "grp:win_space_toggle"
 
-    tap enabled
-    scroll_factor 1.43
+	tap enabled
+	scroll_factor 4
 
-    repeat_delay 210
-    repeat_rate 70
+	repeat_delay 210
+	repeat_rate 70
 }
 ## Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
 ## to get the code of the key, use xev or auto-hotkey
 #bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
 input type:touchpad {
-    natural_scroll enabled
+	natural_scroll enabled
 }
 
 # # Multimedia
