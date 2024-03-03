@@ -52,7 +52,7 @@ shnip.setup({
 		go = {
 			extra = {
 				["<c-r>"] = "if err!=nil {<CR>}",
-				["<down>"] = "if err!=nil {<CR>return err<CR>}",
+				["<down>"] = "if err!=nil {<CR>return err<CR>}<Esc>",
 				["<c-u>"] = "while true {<CR>}<Esc>ko",
 			},
 		},
@@ -61,6 +61,11 @@ shnip.setup({
 				["<c-u>"] = "while True:<CR>",
 			}
 		},
+		typst = {
+			extra = {
+				["<c-u>"] = "#underscore[]<Esc>hi",
+			}
+		}
 	},
 })
 
@@ -68,6 +73,7 @@ shnip.setup({
 shnip.addFtSnippets("typst", {
 	["print"] = "",
 	["debug"] = "",
+	["error"] = "",
 	["while"] = "",
 	["for"] = "",
 	["if"] = "",
@@ -80,5 +86,24 @@ shnip.addFtSnippets("typst", {
 	["lambda"] = "$  $<Esc>hi",
 	["class"] = "",
 	["struct"] = "$<Esc>O$ ",
+	["try"] = "",
+})
+
+shnip.addFtSnippets("sh", {
+	["print"] = "",
+	["debug"] = "",
+	["error"] = "if [ $? -ne 0 ]; then<CR>return 1<CR>fi<Esc>",
+	["while"] = "",
+	["for"] = "",
+	["if"] = "",
+	["elseif"] = "",
+	["else"] = "",
+	["switch"] = "",
+	["case"] = "",
+	["default"] = "",
+	["function"] = "",
+	["lambda"] = "",
+	["class"] = "",
+	["struct"] = "",
 	["try"] = "",
 })

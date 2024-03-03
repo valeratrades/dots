@@ -43,17 +43,30 @@ gc() {
 	elif [ "$#" = 1 ]; then
 		split_array=$(echo "$1" | tr "/" "\n")
 		filename=$(echo "$split_array" | tail -n 1)
-		cd /tmp && rm -rf ./${filename} && git clone --depth=1 "$url" 1>&2
-		cd "$filename"
+		if [ $(pwd) = /tmp/${filename} ]; then # otherwise will delete the directory under ourselves
+			cd - &>/dev/null
+		fi 
+		rm -rf /tmp/${filename}
+		git clone --depth=1 "$url" /tmp/${filename} 1>&2
+		if [ $? -ne 0 ]; then
+			return 1
+		fi
+		cd /tmp/${filename}
 		echo $(pwd)
 	elif [ "$#" = 2 ]; then
 		git clone --depth=1 "$url" $2
+		if [ $? -ne 0 ]; then
+			return 1
+		fi
 	fi
 }
+
 
 gb() {
 	if [ "$1" = "nvim" ]; then
 		target="neovim/neovim"
+	elif [ "$1" = "eww" ]; then
+		target="elkowar/eww"
 	elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
 #build from source helper
@@ -70,6 +83,9 @@ gb() {
 
 	initial_dir=$(pwd)
 	target_dir=$(gc "$target")
+	if [ $? -ne 0 ]; then
+		return 1
+	fi
 	cd $target_dir
 
 	if printf "\n\033[34mtrying just cmake\033[0m\n" && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install; then
@@ -78,7 +94,7 @@ gb() {
 		:
 	elif printf "\n\033[34mtrying go build ./cmd/main.go and save to /usr/local/bin/\033[0m\n" && sudo go build -o /usr/local/bin/ ./cmd/main.go; then
 		:
-	elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release; then
+	elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release && sudo mv -f ./target/release/${1} /usr/local/bin/; then
 		:
 	elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
 		:

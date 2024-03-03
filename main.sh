@@ -12,6 +12,7 @@ target_dir="/home/v/.dots"
 dot_directories="
 	/etc/keyd
 	/etc/systemd/system/getty@tty1.service.d/override.conf
+	/home/v/.cargo/config.toml
 	/home/v/.config/alacritty
 	/home/v/.config/btc_line.toml
 	/home/v/.config/cargo
