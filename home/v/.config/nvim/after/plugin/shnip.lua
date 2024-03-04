@@ -81,7 +81,7 @@ shnip.addFtSnippets("typst", {
 	["else"] = "",
 	["switch"] = "",
 	["case"] = "",
-	["default"] = "",
+	["default"] = "bold(1)_",
 	["function"] = "",
 	["lambda"] = "$  $<Esc>hi",
 	["class"] = "",

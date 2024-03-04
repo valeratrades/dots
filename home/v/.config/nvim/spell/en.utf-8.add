@@ -206,3 +206,5 @@ init
 stderr
 dir
 stdout
+flatten
+flatten

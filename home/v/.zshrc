@@ -173,6 +173,20 @@ chess() {
 	source ${HOME}/envs/Python/bin/activate
 	py -m cli_chess --token lip_sjCnAuNz1D3PM5plORrC
 }
+# move head
+mvh() { # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
+	from="."
+	to=${1}
+	if [ $1 = "-p" ] || [ $1 = "--paper"]; then
+		from="${HOME}/Downloads"
+		to="${HOME}/Documents/Papers"
+	elif [ $1 = "-b" ] || [ $1 = "--book"]; then
+		from="${HOME}/Downloads"
+		to="${HOME}/Documents/Books"
+	fi
+	
+	mv $(ls ${from} -t | head -n 1) ${to}
+}
 
 alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
@@ -181,7 +195,6 @@ alias rf="sudo rm -rf"
 alias srf="sudo rm -rf"
 alias za="zathura"
 alias zp="zathura --mode presentation"
-alias z="zoxide"
 alias senable="sudo systemctl enable"
 alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
@@ -194,9 +207,9 @@ alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias tmux="TERM='alacritty-direct' tmux"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
-alias mvt="ls -t | head -n 1 | xargs -I {} mv {}" # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
 alias ll="exa -lA"
 alias sound="qpwgraph"
+#alias z="__zoxide_z" # there is a correct way to do this, but fuck it
 
 # # cli_translate
 alias ttf="cli_translate -f"
@@ -428,6 +441,7 @@ ct() {
 . ~/s/help_scripts/document_watch.sh
 # what the fuck they're doing other there
 . /etc/profile.d/google-cloud-cli.sh
+. ~/.config/zoxide/setup.sh
 
 source ${HOME}/.config/zsh/other.zsh
 
