@@ -1,5 +1,7 @@
 #!/bin/env sh
 
+# TODO: Move to [SSHFS](<https://en.wikipedia.org/wiki/SSHFS>)
+
 local README="""\
 #server ssh script
   do \033[34mserver\033[0m to ssh into vincent
