@@ -114,7 +114,7 @@ workspace 1 output $primary
 workspace 2 output $primary
 workspace 3 output $primary
 workspace 4 output $primary
-workspace 5 output $primary
+workspace 5 output $output_laptop
 workspace 6 output $primary
 workspace 7 output $primary
 workspace 8 output $output_laptop

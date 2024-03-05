@@ -19,7 +19,7 @@ pyn() {
 	source ./.local.sh
 	cp ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
 	ln ${HOME}/.file_snippets/python_gitignore ./.gitignore
-	cp ${HOME}/.file_snippets/go_main ./main.py &&  chmod u+x ./main.py
+	cp ${HOME}/.file_snippets/py_main ./main.py &&  chmod u+x ./main.py
 	git init
 	git add -A
 	git commit -m "-- New Project Snippet --"

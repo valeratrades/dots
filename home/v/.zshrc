@@ -175,6 +175,7 @@ chess() {
 }
 # move head
 mvh() { # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
+	#NB: {from} cannot end with explicit "/" !
 	from="."
 	to=${1}
 	if [ $1 = "-p" ] || [ $1 = "--paper"]; then
@@ -185,7 +186,7 @@ mvh() { # although, not sure if actually needed, as I could just write out `${co
 		to="${HOME}/Documents/Books"
 	fi
 	
-	mv $(ls ${from} -t | head -n 1) ${to}
+	mv "${from}/$(ls ${from} -t | head -n 1)" ${to}
 }
 
 alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
