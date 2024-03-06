@@ -13,7 +13,8 @@ edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
 export HISTCONTROL=ignorespace # doesn't append command to history if first character is space, so `cd /` is recorded, but ` cd /` is not.
 
-export WAKETIME="7:00"
+#export WAKETIME="7:00"
+export WAKETIME="7:30"
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
@@ -213,9 +214,16 @@ alias sound="qpwgraph"
 #alias z="__zoxide_z" # there is a correct way to do this, but fuck it
 
 # # cli_translate
-alias ttf="cli_translate -f"
-alias tte="cli_translate -e"
-alias ttr="cli_translate -r"
+alias ttf="cli_translate.py -f"
+alias tte="cli_translate.py -e"
+alias ttr="cli_translate.py -r"
+# the following aliases are only for comportability with my chrome translate shortcuts.
+alias tef="cli_translate.py -f"
+alias trf="cli_translate.py -f"
+alias tfe="cli_translate.py -e"
+alias tre="cli_translate.py -e"
+alias ter="cli_translate.py -r"
+alias tfr="cli_translate.py -r"
 #
 
 # # cd
