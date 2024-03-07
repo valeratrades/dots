@@ -1,5 +1,3 @@
-#TODO!: create pdf in a named /tmp pipe
-
 # for document watch
 dw() {
 	if [ -z "$1" ]; then
@@ -17,7 +15,7 @@ dw() {
 
 	if [ -f "${name}.typ" ]; then
 		try_from="${name}.typ"
-		try_to="${name}.pdf"
+		try_to="/tmp/${name}.pdf"
 		sudo killall typst
 		typst compile "$try_from" "$try_to"
 		typst watch "$try_from" "$try_to" > /dev/null 2>&1 &

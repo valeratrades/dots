@@ -64,7 +64,7 @@ input * {
 	xkb_options "grp:win_space_toggle"
 
 	tap enabled
-	scroll_factor 4
+	scroll_factor 3
 
 	repeat_delay 210
 	repeat_rate 70
