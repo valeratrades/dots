@@ -122,12 +122,10 @@ local on_attach = function(client, bufnr)
 			d = { function() telescope_builtin.diagnostics({ sort_by = "severity" }) end, "Diagnostics" },
 			l = { function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end, "Local Diagnostics" },
 			R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-			["<C-r>"] = { "<cmd>LspRestart<CR>", "Restart LSP server" }, -- seem to be just writing it out instead. May deprecate.
 			w = { "<cmd>Telescope lsp_document_symbols<CR>", "Workspace Symbol" },
 			W = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic Workspace Symbol" },
 			f = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
 			a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-			z = { "<cmd>lua vim.cmd.LspRestart()<CR>", "Restart LSP" },
 			y = { "<cmd>lua YankDiagnosticPopup()<CR>", "Yank Diagnostic Popup" },
 			s = { "<cmd>lua ToggleDiagnostics()<CR>", "Toggle Diagnostics" },
 			v = { "<cmd>lua ToggleVirtualText()<CR>", "Toggle Virtual Text" },
