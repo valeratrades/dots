@@ -208,10 +208,17 @@ alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias tmux="TERM='alacritty-direct' tmux"
-alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 #alias z="__zoxide_z" # there is a correct way to do this, but fuck it
+
+# # obs
+alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
+alias obs_virt="obs --startvirtualcamera"
+alias obs_both="obs --scene Both"
+alias obs_camera="obs --scene CameraOnly"
+alias obs_screen="obs --scene ScreenOnly"
+#
 
 # # cli_translate
 alias ttf="cli_translate.py -f"
