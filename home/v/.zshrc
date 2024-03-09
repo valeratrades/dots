@@ -128,10 +128,16 @@ cq() {
 	return $exit_status
 }
 #
+
+# python
 alias py="python3"
 pp() {
 	pip ${@} --break-system-packages
 }
+pu() {
+	${HOME}/s/help_scripts/pip_upload.sh
+}
+#
 
 # ============================================================================
 # ABOVE THIS LINE WE RELY ON ALL THE APIS TO STAY CONSTANT, AS THEY ARE USED BY OTHER SH SCRIPTS.

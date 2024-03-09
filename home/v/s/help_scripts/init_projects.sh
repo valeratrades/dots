@@ -17,7 +17,7 @@ pyn() {
 	cd "$1"
 	cp ${HOME}/.file_snippets/py_local.sh ./.local.sh
 	source ./.local.sh
-	cp ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
+	ln ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
 	ln ${HOME}/.file_snippets/python_gitignore ./.gitignore
 	cp ${HOME}/.file_snippets/py_main ./main.py &&  chmod u+x ./main.py
 	git init
