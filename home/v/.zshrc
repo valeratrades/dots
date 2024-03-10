@@ -363,7 +363,6 @@ alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"
 #
 # # pm
-#alias yS="yay -S --noconfirm"
 yS() {
 	yay -S ${@} --noconfirm && return 0
 	sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak && sudo sh -c "rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist" && yay -S ${@} --noconfirm
@@ -372,14 +371,9 @@ yS() {
 alias yR="yay -R --noconfirm"
 alias yRn="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
+alias ys="yay -s"
 alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/boring.sh"
-#alias pS="yay -S --noconfirm"
-#pS() {
-#	'yay -S ${@} --noconfirm' || 'sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak && sudo sh -c "rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist" && yay -S ${@} --noconfirm'
-#}
-#alias pR="yay -R --noconfirm"
-#alias pRn="yay -Rns --noconfirm"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 beep() {	
