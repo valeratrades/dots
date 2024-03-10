@@ -5,7 +5,6 @@ CURRENT_MODE=$(gsettings get org.gnome.desktop.interface color-scheme)
 if [ "$CURRENT_MODE" = "'prefer-dark'" ]; then
 	notify-send "going light"
   gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-	# Will break when I update to .toml!!!
   sed -i "s/rose-pine.toml/catppuccin-latte.toml/" ~/.config/alacritty/alacritty.toml
 	swaymsg output '*' bg ~/Wallpapers/1_AndreySakharov.jpg fill
 else
