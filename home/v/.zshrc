@@ -216,7 +216,7 @@ alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias tmux="TERM='alacritty-direct' tmux"
 alias ll="exa -lA"
 alias sound="qpwgraph"
-#alias z="__zoxide_z" # there is a correct way to do this, but fuck it
+alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 
 # # obs
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"

@@ -64,11 +64,11 @@ input * {
 	xkb_options "grp:win_space_toggle"
 
 	tap enabled
-	scroll_factor 3
 
 	repeat_delay 210
 	repeat_rate 70
 }
+#scroll_factor 1
 ## Here it is fed by keyd. Done so I can use Alt+Shift in other keybinds
 ## to get the code of the key, use xev or auto-hotkey
 #bindcode Mod1+Shift+52 input type:keyboard xkb_switch_layout next
