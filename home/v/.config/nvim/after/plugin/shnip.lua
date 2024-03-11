@@ -47,6 +47,7 @@ shnip.setup({
 				["<c-u>"] = "loop {<CR>}<Esc>ko",
 				["<down>"] = "impl  {<CR>}<Esc>kg_hi",
 				["<c-r>"] = "#[derive()]<Esc>hi",
+				["<c-y>"] = "todo!()<Esc>",
 			},
 		},
 		go = {
@@ -59,6 +60,7 @@ shnip.setup({
 		python = {
 			extra = {
 				["<c-u>"] = "while True:<CR>",
+				["<c-y>"] = "raise NotImplementedError()<Esc>",
 			}
 		},
 		typst = {
