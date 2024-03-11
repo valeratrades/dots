@@ -152,6 +152,8 @@ exec "~/.config/sway/start_doc_scraper.sh"
 
 bindsym $mod+l focus prev
 bindsym $mod+h focus next
+bindsym $mod+u move left
+bindsym $mod+y move right
 
 bindsym $mod+c kill
 bindsym $mod+Return exec alacritty
