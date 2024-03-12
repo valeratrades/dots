@@ -132,7 +132,7 @@ local on_attach = function(client, bufnr)
 			["2"] = { "<cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 2" },
 			["4"] = { "<cmd>lua vim.opt.shiftwidth=4<CR><cmd>lua vim.opt.tabstop=4<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 4" },
 			["8"] = { "<cmd>lua vim.opt.shiftwidth=8<CR><cmd>lua vim.opt.tabstop=8<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 8" },
-			["0"] = { "<cmd>lua vim.opt.expandtab=false<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>vim.opt.shiftwidth=2<CR><cmd>vim.opt.softtabstop=0<CR>", "Reset Tab Settings" },
+			["0"] = { "<cmd>lua vim.opt.expandtab=false<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.softtabstop=0<CR>", "Reset Tab Settings" },
 		},
 	}, { buffer = bufnr })
 

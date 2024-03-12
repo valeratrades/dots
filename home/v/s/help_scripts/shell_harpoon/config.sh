@@ -7,7 +7,7 @@ _r() {
 }
 
 _n() {
-	cs ~/s/l/ml/introduction
+	cowsay -f dragon "moo"
 }
 
 _t() {
