@@ -19,6 +19,7 @@ pyn() {
 	source ./.local.sh
 	ln ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
 	ln ${HOME}/.file_snippets/python_gitignore ./.gitignore
+	ln ${HOME}/.file_snippets/.upload_py_lib.sh ./.upload_py_lib.sh
 	cp ${HOME}/.file_snippets/py_main ./main.py &&  chmod u+x ./main.py
 	git init
 	git add -A

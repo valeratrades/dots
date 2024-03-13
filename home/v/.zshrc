@@ -452,7 +452,7 @@ ct() {
 . ~/s/help_scripts/shell_harpoon/main.zsh
 . ~/.config/nnn/setup.sh
 . ~/s/help_scripts/server.sh
-. ~/s/help_scripts/init_projects.sh
+. ~/.file_snippets/init_projects.sh
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/document_watch.sh
 # what the fuck they're doing other there

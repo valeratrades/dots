@@ -11,3 +11,4 @@
 **/TODO.md
 .local.sh
 **/tmp/
+.upload_py_lib.sh
