@@ -2,12 +2,17 @@
 
 alias gu='gitui'
 gg() {
+	if [ "$1" = "t" ] || [ "$1" = "-t" ] || [ "$1" = "tag" ]; then
+		git tag -a $2 -m "$2"
+		shift 2
+	fi
+
 	message="."
 	if [ -n "$1" ]; then
 		message="$@"
 		#TODO!!!!!!: squash all the previous sequential commits with "." into one here.
 	fi
-	git add -A && git commit -m "$message" && git push
+	git add -A && git commit -m "$message" && git push --follow-tags
 
 	if [ -f "./Cargo.toml" ]; then
 		current_branch=$(git branch --show-current)
