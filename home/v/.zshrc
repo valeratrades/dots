@@ -227,16 +227,17 @@ alias obs_screen="obs --scene ScreenOnly"
 #
 
 # # cli_translate
-alias ttf="cli_translate.py -f"
-alias tte="cli_translate.py -e"
-alias ttr="cli_translate.py -r"
+cli_translate="${HOME}/s/help_scripts/cli_translate.py"
+alias ttf="$cli_translate -f"
+alias tte="$cli_translate -e"
+alias ttr="$cli_translate -r"
 # the following aliases are only for comportability with my chrome translate shortcuts.
-alias tef="cli_translate.py -f"
-alias trf="cli_translate.py -f"
-alias tfe="cli_translate.py -e"
-alias tre="cli_translate.py -e"
-alias ter="cli_translate.py -r"
-alias tfr="cli_translate.py -r"
+alias tef="$cli_translate -f"
+alias trf="$cli_translate -f"
+alias tfe="$cli_translate -e"
+alias tre="$cli_translate -e"
+alias ter="$cli_translate -r"
+alias tfr="$cli_translate -r"
 #
 
 # # cd

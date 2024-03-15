@@ -7,7 +7,7 @@ _r() {
 }
 
 _n() {
-	cowsay -f dragon "moo"
+	nvim ~/s/g/notes/equilibretechnologies/gameplan.md
 }
 
 _t() {
