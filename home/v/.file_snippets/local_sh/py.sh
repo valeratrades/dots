@@ -1,7 +1,7 @@
 #!/bin/sh
 # File is sourced on `cs` into the project's root. Allows to define a set of project-specific commands and aliases.
 
-u() {
+upload_python_library() {
 	version=$(python ${HOME}/s/help_scripts/bump_version.py $(pwd)/pyproject.toml $1) || { return 1; }
 
 	rm -rf ./dist ./build
@@ -14,3 +14,5 @@ u() {
 	fi
 	git add -A && git commit -m "$message" && git tag "v${version}" && git push --follow-tags
 }
+
+alais ul="upload_python_library"

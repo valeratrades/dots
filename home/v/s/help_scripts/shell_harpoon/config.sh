@@ -11,5 +11,5 @@ _n() {
 }
 
 _t() {
-	cs ~/s/todo
+	cs ~/s/auto_eval
 }

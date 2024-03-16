@@ -213,7 +213,6 @@ alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
-alias tmux="TERM='alacritty-direct' tmux"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
@@ -224,6 +223,15 @@ alias obs_virt="obs --startvirtualcamera"
 alias obs_both="obs --scene Both"
 alias obs_camera="obs --scene CameraOnly"
 alias obs_screen="obs --scene ScreenOnly"
+#
+
+# # tmux
+alias tmux="TERM='alacritty-direct' tmux"
+alias tn="tmux new -s"
+alias ta="tmux attach -t"
+alias tl="tmux ls"
+alias tk="tmux kill-session -t"
+alias tks="tmux kill-server"
 #
 
 # # cli_translate
