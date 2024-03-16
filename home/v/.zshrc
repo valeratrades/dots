@@ -430,15 +430,19 @@ ct() {
 
 	if [ "$#" = "0" ]; then
 		ct r
+		run_after="false"
 	elif [ $1 = "r" ]; then
 		shift
 		${HOME}/s/help_scripts/stop_all_run_cargo.sh lbuild ${@}
 		run_after="true"
+	elif [ $1 = "b" ]; then
+		shift
+		cargo build --release ${@}
 	elif [ $1 = "c" ]; then
 		shift
 		${HOME}/s/help_scripts/stop_all_run_cargo.sh lcheck ${@}
 	else
-		printf "Only takes \"c\" or \"r\". Provided: $1\n"
+		printf "Only takes \"c\", \"r\" or \"b\". Provided: $1\n"
 	fi
 	endtime=$(date +%s)
 	cleanup

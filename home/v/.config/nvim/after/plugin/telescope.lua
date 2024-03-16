@@ -11,6 +11,7 @@ require("which-key").register({
 		p = { "<cmd>Telescope persisted<cr>", "persisted: sessions" },
 		b = { builtin.buffers, "find buffers" },
 		h = { builtin.help_tags, "neovim documentation" },
+		n = { function() builtin.find_files({ no_ignore_parent = true }) end, "no_ignore_parent" },
 		t = { function()
 			FindTodo()
 			require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
