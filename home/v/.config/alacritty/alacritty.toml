@@ -1,4 +1,4 @@
-import = ["/home/v/.config/alacritty/themes/rose-pine.toml"]
+import = ["/home/v/.config/alacritty/themes/catppuccin-latte.toml"]
 live_config_reload = true
 #tabspaces = 2
 
