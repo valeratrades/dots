@@ -245,7 +245,6 @@ mode "screenshot" {
 }
 bindsym $mod+Insert exec "swaymsg mode screenshot && eww update sway_mode=screenshot"
 
-# Set window sizes
 mode "size_presets" {
 	bindsym 1 resize set 350px 650px
 	bindsym 2 resize set 576px 768px
@@ -267,9 +266,7 @@ mode "size_presets" {
 	bindsym q exec $switch_out
 }
 bindsym $mod+apostrophe exec "swaymsg mode size_presets && eww update sway_mode=size_presets"
-#
 
-# # Move and resize
 mode "move_or_resize" {
 	bindsym $left resize grow width 6ppt
 	bindsym $down resize shrink height 6ppt
@@ -290,4 +287,18 @@ mode "move_or_resize" {
 
 }
 bindsym $mod+k exec "swaymsg mode move_or_resize && eww update sway_mode=move_or_resize"
-#
+
+mode "obs" {
+	bindsym v exec /home/v/.config/sway/obs_send.sh "v"
+	bindsym Shift+v exec /home/v/.config/sway/obs_send.sh "Shift+v"
+
+
+	bindsym $mod+comma exec $switch_out
+	bindsym $mod+c exec $switch_out
+	bindsym $mod+q exec $switch_out
+	bindsym Ctrl+c exec $switch_out
+	bindsym Escape exec $switch_out
+	bindsym q exec $switch_out
+
+}
+bindsym $mod+comma exec "swaymsg mode obs && eww update sway_mode=obs"
