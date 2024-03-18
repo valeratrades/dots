@@ -13,7 +13,6 @@ shared_before() {
 	source ./.local.sh
 
 	rm -f ./.gitignore # created automatically by cargo new
-	touch ./.gitignore
 	cat ${HOME}/.file_snippets/gitignore/shared > ./.gitignore
 	echo "\n" >> ./.gitignore
 	cat ${HOME}/.file_snippets/gitignore/${lang} >> ./.gitignore
@@ -27,10 +26,9 @@ shared_after() {
 	lang="${2}" # rust, py, go
 	touch TODO.md
 
-	touch README.md
 	notify-send ${project_name}
-	echo "# ${project_name}\n" >> README.md
-	cat ${HOME}/.file_snippets/readme/licenses.md > README.md
+	echo "# ${project_name}\n" > README.md
+	cat ${HOME}/.file_snippets/readme/licenses.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
 

@@ -413,9 +413,17 @@ beep() {
 		return 0
 	fi
 }	
+timer() {
+	if [ $# = 1 ]; then
+		sleep $1 && beep --loud
+	else
+		printf "Only takes 1 argument. Provided: $#\n"
+	fi
+}
 
 # # cargo
 alias c="cargo"
+alias cw="cargo watch -c -x run"
 # for cargo timed
 ct() {
 	cleanup() {

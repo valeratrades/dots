@@ -29,6 +29,8 @@
 # in cased you did `git add .` before running `git diff`
 [alias]
 	ds = diff --staged
+	unstage = reset HEAD --
+	last = log -1 HEAD
 [init]
 	defaultBranch = master
 [push]

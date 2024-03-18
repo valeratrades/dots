@@ -4,3 +4,6 @@
 #alias r="sc lrun -- start"
 alias a="cargo add"
 alias patch="cargo set-version --bump patch && gg && cargo publish"
+publish() {
+	cargo set-version --bump ${1} && gg && cargo publish
+}

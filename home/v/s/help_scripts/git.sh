@@ -123,14 +123,18 @@ gn() {
 	ex: gn my_new_repo --private
 """
 		return 0
-	elif [ "$#" = 2 ]; then
-		git init
-		git add .
-		git commit -m "Initial Commit"
-		gh repo create ${1} ${2} --source=.
-		git remote add origin https://github.com/Valera6/${1}.git
-		git push -u origin master
-	else
-		return 1
 	fi
+	repo_name=${1}
+	if [ "$1" = "--private" ] || [ "$1" = "--public" ]; then
+		repo_name=$(basename $(pwd))
+	else
+		shift
+	fi
+
+	git init
+	git add .
+	git commit -m "Initial Commit"
+	gh repo create ${repo_name} ${1} --source=.
+	git remote add origin https://github.com/Valera6/${repo_name}.git
+	git push -u origin master
 }
