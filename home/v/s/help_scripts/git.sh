@@ -103,6 +103,8 @@ gb() {
 		:
 	elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
 		:
+	elif printf "\n\033[34mtrying meson\033[0m\n" && meson build && ninja -C build && sudo ninja -C build install; then
+		:
 	elif printf "\n\033[34mfuck this, asking chat gpt\033[0m\n" && ~/s/help_scripts/gpt_build.py ${target_dir}; then
 		:
 	else

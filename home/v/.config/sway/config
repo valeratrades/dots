@@ -188,7 +188,7 @@ bindsym $mod+Mod1+t exec ~/s/help_scripts/theme_toggle.sh
 bindsym $mod+Ctrl+g exec tg $(greenclip print | awk 'NR==1 {print}')
 
 set $refresh_eww "eww kill; eww open bar; eww open btc_line_upper; eww open btc_line_lower"
-exec_always $refresh_eww
+exec $refresh_eww
 bindsym $mod+e exec ~/.config/sway/eww_zoom_toggle.sh
 bindsym $mod+Shift+e exec ~/.config/sway/eww_visibility_toggle.sh
 bindsym $mod+Ctrl+e exec $refresh_eww
@@ -289,8 +289,25 @@ mode "move_or_resize" {
 bindsym $mod+k exec "swaymsg mode move_or_resize && eww update sway_mode=move_or_resize"
 
 mode "obs" {
-	bindsym v exec /home/v/.config/sway/obs_send.sh "v"
-	bindsym Shift+v exec /home/v/.config/sway/obs_send.sh "Shift+v"
+	#NB: Manual starting of obs before any of these is currently required.
+	# I'm using wtype, and it is stupid, so I made a bunch of nonsensical shortcuts in obs, so as to not use modifier keys.
+
+	# Virtual Camera
+	bindsym v exec $switch_out && /home/v/.config/sway/obs_send.sh "v"
+	bindsym Shift+v exec $switch_out && /home/v/.config/sway/obs_send.sh "e"
+	# Start/Stop Recording
+	bindsym r exec $switch_out && /home/v/.config/sway/obs_send.sh "r"
+	bindsym Shift+r exec $switch_out && /home/v/.config/sway/obs_send.sh "g"
+	# Pause/Unpause Recording #BUG: doesn't work
+	bindsym p exec $switch_out && /home/v/.config/sway/obs_send.sh "p"
+	bindsym Shift+p exec $switch_out && /home/v/.config/sway/obs_send.sh "u"
+	## Disable Preview	
+	#bindsym d exec $switch_out && /home/v/.config/sway/obs_send.sh "d"
+
+	## Scenes: Both, Stream, Camera //"t" is to transition to it immediately
+	bindsym b exec $switch_out && /home/v/.config/sway/obs_send.sh "bt"
+	bindsym s exec $switch_out && /home/v/.config/sway/obs_send.sh "st"
+	bindsym c exec $switch_out && /home/v/.config/sway/obs_send.sh "ct"
 
 
 	bindsym $mod+comma exec $switch_out

@@ -216,14 +216,7 @@ alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
-
-# # obs
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
-alias obs_virt="obs --startvirtualcamera"
-alias obs_both="obs --scene Both"
-alias obs_camera="obs --scene CameraOnly"
-alias obs_screen="obs --scene ScreenOnly"
-#
 
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
