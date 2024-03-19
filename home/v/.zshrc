@@ -222,11 +222,18 @@ alias play_last="vlc --one-instance --playlist-enqueue ~/Videos/obs/$(ls -t ~/Vi
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
 tn() {
-	if [ -n "$1" ]; then
-		tmux new -s $1
-	else
-		tmux new -s $(basename $(pwd))
+	if [ -n "$2" ]; then
+		cd $2 || return 1
 	fi
+	SESSION_NAME=${1:-$(basename "$(pwd)")}
+
+	tmux new-session -d -s "$SESSION_NAME" -n "source"
+	tmux send-keys -t "${SESSION_NAME}:source.0" 'nvim .' Enter
+
+	tmux new-window -t "$SESSION_NAME" -n "build"
+	tmux split-window -h -t "${SESSION_NAME}:build"
+
+	tmux attach-session -t "${SESSION_NAME}:source.0"
 }
 alias ta="tmux attach -t"
 alias tl="tmux ls"
