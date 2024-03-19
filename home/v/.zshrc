@@ -233,6 +233,8 @@ tn() {
 	tmux new-window -t "$SESSION_NAME" -n "build"
 	tmux split-window -h -t "${SESSION_NAME}:build"
 
+	tmux new-window -t "$SESSION_NAME" -n "ref"
+
 	tmux attach-session -t "${SESSION_NAME}:source.0"
 }
 alias ta="tmux attach -t"
