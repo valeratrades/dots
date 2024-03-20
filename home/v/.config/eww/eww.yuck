@@ -9,6 +9,7 @@
 (defvar todo_timer "None")
 (defvar sway_mode "default")
 (defvar cargo_compiling "false")
+(defvar timer "")
 
 ;;TODO!: fix the thing with overlapping on myopia=true
 
@@ -22,6 +23,7 @@
 		(sway_mode)
 		(todo_timer)
 		(cargo)
+		(timer)
 		(openvpn)
 		(notifications)
 		(github)
@@ -41,6 +43,14 @@
 		:class "text"
 		:visible {sway_mode != "default"}
 		"#${sway_mode}"))
+
+;; Timer 
+(defwidget timer []
+	(box
+		:class "text"
+		:visible {timer != ""}
+		"|${timer}|"))
+
 
 ;; Todo Timer ;;
 (defwidget todo_timer []

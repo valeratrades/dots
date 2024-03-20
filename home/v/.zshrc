@@ -424,7 +424,24 @@ beep() {
 }	
 timer() {
 	if [ $# = 1 ]; then
-		sleep $1 && beep --loud
+		input=$1
+		if [[ "$input" == *":"* ]]; then
+			IFS=: read mins secs <<< "$input"
+			left=$((mins * 60 + secs))
+		else
+			left=$input
+		fi
+
+		while [ $left -gt 0 ]; do
+			mins=$((left / 60))
+			secs=$((left % 60))
+			formatted_secs=$(printf "%02d" $secs)
+			eww update timer="${mins}:${formatted_secs}"
+			sleep 1
+			left=$((left - 1))
+		done
+		eww update timer=""
+		#beep --loud
 	else
 		printf "Only takes 1 argument. Provided: $#\n"
 	fi

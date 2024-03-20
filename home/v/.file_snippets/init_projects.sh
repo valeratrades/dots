@@ -53,7 +53,8 @@ pyn() {
 	shared_before ${1} "py"
 
 	sudo ln ${HOME}/.file_snippets/pyproject.toml ./pyproject.toml
-	cp ${HOME}/.file_snippets/py_main ./main.py &&  chmod u+x ./main.py
+	mkdir ./src
+	cp ${HOME}/.file_snippets/py_main ./src/main.py &&  chmod u+x ./src/main.py
 
 	git init
 	shared_after ${1} "py"
