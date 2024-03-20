@@ -27,13 +27,15 @@ shared_after() {
 	touch TODO.md
 
 	notify-send ${project_name}
-	echo "# ${project_name}\n" > README.md
+	cat ${HOME}/.file_snippets/readme/header.md > README.md
+	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" README.md
 	cat ${HOME}/.file_snippets/readme/licenses.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
 
 	git add -A
 	git commit -m "-- New Project Snippet --"
+	set +e
 }
 
 can() {

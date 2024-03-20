@@ -47,4 +47,5 @@ cursor = "0x524f67"
 text = "0xe0def4"
 
 [window]
-opacity = 0.998
+#opacity = 0.998 # that's the minimal
+opacity = 0.99
