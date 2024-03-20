@@ -423,6 +423,8 @@ beep() {
 	fi
 }	
 timer() {
+	trap 'eww update timer="";return 1' INT
+	trap 'eww update timer=""' EXIT
 	if [ $# = 1 ]; then
 		input=$1
 		if [[ "$input" == *":"* ]]; then
@@ -441,7 +443,7 @@ timer() {
 			left=$((left - 1))
 		done
 		eww update timer=""
-		#beep --loud
+		beep --loud
 	else
 		printf "Only takes 1 argument. Provided: $#\n"
 	fi
