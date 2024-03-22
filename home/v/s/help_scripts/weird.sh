@@ -74,3 +74,12 @@ function what() {
 }
 
 alias bad_apple="bad-apple"
+
+russian_roulette() {
+	r=$((RANDOM % 6))
+	if [ $r -eq 0 ]; then
+		/usr/bin/emacs ${@}
+	else
+		$EDITOR ${@}
+	fi
+}
