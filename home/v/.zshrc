@@ -525,5 +525,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# you can use `export MANPAGER="nvim +Man!"` to see man pages in neovim
