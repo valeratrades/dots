@@ -11,5 +11,5 @@ _n() {
 }
 
 _t() {
-	cs ~/s/auto_eval
+	cowsay -f dragon moo
 }
