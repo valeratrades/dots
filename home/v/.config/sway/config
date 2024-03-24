@@ -65,7 +65,7 @@ input * {
 
 	tap enabled
 
-	repeat_delay 210
+	repeat_delay 256
 	repeat_rate 70
 }
 #scroll_factor 1

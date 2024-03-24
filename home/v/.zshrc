@@ -13,8 +13,7 @@ edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
 export HISTCONTROL=ignorespace # doesn't append command to history if first character is space, so `cd /` is recorded, but ` cd /` is not.
 
-#export WAKETIME="7:00"
-export WAKETIME="7:30"
+export WAKETIME="7:00"
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
@@ -425,27 +424,51 @@ beep() {
 timer() {
 	trap 'eww update timer="";return 1' INT
 	trap 'eww update timer=""' EXIT
-	if [ $# = 1 ]; then
-		input=$1
-		if [[ "$input" == *":"* ]]; then
-			IFS=: read mins secs <<< "$input"
-			left=$((mins * 60 + secs))
-		else
-			left=$input
-		fi
+	no_beep="false"
+	if [ "$1" = "-q" ]; then
+		no_beep="true"
+		shift
+	fi
+	if [ "$2" = "-q" ]; then
+		no_beep="true"
+	fi
 
-		while [ $left -gt 0 ]; do
-			mins=$((left / 60))
-			secs=$((left % 60))
-			formatted_secs=$(printf "%02d" $secs)
-			eww update timer="${mins}:${formatted_secs}"
-			sleep 1
-			left=$((left - 1))
-		done
-		eww update timer=""
+	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
+		printf """\
+Usage: timer [time] [-q]
+
+Arguments:
+	time: time in seconds or in format \"mm:ss\".
+	-q: quiet mode, shows forever notif instead of beeping.
+"""
+		return 0
+	fi
+
+
+	input=$1
+	if [[ "$input" == *":"* ]]; then
+		IFS=: read mins secs <<< "$input"
+		left=$((mins * 60 + secs))
+	else
+		left=$input
+	fi
+
+	while [ $left -gt 0 ]; do
+		mins=$((left / 60))
+		secs=$((left % 60))
+		formatted_secs=$(printf "%02d" $secs)
+		eww update timer="${mins}:${formatted_secs}"
+		sleep 1
+		left=$((left - 1))
+	done	
+	eww update timer=""
+
+
+	if [ "$no_beep" = "false" ]; then
 		beep --loud
 	else
-		printf "Only takes 1 argument. Provided: $#\n"
+		notify-send "timer finished" -t 2147483647
+		return 0
 	fi
 }
 
