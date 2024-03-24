@@ -217,7 +217,7 @@ alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
-alias play_last="vlc --one-instance --playlist-enqueue ~/Videos/obs/$(ls -t ~/Videos/obs | head -n 1)"
+alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs | head -n 1)"
 
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
