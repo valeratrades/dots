@@ -50,6 +50,8 @@ K("n", "H", "R")
 -- Jumps
 K("", "R", "<C-d>zz")
 K("", "N", "<C-u>zz")
+K("", "<C-d>", "<C-d>zz")
+K("", "<C-u>", "<C-u>zz")
 
 -- Move line
 K("", "<A-r>", "<nop>")
@@ -100,10 +102,11 @@ K({ "i", "" }, "<A-l>", "<Esc>gT")
 K({ "i", "" }, "<A-h>", "<Esc>gt")
 K({ "i", "" }, "<A-v>", "<Esc>g<Tab>")
 K({ "i", "" }, "<A-0>", "<Esc><cmd>tablast<cr>")
-for i = 1, 9 do
+K({ "i", "" }, "<A-9>", "<Esc><cmd>tablast<cr>") -- don't like it on 9, but want to keep compatibility with chrome
+for i = 1, 8 do
 	K("", '<A-' .. i .. '>', '<Esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
-for i = 1, 9 do
+for i = 1, 8 do
 	K("i", '<A-' .. i .. '>', '<Esc><cmd>tabn ' .. i .. '<cr>', { noremap = true, silent = true })
 end
 K("", "<A-o>", "<nop>")
