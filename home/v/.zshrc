@@ -342,6 +342,7 @@ cssg() {
 		_path+="${1}"
 	fi
 	cs $_path
+	git pull
 }
 csb() {
 	_path="${HOME}/Documents/Books/"
