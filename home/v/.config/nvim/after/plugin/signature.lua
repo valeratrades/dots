@@ -10,6 +10,7 @@ local cfg = {
 	hint_scheme = "String",
 	hi_parameter = "LspSignatureActiveParameter",
 	always_trigger = false,
+	auto_close_after = 3,
 }
 
 require 'lsp_signature'.setup(cfg)

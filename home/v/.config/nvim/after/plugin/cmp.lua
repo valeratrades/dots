@@ -13,7 +13,7 @@ cmp.setup({
 			keyword_lenght = 1,
 			max_item_count = 8,
 			-- when inputting an argument, suggest only values with this in mind
-			entry_filter = function(entry, context)
+			entry_filter = function(entry, _context)
 				local success = pcall(function()
 					local node = ts_utils.get_node_at_cursor():type()
 					if node == "arguments" then
