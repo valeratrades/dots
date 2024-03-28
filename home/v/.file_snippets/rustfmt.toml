@@ -1,5 +1,5 @@
 # Cornerstone options
-unstable_options = true
+unstable_features = true
 hard_tabs = true
 max_width = 155
 
