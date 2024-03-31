@@ -211,12 +211,17 @@ alias jn="jupyter notebook &"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
-alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs | head -n 1)"
+
+# # telegram
+alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
+alias tw="tg -w"
+alias tj="tg -j"
+#
 
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
