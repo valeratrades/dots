@@ -106,12 +106,17 @@ cs() {
 
 # # cargo
 cb() {
+	flag="--release"
+	if [ -n "$1" ] && [ "$1" = "-s" ] || [ -n "$1" ] && [ "$1" = "-d" ]; then
+		flag=""
+		shift
+	fi
 	cargo machete
 	guess_name=$(basename $(pwd))
 	if [ -f "./src/lib.rs" ]; then
 		return 0
 	fi
-	cargo build --release && sudo mv ./target/release/${guess_name} /usr/local/bin/
+	cargo build $flag && sudo mv ./target/release/${guess_name} /usr/local/bin/
 }
 cq() {
 	local stderr_temp_file=$(mktemp)
