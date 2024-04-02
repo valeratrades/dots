@@ -219,8 +219,9 @@ alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
-alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && obs"
-alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs | head -n 1)"
+alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default_source --set-volume 95 && obs"
+# for some reason there is a weird caching happening, so have to physically cd next to target.
+alias play_last="cd ~/Videos/obs && vlc --one-instance $(ls -t | head -n 1)"
 
 # # telegram
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
