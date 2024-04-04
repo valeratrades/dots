@@ -26,8 +26,8 @@ dw() {
 	if [ -f "${name}.typ" ]; then
 		source_file="${name}.typ"
 		sudo killall typst
-		typst compile "$try_from" "$try_to"
-		typst watch "$try_from" "$try_to" > /dev/null 2>&1 &
+		typst compile "$try_from" "$target"
+		typst watch "$try_from" "$target" > /dev/null 2>&1 &
 
 	elif [ -f "${name}.tex" ]; then
 		source_file="${name}.tex"
