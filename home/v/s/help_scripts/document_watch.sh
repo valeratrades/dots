@@ -18,24 +18,22 @@ dw() {
 			name="${name%.${ext}}"
 			source_file="${name}"
 			break
+		elif [ -f "${name}.${ext}" ]; then
+			source_file="${name}.${ext}"
+			break
 		fi
 	done
 
 	target="/tmp/${name}.pdf"
 
 	if [ -f "${name}.typ" ]; then
-		source_file="${name}.typ"
 		sudo killall typst
-		typst compile "$try_from" "$target"
-		typst watch "$try_from" "$target" > /dev/null 2>&1 &
+		typst compile "$source_file" "$target"
+		typst watch "$source_file" "$target" > /dev/null 2>&1 &
 
 	elif [ -f "${name}.tex" ]; then
-		source_file="${name}.tex"
-
 		printf "\033[31mTODO\n\033[0m"
 	elif [ -f "${name}.md" ]; then
-		source_file="${name}.md"
-
 		printf "\033[31mTODO\n\033[0m"	
 	else
 		printf "\033[31mNo documents found with supported extensions and provided name\033[0m\n"

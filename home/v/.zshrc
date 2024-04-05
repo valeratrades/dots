@@ -220,6 +220,7 @@ alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
+alias video_cut="video-cut"
 # for some reason there is a weird caching happening, so have to physically cd next to target.
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 
@@ -543,6 +544,7 @@ ct() {
 # what the fuck they're doing other there
 . /etc/profile.d/google-cloud-cli.sh
 . ~/.config/zoxide/setup.sh
+. ~/s/help_scripts/video_editting.sh
 
 source ${HOME}/.config/zsh/other.zsh
 
