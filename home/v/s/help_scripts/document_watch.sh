@@ -1,7 +1,7 @@
 dw() {
-	open_after=0
+	open_editor_after=0
 	if [ "$1" = "-o" ] || [ "$1" = "--open" ]; then
-		open_after=1
+		open_editor_after=1
 		shift
 	elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """compile document on change
@@ -28,7 +28,7 @@ dw() {
 
 	if [ -f "${name}.typ" ]; then
 		sudo killall typst
-		typst compile "$source_file" "$target"
+		typst compile "$source_file" "$target" # since `watch` is asyncronous, and without this line, at times zathura gets to the empty document before typst finishes compiling
 		typst watch "$source_file" "$target" > /dev/null 2>&1 &
 
 	elif [ -f "${name}.tex" ]; then
@@ -40,8 +40,8 @@ dw() {
 	fi
 
 	zathura "$target" > /dev/null 2>&1 &
-	if [ $open_after -eq 1 ]; then
-		nvim "$source_file"
+	if [ $open_editor_after -eq 1 ]; then
+		$EDITOR "$source_file"
 	fi
 }
 

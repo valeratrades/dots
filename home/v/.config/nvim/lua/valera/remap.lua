@@ -48,10 +48,10 @@ K("n", "H", "<nop>")
 K("n", "H", "R")
 
 -- Jumps
-K("", "R", "<C-d>zz")
-K("", "N", "<C-u>zz")
-K("", "<C-d>", "<C-d>zz")
-K("", "<C-u>", "<C-u>zz")
+--K("", "R", "<C-d>zz")
+--K("", "N", "<C-u>zz")
+K("", "<C-d>", "<C-d>M") -- I think master branch broke. This is a temporary solution; want to get back to doing <C-d>zz
+K("", "<C-u>", "<C-u>M")
 
 -- Move line
 K("", "<A-r>", "<nop>")
