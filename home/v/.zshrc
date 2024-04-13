@@ -363,11 +363,15 @@ csg() {
 }
 cssg() {
 	_path="${HOME}/s/g/"
+	parent=0
 	if [ -n "$1" ]; then
 		_path+="${1}"
+		parent=1
 	fi
 	cs $_path
-	git pull
+	if [ $parent = 1 ]; then
+		git pull
+	fi
 }
 csb() {
 	_path="${HOME}/Documents/Books/"
