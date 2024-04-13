@@ -200,6 +200,18 @@ mvh() { # although, not sure if actually needed, as I could just write out `${co
 	mv "${from}/$(ls ${from} -t | head -n 1)" ${to}
 }
 
+matrix() {
+	cleanup() {
+		sed -i "s/#import =/import =/" ~/.config//alacritty/alacritty.toml
+	}
+	trap cleanup EXIT
+	trap cleanup INT
+
+	sed -i "s/import =/#import =/" ~/.config//alacritty/alacritty.toml
+	/usr/bin/cmatrix
+	cleanup
+}
+
 alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
@@ -221,7 +233,7 @@ alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
 alias video_cut="video-cut"
-# for some reason there is a weird caching happening, so have to physically cd next to target.
+# for some reason there is a weird caching happening, so have to physically cd next to target instead currently...
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 
 # # telegram
@@ -275,6 +287,7 @@ mkcd() {
 mvcd() {
     mv $@ && cd "$@[-1]"
 }
+
 
 alias cc="cd && clear"
 # cs{} aliases {{{
