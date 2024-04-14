@@ -208,7 +208,7 @@ matrix() {
 	trap cleanup INT
 
 	sed -i "s/import =/#import =/" ~/.config//alacritty/alacritty.toml
-	/usr/bin/cmatrix -b
+	unimatrix -s96 -fa
 	cleanup
 }
 

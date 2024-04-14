@@ -1,17 +1,18 @@
 local builtin = require('telescope.builtin')
+local gs = { hidden = true, no_ignore = false }
 
 require("which-key").register({
-	f = { builtin.find_files, "search files" },
-	z = { builtin.live_grep, "live grep" },
+	f = { function() builtin.find_files(gs) end, "search files" },
+	z = { function() builtin.live_grep(gs) end, "live grep" },
 	s = {
 		name = "Telescope",
-		s = { builtin.grep_string, "grep visual selection or word under cursor", mode = { "n", "v" } },
-		m = { builtin.keymaps, "keymaps" },
-		g = { builtin.git_files, "git files" },
+		s = { function() builtin.grep_string(gs) end, "grep visual selection or word under cursor", mode = { "n", "v" } },
+		m = { function() builtin.keymaps(gs) end, "keymaps" },
+		g = { function() builtin.git_files(gs) end, "git files" },
 		p = { "<cmd>Telescope persisted<cr>", "persisted: sessions" },
-		b = { builtin.buffers, "find buffers" },
-		h = { builtin.help_tags, "neovim documentation" },
-		n = { function() builtin.find_files({ no_ignore_parent = true }) end, "no_ignore_parent" },
+		b = { function() builtin.buffers(gs) end, "find buffers" },
+		h = { function() builtin.help_tags(gs) end, "neovim documentation" },
+		n = { function() builtin.find_files({ hidden = true, no_ignore_parent = true }) end, "no_ignore_parent" },
 		t = { function()
 			FindTodo()
 			require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
