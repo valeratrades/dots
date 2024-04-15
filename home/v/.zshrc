@@ -13,7 +13,7 @@ edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
 export HISTCONTROL=ignorespace # doesn't append command to history if first character is space, so `cd /` is recorded, but ` cd /` is not.
 
-export WAKETIME="6:00"
+export WAKETIME="4:00"
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
@@ -116,7 +116,7 @@ cb() {
 	if [ -f "./src/lib.rs" ]; then
 		return 0
 	fi
-	cargo build $flag && sudo mv ./target/release/${guess_name} /usr/local/bin/
+	cargo build $flag && sudo cp -r ./target/release/${guess_name} /usr/local/bin/
 }
 cq() {
 	local stderr_temp_file=$(mktemp)

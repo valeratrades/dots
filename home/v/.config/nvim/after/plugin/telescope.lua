@@ -1,5 +1,5 @@
 local builtin = require('telescope.builtin')
-local gs = { hidden = true, no_ignore = false }
+local gs = { hidden = true, no_ignore = false, file_ignore_patterns = { ".git" } }
 
 require("which-key").register({
 	f = { function() builtin.find_files(gs) end, "search files" },

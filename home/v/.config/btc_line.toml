@@ -4,7 +4,7 @@ label = false
 
 [spy]
 alpaca_key = "PKTJYTJNKYSBHAZYT3CO"
-alpaca_secret = "dP9AhnaIkikX84ZRC4ue4OhK5xGDao92c74TkYwg"
+alpaca_secret = { env = "ALPACA_API_SECRET" }
 
 [additional_line]
 show_by_default = true
