@@ -217,7 +217,6 @@ K('n', '<space>clrr', 'vi""8di\\x1b[31m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add re
 K('n', '<space>clrb', 'vi""8di\\x1b[34m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add blue escapecode" })
 K('n', '<space>clrg', 'vi""8di\\x1b[32m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
 
-
 K('', '<space>.', '<cmd>tabe .<cr>')
 
 -- zero width space digraph

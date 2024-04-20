@@ -43,11 +43,13 @@ shnip.setup({
 	},
 	overrides = {
 		rust = {
+			--TODO!: dervie[Default, Clone, Debug] with struct creation
 			extra = {
 				["<c-u>"] = "loop {<CR>}<Esc>ko",
 				["<down>"] = "impl  {<CR>}<Esc>kg_hi",
 				["<c-r>"] = "#[derive()]<Esc>hi",
 				["<c-y>"] = "todo!()<Esc>",
+				--TODO!: add tokio spawn
 			},
 		},
 		go = {
@@ -70,7 +72,6 @@ shnip.setup({
 		}
 	},
 })
-
 
 shnip.addFtSnippets("typst", {
 	["print"] = "",
