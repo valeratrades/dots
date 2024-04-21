@@ -23,6 +23,7 @@ return require('lazy').setup({
 	{ -- Treesitter
 		{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"nvim-treesitter/nvim-treesitter-context",
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"windwp/nvim-ts-autotag",
 		"windwp/nvim-autopairs",
@@ -229,4 +230,5 @@ return require('lazy').setup({
 		end,
 	},
 	"nvim-neotest/nvim-nio",
+	"stevearc/aerial.nvim",
 })
