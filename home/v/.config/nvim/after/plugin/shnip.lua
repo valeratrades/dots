@@ -43,13 +43,13 @@ shnip.setup({
 	},
 	overrides = {
 		rust = {
-			--TODO!: dervie[Default, Clone, Debug] with struct creation
+			["struct"] = "#[derive(Default, Clone, Debug)]<CR>struct  {<CR>}<Esc>kg_hi",
 			extra = {
+				["<c-t>"] = "tokio::spawn(async move {<CR>});<Esc>O",
 				["<c-u>"] = "loop {<CR>}<Esc>ko",
 				["<down>"] = "impl  {<CR>}<Esc>kg_hi",
 				["<c-r>"] = "#[derive()]<Esc>hi",
 				["<c-y>"] = "todo!()<Esc>",
-				--TODO!: add tokio spawn
 			},
 		},
 		go = {
