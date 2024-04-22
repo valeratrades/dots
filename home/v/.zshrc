@@ -506,7 +506,7 @@ Arguments:
 
 # # cargo
 alias c="cargo"
-alias cw="cargo watch -c -x ltest"
+alias cw="cargo watch -c -x lcheck"
 # for cargo timed
 ct() {
 	cleanup() {
