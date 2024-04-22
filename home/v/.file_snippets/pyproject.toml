@@ -22,6 +22,7 @@ ignore = [
 	"E713",
 	"F403",
 	"E401",
+	"E722",
 	"F405", # Warns when using anything from start imports. Useless (unless developing a library), because when something is not defined at all, it's an error.
 	#  # Line length regulated by formatter
 	#  "E501",
