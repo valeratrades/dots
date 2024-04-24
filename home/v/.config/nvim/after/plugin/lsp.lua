@@ -152,7 +152,8 @@ lsp_zero.on_attach(on_attach)
 
 
 -- Language setups
-local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'rust_analyzer', 'bashls', 'clangd' }
+local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'rust_analyzer', 'bashls', 'clangd',
+	'jedi_language_server' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
@@ -167,13 +168,6 @@ lspconfig.htmx.setup {
 lspconfig.leanls.setup {
 	on_attach = on_attach,
 }
---lspconfig.typst_lsp.setup {
---	on_attach = on_attach,
---	settinsg = {
---		exportPdf = "onType",
---		serverPath = "/usr/local/bin/typst-lsp",
---	}
---}
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -208,30 +202,24 @@ require('mason-lspconfig').setup({
 			},
 			staticcheck = true,
 		},
-		--["pyright"] = {
-		--	analysis = {
-		--		typeCheckingMode = "strict",
-		--		autoSearchPaths = true,
-		--		diagnosticMode = 'openFilesOnly',
-		--	},
-		--	before_init = function(params)
-		--		params.initializationOptions = {
-		--			cmd = {
-		--				"pyright-langserver",
-		--				"--stdio",
-		--			},
-		--		}
-		--	end,
-		--},
+		-- Apparently ruff-lsp doesn't provide goto-definition functionality, and is meant to be used in tandem
+		["jedi_language_server"] = {
+			diagnostics = {
+				enable = false,
+			},
+			hover = {
+				enable = true,
+			},
+			jediSettings = {
+				autoImportModules = {},
+				caseInsensitiveCompletion = true,
+				debug = false
+			},
+		},
 		["ruff-lsp"] = {
 			cmd = { 'ruff-lsp' },
 			filetypes = { 'python' },
 			root_dir = require('lspconfig').util.find_git_ancestor,
-			init_options = {
-				settings = {
-					args = {}
-				}
-			}
 		},
 		['typst_lsp'] = {
 			--exportPdf = "checkOnSave",
