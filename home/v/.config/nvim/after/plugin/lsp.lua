@@ -210,10 +210,11 @@ require('mason-lspconfig').setup({
 			hover = {
 				enable = true,
 			},
+			--TODO!!!!!!!!!: disable `reportRedeclaration`
 			jediSettings = {
 				autoImportModules = {},
 				caseInsensitiveCompletion = true,
-				debug = false
+				debug = false,
 			},
 		},
 		["ruff-lsp"] = {

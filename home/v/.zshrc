@@ -141,6 +141,8 @@ pp() {
 pu() {
 	${HOME}/s/help_scripts/pip_upload.sh
 }
+alias pt="pytest"
+alias pk="pytest -k "
 #
 
 # ============================================================================
