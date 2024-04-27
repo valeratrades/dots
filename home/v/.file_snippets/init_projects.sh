@@ -42,8 +42,9 @@ can() {
 	cargo new "${@}"
 	shared_before ${1} "rust"
 
-	sudo ln ${HOME}/.file_snippets/rustfmt.toml ./rustfmt.toml
-	sudo ln ${HOME}/.file_snippets/deny.toml ./deny.toml
+	sudo ln ${HOME}/.file_snippets/rust/rustfmt.toml ./rustfmt.toml
+	sudo ln ${HOME}/.file_snippets/rust/deny.toml ./deny.toml
+	cat ${HOME}/.file_snippets/rust/default_dependencies >> Cargo.toml
 
 	shared_after ${1} "rust"
 }

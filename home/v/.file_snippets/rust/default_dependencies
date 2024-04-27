@@ -1,0 +1,5 @@
+derive-new = "*"
+# v_utils = { version = "*", features = ["full"] }
+serde = { version = "*", features = ["derive"] }
+tokio = { version = "*", features = ["full"] }
+anyhow = "*"
