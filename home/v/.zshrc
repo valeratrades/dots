@@ -426,6 +426,7 @@ alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/boring.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
+alias phone_wifi="phone-wifi"
 #TODO!!!!: fix the bug, where it it blows your ears off when another sound is ongoing when the beep with -l option happens.
 beep() {	
 	if [ $# = 1 ]; then
