@@ -61,14 +61,6 @@ function typing_guide() {
 	google-chrome-stable "https://docs.google.com/document/d/1L-P68VDSGlpLM5A9tfRvWFohaR2NzPbkUT0ok34rsFU/edit"
 }
 
-gm() {
-	printf "\033[32mgm\033[0m\n"
-}
-
-print_moto() {
-	printf "\033[32mIteration Speed\033[0m\n"
-}
-
 function what() {
 	cat ~/s/help_scripts/weird/sbf_tweet.txt | py ~/s/help_scripts/weird/what.py | figlet
 }
