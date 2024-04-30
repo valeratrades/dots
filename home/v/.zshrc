@@ -238,6 +238,7 @@ alias video_cut="video-cut"
 # for some reason there is a weird caching happening, so have to physically cd next to target instead currently...
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 alias ss="sudo systemctl"
+alias cl="wl-copy"
 
 # # telegram
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"

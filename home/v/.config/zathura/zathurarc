@@ -7,6 +7,8 @@
 # zoom in or out on + and -
 # <C-r> to recolor
 
+# F5 for presentation-mode
+
 map s scroll left
 map r scroll down
 map n scroll up
@@ -20,9 +22,6 @@ map \= zoom in
 map <C-\-> zoom out
 map <A-q> quit
 map <A-;> quit
-
-map R scroll half-down
-map N scroll half-up
 
 map <A-s> jumplist backward
 map <A-t> jumplist forward

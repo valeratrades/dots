@@ -1,3 +1,4 @@
+#TODO!!!!!: impplement correctly interactions with full filenames (with extensions) // currently can only guess
 dw() {
 	open_editor_after=0
 	if [ "$1" = "-o" ] || [ "$1" = "--open" ]; then
@@ -40,6 +41,7 @@ dw() {
 	fi
 
 	zathura "$target" > /dev/null 2>&1 &
+
 	if [ $open_editor_after -eq 1 ]; then
 		$EDITOR "$source_file"
 	fi
