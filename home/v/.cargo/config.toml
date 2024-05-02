@@ -4,3 +4,15 @@ rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"]
 
 [build]
 rustc-wrapper = "/usr/bin/sccache"
+
+[alias]
+w = "watch"
+a = "add"
+u = "update"
+m = "machete"
+
+# overriding defaults in favor of cargo-limit alternatives
+b = "lbuild"
+c = "lcheck"
+t = "ltest"
+r = "lrun"

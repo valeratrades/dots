@@ -46,7 +46,7 @@ e() {
 			full_command="${nvim_evocation} ${@} ."
 		else
 			local could_fix=0
-			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js" ".toml")
+			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js" ".toml" ".conf")
 			# note that indexing starts at 1, as we're in a piece of shit zsh.
 			for i in {1..${#try_extensions[@]}}; do
 				local try_path="${1}${try_extensions[$i]}"
