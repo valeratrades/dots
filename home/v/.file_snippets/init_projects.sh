@@ -16,6 +16,8 @@ shared_before() {
 	cat ${HOME}/.file_snippets/gitignore/shared > ./.gitignore
 	echo "\n" >> ./.gitignore
 	cat ${HOME}/.file_snippets/gitignore/${lang} >> ./.gitignore
+
+	cat ${HOME}/.file_snippets/readme/header_start.md > README.md
 }
 
 shared_after() {
@@ -26,8 +28,7 @@ shared_after() {
 	lang="${2}" # rust, py, go
 	touch TODO.md
 
-	notify-send ${project_name}
-	cat ${HOME}/.file_snippets/readme/header.md > README.md
+	cat ${HOME}/.file_snippets/readme/header_end.md >> README.md
 	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" README.md
 	cat ${HOME}/.file_snippets/readme/licenses.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
@@ -45,6 +46,7 @@ can() {
 	sudo ln ${HOME}/.file_snippets/rust/rustfmt.toml ./rustfmt.toml
 	sudo ln ${HOME}/.file_snippets/rust/deny.toml ./deny.toml
 	cat ${HOME}/.file_snippets/rust/default_dependencies >> Cargo.toml
+	cat ${HOME}/.file_snippets/readme/rust_readme >> README.md
 
 	shared_after ${1} "rust"
 }

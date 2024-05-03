@@ -13,7 +13,7 @@ edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
 export HISTCONTROL=ignorespace # doesn't append command to history if first character is space, so `cd /` is recorded, but ` cd /` is not.
 
-export WAKETIME="6:00"
+export WAKETIME="5:00" # utc, with french utc+2, corresponds to 7:00
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
@@ -239,6 +239,7 @@ alias video_cut="video-cut"
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 alias ss="sudo systemctl"
 alias cl="wl-copy"
+alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
 
 # # telegram
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"

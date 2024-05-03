@@ -32,6 +32,7 @@
 	unstage = reset HEAD --
 	last = log -1 HEAD
 	am = commit -am
+	zip = ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@
 [init]
 	defaultBranch = master
 [push]
