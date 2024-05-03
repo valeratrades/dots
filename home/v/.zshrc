@@ -197,6 +197,9 @@ mvh() { # although, not sure if actually needed, as I could just write out `${co
 	elif [ $1 = "-b" ] || [ $1 = "--book"]; then
 		from="${HOME}/Downloads"
 		to="${HOME}/Documents/Books"
+	elif [ $1 = "-n" ] || [ $1 = "--notes"]; then
+		from="${HOME}/Downloads"
+		to="${HOME}/Documents/Notes"
 	fi
 	
 	mv "${from}/$(ls ${from} -t | head -n 1)" ${to}
@@ -387,6 +390,13 @@ csb() {
 }
 csp() {
 	_path="${HOME}/Documents/Papers"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csn() {
+	_path="${HOME}/Documents/Notes"
 	if [ -n "$1" ]; then
 		_path+="${1}"
 	fi
