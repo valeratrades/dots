@@ -106,17 +106,21 @@ cs() {
 
 # # cargo
 cb() {
-	flag="--release"
-	if [ -n "$1" ] && [ "$1" = "-s" ] || [ -n "$1" ] && [ "$1" = "-d" ]; then
-		flag=""
-		shift
-	fi
 	cargo machete
 	guess_name=$(basename $(pwd))
 	if [ -f "./src/lib.rs" ]; then
 		return 0
 	fi
-	cargo build $flag && sudo cp -rf ./target/release/${guess_name} /usr/local/bin/
+
+	if [ -n "$1" ]; then
+		if [ "$1" = "-d" ] || [ "$1" = "--dev" ]; then
+			cargo build --profile dev && sudo cp -rf ./target/debug/${guess_name} /usr/local/bin/
+		else
+			return 1
+		fi
+	else
+		cargo build --release && sudo cp -rf ./target/release/${guess_name} /usr/local/bin/
+	fi
 }
 cq() {
 	local stderr_temp_file=$(mktemp)
@@ -242,7 +246,11 @@ alias video_cut="video-cut"
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 alias ss="sudo systemctl"
 alias cl="wl-copy"
+
+# # git
+alias g="git"
 alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
+#
 
 # # telegram
 alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
@@ -522,6 +530,7 @@ Arguments:
 # # cargo
 alias c="cargo"
 alias cw="cargo watch -c -x lcheck"
+alias cargo_install_all="cargo install $(cargo install --list | rg '^[a-z0-9_-]+ v[0-9.]+:$' | cut -f1 -d' ')"
 # for cargo timed
 ct() {
 	cleanup() {
