@@ -33,6 +33,7 @@
 	last = log -1 HEAD
 	am = commit -am
 	r = reset --hard
+	u = remote add upstream
 [init]
 	defaultBranch = master
 [push]

@@ -48,19 +48,20 @@ can() {
 	sudo ln ${HOME}/.file_snippets/${lang}/rustfmt.toml ./rustfmt.toml
 	sudo ln ${HOME}/.file_snippets/${lang}/deny.toml ./deny.toml
 	cat ${HOME}/.file_snippets/${lang}/default_dependencies >> Cargo.toml
-	cp -f ${HOME}/.file_snippets/${lang}/main ./src/main.${lang} && chmod u+x ./src/main.${lang}
+	cp -f ${HOME}/.file_snippets/main/${lang} ./src/main.${lang} && chmod u+x ./src/main.${lang}
+	mkdir -p .github/workflows && cp -r ${HOME}/.file_snippets/.github/workflows/${lang}/ci.yml ./.github/workflows/ci.yml
 
 	shared_after ${1} ${lang}
 }
 
 pyn() {
 	mkdir "$1"
-	lang = "py"
+	lang="py"
 	shared_before ${1} ${lang}
 
 	sudo ln ${HOME}/.file_snippets/${lang}/pyproject.toml ./pyproject.toml
 	mkdir ./src
-	cp ${HOME}/.file_snippets/${lang}/main ./src/main.${lang} &&  chmod u+x ./src/main.${lang}
+	cp ${HOME}/.file_snippets/main/${lang} ./src/main.${lang} &&  chmod u+x ./src/main.${lang}
 
 	git init
 	shared_after ${1} ${lang}
@@ -73,7 +74,7 @@ gon() {
 
 	sudo ln ${HOME}/.file_snippets/${lang}/gofumpt.toml ./gofumpt.toml
 	# go's convention of cmd/ as the access point prevents placeing this operation in shared_before
-	mkdir cmd && cp ${HOME}/.file_snippets/${lang}/main ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
+	mkdir cmd && cp ${HOME}/.file_snippets/main/${lang} ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
 
 	git init
 	shared_after ${1} ${lang}
