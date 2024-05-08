@@ -26,7 +26,8 @@
 ## Virtual Environments
 .env/
 .venv/
-.env
+env/
+venv/
 
 ## VS Code
 .vscode/*

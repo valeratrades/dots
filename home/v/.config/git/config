@@ -28,6 +28,7 @@
 	detachedHead = true
 # in cased you did `git add .` before running `git diff`
 [alias]
+	d = diff
 	ds = diff --staged
 	unstage = reset HEAD --
 	last = log -1 HEAD
