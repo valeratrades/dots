@@ -14,7 +14,7 @@ dw() {
 	fi
 	name="$1"
 
-	for ext in "pdf" "tex" "md" "typ"; do
+	for ext in "typ" "tex" "md"; do
 		if [ "${name}" = "*.${ext}" ]; then
 			name="${name%.${ext}}"
 			source_file="${name}"
@@ -26,11 +26,12 @@ dw() {
 	done
 
 	target="/tmp/${name}.pdf"
+	notify-send $target $source_file
 
 	if [ -f "${name}.typ" ]; then
 		sudo killall typst
-		typst compile "$source_file" "$target" # since `watch` is asyncronous, and without this line, at times zathura gets to the empty document before typst finishes compiling
-		typst watch "$source_file" "$target" > /dev/null 2>&1 &
+		typst compile $source_file $target # since `watch` is asyncronous, and without this line, at times zathura gets to the empty document before typst finishes compiling
+		typst watch $source_file $target > /dev/null 2>&1 &
 
 	elif [ -f "${name}.tex" ]; then
 		printf "\033[31mTODO\n\033[0m"
