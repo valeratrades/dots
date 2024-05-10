@@ -140,13 +140,14 @@ cq() {
 # python
 alias py="python3"
 pp() {
-	sudo -H pip ${@} --break-system-packages
+	pip ${@} --break-system-packages
 }
 pu() {
 	${HOME}/s/help_scripts/pip_upload.sh
 }
 alias pt="pytest"
 alias pk="pytest -k "
+alias pm="py src/main.py"
 #
 
 # ============================================================================
