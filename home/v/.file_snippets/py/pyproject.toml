@@ -28,6 +28,7 @@ ignore = [
 	"E713",
 	"F403",
 	"E401",
+	"E714", # `${value} is not` instead of `not ${value} is`
 	"E722",
 	"E741", # Ambiguous var name (I'm a Golang man)
 	"F405", # Warns when using anything from start imports. Useless (unless developing a library), because when something is not defined at all, it's an error.

@@ -79,10 +79,10 @@ K("", "L", "T")
 --,}}}
 
 -- Windows
-K("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "windows: decrease width" })
+K("n", "<C-Right>", "<cmd>vertical resize -2<cr>", { desc = "windows: decrease width" })
 K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "windows: decrease height" })
 K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "windows: increase height" })
-K("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "windows: increase width" })
+K("n", "<C-Left>", "<cmd>vertical resize +2<cr>", { desc = "windows: increase width" })
 K("n", "<C-w>h", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
 K("n", "<C-w>v", "<C-w><C-v><C-w>w", { desc = "windows: new vertical and focus" })
 K("n", "<C-w><C-h>", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
