@@ -51,7 +51,7 @@ function FoldMarkerComment()
 	local cs = Cs()
 	F('o' .. cs .. ',}}}')
 	Ft('<Esc>`<')
-	F('O' .. cs .. '  ' .. '{{{')
+	F('O' .. cs .. '  ' .. '{{{') -- }}} because nvim is dumb
 	Ft('<Esc>hhhi')
 end
 
@@ -175,8 +175,19 @@ end
 
 --
 
-K('n', '<space>ch', function()
-	local normal_bg = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg#")
-	vim.cmd('highlight Comment guifg=' .. normal_bg .. ' guibg=' .. "none")
-end, { desc = "comment: hide" })
-K('n', '<space>cs', '<cmd>lua SetSystemTheme()<cr>')
+
+local on = 1
+local original
+
+function toggleCommentsVisibility()
+	on = 1 - on
+	if on == 0 then
+		original = vim.api.nvim_get_hl(0, { name = "Comment" })
+		local custom_group = vim.api.nvim_get_hl(0, { name = "CustomGroup" })
+		vim.api.nvim_set_hl(0, "Comment", { fg = custom_group.bg })
+	else
+		vim.api.nvim_set_hl(0, "Comment", original)
+	end
+end
+
+K('n', '<space>ch', '<cmd>lua toggleCommentsVisibility()<cr>', { desc = "comment: toggle" })

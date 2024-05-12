@@ -3,6 +3,9 @@ function Dark()
 	vim.cmd.colorscheme("rose-pine")
 	--vim.cmd.colorscheme("tokyonight")
 
+	local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+	vim.api.nvim_set_hl(0, "CustomGroup", { bg = normal.bg })
+
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
