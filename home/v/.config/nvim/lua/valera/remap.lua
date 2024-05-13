@@ -167,6 +167,7 @@ local function saveSessionIfOpen(cmd, hook_before)
 end
 
 K({ "", "i" }, "<A-c>", "<cmd>q!<cr>")
+K({ "", "i" }, "<A-C>", "<cmd>tabdo bd<cr>")
 K({ "", "i" }, "<A-a>", saveSessionIfOpen('qa!', 'wa!'), { desc = "save everything and exit" })
 K({ "", "i" }, "<A-;>", '<cmd>qa!<cr>')
 K({ "", "i" }, "<A-w>", saveSessionIfOpen('w!'))
