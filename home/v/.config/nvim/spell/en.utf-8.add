@@ -278,3 +278,5 @@ src
 Filetree
 pytest
 PEP8
+lsp
+jedai

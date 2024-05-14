@@ -531,7 +531,6 @@ Arguments:
 # # cargo
 alias c="cargo"
 alias cw="cargo watch -c -x lcheck"
-alias cargo_install_all="cargo install $(cargo install --list | rg '^[a-z0-9_-]+ v[0-9.]+:$' | cut -f1 -d' ')"
 # for cargo timed
 ct() {
 	cleanup() {
