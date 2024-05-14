@@ -30,6 +30,19 @@ alias ggr="gg refactor:"
 alias ggp="gg perf:"
 alias ggd="gg docs:"
 
+gi() {
+	body=""
+	title=${1}
+	shift
+	if [ "$1" = "-b" ] || [ "$1" = "--body" ]; then
+		body=${1}
+		shift
+	fi
+
+	# auto-assign myself?
+	gh issue create -t "${title}" -b "${body}" $@
+}
+
 gc() {
 	if rg -q "://" <<< "$1"; then
 		url="$1"
