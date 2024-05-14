@@ -30,6 +30,7 @@ alias ggr="gg refactor:"
 alias ggp="gg perf:"
 alias ggd="gg docs:"
 
+# # gh aliases
 gi() {
 	body=""
 	title=${1}
@@ -42,6 +43,12 @@ gi() {
 	# auto-assign myself?
 	gh issue create -t "${title}" -b "${body}" $@
 }
+alias gil="gh issue list"
+alias gic="gh issue close -r completed"
+# r for rejected
+alias gir="gh issue close -r \"not planned\""
+alias gid="gh issue delete --yes"
+#
 
 gc() {
 	if rg -q "://" <<< "$1"; then
