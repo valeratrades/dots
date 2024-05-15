@@ -266,14 +266,17 @@ tn() {
 		cd $2 || return 1
 	fi
 	SESSION_NAME=${1:-$(basename "$(pwd)")}
+	if [ "${SESSION_NAME}" = ".${SESSION_NAME:1}" ]; then
+		SESSION_NAME="_${SESSION_NAME:1}"
+	fi
 
-	tmux new-session -d -s "$SESSION_NAME" -n "source"
+	tmux new-session -d -s "${SESSION_NAME}" -n "source"
 	tmux send-keys -t "${SESSION_NAME}:source.0" 'nvim .' Enter
 
-	tmux new-window -t "$SESSION_NAME" -n "build"
+	tmux new-window -t "${SESSION_NAME}" -n "build"
 	tmux split-window -h -t "${SESSION_NAME}:build"
 
-	tmux new-window -t "$SESSION_NAME" -n "ref"
+	tmux new-window -t "${SESSION_NAME}" -n "ref"
 
 	tmux attach-session -t "${SESSION_NAME}:source.0"
 }

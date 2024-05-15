@@ -1,6 +1,12 @@
 
 <br>
 
+#### Best Practices
+
+<sup>
+This repository follows the best practices as outlined in https://github.com/valeratrades/.github/tree/master/best_practices.
+</sup>
+
 #### License
 
 <sup>
