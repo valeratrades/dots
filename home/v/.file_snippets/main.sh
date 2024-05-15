@@ -50,6 +50,7 @@ can() {
 	cat ${HOME}/.file_snippets/${lang}/default_dependencies >> Cargo.toml
 	cp -f ${HOME}/.file_snippets/main/${lang} ./src/main.${lang} && chmod u+x ./src/main.${lang}
 	mkdir -p .github/workflows && cp -r ${HOME}/.file_snippets/.github/workflows/${lang}/ci.yml ./.github/workflows/ci.yml
+	mkdir tests && cp ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 
 	shared_after ${1} ${lang}
 }
