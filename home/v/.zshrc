@@ -98,6 +98,7 @@ mkfile() {
   mkdir -p "$(dirname "${file_path}")"
 	touch "${file_path}"
 }
+mkf="mkfile"
 cs() {
 	cd "$@" || return 1
 	. "./.local.sh" > /dev/null 2>&1 || :
