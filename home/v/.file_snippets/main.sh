@@ -21,7 +21,7 @@ shared_before() {
 	cat ${HOME}/.file_snippets/readme/header.md > README.md
 	cat ${HOME}/.file_snippets/readme/badges/${lang} | reasonable_envsubst - >> README.md
 	mkdir -p docs/.assets
-	cat ${HOME}/.file_snippets/docs/ARCHITECTURE ./docs/ARCHITECTURE.md
+	cat ${HOME}/.file_snippets/docs/ARCHITECTURE.md > docs/ARCHITECTURE.md
 }
 
 shared_after() {

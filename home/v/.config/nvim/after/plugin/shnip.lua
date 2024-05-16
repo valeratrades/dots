@@ -62,6 +62,7 @@ shnip.setup({
 		python = {
 			extra = {
 				["<c-f>"] = "def :<CR><CR>raise NotImplementedError<Esc>2kg_i",
+				["<c-n>"] = "raise NotImplementedError<Esc>",
 				["<c-u>"] = "while True:<CR>",
 			}
 		},

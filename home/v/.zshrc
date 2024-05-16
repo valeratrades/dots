@@ -206,6 +206,9 @@ mvh() { # although, not sure if actually needed, as I could just write out `${co
 	elif [ $1 = "-n" ] || [ $1 = "--notes"]; then
 		from="${HOME}/Downloads"
 		to="${HOME}/Documents/Notes"
+	elif [ $1 = "-c" ] || [ $1 = "--courses"]; then
+		from="${HOME}/Downloads"
+		to="${HOME}/Documents/Courses"
 	fi
 	
 	mv "${from}/$(ls ${from} -t | head -n 1)" ${to}
@@ -235,7 +238,7 @@ alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
-alias jn="jupyter notebook &"
+alias jn="jupyter notebook"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
@@ -248,6 +251,7 @@ alias video_cut="video-cut"
 alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 alias ss="sudo systemctl"
 alias cl="wl-copy"
+alias gz="tar -xvzf -C"
 
 # # git
 alias g="git"
