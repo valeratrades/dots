@@ -6,6 +6,9 @@ gg() {
 		git tag -a $2 -m "$2"
 		shift 2
 	fi
+	#TODO!!!!: a flag for generating the commit message from git diff with a (preferrably local) fast llm model.
+	#repr: f"_: {llm_output}"
+	#// main empty comment should be switched to "_" from "."
 
 	message="."
 	if [ -n "$1" ]; then
