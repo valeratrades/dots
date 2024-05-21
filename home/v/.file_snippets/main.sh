@@ -39,6 +39,7 @@ shared_after() {
 
 	git add -A
 	git commit -m "-- New Project Snippet --"
+	git branch "release"
 	set +e
 }
 

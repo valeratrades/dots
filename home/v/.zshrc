@@ -539,6 +539,8 @@ Arguments:
 # # cargo
 alias c="cargo"
 alias cw="cargo watch -c -x lbuild"
+#TODO: want `-Z timeings`, `llvm-lines` and `machete` to be ran and shown
+alias c_debug_build="cargo "
 # for cargo timed
 ct() {
 	cleanup() {

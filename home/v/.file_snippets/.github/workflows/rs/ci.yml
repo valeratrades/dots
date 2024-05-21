@@ -9,8 +9,12 @@ on:
 permissions:
   contents: read
 
-#env:
-#  RUSTFLAGS: -Dwarnings
+env:
+  #RUSTFLAGS: -Dwarnings
+  CARGO_INCREMENTAL: 0 # on large changes this just bloats ./target
+  RUST_BACKTRACE: short
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
 
 jobs:
   pre_ci:

@@ -1,4 +1,5 @@
 local builtin = require('telescope.builtin')
+local actions = require('telescope.actions')
 local gs = { hidden = true, no_ignore = false, file_ignore_patterns = { ".git" } }
 
 require("which-key").register({
@@ -23,7 +24,6 @@ K("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascen
 	{ desc = "Ctrl+f remake" })
 
 
-require('telescope').load_extension('media_files')
 require("telescope").setup {
 	extensions = {
 		media_files = {
@@ -31,8 +31,27 @@ require("telescope").setup {
 			find_cmd = "rg"
 		},
 	},
+	defaults = {
+		mappings = {
+			--Can't find action.top there, could this be done? (say on "<C-y>")
+			i = {
+				["<CR>"] = actions.select_default + actions.center,
+				["<C-x>"] = actions.select_horizontal + actions.center,
+				["<C-v>"] = actions.select_vertical + actions.center,
+				["<C-t>"] = actions.select_tab + actions.center,
+			},
+			n = {
+				["<CR>"] = actions.select_default + actions.center,
+				["<C-x>"] = actions.select_horizontal + actions.center,
+				["<C-v>"] = actions.select_vertical + actions.center,
+				["<C-t>"] = actions.select_tab + actions.center,
+			}
+		},
+	},
 }
 --
+-- may or may not be required to be loaded strictly after setup
+require('telescope').load_extension('media_files')
 
 -- Default mappings reference {{{
 --<C-n>/<Down>	Next item
