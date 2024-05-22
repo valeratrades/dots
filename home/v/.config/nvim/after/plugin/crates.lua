@@ -124,14 +124,14 @@ require('crates').setup {
 			goto_item = { "gd", "K" },
 		},
 	},
-	src = {
+	completion = {
 		insert_closing_quote = true,
 		text = {
 			prerelease = "  pre-release ",
 			yanked = "  yanked ",
 		},
 		cmp = {
-			enabled = true,
+			enabled = false,
 			use_custom_kind = true,
 			kind_text = {
 				version = "Version",
@@ -144,7 +144,12 @@ require('crates').setup {
 		},
 		coq = {
 			enabled = false,
-			name = "Crates",
+			name = "crates.nvim",
+		},
+		crates = {
+			enabled = false,
+			min_chars = 3,
+			max_results = 8,
 		},
 	},
 	null_ls = {

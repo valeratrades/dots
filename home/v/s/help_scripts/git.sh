@@ -39,11 +39,11 @@ alias ggd="gg docs:"
 gi() {
 	body=""
 	title=${1}
-	shift
-	if [ "$1" = "-b" ] || [ "$1" = "--body" ]; then
-		body=${1}
+	if [ "$2" != "" ]; then
+		body=${2}
 		shift
 	fi
+	shift # so I append $@ to the actual evokation
 
 	# auto-assign myself?
 	gh issue create -t "${title}" -b "${body}" $@
