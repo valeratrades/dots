@@ -2,9 +2,7 @@
 rustc-wrapper = "sccache"
 
 [target.x86_64-unknown-linux-gnu]
-# the following is assumed with modern gcc. Keeping in case something brakes.
-# linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=/path/to/mold"]
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"]
 
 [doc]
 browser = "google-chrome-stable"
@@ -12,7 +10,7 @@ browser = "google-chrome-stable"
 [profile.dev]
 # Disabling debug info speeds up builds a bunch,
 # and we don't rely on it for debugging that much.
-debug = 0
+#debug = 0
 
 [profile.dev.package]
 # These speed up local tests.

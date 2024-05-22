@@ -153,3 +153,10 @@ require('crates').setup {
 	},
 	on_attach = function(bufnr) end,
 }
+require("which-key").register({
+	["<Space>c"] = {
+		name = "Crates",
+		u = { "<cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade All" },
+		a = { "<cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade Crate" },
+	},
+})

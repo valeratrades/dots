@@ -2,6 +2,8 @@
 
 alias gu='gitui'
 gg() {
+	#TODO!: cb as flag (-c)
+	#TODO!: join all ggx aliases under this via flags, then alias them back as is
 	if [ "$1" = "t" ] || [ "$1" = "-t" ] || [ "$1" = "tag" ]; then
 		git tag -a $2 -m "$2"
 		shift 2
