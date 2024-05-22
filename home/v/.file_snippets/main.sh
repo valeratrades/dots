@@ -33,7 +33,7 @@ shared_after() {
 	touch TODO.md
 
 	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" README.md
-	cat ${HOME}/.file_snippets/readme/licenses.md >> README.md
+	cat ${HOME}/.file_snippets/readme/footer.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
 
