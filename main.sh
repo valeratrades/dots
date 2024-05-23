@@ -54,7 +54,7 @@ dot_directories="
 "
 
 commit() {
-	local message="."
+	local message="_"
 	if [ -n "$1" ]; then
 		message="$@"
 	fi
