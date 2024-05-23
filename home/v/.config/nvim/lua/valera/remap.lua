@@ -11,7 +11,7 @@ K("i", "<Esc>", "<Esc><Esc><cmd>lua CommentCopilotEsc()<cr>",
 	{ desc = "Allow quick exit from cmp suggestions by doubling <Esc>" })
 
 -- -- -- "hjkl" -> "htns" Remaps and the Consequences
--- Basic Movement {{{
+-- Basic Movement {\{{
 local function multiplySidewaysMovements(movement)
 	return function()
 		if vim.v.count == 0 then
@@ -23,15 +23,6 @@ local function multiplySidewaysMovements(movement)
 	end
 end
 
-local function appendNewline()
-	local function do_the_did()
-		vim.cmd("s/\\n/\\r\\r/")
-		vim.cmd.noh()
-	end
-	return function()
-		PersistCursor(do_the_did)
-	end
-end
 
 K("", "<C-e>", "<nop>") -- used as prefix in my tmux
 K("", "j", "<nop>")
@@ -42,10 +33,14 @@ K("", "s", multiplySidewaysMovements('h'), { silent = true })
 K("", "r", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 K("", "n", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 K("", "t", multiplySidewaysMovements('l'), { silent = true })
-K('i', '<C-CR>', appendNewline(), { silent = true })
 K("n", "h", "r")
 K("n", "H", "<nop>")
 K("n", "H", "R")
+
+-- Useful Enter key
+K("", "<CR>", "o<Esc>")
+K("", "<C-CR>", "O<Esc>")
+K("i", "<C-CR>", "<Esc>O")
 
 -- Jumps
 K("", "R", "<C-d>M")
