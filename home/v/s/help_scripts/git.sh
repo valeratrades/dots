@@ -2,38 +2,43 @@
 
 alias gu='gitui'
 gg() {
-	#TODO!: cb as flag (-c)
-	#TODO!: join all ggx aliases under this via flags, then alias them back as is
-	if [ "$1" = "t" ] || [ "$1" = "-t" ] || [ "$1" = "tag" ]; then
+	# needs to be processed first, or acceess aliases would have to be turned into functions
+	prefix=""
+	if [ "$1" = "p" ] || [ "$1" = "-p" ] || [ "$1" = "--prefix" ]; then
+		prefix="${2}: "
+		shift 2
+	fi
+
+	if [ "$1" = "t" ] || [ "$1" = "-t" ] || [ "$1" = "--tag" ]; then
 		git tag -a $2 -m "$2"
 		shift 2
 	fi
+
+
+	message="_"
+	if [ -n "$1" ]; then
+		message="$@"
+	fi
+	message="${prefix}${message}"
+
 	#TODO!!!!: a flag for generating the commit message from git diff with a (preferrably local) fast llm model.
 	#repr: f"_: {llm_output}"
 	#// main empty comment should be switched to "_" from "."
 
-	message="."
-	if [ -n "$1" ]; then
-		message="$@"
-		#TODO!!!!!!: squash all the previous sequential commits with "." into one here.
+	squash_if_needed=""
+	if [ "$(git log -1 --pretty=format:%s)" = "_" ]; then
+		squash_if_needed="--squash HEAD~1"
 	fi
-	git add -A && git commit -m "$message" && git push --follow-tags
-
-	if [ -f "./Cargo.toml" ]; then
-		current_branch=$(git branch --show-current)
-		if [ "$current_branch" = "master" ] || [ "$current_branch" = "release" ] || [ "$current_branch" = "stable" ]; then
-			cb > /dev/null 2>&1
-		fi
-	fi
+	git add -A && git commit ${squash_if_needed} -m "${message}" && git push --follow-tags
 }
-alias ggf="gg feat:"
-alias ggx="gg fix:"
-alias ggc="gg chore:"
-alias ggs="gg style:"
-alias ggt="gg test:"
-alias ggr="gg refactor:"
-alias ggp="gg perf:"
-alias ggd="gg docs:"
+alias ggf="gg -p feat"
+alias ggx="gg -p fix"
+alias ggc="gg -p chore"
+alias ggs="gg -p style"
+alias ggt="gg -p test"
+alias ggr="gg -p refactor"
+alias ggp="gg -p perf"
+alias ggd="gg -p docs"
 
 # # gh aliases
 gi() {
