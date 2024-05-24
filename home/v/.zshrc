@@ -538,8 +538,11 @@ Arguments:
 
 # # cargo
 alias c="cargo"
-#TODO!!: start counting n_restarted towards the daily stats
-alias cw="cargo watch -c -x lbuild"
+cw() {
+	# not sure is duplication of processes is the best way to do it, but eh good enough
+	cargo watch -- todo manual counter-step --cargo-watch >/dev/null 2>&1 &
+	cargo watch -c -x "lbuild"
+}
 alias cu="cargo clean && cargo update"
 #TODO: want `-Z timeings`, `llvm-lines` and `machete` to be ran and shown
 alias c_debug_build="cargo "

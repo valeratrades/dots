@@ -49,13 +49,12 @@ K("", "<C-d>", "<C-d>zz")
 K("", "<C-u>", "<C-u>zz")
 
 -- Move line
-K("", "<A-r>", "<nop>")
-K("v", "<A-r>", ":m '>+1<cr>gv=gv")
-K("v", "<A-n>", ":m '<-2<cr>gv=gv")
-K("n", "<A-r>", "V:m '>+1<cr>gv=gv")
-K("n", "<A-n>", "V:m '>-2<cr>gv=gv")
-K("i", "<A-r>", "<Esc>V:m '>+1<cr>gv=gv")
-K("i", "<A-n>", "<Esc>V:m '>-2<cr>gv=gv")
+K("v", "<A-j>", ":m '>+1<cr>gv=gv")
+K("v", "<A-k>", ":m '<-2<cr>gv=gv")
+K("n", "<A-j>", "V:m '>+1<cr>gv=gv")
+K("n", "<A-k>", "V:m '>-2<cr>gv=gv")
+K("i", "<A-j>", "<Esc>V:m '>+1<cr>gv=gv")
+K("i", "<A-k>", "<Esc>V:m '>-2<cr>gv=gv")
 
 -- Windows
 K('n', '<C-w>s', '<C-W>h')

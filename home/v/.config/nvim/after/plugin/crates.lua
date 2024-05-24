@@ -161,7 +161,8 @@ require('crates').setup {
 require("which-key").register({
 	["<Space>c"] = {
 		name = "Crates",
-		u = { "<cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade All" },
-		a = { "<cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade Crate" },
+		--TODO!: on both of these change the crate from "*" to explicit crate name
+		a = { "<cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade All" },
+		u = { "<cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade Crate" },
 	},
 })
