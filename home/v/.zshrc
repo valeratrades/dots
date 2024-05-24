@@ -538,6 +538,7 @@ Arguments:
 
 # # cargo
 alias c="cargo"
+#TODO!!: start counting n_restarted towards the daily stats
 alias cw="cargo watch -c -x lbuild"
 alias cu="cargo clean && cargo update"
 #TODO: want `-Z timeings`, `llvm-lines` and `machete` to be ran and shown
