@@ -149,6 +149,9 @@ return require('lazy').setup({
 		{ "folke/tokyonight.nvim", name = "tokyonight" },
 		"projekt0n/github-nvim-theme",
 	},
+	{ -- Git
+		'tpope/vim-fugitive',
+	},
 	--
 
 	-- If something breaks, it's likely below here:
