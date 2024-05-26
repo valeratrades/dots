@@ -1,7 +1,7 @@
 #!/bin/sh
 #TODO: add presets. For example, --clap on `can` would add clap with "derive" to dependencies, then the main func would have hell world example specifically with clap, so I don't have to remember all the intricasies
 
-#TODO: add github hook for copying config file (assume "${same_name_as_crate}.toml") if it exists
+#TODO: add github hook for copying config file, (assume "~/.config/${same_name_as_crate}.toml"), if it exists
 
 shared_before() {
 	# $1: project_name
@@ -31,14 +31,18 @@ shared_after() {
 	# $2: lang
 
 	project_name="${1}"
-	lang="${2}" # rust, py, go
+	lang="${2}" # rs, py, go
 	touch TODO.md
 
-	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" README.md
+	fd --type f --exclude .git | rg -v --file <(git ls-files --others --ignored --exclude-standard) | while IFS= read -r file; do
+		sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" "$file"
+	done
+
 	cat ${HOME}/.file_snippets/readme/footer.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
 
+	git init
 	git add -A
 	git commit -m "-- New Project Snippet --"
 	git branch "release"
@@ -46,16 +50,30 @@ shared_after() {
 }
 
 can() {
+	preset=""
+	if [ "${1#--}" != "$1" ]; then
+		preset="${1}"
+		shift
+	fi
 	cargo new "${@}"
 	lang="rs"
 	shared_before ${1} ${lang}
 
 	sudo ln ${HOME}/.file_snippets/${lang}/rustfmt.toml ./rustfmt.toml
 	sudo ln ${HOME}/.file_snippets/${lang}/deny.toml ./deny.toml
-	cat ${HOME}/.file_snippets/${lang}/default_dependencies >> Cargo.toml
-	cp -f ${HOME}/.file_snippets/main/${lang} ./src/main.${lang} && chmod u+x ./src/main.${lang}
+	# removes the [dependencies] line, as it's added by the snippet
+	sed -i '$d' Cargo.toml
+	cat ${HOME}/.file_snippets/${lang}/default_dependencies.toml >> Cargo.toml
+
+	if [ "$preset" = "--clap" ]; then
+		cp -f ${HOME}/.file_snippets/presets/${lang}/clap/main ./src/main.${lang}
+		cat ${HOME}/.file_snippets/presets/${lang}/clap/additional_dependencies.toml >> Cargo.toml
+	else
+		cp -f ${HOME}/.file_snippets/presets/${lang}/main ./src/main.${lang}
+	fi
+
 	mkdir -p .github/workflows && cp -r ${HOME}/.file_snippets/.github/workflows/${lang}/ci.yml ./.github/workflows/ci.yml
-	mkdir tests && cp ${HOME}/.file_snippets/tests/${lang}/* ./tests/
+	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 
 	shared_after ${1} ${lang}
 }
@@ -67,9 +85,8 @@ pyn() {
 
 	sudo ln ${HOME}/.file_snippets/${lang}/pyproject.toml ./pyproject.toml
 	mkdir ./src
-	cp ${HOME}/.file_snippets/main/${lang} ./src/main.${lang} &&  chmod u+x ./src/main.${lang}
+	cp ${HOME}/.file_snippets/presets/${lang}/main ./src/main.${lang} &&  chmod u+x ./src/main.${lang}
 
-	git init
 	shared_after ${1} ${lang}
 }
 
@@ -80,9 +97,8 @@ gon() {
 
 	sudo ln ${HOME}/.file_snippets/${lang}/gofumpt.toml ./gofumpt.toml
 	# go's convention of cmd/ as the access point prevents placeing this operation in shared_before
-	mkdir cmd && cp ${HOME}/.file_snippets/main/${lang} ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
+	mkdir cmd && cp ${HOME}/.file_snippets/presets/${lang}/main ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
 
-	git init
 	shared_after ${1} ${lang}
 	go mod init "github.com/${GITHUB_NAME}/$1"
 }
