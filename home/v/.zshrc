@@ -138,8 +138,18 @@ cq() {
 }
 #
 
-# python
-alias py="python3"
+# # go
+go() {
+	todo manual counter-step --dev-runs
+	go $@
+}
+#
+
+# # python
+py() {
+	todo manual counter-step --dev-runs
+	python3
+}
 pp() {
 	pip ${@} --break-system-packages
 }
@@ -538,7 +548,10 @@ Arguments:
 }
 
 # # cargo
-alias c="cargo"
+c() {
+	todo manual counter-step --dev-runs
+	cargo
+}
 cw() {
 	# not sure is duplication of processes is the best way to do it, but eh good enough
 	cargo watch -- todo manual counter-step --cargo-watch >/dev/null 2>&1 &
