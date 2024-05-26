@@ -140,15 +140,15 @@ cq() {
 
 # # go
 go() {
-	todo manual counter-step --dev-runs
+	todo manual counter-step --dev-runs;
 	go $@
 }
 #
 
 # # python
 py() {
-	todo manual counter-step --dev-runs
-	python3
+	todo manual counter-step --dev-runs;
+	python3 ${@}
 }
 pp() {
 	pip ${@} --break-system-packages
@@ -549,8 +549,8 @@ Arguments:
 
 # # cargo
 c() {
-	todo manual counter-step --dev-runs
-	cargo
+	todo manual counter-step --dev-runs;
+	cargo ${@}
 }
 cw() {
 	# not sure is duplication of processes is the best way to do it, but eh good enough

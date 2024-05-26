@@ -241,6 +241,7 @@ end
 K("n", "<Esc>", function()
 	vim.cmd.noh()
 	killPopups()
+	vim.cmd("PeekClose")
 end)
 
 -- gf and if it doesn't exist, create it
