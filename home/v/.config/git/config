@@ -22,7 +22,9 @@
 	prune = true
 # copy/pastes are colored differently than actual removes/additions
 [diff]
-	colorMoved = zebra
+	colorMoved = zebra #"default"
+	colormovedws = "allow-indentation-change"
+
 # warn when ponting to a commit instead of branch
 [advice]
 	detachedHead = true

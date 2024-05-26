@@ -8,11 +8,11 @@ vim.diagnostic.config({
 })
 
 function ToggleDiagnostics()
-	local state = vim.diagnostic.is_disabled()
+	local state = vim.diagnostic.is_enabled()
 	if state then
-		vim.diagnostic.enable()
+		vim.diagnostic.enable(false)
 	else
-		vim.diagnostic.disable()
+		vim.diagnostic.enable(true)
 	end
 end
 

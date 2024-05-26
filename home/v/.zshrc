@@ -252,6 +252,7 @@ alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1
 alias ss="sudo systemctl"
 alias cl="wl-copy"
 alias gz="tar -xvzf -C"
+alias toggle_theme="${HOME}/s/help_scripts/theme_toggle.sh"
 
 # # git
 alias g="git"

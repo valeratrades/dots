@@ -25,9 +25,10 @@ gg() {
 	#repr: f"_: {llm_output}"
 	#// main empty comment should be switched to "_" from "."
 
+	# squashes with the previous commit if the message is the same
 	squash_if_needed=""
-	if [ "$(git log -1 --pretty=format:%s)" = "_" ]; then
-		squash_if_needed="--squash HEAD~1"
+	if [ "$(git log -1 --pretty=format:%s)" = ${message} ]; then
+		squash_if_needed='--squash HEAD~1'
 	fi
 	git add -A && git commit ${squash_if_needed} -m "${message}" && git push --follow-tags
 }
@@ -39,6 +40,12 @@ alias ggt="gg -p test"
 alias ggr="gg -p refactor"
 alias ggp="gg -p perf"
 alias ggd="gg -p docs"
+
+gd() {
+	branch_name=${1}
+	git branch -d ${branch_name}
+	git push origin --delete ${branch_name}
+}
 
 # # gh aliases
 gi() {

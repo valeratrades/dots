@@ -28,6 +28,7 @@ shnip.setup({
 		["error"]    = "<c-x>",
 		["while"]    = "<c-w>",
 		["for"]      = "<c-f>",
+		--TODO!: write out the whole thing manually; get rid of things like "else", "if", etc.
 		["if"]       = "<c-i>",
 		["elseif"]   = "<c-o>",
 		["else"]     = "<c-e>",
@@ -50,6 +51,7 @@ shnip.setup({
 				["<down>"] = "impl  {<CR>}<Esc>kg_hi",
 				["<c-r>"] = "#[derive()]<Esc>hi",
 				["<c-y>"] = "todo!()<Esc>",
+				["<c-e>"] = "#[derive(Clone, Debug, Copy, PartialEq, Eq)]<CR>enum	{<CR>}<Esc>kg_hi",
 			},
 		},
 		go = {
