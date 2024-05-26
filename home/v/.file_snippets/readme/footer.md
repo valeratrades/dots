@@ -1,8 +1,6 @@
 
 <br>
 
-#### Best Practices
-
 <sup>
 This repository follows <a href="https://github.com/valeratrades/.github/tree/master/best_practices">my best practices</a>.
 </sup>

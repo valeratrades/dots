@@ -1,0 +1,16 @@
+[package]
+name = "tg"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+derive-new = "*"
+# v_utils = { version = "*", features = ["full"] }
+#serde = { version = "*", features = ["derive"] }
+tokio = { version = "1.37.0", features = ["full"] }
+anyhow = "1.0.86"
+reqwest = "0.12.4"
+clap = { version = "4.5.4", features = ["derive"] }
+
+[package.metadata.cargo-machete]
+ignored = ["derive-new", "anyhow", "serde", "tokio"]

@@ -27,9 +27,10 @@ gg() {
 
 	# squashes with the previous commit if the message is the same
 	squash_if_needed=""
-	if [ "$(git log -1 --pretty=format:%s)" = ${message} ]; then
-		squash_if_needed='--squash HEAD~1'
-	fi
+	# doesn't work
+	#if [ "$(git log -1 --pretty=format:%s)" = ${message} ]; then
+	#	squash_if_needed='--squash HEAD~1'
+	#fi
 	git add -A && git commit ${squash_if_needed} -m "${message}" && git push --follow-tags
 }
 alias ggf="gg -p feat"
@@ -152,6 +153,45 @@ gb() {
 	rm -rf $target_dir
 }
 
+
+#TODO!!!!: figure out actual NRSR enforcement on both push and pr merges.
+protect_branch() {
+	repo=${1}
+	branch=${2}
+
+	#TODO!!!!!: auto-include the contexts
+	#NB: when edititing, careful not to add `,` after the last element - this is parsed as JSON
+	curl -X PUT -H "Authorization: token ${GITHUB_KEY}" \
+	-H "Accept: application/vnd.github.v3+json" \
+	https://api.github.com/repos/${GITHUB_NAME}/${repo}/branches/${branch}/protection \
+	-d '{
+		"required_status_checks": {
+			"strict": true,
+			"contexts": []
+		},
+		"enforce_admins": true,
+		"required_pull_request_reviews": null,
+		"restrictions": null,
+		"allow_auto_merge": true,
+		"allow_force_pushes": true
+	}'
+	#{
+	#	"dismiss_stale_reviews": true,
+	#	"require_code_owner_reviews": false,
+	#	"required_approving_review_count": 0
+	#},
+
+	# allow auto-merge (not sure it is passed correctly higher up)
+	curl -L \
+	-X PATCH \
+	-H "Accept: application/vnd.github+json" \
+	-H "Authorization: Bearer ${GITHUB_KEY}" \
+	-H "X-GitHub-Api-Version: 2022-11-28" \
+	https://api.github.com/repos/${GITHUB_NAME}/${repo} \
+	-d '{"allow_auto_merge":true}'
+}
+
+
 gn() {
 	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf """\
@@ -176,4 +216,22 @@ gn() {
 	gh repo create ${repo_name} ${1} --source=.
 	git remote add origin https://github.com/Valera6/${repo_name}.git
 	git push -u origin master
+	#TODO!: also push and protect release if it exists
+	#protect_branch ${repo_name} master
+}
+
+gp() {
+	commit_sha=$(curl -H "Authorization: token ${GITHUB_KEY}" \
+  -H "Accept: application/vnd.github.v3+json" \
+  "https://api.github.com/repos/${GITHUB_NAME}/${REPO}/commits?sha=${BRANCH}&per_page=1" | jq -r '.[0].sha')
+
+	git branch -D temp-branch &>/dev/null 2>&1
+	git push origin --delete temp-branch &>/dev/null 2>&1
+
+	git checkout -b temp-branch
+	git push origin temp-branch
+
+	gg $@
+	gh pr create --title "_" --body "" --base master --head temp-branch
+	gh pr merge --auto --squash --delete-branch
 }

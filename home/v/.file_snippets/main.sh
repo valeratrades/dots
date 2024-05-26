@@ -1,6 +1,8 @@
 #!/bin/sh
 #TODO: add presets. For example, --clap on `can` would add clap with "derive" to dependencies, then the main func would have hell world example specifically with clap, so I don't have to remember all the intricasies
 
+#TODO: add github hook for copying config file (assume "${same_name_as_crate}.toml") if it exists
+
 shared_before() {
 	# $1: project_name
 	# $2: lang

@@ -269,12 +269,6 @@ alias g="git"
 alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
 #
 
-# # telegram
-alias tg="py ${HOME}/s/help_scripts/tg_message_to_self.py"
-alias tw="tg -w"
-alias tj="tg -j"
-#
-
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
 tn() {
@@ -605,6 +599,7 @@ ct() {
 
 . ~/s/todo/functions.sh
 . ~/notes/functions.sh
+. ~/s/help_scripts/tg/functions.sh
 . ~/s/help_scripts/weird.sh
 . ~/s/help_scripts/shell_harpoon/main.zsh
 . ~/.config/nnn/setup.sh
