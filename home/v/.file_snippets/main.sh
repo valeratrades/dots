@@ -32,17 +32,20 @@ shared_after() {
 
 	project_name="${1}"
 	lang="${2}" # rs, py, go
-	touch TODO.md
+	touch TODO.md #? could I fully substitute this with github issues?
+
+	git init
+	cp ${HOME}/.file_snippets/.git/hooks/pre-commit .git/hooks/pre-commit && chmod u+x .git/hooks/pre-commit
 
 	fd --type f --exclude .git | rg -v --file <(git ls-files --others --ignored --exclude-standard) | while IFS= read -r file; do
 		sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" "$file"
 	done
+	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" ".git/hooks/pre-commit"
 
 	cat ${HOME}/.file_snippets/readme/footer.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
 
-	git init
 	git add -A
 	git commit -m "-- New Project Snippet --"
 	git branch "release"
