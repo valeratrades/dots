@@ -64,6 +64,12 @@ c() {
 cw() {
 	# not sure is duplication of processes is the best way to do it, but eh good enough
 	cargo watch -- todo manual counter-step --cargo-watch >/dev/null 2>&1 &
+	pid1=$!
+	cleanup() {
+	    kill $pid1
+	    exit 1
+	}
+	trap cleanup SIGINT
 	cargo watch -c -x "lbuild"
 }
 alias cu="cargo clean && cargo update"

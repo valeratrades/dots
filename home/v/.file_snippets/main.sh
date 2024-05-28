@@ -21,7 +21,7 @@ shared_before() {
 	cat ${HOME}/.file_snippets/gitignore/${lang} >> ./.gitignore
 
 	cat ${HOME}/.file_snippets/readme/header.md > README.md
-	cat ${HOME}/.file_snippets/readme/badges/${lang} | reasonable_envsubst - >> README.md
+	cat ${HOME}/.file_snippets/readme/badges/${lang}.md | reasonable_envsubst - >> README.md
 	mkdir -p docs/.assets
 	cat ${HOME}/.file_snippets/docs/ARCHITECTURE.md > docs/ARCHITECTURE.md
 }
@@ -67,6 +67,7 @@ can() {
 	sed -i '$d' Cargo.toml
 	cat ${HOME}/.file_snippets/${lang}/default_dependencies.toml >> Cargo.toml
 
+	touch src/lib.${lang}
 	if [ "$preset" = "--clap" ]; then
 		cp -f ${HOME}/.file_snippets/presets/${lang}/clap/main ./src/main.${lang}
 		cat ${HOME}/.file_snippets/presets/${lang}/clap/additional_dependencies.toml >> Cargo.toml

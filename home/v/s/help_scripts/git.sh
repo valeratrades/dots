@@ -212,6 +212,22 @@ gn() {
 	git push -u origin master
 	#TODO!: also push and protect release if it exists
 	#protect_branch ${repo_name} master
+
+	gh api repos/${GITHUB_NAME}/${repo_name}/labels \
+		-f name="ci" \
+		-f color="808080" \
+		-f description="New test or benchmark"
+
+	curl -L -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: token ${GITHUB_KEY}" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/${GITHUB_NAME}/${repo_name}/milestones \
+  -d '{
+		"title":"1.0",
+		"state":"open",
+		"description":"Minimum viable product"
+	}'
 }
 
 gtpr() {
