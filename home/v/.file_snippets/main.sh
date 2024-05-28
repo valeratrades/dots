@@ -52,7 +52,7 @@ shared_after() {
 }
 
 can() {
-	preset=""
+	preset="--tokio"
 	if [ "${1#--}" != "$1" ]; then
 		preset="${1}"
 		shift
@@ -71,12 +71,15 @@ can() {
 	if [ "$preset" = "--clap" ]; then
 		cp -f ${HOME}/.file_snippets/presets/${lang}/clap/main ./src/main.${lang}
 		cat ${HOME}/.file_snippets/presets/${lang}/clap/additional_dependencies.toml >> Cargo.toml
+	elif [ "$preset" = "--tokio" ]; then
+		cp -f ${HOME}/.file_snippets/presets/${lang}/tokio/main ./src/main.${lang}
+		cat ${HOME}/.file_snippets/presets/${lang}/tokio/additional_dependencies.toml >> Cargo.toml
 	else
 		cp -f ${HOME}/.file_snippets/presets/${lang}/main ./src/main.${lang}
 	fi
 
 	mkdir -p .github/workflows && cp -r ${HOME}/.file_snippets/.github/workflows/${lang}/ci.yml ./.github/workflows/ci.yml
-	#TODO!: generalize
+	#TODO!: generalize to other languages
 	echo "" >> ./.github/workflows/ci.yml && cat ${HOME}/.file_snippets/.github/workflows/shared/ci.yml | awk 'NR > 1' | reasonable_envsubst - >> ./.github/workflows/ci.yml
 	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 

@@ -3,6 +3,5 @@ ignored = ["derive-new", "anyhow", "serde", "tokio"]
 
 [dependencies]
 derive-new = "^0.6.0"
-# v_utils = { version = "^1.3.6", features = ["full"] }
-tokio = { version = "^1.37.0", features = ["full"] }
 anyhow = "^1.0.86"
+# v_utils = { version = "^1.3.6", features = ["full"] }
