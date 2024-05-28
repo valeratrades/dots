@@ -146,13 +146,31 @@ K('', '<C-z>', '<C-a>')
 --K("n", "<space>gg", [[<Cmd>lua start_gitui()<cr>]], { noremap = true, silent = true })
 --
 
+local function getPopups()
+	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
+		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
+end
+local function killPopups()
+	vim.fn.map(getPopups(), function(_, e)
+		vim.api.nvim_win_close(e, false)
+	end)
+end
+
+K("n", "<Esc>", function()
+	vim.cmd.noh()
+	killPopups()
+	vim.cmd("PeekClose")
+	print(" ")
+end)
+
 local function saveSessionIfOpen(cmd, hook_before)
 	hook_before = hook_before or ""
 	return function()
 		if vim.g.persisting then
 			vim.cmd("SessionSave")
 		end
-		Ft('<Esc>', 'm')
+		vim.cmd.noh()
+		killPopups()
 		if hook_before ~= "" then
 			vim.cmd("wa!")
 		end
@@ -227,22 +245,6 @@ K('n', '<tab>', 'i<tab>')
 K("i", "<c-r><c-r>", "<c-r>\"");
 K("n", "<space>`", "~hi");
 K("v", "<space>`", "~gvI");
-
-local function getPopups()
-	return vim.fn.filter(vim.api.nvim_tabpage_list_wins(0),
-		function(_, e) return vim.api.nvim_win_get_config(e).zindex end)
-end
-local function killPopups()
-	vim.fn.map(getPopups(), function(_, e)
-		vim.api.nvim_win_close(e, false)
-	end)
-end
--- clear search highlight & kill popups
-K("n", "<Esc>", function()
-	vim.cmd.noh()
-	killPopups()
-	vim.cmd("PeekClose")
-end)
 
 -- gf and if it doesn't exist, create it
 local function forceGoFile()

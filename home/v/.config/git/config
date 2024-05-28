@@ -2,25 +2,30 @@
 	email = v79166789533@gmail.com
 	name = Valera6
 	password = $GITHUB_KEY
+
 [credential]
 	helper = store
+
 [pull]
 	rebase = true
-# says it's okay to write anywhere
-[safe]
+
+[safe] # says it's okay to write anywhere
 	directory = *
+
 [core]
 	excludesfile = /home/v/.config/git/.gitignore_global
 # converts any large files that were not included into .gitignoree into pointers
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-# when deleting file locally, delete pointers on the remote
-[fetch]
+
+[fetch] # when deleting file locally, delete pointers on the remote
 	prune = true
 # copy/pastes are colored differently than actual removes/additions
+
 [diff]
 	colorMoved = zebra #"default"
 	colormovedws = "allow-indentation-change"
@@ -28,18 +33,29 @@
 # warn when ponting to a commit instead of branch
 [advice]
 	detachedHead = true
-# in cased you did `git add .` before running `git diff`
-[alias]
+
+[alias] # in cased you did `git add .` before running `git diff`
+	#NB: git "aliases" must be self-contained. Say `am = commit -am` won't work.
 	d = diff
 	ds = diff --staged
+	dm = diff --stat master
+	l = branch --list
 	unstage = reset HEAD --
 	last = log -1 HEAD
-	am = commit -am
-	r = reset --hard
 	u = remote add upstream
+	b = branch
+	c = checkout
+	cb = checkout -b
+
 [init]
 	defaultBranch = master
+
 [push]
 	autoSetupRemote = true
+	default = current
+
 [rerere]
 	enabled = true
+
+[branch]
+	autoSetupMerge = simple
