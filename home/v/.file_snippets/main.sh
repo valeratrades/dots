@@ -76,6 +76,8 @@ can() {
 	fi
 
 	mkdir -p .github/workflows && cp -r ${HOME}/.file_snippets/.github/workflows/${lang}/ci.yml ./.github/workflows/ci.yml
+	#TODO!: generalize
+	echo "" >> ./.github/workflows/ci.yml && cat ${HOME}/.file_snippets/.github/workflows/shared/ci.yml | awk 'NR > 1' | reasonable_envsubst - >> ./.github/workflows/ci.yml
 	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 
 	shared_after ${1} ${lang}

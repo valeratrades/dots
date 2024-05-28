@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        rust: [nightly] # dtolnay had [nightly, beta, stable, 1.70.0], hence the matrix
+        rust: [nightly, stable] # dtolnay had [nightly, beta, stable, 1.70.0], hence the matrix
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4

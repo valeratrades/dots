@@ -47,6 +47,7 @@
 	b = branch
 	c = checkout
 	cb = checkout -b
+	f = push --force-with-lease
 
 [init]
 	defaultBranch = master

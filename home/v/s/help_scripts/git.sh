@@ -41,6 +41,7 @@ alias ggt="gg -p test"
 alias ggr="gg -p refactor"
 alias ggp="gg -p perf"
 alias ggd="gg -p docs"
+alias ggi="gg -p ci"
 
 gd() {
 	branch_name=${1}
