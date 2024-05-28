@@ -106,6 +106,7 @@ cs() {
 }
 
 # # cargo
+alias caclip="cargo clippy --tests -- -Dclippy::all"
 cb() {
 	cargo machete
 	guess_name=$(basename $(pwd))

@@ -61,8 +61,12 @@ gi() {
 	# auto-assign myself?
 	gh issue create -t "${title}" -b "${body}" $@
 }
+# issues
 alias gil="gh issue list"
 alias gic="gh issue close -r completed"
+alias gia="gh issue edit --add-assignee"
+alias giam="gh issue edit --add-assignee @me"
+
 # r for rejected
 alias gir="gh issue close -r \"not planned\""
 alias gid="gh issue delete --yes"
@@ -173,7 +177,8 @@ protect_branch() {
 		"required_pull_request_reviews": null,
 		"restrictions": null,
 		"allow_auto_merge": true,
-		"allow_force_pushes": true
+		"allow_force_pushes": true,
+		"allow_deletions": true
 	}'
 	#{
 	#	"dismiss_stale_reviews": true,
