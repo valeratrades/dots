@@ -49,19 +49,8 @@ gd() {
 }
 
 # # gh aliases
-gi() {
-	body=""
-	title=${1}
-	if [ "$2" != "" ]; then
-		body=${2}
-		shift
-	fi
-	shift # so I append $@ to the actual evokation
-
-	# auto-assign myself?
-	gh issue create -t "${title}" -b "${body}" $@
-}
-# issues
+# Issue
+alias gi="gh issue create -b \"\" -t"
 alias gil="gh issue list"
 alias gic="gh issue close -r completed"
 alias gia="gh issue edit --add-assignee"
@@ -225,7 +214,7 @@ gn() {
 	#protect_branch ${repo_name} master
 }
 
-gp() {
+gtpr() {
 	commit_sha=$(curl -H "Authorization: token ${GITHUB_KEY}" \
   -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/${GITHUB_NAME}/${REPO}/commits?sha=${BRANCH}&per_page=1" | jq -r '.[0].sha')
@@ -239,4 +228,22 @@ gp() {
 	gg $@
 	gh pr create --title "_" --body "" --base master --head temp-branch
 	gh pr merge --auto --squash --delete-branch
+}
+
+#NB: careful! I don't know how to unroll yet
+#TODO: figure out how to synchronize the labels in a chosen repo with all the other repos
+git_add_global_label() {
+	label_name=${1}
+	label_description=${2}
+	label_color=${3}
+
+	repos=$(gh repo list ${GITHUB_NAME} --limit 1000 --json nameWithOwner --jq '.[].nameWithOwner' | rg -v '\.github$|'"${GITHUB_NAME}"'$')
+
+	echo "$repos" | while IFS= read -r repo; do
+		echo "Adding label to $repo"
+		gh api repos/$repo/labels \
+			-f name="${label_name}" \
+			-f color="${label_color}" \
+			-f description="${label_description}"
+	done
 }

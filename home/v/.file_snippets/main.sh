@@ -32,7 +32,6 @@ shared_after() {
 
 	project_name="${1}"
 	lang="${2}" # rs, py, go
-	touch TODO.md #? could I fully substitute this with github issues?
 
 	git init
 	cp ${HOME}/.file_snippets/.git/hooks/pre-commit .git/hooks/pre-commit && chmod u+x .git/hooks/pre-commit
