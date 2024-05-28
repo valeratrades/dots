@@ -169,6 +169,10 @@ local function saveSessionIfOpen(cmd, hook_before)
 		if vim.g.persisting then
 			vim.cmd("SessionSave")
 		end
+		local mode = vim.api.nvim_get_mode().mode
+		if mode == 'i' then
+			Ft("<Esc>l")
+		end
 		vim.cmd.noh()
 		killPopups()
 		if hook_before ~= "" then
