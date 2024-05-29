@@ -24,6 +24,16 @@ shared_before() {
 	cat ${HOME}/.file_snippets/readme/badges/${lang}.md | reasonable_envsubst - >> README.md
 	mkdir -p docs/.assets
 	cat ${HOME}/.file_snippets/docs/ARCHITECTURE.md > docs/ARCHITECTURE.md
+
+	ci_file="./.github/workflows/ci.yml" && mkdir -p .github/workflows
+	cp -r ${HOME}/.file_snippets/.github/workflows/shared.yml $ci_file
+	echo "" >> $ci_file && \
+		cat ${HOME}/.file_snippets/.github/workflows/${lang}.yml | \
+		awk 'NR > 1' | \
+		reasonable_envsubst - 2>/dev/null >> $ci_file
+
+
+	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 }
 
 shared_after() {
@@ -61,9 +71,10 @@ can() {
 	lang="rs"
 	shared_before ${1} ${lang}
 
+	#? can I generalize this to other langs via use of *?
 	sudo ln ${HOME}/.file_snippets/${lang}/rustfmt.toml ./rustfmt.toml
 	sudo ln ${HOME}/.file_snippets/${lang}/deny.toml ./deny.toml
-	# removes the [dependencies] line, as it's added by the snippet
+	# removes the [dependencies] line, as it's added by the snippet #? or is it?
 	sed -i '$d' Cargo.toml
 	cat ${HOME}/.file_snippets/${lang}/default_dependencies.toml >> Cargo.toml
 
@@ -77,11 +88,6 @@ can() {
 	else
 		cp -f ${HOME}/.file_snippets/presets/${lang}/main ./src/main.${lang}
 	fi
-
-	mkdir -p .github/workflows && cp -r ${HOME}/.file_snippets/.github/workflows/${lang}/ci.yml ./.github/workflows/ci.yml
-	#TODO!: generalize to other languages
-	echo "" >> ./.github/workflows/ci.yml && cat ${HOME}/.file_snippets/.github/workflows/shared/ci.yml | awk 'NR > 1' | reasonable_envsubst - >> ./.github/workflows/ci.yml
-	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 
 	shared_after ${1} ${lang}
 }
