@@ -71,6 +71,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@clippy
       - run: cargo clippy --tests -- -Dclippy::all #-Dclippy::pedantic
 
+
   machete:
     name: Unused Dependencies
     runs-on: ubuntu-latest

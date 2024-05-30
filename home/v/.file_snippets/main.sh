@@ -68,6 +68,14 @@ can() {
 		preset="${1}"
 		shift
 	fi
+	case "$preset" in
+		"--tokio"|"--clap"|"--default")
+			;;
+		*)
+			echo "The argument is not valid."
+			return 1
+			;;
+	esac
 	cargo new "${@}"
 	lang="rs"
 	shared_before ${1} ${lang}

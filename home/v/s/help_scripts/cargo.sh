@@ -1,4 +1,5 @@
-alias caclip="cargo clippy --tests -- -Dclippy::all"
+#alias caclip="cargo clippy --tests -- -Dclippy::all"
+alias caclip="cargo clippy --tests -- -Dwarnings"
 
 cb() {
 	cargo machete
