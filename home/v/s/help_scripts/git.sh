@@ -56,6 +56,7 @@ alias gil="gh issue list"
 alias gic="gh issue close -r completed"
 alias gia="gh issue edit --add-assignee"
 alias giam="gh issue edit --add-assignee @me"
+alias gila="gh issue edit --add-label"
 
 # r for rejected
 alias gir="gh issue close -r \"not planned\""

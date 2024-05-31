@@ -10,6 +10,7 @@ w = "watch"
 a = "add"
 u = "update"
 m = "machete"
+re = "insta review"
 
 # overriding defaults in favor of cargo-limit alternatives
 b = "lbuild"
