@@ -8,12 +8,12 @@ struct Cli {
 }
 #[derive(Subcommand)]
 enum Commands {
-	/// Hello the world or rust (flags are mutually exclusive)
+	/// Start the thing
 	///Ex
 	///```sh
-	///what hello -w "!"
+	///PROJECT_NAME_PLACEHOLDER start -w "!"
 	///```
-	Hello(HelloArgs),
+	Start(StartArgs),
 }
 
 #[derive(Args)]
@@ -22,7 +22,7 @@ enum Commands {
         .required(true)
         .args(&["world", "rust"]),
 ))]
-struct HelloArgs {
+struct StartArgs {
 	/// Hello to world
 	#[arg(short, long)]
 	world: bool,
@@ -37,7 +37,7 @@ struct HelloArgs {
 fn main() {
 	let cli = Cli::parse();
 	match cli.command {
-		Commands::Hello(args) => {
+		Commands::Start(args) => {
 			let hello_target = match (args.world, args.rust) {
 				(true, false) => "World",
 				(false, true) => "Rust",

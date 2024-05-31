@@ -2,12 +2,7 @@
 alias caclip="cargo clippy --tests -- -Dwarnings"
 
 cb() {
-	cargo machete
 	guess_name=$(basename $(pwd))
-	if [ -f "./src/lib.rs" ]; then
-		return 0
-	fi
-
 	if [ -n "$1" ]; then
 		if [ "$1" = "-d" ] || [ "$1" = "--dev" ]; then
 			cargo build --profile dev && sudo cp -rf ./target/debug/${guess_name} /usr/local/bin/
