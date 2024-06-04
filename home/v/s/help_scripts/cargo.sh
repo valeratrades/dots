@@ -112,4 +112,3 @@ ct() {
 		cargo run ${@}
 	fi
 }
-

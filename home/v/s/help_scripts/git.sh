@@ -58,6 +58,13 @@ alias gia="gh issue edit --add-assignee"
 alias giam="gh issue edit --add-assignee @me"
 alias gila="gh issue edit --add-label"
 
+# issues under the closest milestone
+gim() {
+	milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
+	gh issue list --milestone="${milestone}"
+}
+
+
 # r for rejected
 alias gir="gh issue close -r \"not planned\""
 alias gid="gh issue delete --yes"

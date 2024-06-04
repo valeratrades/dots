@@ -15,8 +15,8 @@ MNML_BGJOB_MODE=${MNML_BGJOB_MODE:-4}
 [ "${+MNML_INFOLN}" -eq 0 ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
 
 #NB: subset dirs have to be earlier, as I would break on them in `mnml_cmd` otherwise. (eg: `s/valera` has to be before `s`)
-local special_dirs=("s/help_scripts" "s/valera" "tmp" "Downloads" "s/ai-news-trade-bot" "s/l" "g" ".config" "s" "Documents/Books" "Documents/Papers")
-local special_chars=("h" "v" "t" "d" "a" "l" "g" "c" "s" "b" "p")
+local special_dirs=("s/help_scripts" "s/valera" "tmp" "Downloads" "s/ai-news-trade-bot" "s/l" "g" ".config" "s" "Documents/Books" "Documents/Papers" "math")
+local special_chars=("h" "v" "t" "d" "a" "l" "g" "c" "s" "b" "p" "m")
 
 function custom_cwd {
 	#NB: "%~" returns a name with non-standard ~ character. The following special_dir spec contains it as well.

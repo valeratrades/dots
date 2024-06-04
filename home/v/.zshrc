@@ -231,6 +231,7 @@ alias cl="wl-copy"
 alias gz="tar -xvzf -C"
 alias toggle_theme="${HOME}/s/help_scripts/theme_toggle.sh"
 alias tokej="tokei -o json | jq . > /tmp/tokei.json"
+alias book="booktyping run -- --myopia"
 
 # # git
 alias g="git"
@@ -394,6 +395,13 @@ csn() {
 }
 csu() {
 	_path="${HOME}/uni/"
+	if [ -n "$1" ]; then
+		_path+="${1}"
+	fi
+	cs $_path
+}
+csm() {
+	_path="${HOME}/math/"
 	if [ -n "$1" ]; then
 		_path+="${1}"
 	fi
