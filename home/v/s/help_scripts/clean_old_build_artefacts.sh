@@ -1,6 +1,6 @@
 #!/bin/sh
 
-repos="
+directories="
 	/home/v/tmp/
 	/home/v/s/
 	/home/v/g/
@@ -29,7 +29,7 @@ check_and_clean_cargo() {
 
 echo "\033[34mCleaning old build artefacts\033[0m"
 # could split to run in parallel, but ~/s/ takes most of the time.
-for repo in $repos; do
+for repo in $directories; do
 	echo "Searching for stale projects in: \033[34m${repo}\033[0m"
 	if [ -d "$repo" ]; then
 		check_and_clean_cargo "$repo"
