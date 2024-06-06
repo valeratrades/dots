@@ -115,6 +115,7 @@ return require('lazy').setup({
 		'leoluz/nvim-dap-go',
 		'mfussenegger/nvim-dap-python',
 		{ 'rcarriga/nvim-dap-ui', name = 'dapui' },
+		'nvim-neotest/nvim-nio',
 		'theHamsta/nvim-dap-virtual-text',
 		'nvim-telescope/telescope-dap.nvim',
 		'jay-babu/mason-nvim-dap.nvim',
@@ -152,10 +153,20 @@ return require('lazy').setup({
 	{ -- Git
 		'tpope/vim-fugitive',
 	},
+	{ -- Testing
+		'nvim-neotest/neotest',
+	},
 	--
 
 	-- If something breaks, it's likely below here:
 
+	{
+		'mrcjkb/rustaceanvim',
+		--version = '^4',
+		lazy = false, -- This plugin is already lazy
+	},
+
+	'vim-test/vim-test',
 	'lervag/vimtex',
 	'olimorris/persisted.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',

@@ -12,9 +12,6 @@ shared_before() {
 
 	lang="${2}" # rs, py, go
 
-	cp ${HOME}/.file_snippets/local_sh/${lang}.sh ./.local.sh
-	source ./.local.sh
-
 	rm -f ./.gitignore # created automatically by cargo new
 	cat ${HOME}/.file_snippets/gitignore/shared > ./.gitignore
 	echo "\n" >> ./.gitignore
@@ -60,6 +57,8 @@ shared_after() {
 	git commit -m "-- New Project Snippet --"
 	git branch "release"
 	set +e
+
+	tn # command from my ~/.zshrc, opens and attaches to a new tmux sessions
 }
 
 can() {

@@ -1,6 +1,8 @@
 local lspconfig = require('lspconfig')
 local lsp_zero = require('lsp-zero')
 
+--TODO!!!: remove all breakpoints
+
 vim.diagnostic.config({
 	virtual_text = false,
 	-- if line has say both a .HINT and .WARNING, the "worst" will be shown (as a sign on the left)
@@ -153,7 +155,7 @@ lsp_zero.on_attach(on_attach)
 
 
 -- Language setups
-local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'rust_analyzer', 'bashls', 'clangd',
+local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'bashls', 'clangd',
 	'jedi_language_server' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
@@ -170,31 +172,43 @@ lspconfig.leanls.setup {
 	on_attach = on_attach,
 }
 
+vim.g.rustaceanvim = {
+	-- Plugin configuration
+	tools = {
+		--TODO
+	},
+	server = {
+		on_attach = on_attach,
+		default_settings = {
+			['rust-analyzer'] = {
+				cmd = {
+					"rustup", "run", "nightly", "rust-analyzer",
+				},
+				rustfmt = {
+					overrideCommand = { "rustfmt" },
+				},
+				cargo = {
+					runBuildScripts = true,
+					loadOutDirsFromCheck = true,
+				},
+				procMacro = {
+					enable = true,
+				},
+				checkOnSave = {
+					enable = true,
+					--TODO!!: think how to toggle clippy::all (for pedantic checks right before commiting to master)
+					command = "clippy",
+				},
+			},
+		},
+	},
+}
+
 require('mason').setup({})
 require('mason-lspconfig').setup({
 	ensure_installed = lspconfig_servers,
 	handlers = { lsp_zero.default_setup },
 	settings = {
-		["rust-analyzer"] = {
-			cmd = {
-				"rustup", "run", "nightly", "rust-analyzer",
-			},
-			rustfmt = {
-				overrideCommand = { "rustfmt" },
-			},
-			cargo = {
-				runBuildScripts = true,
-				loadOutDirsFromCheck = true,
-			},
-			procMacro = {
-				enable = true,
-			},
-			checkOnSave = {
-				enable = true,
-				--TODO!!: think how to toggle clippy
-				command = "clippy",
-			}
-		},
 		["gopls"] = {
 			completeUnimported = true,
 			usePlaceholders = true,

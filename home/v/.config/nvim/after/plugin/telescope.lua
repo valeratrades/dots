@@ -50,8 +50,18 @@ require("telescope").setup {
 	},
 }
 --
--- may or may not be required to be loaded strictly after setup
-require('telescope').load_extension('media_files')
+-- Must be loaded strictly _after_ setup
+require("telescope").load_extension("media_files")
+
+require("telescope").load_extension("dap")
+require("which-key").register({
+	name = "Telescope: DAP",
+	c = { "<cmd>Telescope dap commands<cr>", "commands" },
+	c = { "<cmd>Telescope dap configurations<cr>", "configurations" },
+	b = { "<cmd>Telescope dap list_breakpoints<cr>", "breakpoints" },
+	v = { "<cmd>Telescope dap variables<cr>", "variables" },
+	s = { "<cmd>Telescope dap frames<cr>", "frames" },
+}, { prefix = "<Space>td" })
 
 -- Default mappings reference {{{
 --<C-n>/<Down>	Next item

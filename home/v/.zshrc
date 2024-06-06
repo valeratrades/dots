@@ -240,6 +240,7 @@ alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-
 
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
+#TODO!!!: make it bail if opening new session failed (could already exist or we could be in another active session now). If former, currently adds new windows to it.
 tn() {
 	if [ -n "$2" ]; then
 		cd $2 || return 1

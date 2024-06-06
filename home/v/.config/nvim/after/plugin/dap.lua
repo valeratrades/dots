@@ -4,20 +4,16 @@ local dap_go = require('dap-go')
 local dap_python = require('dap-python')
 dap_python.test_runner = "pytest"
 
-local k = vim.keymap.set
-vim.g.maplocalleader = "<Space>d"
+-- uhm, so do I need this?
+require('mason-nvim-dap').setup {
+	automatic_setup = true,
 
---TODO: add: showDisassembly = "never" to dap.config.rust
+	handlers = {},
 
---require('mason-nvim-dap').setup {
---	automatic_setup = true,
---
---	handlers = {},
---
---	ensure_installed = {
---		'delve',
---	}
---}
+	ensure_installed = {
+		'delve',
+	}
+}
 
 require("which-key").register({
 	["<F1>"] = { "<cmd>lua require('dap').step_back()<CR>", "Step Back" },
@@ -25,20 +21,39 @@ require("which-key").register({
 	["<F3>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
 	["<F4>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
 	["<F5>"] = { "<cmd>lua require('dap').continue()<CR>", "Start/Continue" },
+	["<F6>"] = { "<cmd>lua require('dapui').toggle()<CR>", "Toggle Windows" },
 	["<Space>d"] = {
 		name = "DAP",
+		d = { "<cmd>lua RustLsp debug", "Start" }, --HACK: definitely not the right place to specify a dap implementation
 		b = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
 		B = { "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Input Breakpoint" },
-		r = { "<cmd>lua require('dap').repl.open()<CR>", "Repl Open" },
+		i = { "<cmd>lua require('dap').repl.open()<CR>", "Repl Open" },
+		r = { "<cmd>lua require('dapui').open()({reset = true})<CR>", "Restore Windows Layout" },
 		e = { "<cmd>lua require('dapui').eval()<CR>", "Eval" },
 		E = { "<cmd>lua require('dapui').eval(vim.fn.input('[DAP] Expression > '))<CR>", "Input Expression" },
 	},
 })
 
+require("telescope").load_extension("dap")
+require("which-key").register({
+	name = "Telescope: DAP",
+	c = { "<cmd>Telescope dap commands<cr>", "commands" },
+	g = { "<cmd>Telescope dap configurations<cr>", "configurations" },
+	b = { "<cmd>Telescope dap list_breakpoints<cr>", "breakpoints" },
+	v = { "<cmd>Telescope dap variables<cr>", "variables" },
+	f = { "<cmd>Telescope dap frames<cr>", "frames" },
+}, { prefix = "<Space>td" })
+
 -- Symbols
-vim.fn.sign_define("DapBreakpoint", { text = "ß", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapBreakpointCondition", { text = "ς", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpoint", { text = "ß", texthl = "Breakpoint", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "ς", texthl = "ConditionalBreakpoint", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "ඞ", texthl = "Error" })
+
+--vim.g.rustaceanvim = {
+--	dap = {
+--		-- TODO
+--	}
+--}
 
 require("nvim-dap-virtual-text").setup {
 	enabled = true,
@@ -147,8 +162,23 @@ dap.configurations.go = {
 	},
 }
 dap_go.setup()
-vim.keymap.set('n', '<localleader>t', dap_go.debug_test)
+--should be done in attach and using which-key
+--vim.keymap.set('n', '<localleader>t', dap_go.debug_test)
 --
+
+dap.configurations.rust = {
+	{
+		type = "lldb",
+		name = "Debug",
+		request = "launch",
+		program = "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+		args = {},
+		runInTerminal = false,
+		showDisassembly = "never",
+	}
+}
 
 -- Python
 dap.configurations.python = {
@@ -169,7 +199,6 @@ dap.configurations.python = {
 		console = "integratedTerminal",
 	},
 }
-local dap_python = require "dap-python"
 dap_python.setup("python", {
 	console = "externalTerminal",
 	include_configs = true,
@@ -177,7 +206,7 @@ dap_python.setup("python", {
 
 dap.adapters.lldb = {
 	type = "executable",
-	command = "/usr/bin/lldb-vscode-11",
+	command = "/usr/bin/codelldb",
 	name = "lldb",
 }
 --
@@ -216,8 +245,7 @@ dapui.setup {
 		position = "left",
 	},
 }
-vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-dap.listeners.before.event_exited['dapui_config'] = dapui.close
+--dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+--dap.listeners.before.event_exited['dapui_config'] = dapui.close
 --
