@@ -16,7 +16,7 @@ require('mason-nvim-dap').setup {
 }
 
 require("which-key").register({
-	["<F1>"] = { "<cmd>lua require('dap').step_back()<CR>", "Step Back" },
+	--["<F1>"] = { "<cmd>lua require('dap').step_back()<CR>", "Step Back" },
 	["<F2>"] = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
 	["<F3>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
 	["<F4>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
