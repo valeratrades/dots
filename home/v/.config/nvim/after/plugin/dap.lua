@@ -49,11 +49,15 @@ vim.fn.sign_define("DapBreakpoint", { text = "ß", texthl = "Breakpoint", linehl
 vim.fn.sign_define("DapBreakpointCondition", { text = "ς", texthl = "ConditionalBreakpoint", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "ඞ", texthl = "Error" })
 
---vim.g.rustaceanvim = {
---	dap = {
---		-- TODO
+--vim.g.rustaceanvim = function()
+--	local cfg = require('rustaceanvim.config')
+--	return {
+--		dap = {
+--			adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+--		},
 --	}
---}
+--end
+
 
 require("nvim-dap-virtual-text").setup {
 	enabled = true,

@@ -17,73 +17,7 @@ export WAKETIME="5:00" # utc, with french utc+2, corresponds to 7:00
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 
-
-# nvim shortcut, that does cd first, to allow for harpoon to detect project directory correctly
-# e stands for editor
-#NB: $1 nvim arg has to be the path
-e() {
-	nvim_commands=""
-	if [ "$1" = "--flag_load_session" ]; then
-		nvim_commands="-c SessionLoad"
-		shift
-	fi
-	nvim_evocation="nvim"
-	if [ "$1" = "--use_sudo_env" ]; then
-		nvim_evocation="sudo -Es -- nvim"
-		shift
-	fi
-	#git_push_after="false"
-	#if [ "$1" = "--git_sync" ]; then
-	#	git_push_after="true"
-	#	shift
-	#	git -C "$1" pull > /dev/null 2>&1
-	#fi
-	local full_command="${nvim_evocation} ."
-	if [ -n "$1" ]; then
-		if [ -d "$1" ]; then
-			pushd ${1} &> /dev/null
-			shift
-			full_command="${nvim_evocation} ${@} ."
-		else
-			local could_fix=0
-			local try_extensions=("" ".sh" ".rs" ".go" ".py" ".json" ".txt" ".md" ".typ" ".tex" ".html" ".js" ".toml" ".conf")
-			# note that indexing starts at 1, as we're in a piece of shit zsh.
-			for i in {1..${#try_extensions[@]}}; do
-				local try_path="${1}${try_extensions[$i]}"
-				if [ -f "$try_path" ]; then
-					pushd $(dirname $try_path) &> /dev/null
-					shift
-					full_command="${nvim_evocation} $(basename $try_path) ${@} ${nvim_commands}"
-					eval ${full_command}
-					popd &> /dev/null
-					#if git_push_after; then
-					#	push ${1}
-					#fi
-					return 0
-				fi
-			done
-			full_command="${nvim_evocation} ${@}"
-		fi
-	fi
-
-	full_command+=" ${nvim_commands}"
-	eval ${full_command}
-
-	# clean the whole dir stack, which would drop back if `pushd` was executed, and do nothing otherwise.
-	# hopefuly I'm not breaking anything by doing so.
-	while [ "$(dirs -v | wc -l)" -gt 1 ]; do popd; done > /dev/null 2>&1
-
-	
-	#if [ "$git_push_after" = "true" ]; then
-	#	push ${1}
-	#fi
-}
-ep() {
-	e --flag_load_session "$@"
-}
-se() {
-	e --use_sudo_env ${@}
-}
+. ~/.config/nvim/functions.sh
 
 # for super ls
 sl() {
@@ -231,7 +165,7 @@ alias cl="wl-copy"
 alias gz="tar -xvzf -C"
 alias toggle_theme="${HOME}/s/help_scripts/theme_toggle.sh"
 alias tokej="tokei -o json | jq . > /tmp/tokei.json"
-alias book="booktyping run -- --myopia"
+alias book="booktyping run --myopia"
 
 # # git
 alias g="git"
@@ -410,15 +344,6 @@ csm() {
 }
 # }}}
 
-# # editor
-alias ec="e ~/.config/nvim"
-alias es="nvim ~/.zshrc"
-alias ezt="e ~/.config/zsh/theme.zsh"
-#? can I do this for rust and go? (maybe something with relative paths there)
-alias epy="e ~/envs/Python/lib/python3.11/site-packages" 
-alias et="nvim /tmp/a_temporary_note.md -c 'nnoremap q gg^vG^g_\"+y:qa!<CR>' -c 'startinsert'"
-alias hx="helix"
-#
 # # keyd
 alias rkeyd="sudo keyd reload && sudo journalctl -eu keyd"
 alias lkeyd="sudo keyd -m"

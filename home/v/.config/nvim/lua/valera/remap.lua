@@ -206,7 +206,7 @@ K("", "C", "\"_C")
 
 --K("n", "<C-F>", "<cmd>silent !tmux neww tmux-sessionizer<cr>")
 
-K("n", "<space>ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+K("n", "<space><space>n", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 
 -- select the pasted
 K("n", "gp", function()

@@ -37,6 +37,7 @@
 [alias] # in cased you did `git add .` before running `git diff`
 	#NB: git "aliases" must be self-contained. Say `am = commit -am` won't work.
 	m = merge
+	r = rebase
 	d = diff
 	ds = diff --staged
 	dm = diff --stat master
@@ -48,6 +49,7 @@
 	c = checkout
 	cb = checkout -b
 	f = push --force-with-lease
+	p = pull --rebase
 
 [init]
 	defaultBranch = master
