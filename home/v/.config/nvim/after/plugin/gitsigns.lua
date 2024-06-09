@@ -27,6 +27,8 @@ require("which-key").register({
 		v = { gs.preview_hunk_inline, "preview hunk" },
 		U = { "<cmd>Gitsigns reset_hunk<cr>", "reset hunk" },
 		s = { "<cmd>Gitsigns stage_hunk<cr>", "stage hunk" },
+
+		f = { "<cmd>Telescope git_status<cr>", "find modifications" },
 	},
 })
 
