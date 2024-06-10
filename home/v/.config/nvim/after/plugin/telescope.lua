@@ -18,6 +18,7 @@ require("which-key").register({
 			FindTodo()
 			require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
 		end, "Project's TODOs" },
+		i = { "<cmd>Telescope media_files<cr>", "media files" },
 	},
 }, { prefix = "<space>" })
 K("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",

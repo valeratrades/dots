@@ -171,6 +171,7 @@ return require('lazy').setup({
 	'olimorris/persisted.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-media-files.nvim',
+	"nvim-lua/popup.nvim",
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
 	'jbyuki/instant.nvim',
@@ -245,4 +246,5 @@ return require('lazy').setup({
 	},
 	"nvim-neotest/nvim-nio",
 	"stevearc/aerial.nvim",
+	"3rd/image.nvim",
 })
