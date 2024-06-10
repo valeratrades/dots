@@ -16,7 +16,7 @@ require("which-key").register({
 	["<leader>g"] = {
 		name = "Git",
 		-- this assumes we correctly did `vim.fn.chdir(vim.env.PWD)` in an autocmd earlier. Otherwise this will often try to execute commands one level in the filetree above.
-		g = { "<cmd>!git add -A && git commit -m '.' && git push<cr><cr>", "just push", silent = true },
+		g = { "<cmd>!git add -A && git commit -m '_' && git push<cr><cr>", "just push", silent = true },
 		p = { "<cmd>!git pull<cr><cr>", "pull", silent = true },
 		r = { "<cmd>!git reset --hard<cr><cr>", "reset --hard", silent = true },
 
