@@ -166,6 +166,7 @@ alias gz="tar -xvzf -C"
 alias toggle_theme="${HOME}/s/help_scripts/theme_toggle.sh"
 alias tokej="tokei -o json | jq . > /tmp/tokei.json"
 alias book="booktyping run --myopia"
+alias tokio-console="tokio-console --lang en_US.UTF-8"
 alias tokio_console="tokio-console"
 
 # # git

@@ -1,4 +1,23 @@
 
+<!-- markdownlint-disable -->
+<details>
+  <summary>
+    <h2>Installation<h2>
+  </summary>
+
+Installation instruction placeholder.
+</details>
+
+<details>
+  <summary>
+    <h2>Usage<h2>
+  </summary>
+
+Usage instruction placeholder.
+</details>
+<!-- markdownlint-restore -->
+
+
 <br>
 
 <sup>
