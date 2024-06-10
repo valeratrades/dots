@@ -5,7 +5,7 @@
     <h2>Installation<h2>
   </summary>
 
-Installation instruction placeholder.
+unimplemented!()
 </details>
 
 <details>
@@ -13,7 +13,7 @@ Installation instruction placeholder.
     <h2>Usage<h2>
   </summary>
 
-Usage instruction placeholder.
+unimplemented!()
 </details>
 <!-- markdownlint-restore -->
 

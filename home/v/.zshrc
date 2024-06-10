@@ -168,6 +168,7 @@ alias tokej="tokei -o json | jq . > /tmp/tokei.json"
 alias book="booktyping run --myopia"
 alias tokio-console="tokio-console --lang en_US.UTF-8"
 alias tokio_console="tokio-console"
+alias fm="yazi" # for file-manager
 
 # # git
 alias g="git"
