@@ -23,7 +23,9 @@ titlebar_padding 1 1
 titlebar_border_thickness 1
 focus_on_window_activation none
 for_window [class="discord"] focus=off
+for_window [class="vesktop"] focus=off
 for_window [class="Zulip"] focus=off
+for_window [app_id="dorion"] focus=off
 for_window [app_id="org.telegram.desktop"] focus=off
 focus_follows_mouse yes
 mouse_warping container
@@ -77,8 +79,6 @@ input type:touchpad {
 }
 
 # # Multimedia
-exec_always pamixer --default-source --set-volume 30
-exec_always pamixer --set-volume 45
 bindsym $mod+F5 exec pamixer --toggle-mute
 bindsym $mod+Shift+F5 exec pamixer --unmute && pamixer --set-volume 45
 bindsym $mod+F6 exec pamixer --decrease 5
@@ -149,7 +149,9 @@ bindsym $mod+Shift+0    move container to workspace 0
 
 assign [class="Google-chrome"] 2
 assign [class="discord"] 4
+assign [class="vesktop"] 4
 assign [class="Zulip"] 4
+assign [app_id="dorion"] 4
 assign [app_id="org.telegram.desktop"] 4
 # doesn't work, as netrw sets the title as "nvim: [No name]"
 #assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4

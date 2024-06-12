@@ -55,8 +55,7 @@ stop_all_run_cargo() {
 
 c() {
 	todo manual counter-step --dev-runs;
-	# not a good solution, but .cargo/config.toml just doesn't get picked up for me
-	RUSTFLAGS="${RUSTFLAGS} --cfg tokio_unstable" cargo ${@}
+	cargo ${@}
 }
 
 cw() {

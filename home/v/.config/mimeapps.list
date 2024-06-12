@@ -9,3 +9,4 @@ inode/directory=nnn.desktop
 x-scheme-handler/mailto=google-chrome.desktop
 application/pdf=org.pwmt.zathura.desktop
 x-scheme-handler/discord-1176718791388975124=discord-1176718791388975124.desktop
+dorion=dorion-handler.desktop
