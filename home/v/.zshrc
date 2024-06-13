@@ -16,6 +16,7 @@ export HISTCONTROL=ignorespace # doesn't append command to history if first char
 export WAKETIME="5:00" # utc, with french utc+2, corresponds to 7:00
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
+#export MANPAGER='nvim +Man!'
 
 . ~/.config/nvim/functions.sh
 
@@ -108,7 +109,7 @@ chess() {
 	py -m cli_chess --token lip_sjCnAuNz1D3PM5plORrC
 }
 # move head
-mvh() { # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
+mvt() { # although, not sure if actually needed, as I could just write out `${command} "$(ls -t | head -n 1)" ${path}`, and get the same, but for the general case.
 	#NB: {from} cannot end with explicit "/" !
 	from="."
 	to=${1}
@@ -173,6 +174,8 @@ alias book="booktyping run --myopia"
 alias tokio-console="tokio-console --lang en_US.UTF-8"
 alias tokio_console="tokio-console"
 alias fm="yazi" # for file-manager
+alias t="ls -t | head -n 1"
+alias mongodb="mongosh "mongodb+srv://test.di2kklr.mongodb.net/" --apiVersion 1 --username valeratrades --password qOcydRtmgFfJnnpd"
 
 # # git
 alias g="git"

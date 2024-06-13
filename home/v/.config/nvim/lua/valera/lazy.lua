@@ -247,4 +247,5 @@ return require('lazy').setup({
 	"nvim-neotest/nvim-nio",
 	"stevearc/aerial.nvim",
 	"3rd/image.nvim",
+	"DreamMaoMao/yazi.nvim",
 })

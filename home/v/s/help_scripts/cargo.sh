@@ -1,5 +1,4 @@
-#alias caclip="cargo clippy --tests -- -Dclippy::all"
-alias caclip="cargo clippy --tests -- -Dwarnings"
+alias caclip="cargo clippy --tests -- -Dclippy::all"
 
 cb() {
 	guess_name=$(basename $(pwd))

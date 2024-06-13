@@ -159,7 +159,7 @@ end
 K("n", "<Esc>", function()
 	vim.cmd.noh()
 	killPopups()
-	vim.cmd("PeekClose")
+	--vim.cmd("PeekClose")
 	print(" ")
 end)
 
