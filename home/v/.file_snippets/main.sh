@@ -58,7 +58,7 @@ shared_after() {
 	git branch "release"
 	set +e
 
-	tn # command from my ~/.zshrc, opens and attaches to a new tmux sessions
+	#tn # command from my ~/.zshrc, opens and attaches to a new tmux sessions
 }
 
 can() {

@@ -41,6 +41,9 @@
 	d = diff
 	ds = diff --staged
 	dm = diff --stat master
+	# which one is better, one above or the one below?
+	sm = diff --stat master
+	s = diff --stat
 	l = branch --list
 	unstage = reset HEAD --
 	last = log -1 HEAD

@@ -34,9 +34,13 @@ mkfile() {
 }
 mkf="mkfile"
 cs() {
-	cd "$@" || return 1
-	. "./.local.sh" > /dev/null 2>&1 || :
-	sl
+	if [ -f "$1" ]; then
+		e "$1"
+	else
+		cd "$@" || return 1
+		. "./.local.sh" > /dev/null 2>&1 || :
+		sl
+	fi
 }
 
 # # go
@@ -149,7 +153,7 @@ alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
-alias jn="jupyter notebook"
+alias jp="jupyter lab"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
@@ -194,6 +198,9 @@ tn() {
 	tmux split-window -h -t "${SESSION_NAME}:build"
 
 	tmux new-window -t "${SESSION_NAME}" -n "ref"
+
+	tmux new-window -t "${SESSION_NAME}" -n "tmp"
+	tmux send-keys -t "${SESSION_NAME}:tmp.0" 'cd tmp &>/dev/null' Enter
 
 	tmux attach-session -t "${SESSION_NAME}:source.0"
 }
