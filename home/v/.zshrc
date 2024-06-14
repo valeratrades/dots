@@ -164,7 +164,6 @@ alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
 alias video_cut="video-cut"
 # for some reason there is a weird caching happening, so have to physically cd next to target instead currently...
-alias play_last="vlc --one-instance ~/Videos/obs/$(ls -t ~/Videos/obs| head -n 1)"
 alias ss="sudo systemctl"
 alias cl="wl-copy"
 alias gz="tar -xvzf -C"
@@ -177,10 +176,16 @@ alias fm="yazi" # for file-manager
 alias t="ls -t | head -n 1"
 alias mongodb="mongosh "mongodb+srv://test.di2kklr.mongodb.net/" --apiVersion 1 --username valeratrades --password qOcydRtmgFfJnnpd"
 
+play_last() {
+	last=$(ls -t ~/Videos/obs| head -n 1)
+	vlc --one-instance ~/Videos/obs/$last
+}
+
 # # git
 alias g="git"
 alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
 #
+
 
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"
@@ -372,7 +377,7 @@ alias yRn="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
 alias ys="yay -s"
 alias pG="pacman -Q | rg"
-alias pY="${HOME}/s/help_scripts/boring.sh"
+alias pY="${HOME}/s/help_scripts/maintenance/main.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 alias phone_wifi="phone-wifi"

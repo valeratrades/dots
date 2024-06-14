@@ -1,0 +1,15 @@
+# (in kilobytes, so 30GB)
+pacman_cache_threshold=30000000
+pacman_cache_size=$(du -sk /var/cache/pacman/pkg | cut -f1)
+if [ "$pacman_cache_size" -gt "$pacman_cache_threshold" ]; then
+	sudo pacman -Sc
+	echo "\033[32mCleaned pacman cache\033[0m"
+fi
+
+# (in kilobytes, so 20GB)
+home_cache_threshold=20000000
+home_cache_size=$(du -sk /home/v/.cache | cut -f1)
+if [ "$home_cache_size" -gt "$home_cache_threshold" ]; then
+	rm -rf /home/v/.cache/*
+	echo "\033[32mCleaned home cache\033[0m"
+fi
