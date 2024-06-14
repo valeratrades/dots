@@ -21,7 +21,7 @@ enum Commands {
 #[command(group(
     ArgGroup::new("channel")
         .required(true)
-        .args(&["wtt", "journal"]),
+        .args(&["wtt", "journal", "alerts"]),
 ))]
 struct SendArgs {
 	/// Send message to WTT channel
@@ -30,6 +30,9 @@ struct SendArgs {
 	/// Send message to Journal channel
 	#[arg(short, long)]
 	journal: bool,
+	/// Send message to Alerts channel
+	#[arg(short, long)]
+	alerts: bool,
 
 	/// Message to send
 	message: Vec<String>,
@@ -42,12 +45,16 @@ async fn main() -> Result<(), Error> {
 
 	match cli.command {
 		Commands::Send(args) => {
-			let chat_id = match (args.wtt, args.journal) {
-				(true, false) => "-1001179171854",
-				(false, true) => "-1002128875937",
-				(true, true) => panic!("Cannot send to both channels"),
-				(false, false) => panic!("No channel specified"),
-			};
+			let chat_id: &'static str;
+			if args.wtt {
+				chat_id = "-1001179171854";
+			} else if args.journal {
+				chat_id = "-1002128875937";
+			} else if args.alerts {
+				chat_id = "-1001800341082";
+			} else {
+				unreachable!(); // ArgGroup should prevent this
+			}
 
 			let url = format!("https://api.telegram.org/bot{}/sendMessage", bot_token);
 			let params = [("chat_id", chat_id), ("text", &args.message.join(" "))];

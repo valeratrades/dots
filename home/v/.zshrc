@@ -40,6 +40,7 @@ cs() {
 	else
 		cd "$@" || return 1
 		. "./.local.sh" > /dev/null 2>&1 || :
+		. "venv/bin/activate" > /dev/null 2>&1 || :
 		sl
 	fi
 }
@@ -175,6 +176,8 @@ alias tokio_console="tokio-console"
 alias fm="yazi" # for file-manager
 alias t="ls -t | head -n 1"
 alias mongodb="mongosh "mongodb+srv://test.di2kklr.mongodb.net/" --apiVersion 1 --username valeratrades --password qOcydRtmgFfJnnpd"
+alias sql="sqlite3"
+alias poetry="POETRY_KEYRING_DISABLED=true poetry"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

@@ -15,9 +15,9 @@ fi
 wallpapers=$(ls "${wallpaper_dir}" | grep -v '^\.' | sort)
 
 n_wallpapers=$(echo -e "$wallpapers" | awk 'END { print NR }')
-if [ $((n_wallpapers % 2)) -eq 0 ]; then
-  notify-send "Due to a weird bug, where circle_wallpapers is evoked twice by sway, you need to keep the num of Wallpapers forever odd. Add another wallpaper to ${wallpaper_dir}"
-fi
+#if [ $((n_wallpapers % 2)) -eq 0 ]; then
+#  notify-send "Due to a weird bug, where circle_wallpapers is evoked twice by sway, you need to keep the num of Wallpapers forever odd. Add another wallpaper to ${wallpaper_dir}"
+#fi
 
 get_wallpaper_by_index() {
 	i=1

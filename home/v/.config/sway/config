@@ -229,6 +229,7 @@ bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"
 bindsym $mod+Shift+w exec "~/s/help_scripts/circle_wallpapers.sh b"
 
 # Screenshots
+exec mkdir -p ~/tmp/Screenshots >/dev/null
 set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
 bindsym Insert exec $throwaway_screenshot
 mode "screenshot" {
