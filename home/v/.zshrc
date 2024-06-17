@@ -39,7 +39,14 @@ cs() {
 		e "$1"
 	else
 		cd "$@" || return 1
+
 		. "./.local.sh" > /dev/null 2>&1 || :
+
+		if [ "$VIRTUAL_ENV" != "" ]; then
+			deactivate
+			unset VIRTUAL_ENV
+		fi
+
 		. "venv/bin/activate" > /dev/null 2>&1 || :
 		sl
 	fi
@@ -162,7 +169,7 @@ alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
-alias obs="sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
+alias obs="mkdir ~/Videos/obs >/dev/null; sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
 alias video_cut="video-cut"
 # for some reason there is a weird caching happening, so have to physically cd next to target instead currently...
 alias ss="sudo systemctl"
@@ -207,6 +214,8 @@ tn() {
 
 	tmux new-window -t "${SESSION_NAME}" -n "build"
 	tmux split-window -h -t "${SESSION_NAME}:build"
+	tmux send-keys -t "${SESSION_NAME}:build.0" 'cs .' Enter
+	tmux send-keys -t "${SESSION_NAME}:build.1" 'cs .' Enter
 
 	tmux new-window -t "${SESSION_NAME}" -n "ref"
 
@@ -384,7 +393,8 @@ alias pY="${HOME}/s/help_scripts/maintenance/main.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 alias phone_wifi="phone-wifi"
-#TODO!!!!: fix the bug, where it it blows your ears off when another sound is ongoing when the beep with -l option happens.
+#TODO!!!!!!!!: fix the bug, where it it blows your ears off when another sound is ongoing when the beep with -l option happens.
+# Should be fine if I just implement a global limit on volume, conditional on headphones. But currently fuck the sound-maxing feature.
 beep() {	
 	if [ $# = 1 ]; then
 		if [ "$1" = "-l" ] || [ "$1" = "--loud" ]; then
@@ -394,21 +404,22 @@ beep() {
 			fi
 
 			volume=$(pamixer --get-volume)
-			pamixer --set-volume 100
-			mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
-			pamixer --set-volume $volume
+			#pamixer --set-volume 100
+			#mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
+			#pamixer --set-volume $volume
 
 			if [ "$mute" = "true" ]; then
 				pamixer --mute
 			fi
 
-			notify-send "beep"
+			notify-send "beep" -t 600000 # 10min
 			return 0
 		else
 			printf "Only takes \"-l\"/\"--loud\". Provided: $1\n"
 			return 1
 		fi
 	else # normal beep
+		notify-send "beep"
 		mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
 		return 0
 	fi
