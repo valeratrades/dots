@@ -1,5 +1,6 @@
 #!/bin/env sh
 
+# TODO: rename stuff in here. And potentially replace some of these with /usr/bin/sshpass
 # TODO: Move to [SSHFS](<https://en.wikipedia.org/wiki/SSHFS>)
 
 local README="""\
@@ -7,23 +8,14 @@ local README="""\
   do \033[34mserver\033[0m to ssh into vincent
   do \033[34mserver disconnect\033[0m to close all sessions"""
 
-vincent_ssh() {
-	export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
+
+ssh_connect() {
+	host="${1}"
+	password="${2}"
 	expect -c "
-	spawn ssh $VINCENT_SSH_HOST
+	spawn ssh ${host}
 	expect -re \".*password: \"
-	send \"$VINCENT_SSH_PASSWORD\r\"
-	interact
-	"
-}
-vincent_connect() {
-	export VINCENT_VPN_USERNAME VINCENT_VPN_PASSWORD
-	expect -c "
-	spawn sudo openvpn --config ${HOME}/.config/openvpn/client.ovpn;
-	expect \"Enter Auth Username: \";
-	send \"\$env(VINCENT_VPN_USERNAME)\r\";
-	expect \"Enter Auth Password: \";
-	send \"\$env(VINCENT_VPN_PASSWORD)\r\";
+	send \"${password}\r\"
 	interact
 	"
 }
@@ -34,7 +26,8 @@ server() {
 		#if [ "$(eww get openvpn_poll)" != "1" ]; then
 		#	vincent_connect &
 		#fi
-		vincent_ssh
+		export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
+		ssh_connect $VINCENT_SSH_HOST $VINCENT_SSH_PASSWORD
 	elif [ "$1" = "connect" ]; then
 		vincent_connect &
 	elif [ "$1" = "disconnect" ]; then
@@ -45,4 +38,9 @@ server() {
 		printf "${README}\n"
 		return 1
 	fi
+}
+
+linode_ssh() {
+	export LINODE_SSH_PASSWORD LINODE_SSH_HOST
+	ssh_connect $LINODE_SSH_HOST $LINODE_SSH_PASSWORD
 }

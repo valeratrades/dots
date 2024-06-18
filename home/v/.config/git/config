@@ -66,3 +66,5 @@
 
 [branch]
 	autoSetupMerge = simple
+[rebase]
+	autosquash = true

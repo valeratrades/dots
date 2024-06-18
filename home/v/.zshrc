@@ -20,6 +20,7 @@ export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # cur
 
 . ~/.config/nvim/functions.sh
 
+alias exa="eza"
 # for super ls
 sl() {
 	if [ -f "$1" ]; then
@@ -63,6 +64,10 @@ go() {
 py() {
 	todo manual counter-step --dev-runs;
 	python3 ${@}
+}
+spy() {
+	todo manual counter-step --dev-runs;
+	sudo python3 ${@}
 }
 pp() {
 	pip ${@} --break-system-packages
@@ -162,7 +167,7 @@ alias sstart="sudo systemctl start"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
-alias jp="jupyter lab"
+alias jp="jupyter lab -y"
 alias sr='source ~/.zshrc'
 alias tree="tree -I 'target|debug|_*'"
 alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
@@ -185,6 +190,7 @@ alias t="ls -t | head -n 1"
 alias mongodb="mongosh "mongodb+srv://test.di2kklr.mongodb.net/" --apiVersion 1 --username valeratrades --password qOcydRtmgFfJnnpd"
 alias sql="sqlite3"
 alias poetry="POETRY_KEYRING_DISABLED=true poetry"
+alias dk="sudo docker"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)
@@ -201,12 +207,20 @@ alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-
 alias tmux="TERM='alacritty-direct' tmux"
 #TODO!!!: make it bail if opening new session failed (could already exist or we could be in another active session now). If former, currently adds new windows to it.
 tn() {
+	if [ "$TMUX" != "" ]; then
+		echo "Already in a tmux session."
+		return 1
+	fi
 	if [ -n "$2" ]; then
 		cd $2 || return 1
 	fi
 	SESSION_NAME=${1:-$(basename "$(pwd)")}
 	if [ "${SESSION_NAME}" = ".${SESSION_NAME:1}" ]; then
 		SESSION_NAME="_${SESSION_NAME:1}"
+	fi
+	if tmux has-session -t "${SESSION_NAME}" 2>/dev/null; then
+		echo "Session ${SESSION_NAME} already exists."
+		return 1
 	fi
 
 	tmux new-session -d -s "${SESSION_NAME}" -n "source"
@@ -216,11 +230,18 @@ tn() {
 	tmux split-window -h -t "${SESSION_NAME}:build"
 	tmux send-keys -t "${SESSION_NAME}:build.0" 'cs .' Enter
 	tmux send-keys -t "${SESSION_NAME}:build.1" 'cs .' Enter
+	tmux select-pane -t "${SESSION_NAME}:build.0"
 
 	tmux new-window -t "${SESSION_NAME}" -n "ref"
 
 	tmux new-window -t "${SESSION_NAME}" -n "tmp"
-	tmux send-keys -t "${SESSION_NAME}:tmp.0" 'cd tmp &>/dev/null' Enter
+	tmux send-keys -t "${SESSION_NAME}:tmp.0" 'cd tmp; clear' Enter
+	tmux split-window -h -t "${SESSION_NAME}:tmp"
+	tmux send-keys -t "${SESSION_NAME}:tmp.1" 'cd tmp; clear' Enter
+	tmux split-window -v -t "${SESSION_NAME}:tmp.1"
+	tmux send-keys -t "${SESSION_NAME}:tmp.2" 'cd tmp; clear' Enter
+	tmux send-keys -t "${SESSION_NAME}:tmp.0" 'nvim .' Enter
+	tmux select-pane -t "${SESSION_NAME}:tmp.0"
 
 	tmux attach-session -t "${SESSION_NAME}:source.0"
 }
