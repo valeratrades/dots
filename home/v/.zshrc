@@ -191,17 +191,12 @@ alias mongodb="mongosh "mongodb+srv://test.di2kklr.mongodb.net/" --apiVersion 1 
 alias sql="sqlite3"
 alias poetry="POETRY_KEYRING_DISABLED=true poetry"
 alias dk="sudo docker"
+alias hardware="sudo lshw"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)
 	vlc --one-instance ~/Videos/obs/$last
 }
-
-# # git
-alias g="git"
-alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
-#
-
 
 # # tmux
 alias tmux="TERM='alacritty-direct' tmux"

@@ -1,5 +1,6 @@
 # all general git shorthands
 
+alias g="git"
 alias gu='gitui'
 gg() {
 	# needs to be processed first, or acceess aliases would have to be turned into functions
@@ -69,6 +70,9 @@ gim() {
 alias gir="gh issue close -r \"not planned\""
 alias gid="gh issue delete --yes"
 #
+
+alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
+
 
 gc() {
 	if rg -q "://" <<< "$1"; then

@@ -20,14 +20,15 @@ ssh_connect() {
 	"
 }
 
+vincent_connect() {
+	export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
+	ssh_connect $VINCENT_SSH_HOST $VINCENT_SSH_PASSWORD
+}
+
+#BUG: doesn't work in sequence. The next `expect` command hops onto the previous `expect` session no matter what.
 server() {
 	if [ -z "$1" ] || [ "$1" = "ssh" ]; then
-		#BUG: doesn't work in sequence. The next `expect` command hops onto the previous `expect` session no matter what.
-		#if [ "$(eww get openvpn_poll)" != "1" ]; then
-		#	vincent_connect &
-		#fi
-		export VINCENT_SSH_PASSWORD VINCENT_SSH_HOST
-		ssh_connect $VINCENT_SSH_HOST $VINCENT_SSH_PASSWORD
+		vincent_connect
 	elif [ "$1" = "connect" ]; then
 		vincent_connect &
 	elif [ "$1" = "disconnect" ]; then
