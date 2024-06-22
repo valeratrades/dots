@@ -89,9 +89,9 @@ gc() {
   ex: gc neovim/neovim
 """
 		return 0
+
 	elif [ "$#" = 1 ]; then
-		split_array=$(echo "$1" | tr "/" "\n")
-		filename=$(echo "$split_array" | tail -n 1)
+		filename=$(echo "${url}" | tr "/" "\n" | tail -n 1)
 		if [ $(pwd) = /tmp/${filename} ]; then # otherwise will delete the directory under ourselves
 			cd - &>/dev/null
 		fi 
@@ -143,7 +143,7 @@ gb() {
 		:
 	elif printf "\n\033[34mtrying go build ./cmd/main.go and save to /usr/local/bin/\033[0m\n" && sudo go build -o /usr/local/bin/ ./cmd/main.go; then
 		:
-	elif printf "\n\033[34mtrying cargo build --release\033[0m\n" && cargo build --release && sudo mv -f ./target/release/${1} /usr/local/bin/; then
+	elif printf "\n\033[34mtrying cargo install\033[0m\n" && cargo install -f --path . --root /usr/local/bin/; then
 		:
 	elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
 		:
