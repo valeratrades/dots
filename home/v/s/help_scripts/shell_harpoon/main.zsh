@@ -15,7 +15,7 @@ mute() {
 
 
 temp_file="${HOME}/tmp/shell_harpoon.sh"
-,add() {
+,set() {
 	dir=$(pwd)
 	if [ -n "$1" ]; then
 		dir="${dir}/$1"

@@ -17,6 +17,7 @@ export WAKETIME="5:00" # utc, with french utc+2, corresponds to 7:00
 export DAY_SECTION_BORDERS="2.5:10.5:16" # meaning: morning is watektime, (wt), + 2.5h, work-day is `wt+2.5< t <= wt+10.5` and evening is `wt+8.5< t <=16`, after which you sleep.
 export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # currently it is 3,65Gb # And B is for bytes
 #export MANPAGER='nvim +Man!'
+export LC_TIME=en_GB.UTF-8
 
 . ~/.config/nvim/functions.sh
 
@@ -525,3 +526,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 . "$HOME/.cargo/env"
+#[BEGIN SKAR_CONFIG]
+alias '?'='/home/v/.cargo/bin/skar shell complete'
+alias '??'='/home/v/.cargo/bin/skar shell explain'
+alias '?!'='/home/v/.cargo/bin/skar shell generate'
+alias '?-'='/home/v/.cargo/bin/skar chat'
+#[END SKAR_CONFIG]
