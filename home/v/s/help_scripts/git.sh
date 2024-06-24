@@ -73,6 +73,11 @@ alias gid="gh issue delete --yes"
 
 alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
 
+#TODO!: \
+fixup() {
+	echo "unimplemented!()"
+}
+
 
 gc() {
 	if rg -q "://" <<< "$1"; then

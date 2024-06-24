@@ -81,6 +81,7 @@ can() {
 	#? can I generalize this to other langs via use of *?
 	sudo ln ${HOME}/.file_snippets/${lang}/rustfmt.toml ./rustfmt.toml
 	sudo ln ${HOME}/.file_snippets/${lang}/deny.toml ./deny.toml
+	cp -r ${HOME}/.file_snippets/${lang}/.cargo ./.cargo
 	# removes the [dependencies] line, as it's added by the snippet #? or is it?
 	sed -i '$d' Cargo.toml
 	cat ${HOME}/.file_snippets/${lang}/default_dependencies.toml >> Cargo.toml
