@@ -29,6 +29,7 @@ shared_before() {
 
 
 	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
+	mkdir tmp
 }
 
 shared_after() {

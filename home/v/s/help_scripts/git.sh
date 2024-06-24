@@ -241,6 +241,7 @@ gn() {
 		"state":"open",
 		"description":"Minimum viable product"
 	}'
+	#TODO: create 4 more milestones. I think that far they could be standardized.
 }
 
 gtpr() {
