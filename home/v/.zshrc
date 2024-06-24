@@ -43,6 +43,7 @@ cs() {
 		cd "$@" || return 1
 
 		. "./.local.sh" > /dev/null 2>&1 || :
+		. "./tmp/.local.sh" > /dev/null 2>&1 || :
 
 		if [ "$VIRTUAL_ENV" != "" ]; then
 			deactivate

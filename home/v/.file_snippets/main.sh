@@ -27,9 +27,10 @@ shared_before() {
 		awk 'NR > 1' | \
 		reasonable_envsubst - 2>/dev/null >> $ci_file
 
-
 	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 	mkdir tmp
+	cp ${HOME}/.file_snippets/local_sh/${lang}.sh ./tmp/.local.sh
+	source ./tmp/.local.sh
 }
 
 shared_after() {
