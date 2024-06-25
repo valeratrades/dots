@@ -231,10 +231,16 @@ gn() {
 	#TODO!: also push and protect release if it exists
 	#protect_branch ${repo_name} master
 
+	# # Labels
 	gh api repos/${GITHUB_NAME}/${repo_name}/labels \
 		-f name="ci" \
 		-f color="808080" \
 		-f description="New test or benchmark"
+
+	gh api \
+  -X DELETE \
+  repos/${GITHUB_NAME}/${repo_name}/labels/enhancement
+	#
 
 	curl -L -X POST \
   -H "Accept: application/vnd.github+json" \
