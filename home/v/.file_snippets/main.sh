@@ -47,10 +47,12 @@ shared_after() {
 		sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" "$file"
 	done
 	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" ".git/hooks/pre-commit"
+	#fd -x sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" {}
 
 	cat ${HOME}/.file_snippets/readme/footer.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
+
 
 	git add -A
 	git commit -m "-- New Project Snippet --"
