@@ -92,10 +92,10 @@ chh() {
 }
 
 usb() {
-	sudo mkdir -p /mnt/USB
-	sudo chown $(whoami):$(whoami) /mnt/USB
-	sudo mount /dev/sdb1 /mnt/USB
-	cd /mnt/USB
+	sudo mkdir -p /mnt/usb
+	sudo chown $(whoami):$(whoami) /mnt/usb
+	sudo mount -o rw /dev/sdb1 /mnt/usb
+	cd /mnt/usb
 	exa -A
 }
 creds() {

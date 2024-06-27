@@ -17,9 +17,11 @@ dot_directories="
 	/home/v/.config/btc_line.toml
 	/home/v/.config/cargo
 	/home/v/.config/dconf/user
+	/home/v/.config/discord/settings.json
 	/home/v/.config/eww
 	/home/v/.config/foot
 	/home/v/.config/git
+	/home/v/.config/gh/config.yml
 	/home/v/.config/greenclip.toml
 	/home/v/.config/helix
 	/home/v/.config/jfind
