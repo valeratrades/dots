@@ -15,7 +15,7 @@ dots
 ```
 Or without `git`:
 ```sh
-curl -sL https://github.com/valeratrades/dots/tree/master/load_dots_script.sh | bash
+curl -sL https://github.com/valeratrades/dots/tree/master/load_dots.sh | bash
 ```
 
 ## Configure
