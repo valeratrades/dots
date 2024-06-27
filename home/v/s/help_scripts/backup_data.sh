@@ -25,6 +25,11 @@ target_directories="
 	/home/v/.cargo/credentials.toml
 	/home/v/.config/gh/hosts.yml
 	/etc/resolv.conf
+	/etc/locale.gen
+	/etc/locale.conf
+	/etc/hostname
+	/etc/hosts
+	/etc/default/grub
 "
 
 sync_files_and_directories() {

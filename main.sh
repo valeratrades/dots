@@ -43,6 +43,7 @@ dot_directories="
 	/home/v/.local/share/applications/nnn.desktop
 	/home/v/.local/share/applications/nvim.desktop
 	/home/v/.zprofile
+	/home/v/.profile
 	/home/v/.zshrc
 	/home/v/Wallpapers
 	/home/v/g/README.md
