@@ -24,6 +24,7 @@ target_directories="
 	/home/v/.cargo/.crates.toml
 	/home/v/.cargo/credentials.toml
 	/home/v/.config/gh/hosts.yml
+	/etc/resolv.conf
 "
 
 sync_files_and_directories() {
