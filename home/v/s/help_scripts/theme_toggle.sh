@@ -13,5 +13,4 @@ else
   sed -i "s/catppuccin-latte.toml/rose-pine.toml/" ~/.config/alacritty/alacritty.toml
 	swaymsg output '*' bg ~/Wallpapers/girl_with_a_perl_earring.jpg fill
 fi
-nvim --remote-send '<C-\><C-N>:lua setSystemTheme()<CR>' --servername ~/tmp/nvimsocket
-
+nvim --remote-send '<C-\><C-N>:lua setSystemTheme()<CR>'

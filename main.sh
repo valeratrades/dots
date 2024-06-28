@@ -20,8 +20,8 @@ dot_directories="
 	/home/v/.config/discord/settings.json
 	/home/v/.config/eww
 	/home/v/.config/foot
-	/home/v/.config/git
 	/home/v/.config/gh/config.yml
+	/home/v/.config/git
 	/home/v/.config/greenclip.toml
 	/home/v/.config/helix
 	/home/v/.config/jfind
@@ -37,13 +37,14 @@ dot_directories="
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config
 	/home/v/.config/zathura
 	/home/v/.config/zellij
+	/home/v/.config/zoxide/setup.sh
 	/home/v/.config/zsh
 	/home/v/.file_snippets
 	/home/v/.lesskey
 	/home/v/.local/share/applications/nnn.desktop
 	/home/v/.local/share/applications/nvim.desktop
-	/home/v/.zprofile
 	/home/v/.profile
+	/home/v/.zprofile
 	/home/v/.zshrc
 	/home/v/Wallpapers
 	/home/v/g/README.md

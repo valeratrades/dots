@@ -30,6 +30,7 @@ target_directories="
 	/etc/hostname
 	/etc/hosts
 	/etc/default/grub
+	/etc/NetworkManager/system-connections/
 "
 
 sync_files_and_directories() {
