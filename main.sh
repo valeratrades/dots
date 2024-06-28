@@ -103,7 +103,7 @@ load() {
 		if [ "$stripped" != "$dir" ]; then
 			to="${HOME}${stripped}"
 		else
-			if [ "$force" = true ]; then
+			if [ "$force" = "1" ]; then
 				to="$dir"
 			else
 				# normally, all the things outside ${HOME} are working on the daemon level, and should not be exported
@@ -135,9 +135,9 @@ if [ -z "$1" ] || [ "$1" = "sync" ]; then
 	fi
 elif [ "$1" = "load" ]; then
 	if [ "$2" = "-f" ]; then
-		load true
+		load 1
 	else
-		load false
+		load 0
 	fi
 	load
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
