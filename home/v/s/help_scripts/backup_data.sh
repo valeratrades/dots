@@ -50,17 +50,14 @@ sync_files_and_directories() {
 	# target is definitely a directory here
 	copied_dir="$copied_file_or_dir"
 	mkdir -p "${to_dir}"
-	echo "DBG: $copied_dir -> $to_dir"
 	for file_or_dir in $(fd --maxdepth=1 --search-path "${copied_dir}") ; do
 		if [ -f "$file_or_dir" ]; then
 			file=${file_or_dir}
 			to_file_exact="${to_dir%/}/$(basename ${file})"
-			echo "DBG: file $file -> $to_file_exact"
 			cp "$file" "${to_file_exact}" || printf "\033[31merror\033[0m on ${file} -> ${to_file_exact}\n"
 		else
 			dir=${file_or_dir}
 			to_dir_exact="${to_dir%/}/$(basename ${dir})"
-			echo "DBG: dir $dir -> $to_dir_exact"
 			rsync -au "${dir}" --exclude "target/" ${to_dir_exact} || printf "\033[31merror\033[0m on ${dir} -> ${to_dir}\n"
 		fi
 	done
