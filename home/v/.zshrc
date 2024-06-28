@@ -92,9 +92,10 @@ chh() {
 }
 
 usb() {
+	partition=${1:-"/dev/sdb1"}
 	sudo mkdir -p /mnt/usb
 	sudo chown $(whoami):$(whoami) /mnt/usb
-	sudo mount -o rw /dev/sdb1 /mnt/usb
+	sudo mount -o rw ${partition} /mnt/usb
 	cd /mnt/usb
 	exa -A
 }

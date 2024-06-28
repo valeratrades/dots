@@ -19,7 +19,9 @@ target_directories="
 	/home/v/g/
 	/home/v/math/
 	/home/v/uni/
+	/home/v/leetcode/
 	/home/v/.cargo/bin/
+	/home/v/.config/google-chrome/Profile
 	/home/v/.cargo/git/
 	/home/v/.cargo/.crates.toml
 	/home/v/.cargo/credentials.toml
@@ -29,6 +31,7 @@ target_directories="
 	/etc/locale.conf
 	/etc/hostname
 	/etc/hosts
+	/home/v/.local/share/TelegramDesktop
 	/etc/default/grub
 	/etc/NetworkManager/system-connections/
 "
