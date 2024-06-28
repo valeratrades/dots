@@ -139,7 +139,6 @@ elif [ "$1" = "load" ]; then
 	else
 		load 0
 	fi
-	load
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 	printf "${README}\n"
 else
