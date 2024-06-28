@@ -81,7 +81,7 @@ load() {
 		from="${sync_directory}${target_dir}"
 		to_dir="${target_dir}"
 		mkdir -p "$(dirname "${to_dir}")"
-		rsync -ru "${from}" "$(dirname "${to_dir}")" || printf "\033[31merror\033[0m on ${from} -> ${to_dir}\n"
+		rsync -ru "${from}" "${to_dir}" || printf "\033[31merror\033[0m on ${from} -> ${to_dir}\n"
 	done
 }
 
