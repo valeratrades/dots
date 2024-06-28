@@ -103,6 +103,7 @@ load() {
 			to="${HOME}${stripped}"
 		else
 			# normally, all the things outside ${HOME} are working on the daemon level, and should not be exported
+			printf "\033[31m%s\033[0m\n" "skipping $dir"
 			continue
 		fi
 		mkdir -p "$(dirname "$to")"
