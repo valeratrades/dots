@@ -1,0 +1,5 @@
+import "./options"
+import "./mappings"
+import "./autocommands"
+import "./colors"
+import "./lazy"

@@ -52,6 +52,7 @@ dot_directories="
 	/home/v/s/g/README.md	
 	/home/v/s/help_scripts
 	/home/v/s/l/README.md
+	/home/v/s/t/README.md
 	/usr/bin/start_sway.sh
 	/usr/share/X11/xkb/symbols/ru
 	/usr/share/X11/xkb/symbols/semimak

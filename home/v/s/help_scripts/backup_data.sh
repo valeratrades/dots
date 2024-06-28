@@ -21,6 +21,7 @@ target_directories="
 	/home/v/.config/gh/hosts.yml
 	/home/v/.data/
 	/home/v/.documents/
+	/home/v/.dots/
 	/home/v/.local/share/TelegramDesktop
 	/home/v/.ssh/
 	/home/v/.vim/

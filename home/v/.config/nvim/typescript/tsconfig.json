@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "lib": ["ESNext"],
+        "module": "es2020",
+        "moduleResolution": "node",
+        "types": [
+            "tsnvim",
+            "@typescript-to-lua/language-extensions"
+        ],
+        "noImplicitAny": false,
+        "strict": true
+    }
+}
