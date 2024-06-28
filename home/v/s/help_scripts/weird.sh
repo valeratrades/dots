@@ -62,7 +62,7 @@ function typing_guide() {
 }
 
 function what() {
-	cat ~/s/help_scripts/weird/sbf_tweet.txt | py ~/s/help_scripts/weird/what.py | figlet
+	cat ~/s/help_scripts/weird/sbf_tweet.txt | python3 ~/s/help_scripts/weird/what.py | figlet
 }
 
 alias bad_apple="bad-apple"

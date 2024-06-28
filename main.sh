@@ -16,6 +16,7 @@ dot_directories="
 	/home/v/.config/alacritty
 	/home/v/.config/btc_line.toml
 	/home/v/.config/cargo
+	/home/v/.config/tg.toml
 	/home/v/.config/dconf/user
 	/home/v/.config/discord/settings.json
 	/home/v/.config/eww

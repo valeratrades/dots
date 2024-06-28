@@ -400,12 +400,13 @@ alias lkeyd="sudo keyd -m"
 # # pm
 yS() {
 	yay -S ${@} --noconfirm && return 0
-	sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak && sudo sh -c "rankmirrors -n 10 /etc/pacman.d/mirrorlist.bak > /etc/pacman.d/mirrorlist" && yay -S ${@} --noconfirm
+	${HOME}/s/help_scripts/refresh_mirrorlist.sh && yay -S ${@} --noconfirm
 }
 
 alias yR="yay -R --noconfirm"
 alias yRn="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
+alias yQ="yay -Q"
 alias ys="yay -s"
 alias pG="pacman -Q | rg"
 alias pY="${HOME}/s/help_scripts/maintenance/main.sh"

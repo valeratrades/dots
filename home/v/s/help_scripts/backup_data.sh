@@ -7,66 +7,68 @@ README="""\
 	\033[34msync \$sync_dir\033[0m to upload local files
 	\033[34mload \$sync_dir\033[0m to load global files"""
 
+	#/etc/NetworkManager/system-connections/
 target_directories="
+	/etc/default/grub
+	/etc/hostname
+	/etc/hosts
+	/etc/locale.conf
+	/etc/locale.gen
+	/etc/resolv.conf
+	/home/v/.cargo/.crates.toml
+	/home/v/.cargo/bin/
+	/home/v/.cargo/credentials.toml
+	/home/v/.config/gh/hosts.yml
 	/home/v/.data/
-	/home/v/s/
-	/home/v/Documents/
 	/home/v/.documents/
+	/home/v/.local/share/TelegramDesktop
 	/home/v/.ssh/
 	/home/v/.vim/
+	/home/v/Documents/
 	/home/v/Images/
 	/home/v/Sounds/
 	/home/v/g/
-	/home/v/math/
-	/home/v/uni/
 	/home/v/leetcode/
-	/home/v/.cargo/bin/
-	/home/v/.config/google-chrome/Profile
-	/home/v/.cargo/git/
-	/home/v/.cargo/.crates.toml
-	/home/v/.cargo/credentials.toml
-	/home/v/.config/gh/hosts.yml
-	/etc/resolv.conf
-	/etc/locale.gen
-	/etc/locale.conf
-	/etc/hostname
-	/etc/hosts
-	/home/v/.local/share/TelegramDesktop
-	/etc/default/grub
-	/etc/NetworkManager/system-connections/
+	/home/v/math/
+	/home/v/s/
+	/home/v/uni/
 "
 
 sync_files_and_directories() {
-	local copied_file_or_dir="$1"
-	local dest_dir="$2"
+	local copied_file_or_dir="${1%/}"
+	local dest_dir="${2%/}"
 	local directories_with_git=""
 
-	to_dir=$(dirname "$dest_dir$copied_file_or_dir")
-	mkdir -p "${to_dir}"
+	to_dir="$dest_dir$copied_file_or_dir"
+	mkdir -p "$(dirname ${to_dir})"
 
 	if [ -f "$copied_file_or_dir" ]; then
-		filename=$(basename "$copied_file_or_dir")
-		cp "${copied_file_or_dir}" "${to_dir}/${filename}" || printf "\033[31merror\033[0m on ${copied_file_or_dir} -> ${to_dir}/${filename}\n"
+		cp "${copied_file_or_dir}" "${to_dir}" || printf "\033[31merror\033[0m on ${copied_file_or_dir} -> ${to_dir}\n"
 		return
 	fi
 
 	# target is definitely a directory here
 	copied_dir="$copied_file_or_dir"
-	filename=$(basename "$copied_dir")
-	to_dir="$to_dir/$filename"
 	mkdir -p "${to_dir}"
+	echo "DBG: $copied_dir -> $to_dir"
 	for file_or_dir in $(fd --maxdepth=1 --search-path "${copied_dir}") ; do
 		if [ -f "$file_or_dir" ]; then
-			cp "$file_or_dir" "${to_dir}" || printf "\033[31merror\033[0m on ${file_or_dir} -> ${to_dir}\n"
+			file=${file_or_dir}
+			to_file_exact="${to_dir%/}/$(basename ${file})"
+			echo "DBG: file $file -> $to_file_exact"
+			cp "$file" "${to_file_exact}" || printf "\033[31merror\033[0m on ${file} -> ${to_file_exact}\n"
 		else
 			dir=${file_or_dir}
-			rsync -au "${dir}" --exclude "target/" ${to_dir} || printf "\033[31merror\033[0m on ${dir} -> ${to_dir}\n"
+			to_dir_exact="${to_dir%/}/$(basename ${dir})"
+			echo "DBG: dir $dir -> $to_dir_exact"
+			rsync -au "${dir}" --exclude "target/" ${to_dir_exact} || printf "\033[31merror\033[0m on ${dir} -> ${to_dir}\n"
 		fi
 	done
+	printf "\n\n"
 }
 
 sync() {
-	local sync_directory="$1"
+	local sync_directory="${1%/}"
 	rm -rf "${sync_directory}/*"
 	local directories_with_git=""
 
@@ -77,7 +79,7 @@ sync() {
 }
 
 load() {
-	local sync_directory="$1"
+	local sync_directory="${1%/}"
 	for target_dir in $target_directories; do
 		from="${sync_directory}${target_dir}"
 		to_dir="${target_dir}"
