@@ -95,6 +95,7 @@ sync() {
 #TODO: `reverse()`, that would sync it back in place after I made changes on the side of the git repo, which I want to sync locally
 
 load() {
+	force=${1}
 	touch "${HOME}/.local.sh"
 	for dir in $dot_directories; do
 		from="$(pwd)$dir"
@@ -102,9 +103,13 @@ load() {
 		if [ "$stripped" != "$dir" ]; then
 			to="${HOME}${stripped}"
 		else
-			# normally, all the things outside ${HOME} are working on the daemon level, and should not be exported
-			printf "\033[31m%s\033[0m\n" "skipping $dir"
-			continue
+			if [ "$force" = true ]; then
+				to="$dir"
+			else
+				# normally, all the things outside ${HOME} are working on the daemon level, and should not be exported
+				printf "\033[31m%s\033[0m\n" "skipping $dir"
+				continue
+			fi
 		fi
 		mkdir -p "$(dirname "$to")"
 		rsync -ru $from $(dirname "$to")
@@ -129,6 +134,11 @@ if [ -z "$1" ] || [ "$1" = "sync" ]; then
 		commit
 	fi
 elif [ "$1" = "load" ]; then
+	if [ "$2" = "-f" ]; then
+		load true
+	else
+		load false
+	fi
 	load
 elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 	printf "${README}\n"
