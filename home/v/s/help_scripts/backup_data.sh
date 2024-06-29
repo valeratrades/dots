@@ -15,6 +15,7 @@ target_directories="
 	/etc/locale.conf
 	/etc/locale.gen
 	/etc/resolv.conf
+	/home/v/.booktyping/
 	/home/v/.cargo/.crates.toml
 	/home/v/.cargo/bin/
 	/home/v/.cargo/credentials.toml
