@@ -37,6 +37,7 @@ dot_directories="
 	/home/v/.config/todo.toml
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config
 	/home/v/.config/zathura
+	/home/v/.config/mako/config
 	/home/v/.config/zellij
 	/home/v/.config/zoxide/setup.sh
 	/home/v/.config/zsh

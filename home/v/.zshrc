@@ -166,7 +166,12 @@ alias srf="sudo rm -rf"
 alias za="zathura"
 alias zp="zathura --mode presentation"
 alias senable="sudo systemctl enable"
-alias sstart="sudo systemctl start"
+sstart() {
+	target="${1}"
+	sudo systemct enable ${target}
+	sudo systemct start ${target}
+}
+alias sstatus="systemctl status"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
@@ -195,6 +200,7 @@ alias sql="sqlite3"
 alias poetry="POETRY_KEYRING_DISABLED=true poetry"
 alias dk="sudo docker"
 alias hardware="sudo lshw"
+alias home_wifi="nmcli connection up id \"Livebox-3B70\"" #dbg
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

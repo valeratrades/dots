@@ -79,6 +79,7 @@ fixup() {
 }
 
 
+#TODO!: make it default to my GITHUB_NAME, when no "/" are found in the provided repo query, and it's not in defaults.
 gc() {
 	if rg -q "://" <<< "$1"; then
 		url="$1"
