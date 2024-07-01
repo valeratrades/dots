@@ -95,6 +95,8 @@ xkb_symbols "iso" {
 	// Swap Shift_L and <LSGT> keys
 	//FIX: currently impossible, as I think dell sends 50 for _both_ shifts at the firmware level. (theoretically fixable though).
 	//key <LFSH> { [ less, greater, NoSymbol, NoSymbol ] };
-	key <LSGT> { [ Shift_L, Shift_L, Shift_L, Shift_L ] };
-	modifier_map Shift { Shift_L, Shift_R, <LSGT> };
+
+	//dbg (will try to get some shift with udev (ultimate goal: get it to work with oneshot)
+	//key <LSGT> { [ Shift_L, Shift_L, Shift_L, Shift_L ] };
+	//modifier_map Shift { Shift_L, Shift_R, <LSGT> };
 };

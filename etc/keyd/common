@@ -2,7 +2,7 @@
 capslock = overload(ctrl_vim, esc)
 shift = oneshot(shift)
 alt = oneshot(alt)
-lsgt = oneshot(shift)
+#scancode 70056 = oneshot(shift)
 
 [ctrl_vim:C]
 space = swap(vim_mode)
