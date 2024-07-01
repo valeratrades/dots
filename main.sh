@@ -10,13 +10,13 @@ README="""\
 
 target_dir="/home/v/.dots"
 dot_directories="
+	/etc/NetworkManager/NetworkManager.conf
 	/etc/keyd
 	/etc/systemd/system/getty@tty1.service.d/override.conf
 	/home/v/.cargo/config.toml
 	/home/v/.config/alacritty
 	/home/v/.config/btc_line.toml
 	/home/v/.config/cargo
-	/home/v/.config/tg.toml
 	/home/v/.config/dconf/user
 	/home/v/.config/discord/settings.json
 	/home/v/.config/eww
@@ -27,17 +27,18 @@ dot_directories="
 	/home/v/.config/helix
 	/home/v/.config/jfind
 	/home/v/.config/keyd
+	/home/v/.config/mako/config
 	/home/v/.config/mimeapps.list
 	/home/v/.config/nnn/setup.sh
 	/home/v/.config/nnn/termfilechooser.sh
 	/home/v/.config/nvim
 	/home/v/.config/openvpn
 	/home/v/.config/sway
+	/home/v/.config/tg.toml
 	/home/v/.config/tmux
 	/home/v/.config/todo.toml
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config
 	/home/v/.config/zathura
-	/home/v/.config/mako/config
 	/home/v/.config/zellij
 	/home/v/.config/zoxide/setup.sh
 	/home/v/.config/zsh

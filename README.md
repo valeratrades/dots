@@ -19,10 +19,11 @@ curl -sL https://github.com/valeratrades/dots/tree/master/load_dots.sh | bash
 ```
 
 ## Configure
-To overwrite or add functionality, edit
-```bash
-${HOME}/.local.sh
+Configuration is in `zsh`, so have to install it and run
+```sh
+chsh -s $(which zsh)
 ```
+Then change [~/.zshrc] or/and [~/.config/zsh/]
 
 ### Cli Philosophie
 Target length for general aliases is 2 characters, if they are important enough.

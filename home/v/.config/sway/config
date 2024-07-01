@@ -49,7 +49,7 @@ exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
 
 exec mako
 exec libinput-gestures
-exec wlr-gamma-service
+exec_always wlr-gamma-service
 exec keyd-application-mapper -d
 exec bluetoothctl
 exec pipewire
@@ -79,18 +79,18 @@ input type:touchpad {
 }
 
 # # Multimedia
-bindsym $mod+F5 exec pamixer --toggle-mute
-bindsym $mod+Shift+F5 exec pamixer --unmute && pamixer --set-volume 45
-bindsym $mod+F6 exec pamixer --decrease 5
-bindsym $mod+F7 exec pamixer --increase 5
-bindsym $mod+F8 exec pamixer --default-source -t
-bindsym $mod+Shift+F8 exec pamixer --default-source --unmute && pamixer --default-source --set-volume 30
-bindsym $mod+Shift+F6 exec pamixer --default-source --decrease 5
-bindsym $mod+Shift+F7 exec pamixer --default-source --increase 5
+bindsym $mod+F1 exec pamixer --toggle-mute
+bindsym $mod+Shift+F1 exec pamixer --unmute && pamixer --set-volume 45
+bindsym $mod+F2 exec pamixer --decrease 5
+bindsym $mod+F3 exec pamixer --increase 5
+bindsym $mod+F4 exec pamixer --default-source -t
+bindsym $mod+Shift+F4 exec pamixer --default-source --unmute && pamixer --default-source --set-volume 30
+bindsym $mod+Shift+F2 exec pamixer --default-source --decrease 5
+bindsym $mod+Shift+F3 exec pamixer --default-source --increase 5
 bindsym XF86AudioPlay exec playerctl play-pause
-bindsym $mod+F3 exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym F5 exec playerctl play-pause
+bindsym $mod+F5 exec playerctl next
+bindsym $mod+Shift+F5 exec playerctl previous
 # could be redundant, if I find a way to fix a bug with audio on the phone stopping at times with headphones connected to pc too.
 bindsym $mod+b exec bluetoothctl connect E8:EE:CC:36:53:49
 bindsym $mod+Shift+b exec bluetoothctl disconnect E8:EE:CC:36:53:49
@@ -99,15 +99,15 @@ bindsym $mod+Shift+b exec bluetoothctl disconnect E8:EE:CC:36:53:49
 # # Redshift
 # calibrated so it takes 20 key presses for both temperature and brightness to move between the two default states.
 # minus brightness
-bindsym $mod+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.decrease 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.decrease 0.0275
+bindsym $mod+F6 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.decrease 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.decrease 0.0275
 # plus brightness
-bindsym $mod+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
+bindsym $mod+F7 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.increase 210 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.increase 0.0275
 # night + glasses
-bindsym $mod+Shift+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
+bindsym $mod+Shift+F6 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 2300 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.45
 # day
-bindsym $mod+Shift+F10 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
+bindsym $mod+Shift+F7 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.temperature.set 6500 && gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 1
 # night + no glasses
-bindsym $mod+Ctrl+F9 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.15
+bindsym $mod+Ctrl+F6 exec gdbus call -e -d net.zoidplex.wlr_gamma_service -o /net/zoidplex/wlr_gamma_service -m net.zoidplex.wlr_gamma_service.brightness.set 0.15
 exec_always sudo killall auto_redshift
 exec_always sleep 2 && auto_redshift 7:00
 #

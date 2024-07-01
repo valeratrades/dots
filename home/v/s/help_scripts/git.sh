@@ -116,6 +116,14 @@ gc() {
 	fi
 }
 
+local gb_readme='''\
+#build from source helper
+	Does git clone into /tmp, and then tries to build until it works.
+
+	ex: build neovim/neovim
+
+	some repositories have shorthands, eg: `build nvim` would work.
+'''
 
 gb() {
 	if [ "$1" = "nvim" ]; then
@@ -123,15 +131,11 @@ gb() {
 	elif [ "$1" = "eww" ]; then
 		target="elkowar/eww"
 	elif [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
-		printf """\
-#build from source helper
-	Does git clone into /tmp, and then tries to build until it works.
-
-	ex: build neovim/neovim
-
-	some repositories have shorthands, eg: `build nvim` would work.
-"""
+		printf ${gb_readme}
 		return 0
+	elif [ "$1" = "" ]; then
+		printf ${gb_readme}
+		return 1
 	else
 		target="$1"
 	fi
@@ -150,6 +154,8 @@ gb() {
 	elif printf "\n\033[34mtrying go build ./cmd/main.go and save to /usr/local/bin/\033[0m\n" && sudo go build -o /usr/local/bin/ ./cmd/main.go; then
 		:
 	elif printf "\n\033[34mtrying cargo install\033[0m\n" && cargo install -f --path . --root /usr/local/bin/; then
+		:
+	elif printf "\n\033[34mtrying cb script\033[0m\n" && cb; then
 		:
 	elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
 		:

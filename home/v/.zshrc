@@ -165,13 +165,6 @@ alias rf="sudo rm -rf"
 alias srf="sudo rm -rf"
 alias za="zathura"
 alias zp="zathura --mode presentation"
-alias senable="sudo systemctl enable"
-sstart() {
-	target="${1}"
-	sudo systemct enable ${target}
-	sudo systemct start ${target}
-}
-alias sstatus="systemctl status"
 alias massren="py ${HOME}/clone/massren/massren -d '' $@"
 alias q="py ${HOME}/s/help_scripts/ask_gpt.py -s $@"
 alias f="py ${HOME}/s/help_scripts/ask_gpt.py -f $@"
@@ -184,7 +177,6 @@ alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
 alias obs="mkdir ~/Videos/obs >/dev/null; sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
 alias video_cut="video-cut"
-# for some reason there is a weird caching happening, so have to physically cd next to target instead currently...
 alias ss="sudo systemctl"
 alias cl="wl-copy"
 alias gz="tar -xvzf -C"
@@ -201,6 +193,7 @@ alias poetry="POETRY_KEYRING_DISABLED=true poetry"
 alias dk="sudo docker"
 alias hardware="sudo lshw"
 alias home_wifi="nmcli connection up id \"Livebox-3B70\"" #dbg
+alias keys="xev -event keyboard"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)
@@ -519,13 +512,8 @@ Arguments:
 
 source ${HOME}/.config/zsh/other.zsh
 
-# last one, so local changes can overwrite global.
-if [ -f "${HOME}/.local.sh" ]; then
-	source "${HOME}/.local.sh"
-else
-	ZSH_THEME="${HOME}/.config/zsh/theme.zsh"
-	source $ZSH_THEME
-fi
+ZSH_THEME="${HOME}/.config/zsh/theme.zsh"
+source $ZSH_THEME
 
 # pnpm
 export PNPM_HOME="/home/v/.local/share/pnpm"

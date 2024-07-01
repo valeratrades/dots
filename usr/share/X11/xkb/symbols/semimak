@@ -42,7 +42,8 @@ xkb_symbols "basic" {
 
 	//TODO!: Get modifier status off of the old <RALT>
 	key <RALT> { type="FOUR_LEVEL", [ BackSpace ] };
-	key <LSGT> { type="ONE_LEVEL", [ ISO_Level3_Shift ] };
+	//HACK: can't make the old place of the key for the following work, and otherwise this conflicts with my iso shift remapping...
+	//key <LSGT> { type="ONE_LEVEL", [ ISO_Level3_Shift ] };
 	// modifier_map Mod1 { Alt_L, Alt_R, Meta_L, Meta_R };
 
 	// // French stuff
@@ -92,7 +93,8 @@ xkb_symbols "iso" {
 	key <BKSL> { [ Return, Return ] };
 
 	// Swap Shift_L and <LSGT> keys
-	//key <I050> { [ less, greater, NoSymbol, NoSymbol ] };
-	//key <I094> { [ Shift_L, Shift_L, Shift_L, Shift_L ] };
-	//modifier_map Shift { Shift_L, Shift_R };
+	//FIX: currently impossible, as I think dell sends 50 for _both_ shifts at the firmware level. (theoretically fixable though).
+	//key <LFSH> { [ less, greater, NoSymbol, NoSymbol ] };
+	key <LSGT> { [ Shift_L, Shift_L, Shift_L, Shift_L ] };
+	modifier_map Shift { Shift_L, Shift_R, <LSGT> };
 };
