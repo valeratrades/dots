@@ -20,6 +20,7 @@ export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # cur
 export LC_TIME=en_GB.UTF-8
 
 . ~/.config/nvim/functions.sh
+mkdir -p /home/v/Videos/obs/ >/dev/null 2>&1
 
 alias exa="eza"
 # for super ls

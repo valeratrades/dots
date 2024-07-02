@@ -124,7 +124,7 @@ K("n", "<bs>", "i<bs>")
 K("n", "<del>", "i<del>")
 K("n", "<C-del>", "a<C-del>", { remap = true })
 
-K('', '<C-a>', 'ggVG')
+K("n", "<C-A>", "ggVG")
 -- Consequences
 K('', '<C-z>', '<C-a>')
 --

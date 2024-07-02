@@ -29,6 +29,7 @@ shared_before() {
 
 	mkdir tests && cp -r ${HOME}/.file_snippets/tests/${lang}/* ./tests/
 	mkdir tmp
+	#TODO!: transition to "runnables" dap format, because that's what these are essentially are.
 	cp ${HOME}/.file_snippets/local_sh/${lang}.sh ./tmp/.local.sh
 	source ./tmp/.local.sh
 }
@@ -41,7 +42,7 @@ shared_after() {
 	lang="${2}" # rs, py, go
 
 	git init
-	cp ${HOME}/.file_snippets/.git/hooks/pre-commit .git/hooks/pre-commit && chmod u+x .git/hooks/pre-commit
+	cp ${HOME}/.file_snippets/git/hooks/pre-commit.sh .git/hooks/pre-commit && chmod u+x .git/hooks/pre-commit
 
 	fd --type f --exclude .git | rg -v --file <(git ls-files --others --ignored --exclude-standard) | while IFS= read -r file; do
 		sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" "$file"

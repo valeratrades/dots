@@ -35,6 +35,7 @@ dot_directories="
 	/home/v/.config/openvpn
 	/home/v/.config/sway
 	/home/v/.config/tg.toml
+	/home/v/.config/tg_admin.toml
 	/home/v/.config/tmux
 	/home/v/.config/todo.toml
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config

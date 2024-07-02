@@ -172,50 +172,51 @@ lspconfig.leanls.setup {
 	on_attach = on_attach,
 }
 
---vim.g.rustaceanvim = {
---	tools = {
---		-- Plugin configuration
---		--TODO
---	},
---	server = {
---		cmd = function()
---			local mason_registry = require('mason-registry')
---			local ra_binary = mason_registry.is_installed('rust-analyzer')
---					and mason_registry.get_package('rust-analyzer'):get_install_path() .. "/rust-analyzer"
---					or "rust-analyzer"
---			return { ra_binary } -- You can add args to the list, such as '--log-file'
---		end,
---		on_attach = on_attach,
---		default_settings = {
---		},
---	},
---}
+vim.g.rustaceanvim = {
+	tools = {
+		-- Plugin configuration
+		--TODO
+	},
+	server = {
+		cmd = function()
+			local mason_registry = require('mason-registry')
+			local ra_binary = mason_registry.is_installed('rust-analyzer')
+					and mason_registry.get_package('rust-analyzer'):get_install_path() .. "/rust-analyzer"
+					or "rust-analyzer"
+			return { ra_binary } -- You can add args to the list, such as '--log-file'
+		end,
+		on_attach = on_attach,
+		default_settings = {
+			['rust-analyzer'] = {
+				cmd = {
+					"rustup", "run", "nightly", "rust-analyzer",
+				},
+				rustfmt = {
+					overrideCommand = { "rustfmt" },
+				},
+				cargo = {
+					runBuildScripts = true,
+					loadOutDirsFromCheck = true,
+				},
+				procMacro = {
+					enable = true,
+				},
+				checkOnSave = {
+					enable = true,
+					--TODO!!: think how to toggle clippy::all (for pedantic checks right before commiting to master)
+					command = "clippy",
+				},
+			},
+
+		},
+	},
+}
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
 	ensure_installed = lspconfig_servers,
 	handlers = { lsp_zero.default_setup },
 	settings = {
-		['rust-analyzer'] = {
-			cmd = {
-				"rustup", "run", "nightly", "rust-analyzer",
-			},
-			rustfmt = {
-				overrideCommand = { "rustfmt" },
-			},
-			cargo = {
-				runBuildScripts = true,
-				loadOutDirsFromCheck = true,
-			},
-			procMacro = {
-				enable = true,
-			},
-			checkOnSave = {
-				enable = true,
-				--TODO!!: think how to toggle clippy::all (for pedantic checks right before commiting to master)
-				command = "clippy",
-			},
-		},
 		["gopls"] = {
 			completeUnimported = true,
 			usePlaceholders = true,

@@ -44,6 +44,8 @@ alias ggp="gg -p perf"
 alias ggd="gg -p docs"
 alias ggi="gg -p ci"
 
+alias ggup="gg 'fixup!'"
+
 gd() {
 	branch_name=${1}
 	git branch -d ${branch_name}
@@ -59,10 +61,14 @@ alias gia="gh issue edit --add-assignee"
 alias giam="gh issue edit --add-assignee @me"
 alias gila="gh issue edit --add-label"
 
-# issues under the closest milestone
-gim() {
+# Git Issues Filter Milestone (the closest one)
+gifm() {
 	milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
 	gh issue list --milestone="${milestone}"
+}
+# Git Issues Filter Assignee (me)
+gifa() {
+	gh issue list --assignee="@me"
 }
 
 

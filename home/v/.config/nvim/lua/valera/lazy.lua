@@ -160,11 +160,11 @@ return require('lazy').setup({
 
 	-- If something breaks, it's likely below here:
 
-	--{
-	--	'mrcjkb/rustaceanvim',
-	--	--version = '^4',
-	--	lazy = false, -- This plugin is already lazy
-	--},
+	{
+		'mrcjkb/rustaceanvim',
+		--version = '^4',
+		lazy = false, -- This plugin is already lazy
+	},
 
 	'vim-test/vim-test',
 	'lervag/vimtex',
@@ -248,4 +248,5 @@ return require('lazy').setup({
 	"stevearc/aerial.nvim",
 	"3rd/image.nvim",
 	"DreamMaoMao/yazi.nvim",
+	"zbirenbaum/copilot.lua",
 })

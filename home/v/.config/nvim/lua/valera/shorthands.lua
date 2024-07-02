@@ -20,9 +20,9 @@ end
 -- Note that this takes over 1ms defer
 function PersistCursor(fn, ...)
 	local args = ...
-	local save_cursor = vim.api.nvim_win_get_cursor(0)
+	local cursor_position = vim.api.nvim_win_get_cursor(0)
 	local result = fn(args)
-	vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, save_cursor) end, 1)
+	vim.defer_fn(function() vim.api.nvim_win_set_cursor(0, cursor_position) end, 1)
 	return result
 end
 
