@@ -5,7 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 export MODULAR_HOME="$HOME/.modular"
-export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/:$MODULAR_HOME/pkg/packages.modular.com_mojo/bin"
+export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/:$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:/${HOME}/.local/share/flatpak/:/var/lib/flatpak/"
+export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/flatpak/exports/share:${HOME}/.local/share/flatpak/exports/share"
 fpath+="${HOME}/.config/zsh/.zfunc"
 . ~/.private/credentials.sh
 export EDITOR=nvim
@@ -195,6 +196,7 @@ alias dk="sudo docker"
 alias hardware="sudo lshw"
 alias home_wifi="nmcli connection up id \"Livebox-3B70\"" #dbg
 alias keys="xev -event keyboard"
+alias audio="qpwgraph"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

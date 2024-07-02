@@ -65,7 +65,7 @@ function what() {
 	cat ~/s/help_scripts/weird/sbf_tweet.txt | python3 ~/s/help_scripts/weird/what.py | figlet
 }
 
-alias bad_apple="bad-apple"
+alias bad_apple="bad-apple-rs"
 
 russian_roulette() {
 	r=$((RANDOM % 6))
