@@ -228,9 +228,12 @@ tn() {
 	tmux send-keys -t "${SESSION_NAME}:source.0" 'nvim .' Enter
 
 	tmux new-window -t "${SESSION_NAME}" -n "build"
-	tmux split-window -h -t "${SESSION_NAME}:build"
 	tmux send-keys -t "${SESSION_NAME}:build.0" 'cs .' Enter
+	tmux split-window -h -t "${SESSION_NAME}:build"
 	tmux send-keys -t "${SESSION_NAME}:build.1" 'cs .' Enter
+	tmux split-window -v -t "${SESSION_NAME}:build.1"
+	tmux send-keys -t "${SESSION_NAME}:build.1" 'cs .' Enter
+	tmux resize-pane -t "${SESSION_NAME}:build.2" -D 25
 	tmux select-pane -t "${SESSION_NAME}:build.0"
 
 	tmux new-window -t "${SESSION_NAME}" -n "ref"
