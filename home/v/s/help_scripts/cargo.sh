@@ -1,4 +1,5 @@
 alias caclip="cargo clippy --tests -- -Dclippy::all"
+alias ctn="cargo test -- --nocapture"
 
 cb() {
 	guess_name=$(basename $(pwd))
