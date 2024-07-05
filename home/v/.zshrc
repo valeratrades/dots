@@ -198,6 +198,7 @@ alias home_wifi="nmcli connection up id \"Livebox-3B70\"" #dbg
 alias keys="xev -event keyboard"
 alias audio="qpwgraph"
 alias test_mic="arecord -c1 -vvv /tmp/mic.wav"
+alias nano="nvim"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

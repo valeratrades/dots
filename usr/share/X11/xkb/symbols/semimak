@@ -40,7 +40,6 @@ xkb_symbols "basic" {
 	key <AB10> {[ slash,     question  ]};
 	key <AC11> {[ semicolon, colon     ]};
 
-	//TODO!: Get modifier status off of the old <RALT>
 	key <RALT> { type="FOUR_LEVEL", [ BackSpace ] };
 	//HACK: can't make the old place of the key for the following work, and otherwise this conflicts with my iso shift remapping...
 	//key <LSGT> { type="ONE_LEVEL", [ ISO_Level3_Shift ] };
@@ -95,8 +94,5 @@ xkb_symbols "iso" {
 	// Swap Shift_L and <LSGT> keys
 	//FIX: currently impossible, as I think dell sends 50 for _both_ shifts at the firmware level. (theoretically fixable though).
 	//key <LFSH> { [ less, greater, NoSymbol, NoSymbol ] };
-
-	//dbg (will try to get some shift with udev (ultimate goal: get it to work with oneshot)
-	//key <LSGT> { [ Shift_L, Shift_L, Shift_L, Shift_L ] };
-	//modifier_map Shift { Shift_L, Shift_R, <LSGT> };
+	//HACK: LSGT is currently swapped via keyd
 };
