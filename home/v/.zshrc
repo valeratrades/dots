@@ -286,13 +286,6 @@ csl() {
 	fi
 	cs $_path
 }
-csk() {
-	_path="/usr/share/X11/xkb/symbols/"
-	if [ -n "$1" ]; then
-		_path+="${1}"
-	fi
-	cs $_path
-}
 csg() {
 	_path="${HOME}/g/"
 	if [ -n "$1" ]; then
