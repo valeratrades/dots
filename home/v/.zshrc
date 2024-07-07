@@ -466,6 +466,7 @@ Arguments:
 . ~/s/help_scripts/video_editting.sh
 . ~/s/help_scripts/weird.sh
 . ~/s/todo/functions.sh
+. ~/.local.sh
 
 source ${HOME}/.config/zsh/other.zsh
 

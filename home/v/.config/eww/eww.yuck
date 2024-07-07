@@ -166,7 +166,7 @@
 		;;TODO!: add border betwen these // can't do here, because the space is owned by the window. And if I create a new one for additional_line, how do I make it horiizontally stack with the main?
 		(box
 			:class "text"
-			"${btc_line_main_str}")))
+			" ${btc_line_main_str}")))
 
 (defwindow btc_line_lower
 	:monitor 0

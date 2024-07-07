@@ -1,4 +1,4 @@
-// Semimak for ISO keyboards specifically
+// Semimak for both keyboard standards
 
 default partial
 xkb_symbols "basic" {

@@ -45,3 +45,8 @@ linode_ssh() {
 	export LINODE_SSH_PASSWORD LINODE_SSH_HOST
 	ssh_connect $LINODE_SSH_HOST $LINODE_SSH_PASSWORD
 }
+
+masha_ssh() {
+	export MASHA_SSH_PASSWORD MASHA_SSH_HOST
+	ssh_connect $MASHA_SSH_HOST $MASHA_SSH_PASSWORD
+}
