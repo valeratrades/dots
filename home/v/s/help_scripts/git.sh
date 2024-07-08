@@ -32,7 +32,7 @@ gg() {
 	#if [ "$(git log -1 --pretty=format:%s)" = ${message} ]; then
 	#	squash_if_needed='--squash HEAD~1'
 	#fi
-	git add -A && git commit ${squash_if_needed} -m "${message}" && git push --follow-tags
+	git add -A && git commit ${squash_if_needed} -m "${message}"; git push --follow-tags
 }
 alias ggf="gg -p feat"
 alias ggx="gg -p fix"
