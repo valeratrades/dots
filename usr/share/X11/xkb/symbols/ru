@@ -82,6 +82,17 @@ xkb_symbols "common" {
     include "kpdl(comma)"
 };
 
+partial
+xkb_symbols "iso" {
+	include "ru(common)"
+	
+		name[Group1] = "Russian ISO";
+
+	// Swap Enter and backslash/bar
+	key <RTRN> { [ backslash, bar ] };	
+	key <BKSL> { [ Return, Return ] };
+};
+
 partial alphanumeric_keys
 xkb_symbols "legacy" {
 

@@ -61,8 +61,8 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-	xkb_layout "semimak,ru,fr,us"
-	xkb_variant "iso,,,"
+	xkb_layout "semimak,ru,fr"
+	xkb_variant "iso,iso,"
 	xkb_options "grp:win_space_toggle"
 
 	tap enabled
