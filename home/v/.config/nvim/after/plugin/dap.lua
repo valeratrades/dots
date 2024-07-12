@@ -9,10 +9,6 @@ require('mason-nvim-dap').setup {
 	automatic_setup = true,
 
 	handlers = {},
-
-	ensure_installed = {
-		'delve',
-	}
 }
 
 require("which-key").register({
