@@ -26,6 +26,8 @@ tn() {
 	tmux send-keys -t "${SESSION_NAME}:build.1" 'cs .' Enter
 	tmux split-window -v -t "${SESSION_NAME}:build.1"
 	tmux send-keys -t "${SESSION_NAME}:build.2" 'cs .; clear' Enter
+	tmux send-keys -t "${SESSION_NAME}:build.2" 'gil' Enter
+	tmux send-keys -t "${SESSION_NAME}:build.2" 'gifa' Enter
 	tmux resize-pane -t "${SESSION_NAME}:build.2" -D 30
 	tmux select-pane -t "${SESSION_NAME}:build.0"
 

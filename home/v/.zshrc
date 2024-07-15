@@ -357,7 +357,14 @@ alias yRn="yay -Rns --noconfirm"
 alias yG="yay -Q | rg"
 alias yQ="yay -Q"
 alias ys="yay -s"
+
+alias pS="sudo pacman --noconfirm -S"
+alias pR="sudo pacman --noconfirm -R"
+alias pRn="sudo pacman --noconfirm -Rn"
+alias pSyy="sudo pacman --noconfirm -Syy"
+alias pSyu="sudo pacman --noconfirm -Syu"
 alias pG="pacman -Q | rg"
+
 alias pY="${HOME}/s/help_scripts/maintenance/main.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
