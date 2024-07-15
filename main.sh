@@ -30,6 +30,7 @@ dot_directories="
 	/home/v/.config/mako/config
 	/home/v/.config/mimeapps.list
 	/home/v/.config/nnn/setup.sh
+	/home/v/.config/discretionary_engine.toml
 	/home/v/.config/nnn/termfilechooser.sh
 	/home/v/.config/nvim
 	/home/v/.config/openvpn

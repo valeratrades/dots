@@ -260,3 +260,7 @@ local function forceGoFile()
 	vim.cmd.norm("gf")
 end
 K("n", "<Space>gf", forceGoFile);
+
+
+--K("", "<M-o>", "<C-o>", { desc = "Because https://github.com/jake-stewart/filestack.nvim doesn't work" })
+--K("", "<M-a>", "<C-a>", { desc = "Because https://github.com/jake-stewart/filestack.nvim doesn't work" })
