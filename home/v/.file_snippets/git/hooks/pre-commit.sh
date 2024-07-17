@@ -18,4 +18,13 @@ if [ -f "Cargo.toml" ]; then
   cargo sort
 fi
 
+# # Count LoC
+tokei --output json > /tmp/tokei_output.json
+LINES_OF_CODE=$(jq '.Total.code' /tmp/tokei_output.json )
+BADGE_URL="https://img.shields.io/badge/LoC-${LINES_OF_CODE}-lightblue"
+sed -i "s|!\[Lines Of Code\](.*)|![Lines Of Code](${BADGE_URL})|" README.md && git add README.md || :
+#
+
+rm commit >/dev/null 2>&1 # remove commit message text file if it exists
+
 exit 0
