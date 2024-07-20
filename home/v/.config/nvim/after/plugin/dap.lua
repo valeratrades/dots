@@ -11,34 +11,33 @@ require('mason-nvim-dap').setup {
 	handlers = {},
 }
 
-require("which-key").register({
-	--["<F1>"] = { "<cmd>lua require('dap').step_back()<CR>", "Step Back" },
-	["<F2>"] = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
-	["<F3>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
-	["<F4>"] = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
-	["<F5>"] = { "<cmd>lua require('dap').continue()<CR>", "Start/Continue" },
-	["<F6>"] = { "<cmd>lua require('dapui').toggle()<CR>", "Toggle Windows" },
-	["<Space>d"] = {
-		name = "DAP",
-		d = { "<cmd>lua RustLsp debug", "Start" }, --HACK: definitely not the right place to specify a dap implementation
-		b = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
-		B = { "<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", "Input Breakpoint" },
-		i = { "<cmd>lua require('dap').repl.open()<CR>", "Repl Open" },
-		r = { "<cmd>lua require('dapui').open()({reset = true})<CR>", "Restore Windows Layout" },
-		e = { "<cmd>lua require('dapui').eval()<CR>", "Eval" },
-		E = { "<cmd>lua require('dapui').eval(vim.fn.input('[DAP] Expression > '))<CR>", "Input Expression" },
-	},
-})
+-- DAP keymaps
+vim.keymap.set('n', '<F2>', function() require('dap').step_into() end, { desc = "DAP: Step Into" })
+vim.keymap.set('n', '<F3>', function() require('dap').step_over() end, { desc = "DAP: Step Over" })
+vim.keymap.set('n', '<F4>', function() require('dap').step_out() end, { desc = "DAP: Step Out" })
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = "DAP: Start/Continue" })
+vim.keymap.set('n', '<F6>', function() require('dapui').toggle() end, { desc = "DAP: Toggle Windows" })
+
+-- DAP space commands
+vim.keymap.set('n', '<Space>dd', function() vim.cmd('RustLsp debug') end, { desc = "DAP: Start (RustLsp)" })
+vim.keymap.set('n', '<Space>db', function() require('dap').toggle_breakpoint() end, { desc = "DAP: Toggle Breakpoint" })
+vim.keymap.set('n', '<Space>dB', function()
+	require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
+end, { desc = "DAP: Input Breakpoint" })
+vim.keymap.set('n', '<Space>di', function() require('dap').repl.open() end, { desc = "DAP: Repl Open" })
+vim.keymap.set('n', '<Space>dr', function() require('dapui').open({ reset = true }) end,
+	{ desc = "DAP: Restore Windows Layout" })
+vim.keymap.set('n', '<Space>de', function() require('dapui').eval() end, { desc = "DAP: Eval" })
+vim.keymap.set('n', '<Space>dE', function()
+	require('dapui').eval(vim.fn.input('[DAP] Expression > '))
+end, { desc = "DAP: Input Expression" })
 
 require("telescope").load_extension("dap")
-require("which-key").register({
-	name = "Telescope: DAP",
-	c = { "<cmd>Telescope dap commands<cr>", "commands" },
-	g = { "<cmd>Telescope dap configurations<cr>", "configurations" },
-	b = { "<cmd>Telescope dap list_breakpoints<cr>", "breakpoints" },
-	v = { "<cmd>Telescope dap variables<cr>", "variables" },
-	f = { "<cmd>Telescope dap frames<cr>", "frames" },
-}, { prefix = "<Space>td" })
+vim.keymap.set('n', '<Space>tdc', "<cmd>Telescope dap commands<cr>", { desc = "Telescope DAP: Commands" })
+vim.keymap.set('n', '<Space>tdg', "<cmd>Telescope dap configurations<cr>", { desc = "Telescope DAP: Configurations" })
+vim.keymap.set('n', '<Space>tdb', "<cmd>Telescope dap list_breakpoints<cr>", { desc = "Telescope DAP: Breakpoints" })
+vim.keymap.set('n', '<Space>tdv', "<cmd>Telescope dap variables<cr>", { desc = "Telescope DAP: Variables" })
+vim.keymap.set('n', '<Space>tdf', "<cmd>Telescope dap frames<cr>", { desc = "Telescope DAP: Frames" })
 
 -- Symbols
 vim.fn.sign_define("DapBreakpoint", { text = "ß", texthl = "Breakpoint", linehl = "", numhl = "" })

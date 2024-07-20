@@ -44,7 +44,7 @@ shnip.setup({
 	},
 	overrides = {
 		rust = {
-			["struct"] = "#[derive(Clone, Debug, Default, derive_new::new)]<CR>struct  {<CR>}<Esc>kg_hi", -- I guess now I have to manually derive Default for all enums
+			["struct"] = "#[derive(Clone, Debug, Default, derive_new::new, Copy)]<CR>struct  {<CR>}<Esc>kg_hi", -- I guess now I have to manually derive Default for all enums
 			extra = {
 				["<c-t>"] = "tokio::spawn(async move {<CR>});<Esc>O",
 				["<c-u>"] = "loop {<CR>}<Esc>ko",

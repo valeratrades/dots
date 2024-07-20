@@ -11,7 +11,10 @@ set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.node
 set $output_laptop "eDP-1"
 set $output_monitor "HDMI-A-1"
 # sway circles through this space-delimited list when the first element is not found.
-set $primary "HDMI-A-1" "eDP-1"
+set $primary "HDMI-A-1" "eDP-1" "DP-1"
+
+#dbg
+set $output_laptop "DP-1"
 
 set $left s
 set $down r
@@ -119,7 +122,7 @@ output * bg ~/Wallpapers/starry_night.jpg fill
 workspace 1 output $primary
 workspace 2 output $primary
 workspace 3 output $primary
-workspace 4 output $primary
+workspace 4 output $output_laptop
 workspace 5 output $output_laptop
 workspace 6 output $primary
 workspace 7 output $primary

@@ -1,4 +1,3 @@
-require('which-key').register({
-	name = "Rustacean",
-	e = { "<cmd>lua vim.cmd.RustLsp('expandMacro')<cr>", "Expand Macro" },
-}, { prefix = "<Space>r" })
+vim.keymap.set('n', '<Space>re', function()
+	vim.cmd.RustLsp('expandMacro')
+end, { desc = "Rustacean: Expand Macro" })

@@ -50,15 +50,6 @@ return require('lazy').setup({
 		end
 	},
 	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-		opts = {}
-	},
-	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
 	},
@@ -172,6 +163,10 @@ return require('lazy').setup({
 	'olimorris/persisted.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-media-files.nvim',
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		deps = { "echasnovski/mini.icons" },
+	},
 	"nvim-lua/popup.nvim",
 	"folke/persistence.nvim",
 	"folke/todo-comments.nvim",
@@ -223,10 +218,8 @@ return require('lazy').setup({
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
-			"folke/which-key.nvim",
 		},
 	},
-	"smoka7/hop.nvim",
 	"nanotee/zoxide.vim",
 	{
 		"ziontee113/color-picker.nvim",

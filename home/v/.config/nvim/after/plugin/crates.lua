@@ -157,11 +157,6 @@ require('crates').setup {
 	},
 	on_attach = function(bufnr) end,
 }
-require("which-key").register({
-	["<Space>c"] = {
-		name = "Crates",
-		--TODO!: on both of these change the crate from "*" to explicit crate name
-		a = { "<cmd>lua require('crates').upgrade_all_crates()<CR>", "Upgrade All" },
-		u = { "<cmd>lua require('crates').upgrade_crate()<CR>", "Upgrade Crate" },
-	},
-})
+
+vim.keymap.set('n', '<Space>ca', "<cmd>lua require('crates').upgrade_all_crates()<CR>", { desc = "Crates: Upgrade All" })
+vim.keymap.set('n', '<Space>cu', "<cmd>lua require('crates').upgrade_crate()<CR>", { desc = "Crates: Upgrade Crate" })

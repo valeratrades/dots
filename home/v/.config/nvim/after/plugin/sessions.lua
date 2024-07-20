@@ -12,10 +12,9 @@ require("persisted").setup({
 	},
 })
 
-require("which-key").register({
-	name = "Session",
-	l = { "<cmd>SessionLoad<cr><cmd>SessionSave<cr>", "Load" }, -- Saving so vim.g.persisting == true
-	s = { "<cmd>SessionSave<cr><cmd>lua print('session saved')<cr>", "Save" },
-	i = { "<cmd>SessionStart<cr><cmd>lua print('session started')<cr>", "Init" },
-	q = { "<cmd>SessionStop<cr><cmd>lua print('stopped recording session')<cr>", "Quit" },
-}, { prefix = "<space>se" })
+vim.keymap.set('n', '<space>sel', "<cmd>SessionLoad<cr><cmd>SessionSave<cr>", { desc = "Session: Load" })
+vim.keymap.set('n', '<space>ses', "<cmd>SessionSave<cr><cmd>lua print('session saved')<cr>", { desc = "Session: Save" })
+vim.keymap.set('n', '<space>sei', "<cmd>SessionStart<cr><cmd>lua print('session started')<cr>",
+	{ desc = "Session: Init" })
+vim.keymap.set('n', '<space>seq', "<cmd>SessionStop<cr><cmd>lua print('stopped recording session')<cr>",
+	{ desc = "Session: Quit" })

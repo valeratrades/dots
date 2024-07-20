@@ -109,35 +109,49 @@ end
 --TODO!: add zz after some search commands (just appending to the cmd string doesn't work)
 local on_attach = function(client, bufnr)
 	local telescope_builtin = require("telescope.builtin")
-	require("which-key").register({
-		K = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover Info" },
-		gd = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Go to Definition" },
-		["<C-r>"] = { "<cmd>lua JumpToDiagnostic(1, 'max')<CR>", "Next Error" },
-		["<C-n>"] = { "<cmd>lua JumpToDiagnostic(-1, 'max')<CR>", "Previous Error" },
-		["<C-R>"] = { "<cmd>lua JumpToDiagnostic(1, 'all')<CR>", "Next Diagnostic" },
-		["<C-N>"] = { "<cmd>lua JumpToDiagnostic(-1, 'all')<CR>", "Previous Diagnostic" },
-		["<space>l"] = {
-			name = "LSP",
-			D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-			t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type Definition" },
-			i = { "<cmd>Telescope lsp_implementations<CR>", "Implementations" },
-			r = { "<cmd>Telescope lsp_references<CR>", "References" },
-			d = { function() telescope_builtin.diagnostics({ sort_by = "severity" }) end, "Diagnostics" },
-			l = { function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end, "Local Diagnostics" },
-			R = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-			w = { "<cmd>Telescope lsp_document_symbols<CR>", "Workspace Symbol" },
-			W = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "Dynamic Workspace Symbol" },
-			f = { "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", "Format" },
-			a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-			y = { "<cmd>lua YankDiagnosticPopup()<CR>", "Yank Diagnostic Popup" },
-			s = { "<cmd>lua ToggleDiagnostics()<CR>", "Toggle Diagnostics" },
-			v = { "<cmd>lua ToggleVirtualText()<CR>", "Toggle Virtual Text" },
-			["2"] = { "<cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 2" },
-			["4"] = { "<cmd>lua vim.opt.shiftwidth=4<CR><cmd>lua vim.opt.tabstop=4<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 4" },
-			["8"] = { "<cmd>lua vim.opt.shiftwidth=8<CR><cmd>lua vim.opt.tabstop=8<CR><cmd>lua vim.opt.expandtab=true<CR>", "Tab = 8" },
-			["0"] = { "<cmd>lua vim.opt.expandtab=false<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.softtabstop=0<CR>", "Reset Tab Settings" },
-		},
-	}, { buffer = bufnr })
+
+	local function buf_set_keymap(mode, lhs, rhs, opts)
+		opts = opts or {}
+		opts.buffer = bufnr
+		vim.keymap.set(mode, lhs, rhs, opts)
+	end
+
+	buf_set_keymap('n', 'K', vim.lsp.buf.hover, { desc = "Hover Info" })
+	buf_set_keymap('n', 'gd', vim.lsp.buf.definition, { desc = "Go to Definition" })
+	buf_set_keymap('n', '<C-r>', function() JumpToDiagnostic(1, 'max') end, { desc = "Next Error" })
+	buf_set_keymap('n', '<C-n>', function() JumpToDiagnostic(-1, 'max') end, { desc = "Previous Error" })
+	buf_set_keymap('n', '<C-R>', function() JumpToDiagnostic(1, 'all') end, { desc = "Next Diagnostic" })
+	buf_set_keymap('n', '<C-N>', function() JumpToDiagnostic(-1, 'all') end, { desc = "Previous Diagnostic" })
+
+	buf_set_keymap('n', '<space>lD', vim.lsp.buf.declaration, { desc = "Declaration" })
+	buf_set_keymap('n', '<space>lt', vim.lsp.buf.type_definition, { desc = "Type Definition" })
+	buf_set_keymap('n', '<space>li', '<cmd>Telescope lsp_implementations<CR>', { desc = "Implementations" })
+	buf_set_keymap('n', '<space>lr', '<cmd>Telescope lsp_references<CR>', { desc = "References" })
+	buf_set_keymap('n', '<space>ld', function() telescope_builtin.diagnostics({ sort_by = "severity" }) end,
+		{ desc = "Diagnostics" })
+	buf_set_keymap('n', '<space>ll', function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end,
+		{ desc = "Local Diagnostics" })
+	buf_set_keymap('n', '<space>lR', vim.lsp.buf.rename, { desc = "Rename" })
+	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Workspace Symbol" })
+	buf_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>',
+		{ desc = "Dynamic Workspace Symbol" })
+	buf_set_keymap('n', '<space>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
+	buf_set_keymap('n', '<space>la', vim.lsp.buf.code_action, { desc = "Code Action" })
+	buf_set_keymap('n', '<space>ly', YankDiagnosticPopup, { desc = "Yank Diagnostic Popup" })
+	buf_set_keymap('n', '<space>ls', ToggleDiagnostics, { desc = "Toggle Diagnostics" })
+	buf_set_keymap('n', '<space>lv', ToggleVirtualText, { desc = "Toggle Virtual Text" })
+	buf_set_keymap('n', '<space>l2',
+		'<cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.expandtab=true<CR>',
+		{ desc = "Tab = 2" })
+	buf_set_keymap('n', '<space>l4',
+		'<cmd>lua vim.opt.shiftwidth=4<CR><cmd>lua vim.opt.tabstop=4<CR><cmd>lua vim.opt.expandtab=true<CR>',
+		{ desc = "Tab = 4" })
+	buf_set_keymap('n', '<space>l8',
+		'<cmd>lua vim.opt.shiftwidth=8<CR><cmd>lua vim.opt.tabstop=8<CR><cmd>lua vim.opt.expandtab=true<CR>',
+		{ desc = "Tab = 8" })
+	buf_set_keymap('n', '<space>l0',
+		'<cmd>lua vim.opt.expandtab=false<CR><cmd>lua vim.opt.tabstop=2<CR><cmd>lua vim.opt.shiftwidth=2<CR><cmd>lua vim.opt.softtabstop=0<CR>',
+		{ desc = "Reset Tab Settings" })
 
 
 	if client.supports_method('textDocument/formatting') then

@@ -2,26 +2,24 @@ local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
 local gs = { hidden = true, no_ignore = false, file_ignore_patterns = { ".git" } }
 
-require("which-key").register({
-	f = { function() builtin.find_files(gs) end, "search files" },
-	z = { function() builtin.live_grep(gs) end, "live grep" },
-	s = {
-		name = "Telescope",
-		s = { function() builtin.grep_string(gs) end, "grep visual selection or word under cursor", mode = { "n", "v" } },
-		m = { function() builtin.keymaps(gs) end, "keymaps" },
-		g = { function() builtin.git_files(gs) end, "git files" },
-		p = { "<cmd>Telescope persisted<cr>", "persisted: sessions" },
-		b = { function() builtin.buffers(gs) end, "find buffers" },
-		h = { function() builtin.help_tags(gs) end, "neovim documentation" },
-		n = { function() builtin.find_files({ hidden = true, no_ignore_parent = true }) end, "no_ignore_parent" },
-		t = { function()
-			FindTodo()
-			require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
-		end, "Project's TODOs" },
-		i = { "<cmd>Telescope media_files<cr>", "media files" },
-	},
-}, { prefix = "<space>" })
-K("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",
+vim.keymap.set('n', '<space>f', function() builtin.find_files(gs) end, { desc = "Search files" })
+vim.keymap.set('n', '<space>z', function() builtin.live_grep(gs) end, { desc = "Live grep" })
+vim.keymap.set({ 'n', 'v' }, '<space>ss', function() builtin.grep_string(gs) end,
+	{ desc = "Grep visual selection or word under cursor" })
+vim.keymap.set('n', '<space>sm', function() builtin.keymaps(gs) end, { desc = "Keymaps" })
+vim.keymap.set('n', '<space>sg', function() builtin.git_files(gs) end, { desc = "Git files" })
+vim.keymap.set('n', '<space>sp', "<cmd>Telescope persisted<cr>", { desc = "Persisted: sessions" })
+vim.keymap.set('n', '<space>sb', function() builtin.buffers(gs) end, { desc = "Find buffers" })
+vim.keymap.set('n', '<space>sh', function() builtin.help_tags(gs) end, { desc = "Neovim documentation" })
+vim.keymap.set('n', '<space>sn', function() builtin.find_files({ hidden = true, no_ignore_parent = true }) end,
+	{ desc = "No_ignore_parent" })
+vim.keymap.set('n', '<space>st', function()
+	FindTodo()
+	require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
+end, { desc = "Project's TODOs" })
+vim.keymap.set('n', '<space>si', "<cmd>Telescope media_files<cr>", { desc = "Media files" })
+vim.keymap.set("n", "<C-f>",
+	"<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",
 	{ desc = "Ctrl+f remake" })
 
 
@@ -31,11 +29,31 @@ require("telescope").setup {
 			filetypes = { "png", "webp", "jpg", "jpeg" },
 			find_cmd = "rg"
 		},
+		--["ui-select"] = {
+		--	require("telescope.themes").get_dropdown {
+		--		-- even more opts
+		--	}
+		--
+		--	-- pseudo code / specification for writing custom displays, like the one
+		--	-- for "codeactions"
+		--	-- specific_opts = {
+		--	--   [kind] = {
+		--	--     make_indexed = function(items) -> indexed_items, width,
+		--	--     make_displayer = function(widths) -> displayer
+		--	--     make_display = function(displayer) -> function(e)
+		--	--     make_ordinal = function(e) -> string
+		--	--   },
+		--	--   -- for example to disable the custom builtin "codeactions" display
+		--	--      do the following
+		--	--   codeactions = false,
+		--	-- }
+		--},
 	},
 	defaults = {
 		mappings = {
 			--Can't find action.top there, could this be done? (say on "<C-y>")
 			i = {
+				--TODO!!!: figure out how to do/immitate actions.top
 				["<CR>"] = actions.select_default + actions.center,
 				["<C-x>"] = actions.select_horizontal + actions.center,
 				["<C-v>"] = actions.select_vertical + actions.center,
@@ -53,16 +71,7 @@ require("telescope").setup {
 --
 -- Must be loaded strictly _after_ setup
 require("telescope").load_extension("media_files")
-
-require("telescope").load_extension("dap")
-require("which-key").register({
-	name = "Telescope: DAP",
-	c = { "<cmd>Telescope dap commands<cr>", "commands" },
-	c = { "<cmd>Telescope dap configurations<cr>", "configurations" },
-	b = { "<cmd>Telescope dap list_breakpoints<cr>", "breakpoints" },
-	v = { "<cmd>Telescope dap variables<cr>", "variables" },
-	s = { "<cmd>Telescope dap frames<cr>", "frames" },
-}, { prefix = "<Space>td" })
+require("telescope").load_extension("ui-select")
 
 -- Default mappings reference {{{
 --<C-n>/<Down>	Next item
