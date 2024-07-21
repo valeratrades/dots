@@ -487,3 +487,9 @@ alias '??'='/home/v/.cargo/bin/skar shell explain'
 alias '?!'='/home/v/.cargo/bin/skar shell generate'
 alias '?-'='/home/v/.cargo/bin/skar chat'
 #[END SKAR_CONFIG]
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh --disable-up-arrow)"
+#TODO!: figure out direnv
+#eval "$(direnv hook zsh)"
