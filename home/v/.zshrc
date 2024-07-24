@@ -490,6 +490,11 @@ alias '?-'='/home/v/.cargo/bin/skar chat'
 
 . "$HOME/.atuin/bin/env"
 
-eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+export filter_mode_shell_up_key_binding="directory"
+bindkey "^r" 'atuin-up-search' # only for current dir
+bindkey "^g" 'atuin-search' # global search
+# and then the actual Up is searching through the session history, as is the default.
+
 #TODO!: figure out direnv
 #eval "$(direnv hook zsh)"
