@@ -239,7 +239,7 @@ gn() {
 	git add .
 	git commit -m "Initial Commit"
 	gh repo create ${repo_name} ${1} --source=.
-	git remote add origin https://github.com/Valera6/${repo_name}.git
+	git remote add origin https://github.com/${GITHUB_NAME}/${repo_name}.git
 	git push -u origin master
 	#TODO!: also push and protect release if it exists
 	#protect_branch ${repo_name} master
