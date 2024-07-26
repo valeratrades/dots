@@ -9,12 +9,15 @@ set $wifi ~/.config/rofi/modi/nmcli
 set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -sorting-method fzf -sort -run-command 'swaymsg exec -- {cmd}'
 #
 set $output_laptop "eDP-1"
-set $output_monitor "HDMI-A-1"
+
+set $output_monitor "DP-1"
+# HDMI-A-1 is monitor when connected directly, DP-1 is monitor when connected through dock.
 # sway circles through this space-delimited list when the first element is not found.
-set $primary "HDMI-A-1" "eDP-1" "DP-1"
+set $output_monitor "DP-1" "HDMI-A-1"
+set $primary "DP-1" "HDMI-A-1" "eDP-1"
 
 #dbg
-set $output_laptop "DP-1"
+#set $output_laptop "DP-1"
 
 set $left s
 set $down r
@@ -317,9 +320,12 @@ mode "obs" {
 	#bindsym d exec $switch_out && /home/v/.config/sway/obs_send.sh "d"
 
 	## Scenes: Both, Stream, Camera //"t" is to transition to it immediately
-	bindsym b exec $switch_out && /home/v/.config/sway/obs_send.sh "bt"
-	bindsym s exec $switch_out && /home/v/.config/sway/obs_send.sh "st"
-	bindsym c exec $switch_out && /home/v/.config/sway/obs_send.sh "ct"
+	bindsym b exec $switch_out && /home/v/.config/sway/obs_send.sh "b"
+#"bt"
+	bindsym s exec $switch_out && /home/v/.config/sway/obs_send.sh "s"
+#"st"
+	bindsym c exec $switch_out && /home/v/.config/sway/obs_send.sh "c"
+#"ct"
 
 
 	bindsym $mod+comma exec $switch_out
