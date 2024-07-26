@@ -52,6 +52,7 @@ shnip.setup({
 				["<c-r>"] = "#[derive()]<Esc>hi",
 				["<c-y>"] = "todo!()<Esc>",
 				["<c-e>"] = "#[derive(Clone, Debug, Copy, PartialEq, Eq)]<CR>enum	{<CR>}<Esc>kg_hi",
+				["<C-f>"] = "Result<impl std::future::Future<Output = Result<>> + Send + Sync + 'static><Esc>26hi",
 			},
 		},
 		go = {

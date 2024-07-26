@@ -12,8 +12,9 @@ set $output_laptop "eDP-1"
 
 set $output_monitor "DP-1"
 # HDMI-A-1 is monitor when connected directly, DP-1 is monitor when connected through dock.
+set $output_monitor "DP-1"
+# "HDMI-A-1" # can't have a list here, because sway. Need to update manually when switching connection method.
 # sway circles through this space-delimited list when the first element is not found.
-set $output_monitor "DP-1" "HDMI-A-1"
 set $primary "DP-1" "HDMI-A-1" "eDP-1"
 
 #dbg
