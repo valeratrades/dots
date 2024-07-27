@@ -42,6 +42,7 @@ done
 
 # # Autocompletion
 source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+#source "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 
 setopt nocaseglob
 setopt no_list_ambiguous
