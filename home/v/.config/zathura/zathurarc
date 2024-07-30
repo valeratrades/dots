@@ -14,6 +14,11 @@ map r scroll down
 map n scroll up
 map t scroll right
 
+map d scroll half-down
+map u scroll half-up
+map <C-d> toggle_page_mode
+# I think `u` wasn't taken
+
 map j rotate
 map z reload
 
