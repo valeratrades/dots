@@ -64,7 +64,7 @@ shared_after() {
 }
 
 can() {
-	preset="--tokio"
+	preset="--default"
 	if [ "${1#--}" != "$1" ]; then
 		preset="${1}"
 		shift
@@ -77,9 +77,15 @@ can() {
 			return 1
 			;;
 	esac
-	cargo new "${@}"
+
+	if [ "$#" -ne 1 ]; then
+		echo "The number of arguments is not valid."
+		return 1
+	fi
+
+	cargo new "${@}" || return 1
 	lang="rs"
-	shared_before ${1} ${lang}
+	shared_before ${1} ${lang} || return 1
 
 	#? can I generalize this to other langs via use of *?
 	sudo ln ${HOME}/.file_snippets/${lang}/rustfmt.toml ./rustfmt.toml
@@ -89,16 +95,19 @@ can() {
 	sed -i '$d' Cargo.toml
 	cat ${HOME}/.file_snippets/${lang}/default_dependencies.toml >> Cargo.toml
 
-	touch src/lib.${lang}
 	if [ "$preset" = "--clap" ]; then
-		cp -f ${HOME}/.file_snippets/presets/${lang}/clap/main ./src/main.${lang}
-		cat ${HOME}/.file_snippets/presets/${lang}/clap/additional_dependencies.toml >> Cargo.toml
+		rm -r src
+		cp -r ${HOME}/.file_snippets/${lang}/presets/clap/src src
+		cat ${HOME}/.file_snippets/${lang}/presets/clap/additional_dependencies.toml >> Cargo.toml
 	elif [ "$preset" = "--tokio" ]; then
-		cp -f ${HOME}/.file_snippets/presets/${lang}/tokio/main ./src/main.${lang}
-		cat ${HOME}/.file_snippets/presets/${lang}/tokio/additional_dependencies.toml >> Cargo.toml
+		rm -r src
+		cp -r ${HOME}/.file_snippets/${lang}/presets/tokio/src src
+		cat ${HOME}/.file_snippets/${lang}/presets/tokio/additional_dependencies.toml >> Cargo.toml
 	else
-		cp -f ${HOME}/.file_snippets/presets/${lang}/main ./src/main.${lang}
+		rm -r src
+		cp -r ${HOME}/.file_snippets/${lang}/presets/default/src src
 	fi
+	touch src/lib.${lang}
 
 	shared_after ${1} ${lang}
 }
@@ -110,7 +119,7 @@ pyn() {
 
 	sudo ln ${HOME}/.file_snippets/${lang}/pyproject.toml ./pyproject.toml
 	mkdir ./src
-	cp ${HOME}/.file_snippets/presets/${lang}/main ./src/main.${lang} &&  chmod u+x ./src/main.${lang}
+	cp ${HOME}/.file_snippets/${lang}/presets/main ./src/main.${lang} &&  chmod u+x ./src/main.${lang}
 
 	shared_after ${1} ${lang}
 }
@@ -122,7 +131,7 @@ gon() {
 
 	sudo ln ${HOME}/.file_snippets/${lang}/gofumpt.toml ./gofumpt.toml
 	# go's convention of cmd/ as the access point prevents placeing this operation in shared_before
-	mkdir cmd && cp ${HOME}/.file_snippets/presets/${lang}/main ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
+	mkdir cmd && cp ${HOME}/.file_snippets/${lang}/presets/main ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
 
 	shared_after ${1} ${lang}
 	go mod init "github.com/${GITHUB_NAME}/$1"

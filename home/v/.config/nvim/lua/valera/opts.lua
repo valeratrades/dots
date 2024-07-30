@@ -18,6 +18,8 @@ o.expandtab = false
 o.smartindent = true
 o.wrap = true
 
+o.splitright = true
+
 o.swapfile = false
 o.backup = false
 o.undofile = true
