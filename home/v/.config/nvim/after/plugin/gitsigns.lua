@@ -26,8 +26,8 @@ vim.keymap.set('n', '<leader>gU', "<cmd>Gitsigns reset_hunk<cr>", { desc = "Git:
 vim.keymap.set('n', '<leader>gs', "<cmd>Gitsigns stage_hunk<cr>", { desc = "Git: stage hunk" })
 vim.keymap.set('n', '<leader>gf', "<cmd>Telescope git_status<cr>", { desc = "Git: find modifications" })
 
-K('n', 'gt', function()
-	if vim.wo.diff then return 'gt' end
+K('n', 'gr', function()
+	if vim.wo.diff then return 'gr' end
 	vim.schedule(function() gs.next_hunk() end)
 	return '<Ignore>'
 end, { expr = true })

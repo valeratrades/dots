@@ -36,9 +36,11 @@ fn main() {
 		}
 	};
 	match cli.command {
-		Commands::Start(args) => {
-			let message = format!("Hello, {}", args.arg);
-			println!("{message}");
-		}
+		Commands::Start(args) => start(config, args),
 	}
+}
+
+fn start(config: AppConfig, args: StartArgs) {
+	let message = format!("Hello, {}", args.arg);
+	println!("{message}");
 }

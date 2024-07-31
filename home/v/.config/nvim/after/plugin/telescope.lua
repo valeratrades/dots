@@ -6,7 +6,7 @@ vim.keymap.set('n', '<space>f', function() builtin.find_files(gs) end, { desc = 
 vim.keymap.set('n', '<space>z', function() builtin.live_grep(gs) end, { desc = "Live grep" })
 vim.keymap.set({ 'n', 'v' }, '<space>ss', function() builtin.grep_string(gs) end,
 	{ desc = "Grep visual selection or word under cursor" })
-vim.keymap.set('n', '<space>sm', function() builtin.keymaps(gs) end, { desc = "Keymaps" })
+vim.keymap.set('n', '<space>sk', function() builtin.keymaps(gs) end, { desc = "Keymaps" })
 vim.keymap.set('n', '<space>sg', function() builtin.git_files(gs) end, { desc = "Git files" })
 vim.keymap.set('n', '<space>sp', "<cmd>Telescope persisted<cr>", { desc = "Persisted: sessions" })
 vim.keymap.set('n', '<space>sb', function() builtin.buffers(gs) end, { desc = "Find buffers" })

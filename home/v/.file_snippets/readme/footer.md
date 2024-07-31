@@ -5,18 +5,12 @@
     <h2>Installation<h2>
   </summary>
 
-unimplemented!()
-</details>
-
-<details>
-  <summary>
-    <h2>Usage<h2>
-  </summary>
-
-unimplemented!()
+TODO
 </details>
 <!-- markdownlint-restore -->
 
+## Usage
+TODO
 
 <br>
 
