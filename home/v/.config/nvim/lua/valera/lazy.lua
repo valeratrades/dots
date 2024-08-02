@@ -64,13 +64,6 @@ return require('lazy').setup({
 		'jake-stewart/normon.nvim',
 		'jake-stewart/shnip.nvim',
 	},
-	-- Stuck with this shit until I figure out <C-i> in tmux in my setup
-	{
-		'jake-stewart/filestack.nvim',
-		config = function()
-			require("filestack").setup()
-		end
-	},
 	{ -- https://github.com/tpope/vim-abolish/blob/master/doc/abolish.txt
 		'tpope/vim-abolish',
 		keys = {

@@ -77,12 +77,12 @@ K("n", "<C-Right>", "<cmd>vertical resize -2<cr>", { desc = "windows: decrease w
 K("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "windows: decrease height" })
 K("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "windows: increase height" })
 K("n", "<C-Left>", "<cmd>vertical resize +2<cr>", { desc = "windows: increase width" })
-K("n", "<C-w>h", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
-K("n", "<C-w>v", "<C-w><C-v><C-w>w", { desc = "windows: new vertical and focus" })
-K("n", "<C-w><C-h>", "<C-w><C-s><C-w>w", { desc = "windows: new horizontal and focus" })
-K("n", "<C-w><C-v>", "<C-w><C-v><C-w>w", { desc = "windows: new vertical and focus" })
-K("n", "<C-w>v", "<C-w>v<C-w>w", { desc = "windows: new vertical and focus" })
+K("n", "<C-w>h", "<C-w><C-s>", { desc = "windows: new horizontal" })
+K("n", "<C-w>v", "<C-w><C-v>", { desc = "windows: new vertical" })
+K("n", "<C-w><C-h>", "<C-w><C-s>", { desc = "windows: new horizontal" })
+K("n", "<C-w><C-v>", "<C-w><C-v>", { desc = "windows: new vertical" })
 K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab split`" })
+-- <C-w>= for normalizing
 --
 
 -- Toggle Options
@@ -262,5 +262,7 @@ end
 K("n", "<Space>gf", forceGoFile);
 
 
---K("", "<M-o>", "<C-o>", { desc = "Because https://github.com/jake-stewart/filestack.nvim doesn't work" })
---K("", "<M-a>", "<C-a>", { desc = "Because https://github.com/jake-stewart/filestack.nvim doesn't work" })
+K("", "<M-o>", "<C-o>zt", { desc = "Because <C-i> doesn't work with tmux" })
+K("", "<M-i>", "<C-i>zt", { desc = "Because <C-i> doesn't work with tmux" })
+K("", "<C-o>", "C-o>zz")
+K("", "<C-i>", "C-i>zz")
