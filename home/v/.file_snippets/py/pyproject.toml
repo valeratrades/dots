@@ -25,6 +25,7 @@ unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 task-tags = ["TODO", "FIXME", "Q", "BUG", "NB"]
 ignore = [
+	"E262", # no-space-after-inline-comment
 	"E713",
 	"F403",
 	"E401",
