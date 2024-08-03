@@ -44,16 +44,20 @@ shared_after() {
 	git init
 	cp ${HOME}/.file_snippets/git/hooks/pre-commit.sh .git/hooks/pre-commit && chmod u+x .git/hooks/pre-commit
 
+	rustc_current_version=$(rustc -V | sed -E 's/rustc ([0-9]+\.[0-9]+).*/\1/')
+	current_nightly_by_date="nightly-$(date -d '-1 day' +%Y-%m-%d)"
 	fd --type f --exclude .git | rg -v --file <(git ls-files --others --ignored --exclude-standard) | while IFS= read -r file; do
 		sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" "$file"
+		sed -i "s/RUSTC_CURRENT_VERSION/${rustc_current_version}/g" "$file"
 	done
 	sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" ".git/hooks/pre-commit"
+	sed -i "s/RUSTC_CURRENT_VERSION/${rustc_current_version}/g" ".git/hooks/pre-commit"
+	sed -i "s/CURRENT_NIGHTLY_BY_DATE/${current_nightly_by_date}/g" ".github/workflows/ci.yml"
 	#fd -x sed -i "s/PROJECT_NAME_PLACEHOLDER/${project_name}/g" {}
 
 	cat ${HOME}/.file_snippets/readme/footer.md >> README.md
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-APACHE ./LICENSE-APACHE
 	sudo ln ${HOME}/.file_snippets/readme/LICENSE-MIT ./LICENSE-MIT
-
 
 	git add -A
 	git commit -m "-- New Project Snippet --"
