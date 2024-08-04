@@ -462,7 +462,7 @@ Arguments:
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/shell_harpoon/main.zsh
-. ~/s/help_scripts/tg/functions.sh
+. ~/s/tg/functions.sh
 . ~/s/help_scripts/video_editting.sh
 . ~/s/help_scripts/weird.sh
 . ~/s/todo/functions.sh
