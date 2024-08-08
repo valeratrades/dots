@@ -21,9 +21,10 @@
 		:space-evenly false
 		:visible {bar_visible == "true"}
 		(sway_mode)
-		(todo_timer)
 		(cargo)
 		(timer)
+		(obs)
+		(todo_timer)
 		(openvpn)
 		(notifications)
 		(github)
@@ -63,10 +64,17 @@
 ;; Cargo ;;
 (defwidget cargo []
 	(box
-		:class "text"
 		:class "problematic"
 		:visible {cargo_compiling == "true"}
 		""))
+
+;; Obs ;;
+(defpoll obs_active_poll	:initial "0" :interval "1s" "./modules/obs_active.sh")
+(defwidget obs []
+	(box
+		:class "text"
+		:visible {obs_active_poll == "1"}
+		" "))
 
 ;; Openvpn ;;
 (defpoll openvpn_poll :initial "0" :interval "1s" "./modules/openvpn.sh")
