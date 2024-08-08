@@ -55,6 +55,7 @@ exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
 #exec "~/.config/sway/cardio_break_reminder.sh"
 
 exec mako
+exec tg server
 exec libinput-gestures
 exec_always wlr-gamma-service
 exec keyd-application-mapper -d
@@ -159,6 +160,7 @@ assign [class="discord"] 4
 assign [class="vesktop"] 4
 assign [class="Zulip"] 4
 assign [app_id="dorion"] 4
+assign [app_id="spotube"] 4
 assign [app_id="org.telegram.desktop"] 4
 # doesn't work, as netrw sets the title as "nvim: [No name]"
 #assign [app_id="Alacritty" title="nvim: ~/Todo*$"] 4
