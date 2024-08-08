@@ -177,7 +177,7 @@ alias lhost="nohup nyxt http://localhost:8080/ > /dev/null 2>&1 &"
 alias ll="exa -lA"
 alias sound="qpwgraph"
 alias choose_port="${HOME}/s/help_scripts/choose_port.sh"
-alias obs="mkdir ~/Videos/obs >/dev/null; sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs"
+alias obs="mkdir ~/Videos/obs >/dev/null; sudo modprobe v4l2loopback video_nr=2 card_label=\"OBS Virtual Camera\" && pamixer --default-source --set-volume 95 && obs" # needed for virtual camera to work // obviously, virtual-cam plugin is pre-requisit
 alias video_cut="video-cut"
 alias ss="sudo systemctl"
 alias cl="wl-copy"
@@ -199,6 +199,7 @@ alias keys="xev -event keyboard"
 alias audio="qpwgraph"
 alias test_mic="arecord -c1 -vvv /tmp/mic.wav"
 alias nano="nvim"
+alias pro_audio="pulsemixer"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

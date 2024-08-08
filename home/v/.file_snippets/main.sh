@@ -111,7 +111,7 @@ can() {
 		rm -r src
 		cp -r ${HOME}/.file_snippets/${lang}/presets/default/src src
 	fi
-	touch src/lib.${lang}
+	touch src/lib.rs
 
 	shared_after ${1} ${lang}
 }

@@ -43,8 +43,8 @@ K("", "<C-CR>", "O<Esc>")
 K("i", "<C-CR>", "<Esc>O")
 
 -- Jumps
-K("", "R", "<C-d>M")
-K("", "N", "<C-u>M") -- I think master branch broke. This is a temporary solution; want to get back to doing <C-d>zz
+K("", "R", "<C-d>zz")
+K("", "N", "<C-u>zz")
 K("", "<C-d>", "<C-d>zz")
 K("", "<C-u>", "<C-u>zz")
 
@@ -264,5 +264,5 @@ K("n", "<Space>gf", forceGoFile);
 
 K("", "<M-o>", "<C-o>zt", { desc = "Because <C-i> doesn't work with tmux" })
 K("", "<M-i>", "<C-i>zt", { desc = "Because <C-i> doesn't work with tmux" })
-K("", "<C-o>", "C-o>zz")
-K("", "<C-i>", "C-i>zz")
+K("", "<C-o>", "<C-o>zz")
+K("", "<C-i>", "<C-i>zz")

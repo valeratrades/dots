@@ -165,11 +165,6 @@ assign [app_id="org.telegram.desktop"] 4
 exec "~/.config/sway/restore_session.sh"
 exec "~/.config/sway/start_doc_scraper.sh"
 
-bindsym $mod+l focus prev
-bindsym $mod+h focus next
-bindsym $mod+u move left
-bindsym $mod+y move right
-
 bindsym $mod+c kill
 bindsym $mod+Return exec alacritty
 bindsym $mod+z floating toggle
@@ -283,6 +278,10 @@ mode "size_presets" {
 }
 bindsym $mod+apostrophe exec "swaymsg mode size_presets && eww update sway_mode=size_presets"
 
+bindsym $mod+l focus prev
+bindsym $mod+h focus next
+bindsym $mod+u move left
+bindsym $mod+y move right
 mode "move_or_resize" {
 	bindsym $left resize grow width 6ppt
 	bindsym $down resize shrink height 6ppt

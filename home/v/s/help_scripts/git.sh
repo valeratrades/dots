@@ -22,10 +22,6 @@ gg() {
 	fi
 	message="${prefix}${message}"
 
-	#TODO!!!!: a flag for generating the commit message from git diff with a (preferrably local) fast llm model.
-	#repr: f"_: {llm_output}"
-	#// main empty comment should be switched to "_" from "."
-
 	# squashes with the previous commit if the message is the same
 	squash_if_needed=""
 	# doesn't work
@@ -43,6 +39,8 @@ alias ggr="gg -p refactor"
 alias ggp="gg -p perf"
 alias ggd="gg -p docs"
 alias ggi="gg -p ci"
+
+#TODO!!!!: a flag for generating the commit message from git diff with a (preferrably local) fast llm model.
 
 alias ggup="gg 'fixup!'"
 
@@ -79,31 +77,43 @@ alias gid="gh issue delete --yes"
 
 alias git_zip="rm -f ~/Downloads/last_git_zip.zip; git ls-files -o -c --exclude-standard | zip ~/Downloads/last_git_zip.zip -@"
 
-#TODO!: \
-fixup() {
-	echo "unimplemented!()"
-}
+gco() {
+	if [ -n "$1" ]; then
+		if git checkout "$1" 2>/dev/null; then
+			return 0
+		else
+			initial_query="$1"
+		fi
+	else
+		initial_query=""
+	fi
 
+	git branch | sed 's/^\* //' | 
+		fzf --height=20% --reverse --info=inline --query="$initial_query" |
+		xargs git checkout
+}
 
 #TODO!: make it default to my GITHUB_NAME, when no "/" are found in the provided repo query, and it's not in defaults.
 gc() {
+	help_message="""\
+#git clone on rails.
+	give repo name, it clones into /tmp or provided directory.
+
+  ex: gc neovim/neovim
+"""
 	if rg -q "://" <<< "$1"; then
 		url="$1"
 	else
 		url="https://github.com/$1" 
 	fi
 
-	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
-		printf """\
-#git clone on rails.
-	give repo name, it clones into /tmp or provided directory.
-
-  ex: gc neovim/neovim
-"""
+	if [ "$#" = 0 ] || "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
+		printf "$help_message"
 		return 0
+	fi
 
-	elif [ "$#" = 1 ]; then
-		filename=$(echo "${url}" | tr "/" "\n" | tail -n 1)
+	filename=$(echo "${url}" | tr "/" "\n" | tail -n 1)
+	if [ "$#" = 1 ]; then
 		if [ $(pwd) = /tmp/${filename} ]; then # otherwise will delete the directory under ourselves
 			cd - &>/dev/null
 		fi 
@@ -115,7 +125,11 @@ gc() {
 		cd /tmp/${filename}
 		echo $(pwd)
 	elif [ "$#" = 2 ]; then
-		git clone --depth=1 "$url" $2
+		target="${2}"
+		if [ -d "$2" ]; then
+			target="${2%/}/${filename}"
+		fi
+		git clone --depth=1 "$url" "${target}"
 		if [ $? -ne 0 ]; then
 			return 1
 		fi
@@ -268,6 +282,7 @@ gn() {
 	#TODO: create 4 more milestones. I think that far they could be standardized.
 }
 
+#DEPRECATED
 gtpr() {
 	commit_sha=$(curl -H "Authorization: token ${GITHUB_KEY}" \
   -H "Accept: application/vnd.github.v3+json" \
