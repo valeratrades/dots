@@ -4,6 +4,7 @@ localhost_port = 59753
 making = "-1002244305221/3"
 trading = "-1002244305221/7"
 journal = "-1002244305221/5"
+far-fetched = "2244305221/113"
 general = -1002244305221
 
 alerts = -1001800341082

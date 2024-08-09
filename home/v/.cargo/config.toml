@@ -11,6 +11,8 @@ a = "add"
 u = "update"
 m = "machete"
 re = "insta review"
+f = "fix --allow-dirty"
+fc = "clippy --fix --allow-dirty -- -D warnings"
 
 # overriding defaults in favor of cargo-limit alternatives
 b = "lbuild"
