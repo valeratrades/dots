@@ -211,6 +211,7 @@ vim.g.rustaceanvim = {
 				cargo = {
 					runBuildScripts = true,
 					loadOutDirsFromCheck = true,
+					allFeatures = true, -- will break on projects with incompatible features. If comes up, write a script to copy code before uploading to crates.io and sed `features = ["full"]` for `[]`
 				},
 				procMacro = {
 					enable = true,
