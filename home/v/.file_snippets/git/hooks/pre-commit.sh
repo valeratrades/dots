@@ -15,7 +15,7 @@ if [ -f "$config_filepath" ]; then
 fi
 
 if [ -f "Cargo.toml" ]; then
-  cargo sort
+  cargo sort --workspace
 fi
 
 # # Count LoC

@@ -1,5 +1,6 @@
 #!/bin/sh
 
+#TODO!: look into [speeding GA up with docker containers](<https://docs.github.com/en/actions/writing-workflows/choosing-where-your-workflow-runs/running-jobs-in-a-container>)
 shared_before() {
 	# $1: project_name
 	# $2: lang
