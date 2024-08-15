@@ -1,4 +1,5 @@
-import = ["/home/v/.config/alacritty/themes/rose-pine.toml"]
+#import = ["/home/v/.config/alacritty/themes/rose-pine.toml"]
+import = ["/home/v/.config/alacritty/alacritty-theme/themes/github_dark_high_contrast.toml"]
 live_config_reload = true
 #tabspaces = 2
 

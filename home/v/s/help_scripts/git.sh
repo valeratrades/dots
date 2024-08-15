@@ -113,6 +113,7 @@ gc() {
 	fi
 
 	filename=$(echo "${url}" | tr "/" "\n" | tail -n 1)
+	filename="${filename%.git}"
 	if [ "$#" = 1 ]; then
 		if [ $(pwd) = /tmp/${filename} ]; then # otherwise will delete the directory under ourselves
 			cd - &>/dev/null

@@ -43,8 +43,8 @@ K("", "<C-CR>", "O<Esc>")
 K("i", "<C-CR>", "<Esc>O")
 
 -- Jumps
-K("", "R", "<C-d>zz")
-K("", "N", "<C-u>zz")
+--K("", "R", "<C-d>zz")
+--K("", "N", "<C-u>zz")
 K("", "<C-d>", "<C-d>zz")
 K("", "<C-u>", "<C-u>zz")
 

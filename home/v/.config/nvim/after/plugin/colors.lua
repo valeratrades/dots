@@ -1,6 +1,7 @@
 function Dark()
 	vim.cmd.colorscheme("default")
-	vim.cmd.colorscheme("rose-pine")
+	--vim.cmd.colorscheme("rose-pine")
+	vim.cmd.colorscheme("github_dark_high_contrast")
 	--vim.cmd.colorscheme("tokyonight")
 
 	local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
@@ -11,8 +12,8 @@ function Dark()
 end
 
 function Light()
-	--vim.cmd.colorscheme("github_light_high_contrast")
-	vim.cmd.colorscheme("github_light")
+	vim.cmd.colorscheme("github_light_high_contrast")
+	--vim.cmd.colorscheme("github_light")
 	--vim.cmd.colorscheme("catppuccin-latte")
 end
 

@@ -4,6 +4,7 @@ rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"] #, "--cfg", "tokio_unstabl
 
 [build]
 rustc-wrapper = "/usr/bin/sccache"
+rustflags = ["-Z", "threads=16"]
 
 [alias]
 w = "watch"
