@@ -1,20 +1,24 @@
 function Dark()
 	vim.cmd.colorscheme("default")
 	--vim.cmd.colorscheme("rose-pine")
-	vim.cmd.colorscheme("github_dark_high_contrast")
-	--vim.cmd.colorscheme("tokyonight")
+	vim.cmd.colorscheme("github_dark")
 
+
+	vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
 	local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+	vim.api.nvim_set_hl(0, "NormalNC", { bg = normal.bg })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = normal.bg })
+	vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
 	vim.api.nvim_set_hl(0, "CustomGroup", { bg = normal.bg })
 
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	-- To make transparent:
+	--vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	--vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 function Light()
 	vim.cmd.colorscheme("github_light_high_contrast")
 	--vim.cmd.colorscheme("github_light")
-	--vim.cmd.colorscheme("catppuccin-latte")
 end
 
 function SetSystemTheme()

@@ -133,6 +133,7 @@ return require('lazy').setup({
 		{ 'rose-pine/neovim',      name = 'rose-pine' },
 		{ "catppuccin/nvim",       name = "catppuccin" },
 		{ "folke/tokyonight.nvim", name = "tokyonight" },
+		{ "jdsimcoe/panic.vim",    name = "panic" }, -- perfect colors, bad mapping of color to element
 		"projekt0n/github-nvim-theme",
 	},
 	{ -- Git
