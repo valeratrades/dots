@@ -131,18 +131,21 @@ mvt() { # although, not sure if actually needed, as I could just write out `${co
 	#NB: {from} cannot end with explicit "/" !
 	from="."
 	to=${1}
-	if [ $1 = "-p" ] || [ $1 = "--paper"]; then
+	if [ $1 = "-p" ] || [ $1 = "--paper" ]; then
 		from="${HOME}/Downloads"
 		to="${HOME}/Documents/Papers"
-	elif [ $1 = "-b" ] || [ $1 = "--book"]; then
+	elif [ $1 = "-b" ] || [ $1 = "--book" ]; then
 		from="${HOME}/Downloads"
 		to="${HOME}/Documents/Books"
-	elif [ $1 = "-n" ] || [ $1 = "--notes"]; then
+	elif [ $1 = "-n" ] || [ $1 = "--notes" ]; then
 		from="${HOME}/Downloads"
 		to="${HOME}/Documents/Notes"
-	elif [ $1 = "-c" ] || [ $1 = "--courses"]; then
+	elif [ $1 = "-c" ] || [ $1 = "--courses" ]; then
 		from="${HOME}/Downloads"
 		to="${HOME}/Documents/Courses"
+	elif [ $1 = "-w" ] || [ $1 = "--wine" ]; then
+		from="${HOME}/Downloads"
+		to="${HOME}/.wine/drive_c/users/v/Downloads"
 	fi
 	
 	mv "${from}/$(ls ${from} -t | head -n 1)" ${to}
@@ -200,6 +203,7 @@ alias audio="qpwgraph"
 alias test_mic="arecord -c1 -vvv /tmp/mic.wav"
 alias nano="nvim"
 alias pro_audio="pulsemixer"
+alias wayland_wine="DISPLAY='' wine64" # set it up to work with wayland, following https://youtu.be/bg-xugXfSGM?si=neo2TQN8yQHQEIip. Still doesn't really work (or I'm dumb).
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

@@ -3,7 +3,7 @@
 CURRENT_MODE=$(gsettings get org.gnome.desktop.interface color-scheme)
 #dark_theme_alacritty="rose-pine"
 #light_theme_alacritty="catppuccino-latte"
-dark_theme_alacritty="github_dark_high_contrast"
+dark_theme_alacritty="github_dark"
 light_theme_alacritty="github_light_high_contrast"
 
 if [ "$CURRENT_MODE" = "'prefer-dark'" ]; then
