@@ -7,7 +7,6 @@ hex_literal_case = "Lower"
 hard_tabs = true
 imports_granularity = "Crate"
 max_width = 190
-reorder_impl_items = true
 reorder_imports = true
 normalize_comments = true
 normalize_doc_attributes = true
