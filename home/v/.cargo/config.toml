@@ -6,6 +6,9 @@ rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"] #, "--cfg", "tokio_unstabl
 rustc-wrapper = "/usr/bin/sccache"
 rustflags = ["-Z", "threads=16"]
 
+[rust]
+rustflags = ["-Z", "track-diagnostics"]
+
 [alias]
 w = "watch"
 a = "add"
