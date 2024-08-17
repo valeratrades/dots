@@ -1,7 +1,11 @@
 ## workspaces:
 1 | editor
 2 | browser
-3 | messengers
-4 | todo or Zathura
+3 | notes | todo
+4 | messengers
+5 | reading
 6 | ssh
-0 | tmp
+7 | 
+8 | obs
+9 | whiteboard
+0 | tmp (monitoring running processes)

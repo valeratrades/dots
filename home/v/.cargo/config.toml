@@ -2,6 +2,14 @@
 linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"] #, "--cfg", "tokio_unstable"]
 
+#[profile.dev]
+## Disabling debug info speeds up builds a bit.
+#debug = 0
+## However, in many cases useful to get a good trace:
+#debug = true
+## Will cost compile time, however
+
+
 [build]
 rustc-wrapper = "/usr/bin/sccache"
 rustflags = ["-Z", "threads=16"]
@@ -17,7 +25,7 @@ m = "machete"
 re = "insta review"
 tr = "insta test --review"
 f = "fix --allow-dirty"
-fc = "clippy --fix --allow-dirty -- -D warnings"
+fc = "clippy --fix --allow-dirty"
 
 # overriding defaults in favor of cargo-limit alternatives
 b = "lbuild --all-features"

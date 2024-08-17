@@ -136,7 +136,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>',
 		{ desc = "Dynamic Workspace Symbol" })
 	buf_set_keymap('n', '<space>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
-	buf_set_keymap('n', '<space>la', vim.lsp.buf.code_action, { desc = "Code Action" })
+	buf_set_keymap({ 'n', 'v' }, '<space>la', vim.lsp.buf.code_action, { desc = "Code Action" })
 	buf_set_keymap('n', '<space>ly', YankDiagnosticPopup, { desc = "Yank Diagnostic Popup" })
 	buf_set_keymap('n', '<space>ls', ToggleDiagnostics, { desc = "Toggle Diagnostics" })
 	buf_set_keymap('n', '<space>lv', ToggleVirtualText, { desc = "Toggle Virtual Text" })

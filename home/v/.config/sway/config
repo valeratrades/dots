@@ -49,13 +49,13 @@ bindgesture pinch:outward exec xdotool key ctrl+plus
 bindgesture pinch:inward exec xdotool key ctrl+minus
 
 # # Autostart
-exec "bash -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
+exec "sh -c 'ps -u $USER -o pid= > /tmp/sway_existing_pids.txt'"
 #exec "~/.config/sway/listen.sh"
 
 #exec "~/.config/sway/cardio_break_reminder.sh"
 
 exec mako
-exec tg server
+#exec "sh -c 'tg server' > /tmp/tg_server_log.txt 2>&1 &" # for some damn reason doesn't work
 exec libinput-gestures
 exec_always wlr-gamma-service
 exec keyd-application-mapper -d
