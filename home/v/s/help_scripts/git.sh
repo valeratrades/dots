@@ -61,7 +61,11 @@ alias gila="gh issue edit --add-label"
 
 # Git Issues Filter Milestone (the closest one)
 gifm() {
-	milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
+	if [ -n "$1" ]; then
+		milestone="$1"
+	else
+		milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
+	fi
 	gh issue list --milestone="${milestone}"
 }
 # Git Issues Filter Assignee (me)

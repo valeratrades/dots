@@ -2,11 +2,11 @@
 linker = "clang"
 rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"] #, "--cfg", "tokio_unstable"]
 
-#[profile.dev]
+[profile.dev]
 ## Disabling debug info speeds up builds a bit.
 #debug = 0
 ## However, in many cases useful to get a good trace:
-#debug = true
+debug = true
 ## Will cost compile time, however
 
 
