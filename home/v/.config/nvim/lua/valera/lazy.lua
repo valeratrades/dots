@@ -146,6 +146,7 @@ return require('lazy').setup({
 
 	-- If something breaks, it's likely below here:
 
+	--{ 'akinsho/toggleterm.nvim', version = "*", config = true }, // deprecated. Nvim seems to already have all the things I want. Delete this fallback reminder in a month.
 	{
 		'mrcjkb/rustaceanvim',
 		--version = '^4',

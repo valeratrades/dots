@@ -266,3 +266,8 @@ K("", "<M-o>", "<C-o>zt", { desc = "Because <C-i> doesn't work with tmux" })
 K("", "<M-i>", "<C-i>zt", { desc = "Because <C-i> doesn't work with tmux" })
 K("", "<C-o>", "<C-o>zz")
 K("", "<C-i>", "<C-i>zz")
+
+-- -- Built-in Terminal
+--K("", "<Esc><Esc>", "<C-\\><C-n>")
+K("t", "<Esc>", "<C-\\><C-n>")
+--
