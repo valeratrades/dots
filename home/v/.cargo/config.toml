@@ -8,11 +8,12 @@ rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"] #, "--cfg", "tokio_unstabl
 ## However, in many cases useful to get a good trace:
 debug = true
 ## Will cost compile time, however
+# supposed to be faster than llvm, following Orion on this blindly
 
 
 [build]
 rustc-wrapper = "/usr/bin/sccache"
-rustflags = ["-Z", "threads=16"]
+#rustflags = ["-Z", "threads=8"]
 
 [rust]
 rustflags = ["-Z", "track-diagnostics"]
