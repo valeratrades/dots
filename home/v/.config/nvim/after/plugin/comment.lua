@@ -45,9 +45,9 @@ K('n', 'gco', commentExtraReimplementation('o'), { desc = "comment: reimplement 
 K('n', 'gcA', commentExtraReimplementation('A '), { desc = "comment: reimplement `gcA`" })
 --
 
--- -- Code Section comment
-function FoldMarkerComment()
-	vim.b.copilot_enabled = false
+-- -- Surround Block Comments
+function FoldmarkerCommentBlock()
+	vim.b.copilot_enabled = false --? Am I sure about this one?
 	local cs = Cs()
 	F('o' .. cs .. ',}}}')
 	Ft('<Esc>`<')
@@ -55,7 +55,17 @@ function FoldMarkerComment()
 	Ft('<Esc>hhhi')
 end
 
-K("v", "gzf", "<esc>`><cmd>lua FoldMarkerComment()<cr>", { desc = "Add a fold marker around the selection" })
+K("v", "gbf", "<esc>`><cmd>lua FoldmarkerCommentBlock()<cr>", { desc = "Add a fold marker around the selection" })
+
+function DoubleCommentBlock()
+	vim.b.copilot_enabled = false
+	local cs = Cs()
+	F('o' .. cs)
+	Ft('<Esc>`<')
+	F('O' .. cs .. ' ' .. cs .. ' ')
+end
+
+K("v", "gbd", "<esc>`><cmd>lua DoubleCommentBlock()<cr>", { desc = "Double comment block" })
 --
 
 

@@ -6,12 +6,23 @@ cb() {
 	guess_name=$(basename $(pwd))
 	if [ -n "$1" ]; then
 		if [ "$1" = "-d" ] || [ "$1" = "--dev" ]; then
-			cargo build --profile dev && sudo cp -rf ./target/debug/${guess_name} /usr/local/bin/
+			path_to_build="target/debug/${guess_name}"
+			cargo build --profile dev
 		else
 			return 1
 		fi
 	else
-		cargo build --release && sudo cp -rf ./target/release/${guess_name} /usr/local/bin/
+		path_to_build="target/release/${guess_name}"
+		cargo build --release
+	fi
+	
+	if [ -f "./${path_to_build}" ]; then
+		sudo cp -f "./${path_to_build}" /usr/local/bin/
+	elif [ -f "../${path_to_build}" ]; then
+		sudo cp -f "../${path_to_build}" /usr/local/bin/
+	else
+		printf "Could not guess the built binary location\n"
+		return 1
 	fi
 }
 
@@ -27,6 +38,10 @@ cq() {
 
 	rm -f "$stderr_temp_file"
 	return $exit_status
+}
+
+cpublish() {
+	cargo release --no-confirm --execute ${@}
 }
 
 
