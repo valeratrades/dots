@@ -17,6 +17,7 @@ K('i', '<Right>', 'copilot#Accept("<Up>")', {
 vim.g.copilot_no_tab_map = true -- currently doesn't work, hence the next line
 K("i", "<Tab>", "<Tab>")
 
-K("i", "<Down>", "<Plug>(copilot-accept-word)")
+
 K("i", "<Left>", "<Plug>(copilot-accept-line)")
+K("i", "<M-k>", "<Plug>(copilot-accept-word)")
 K("i", "<M-/>", "<Plug>(copilot-suggest)")
