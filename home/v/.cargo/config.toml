@@ -27,6 +27,7 @@ re = "insta review"
 tr = "insta test --review"
 f = "fix --allow-dirty"
 fc = "clippy --fix --allow-dirty"
+s = "sweep --recursive --installed" # only leave currently active artifacts
 
 # overriding defaults in favor of cargo-limit alternatives
 b = "lbuild --all-features"

@@ -132,9 +132,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<space>ll', function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end,
 		{ desc = "Local Diagnostics" })
 	buf_set_keymap('n', '<space>lR', vim.lsp.buf.rename, { desc = "Rename" })
-	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Workspace Symbol" })
-	buf_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>',
-		{ desc = "Dynamic Workspace Symbol" })
+	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Document Symbols" })
+	buf_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_workspace_symbols<CR>', { desc = "Workspace Symbols" })
 	buf_set_keymap('n', '<space>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
 	buf_set_keymap({ 'n', 'v' }, '<space>la', vim.lsp.buf.code_action, { desc = "Code Action" })
 	buf_set_keymap('n', '<space>ly', YankDiagnosticPopup, { desc = "Yank Diagnostic Popup" })

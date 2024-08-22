@@ -184,6 +184,7 @@ alias obs="mkdir ~/Videos/obs >/dev/null; sudo modprobe v4l2loopback video_nr=2 
 alias video_cut="video-cut"
 alias ss="sudo systemctl"
 alias cl="wl-copy"
+alias wl_copy="wl-copy"
 alias gz="tar -xvzf -C"
 alias toggle_theme="${HOME}/s/help_scripts/theme_toggle.sh"
 alias tokej="tokei -o json | jq . > /tmp/tokei.json"

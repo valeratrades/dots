@@ -82,6 +82,7 @@ K("n", "<C-w>v", "<C-w><C-v>", { desc = "windows: new vertical" })
 K("n", "<C-w><C-h>", "<C-w><C-s>", { desc = "windows: new horizontal" })
 K("n", "<C-w><C-v>", "<C-w><C-v>", { desc = "windows: new vertical" })
 K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab split`" })
+K("n", "<C-w>t", "<cmd>tab sb<cr>", { desc = "C-w>t that is consistent with <C-w>v and <C-w>h" })
 -- <C-w>= for normalizing
 --
 
@@ -111,7 +112,6 @@ K({ "i", "" }, "<A-u>", "<Esc><cmd>tabmove -<cr>")
 K({ "i", "" }, "<A-y>", "<Esc><cmd>tabmove +<cr>")
 K({ "i", "" }, "<A-U>", "<Esc><cmd>tabmove 0<cr>")
 K({ "i", "" }, "<A-Y>", "<Esc><cmd>tabmove $<cr>")
-
 --
 
 -- -- Standards and the Consequences
