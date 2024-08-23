@@ -13,7 +13,7 @@ debug = true
 
 [build]
 rustc-wrapper = "/usr/bin/sccache"
-#rustflags = ["-Z", "threads=8"]
+rustflags = ["-Z", "threads=8"]
 
 [rust]
 rustflags = ["-Z", "track-diagnostics"]

@@ -83,6 +83,7 @@ K("n", "<C-w><C-h>", "<C-w><C-s>", { desc = "windows: new horizontal" })
 K("n", "<C-w><C-v>", "<C-w><C-v>", { desc = "windows: new vertical" })
 K("n", "<C-w>f", "<cmd>tab split<cr>", { desc = "windows: focus current by `:tab split`" })
 K("n", "<C-w>t", "<cmd>tab sb<cr>", { desc = "C-w>t that is consistent with <C-w>v and <C-w>h" })
+K("n", "<C-w>x", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 -- <C-w>= for normalizing
 --
 
