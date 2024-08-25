@@ -69,24 +69,32 @@ jobs:
       - uses: dtolnay/rust-toolchain@clippy
       - run: cargo clippy --tests -- -Dclippy::all #-Dclippy::pedantic
 
+  sort:
+    name: Cargo Sorted
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cargo-sort
+        run: |
+          cargo install cargo-sort
+
+      - name: Check if Cargo.toml is sorted
+        run: |
+          cargo sort -wc
+          exit_code=$?
+          if [ $exit_code != 0 ]; then
+            echo "Cargo.toml is not sorted. Run `cargo sort -w` to fix it."
+            exit $exit_code
+          fi
 
   machete:
-    name: Unused Dependencies
+    name: Cargo Machete
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install cargo-machete
-      run: |
-        cargo install cargo-machete
-
-    - name: Cargo Machete
-      run: |
-        cargo machete
-        exit_code=$?
-        if [ $exit_code = 0 ]; then
-          echo "Found unused dependencies"
-          exit $exit_code
-        fi
+      - uses: actions/checkout@v4
+      - name: Check for unused dependencies
+        uses: bnjbvr/cargo-machete@main
 
   bad_practices:
     name: Bad Practices
@@ -108,24 +116,6 @@ jobs:
             echo "Found instances of tokio::spawn, switch all of them to JoinSet::spawn immediately:"
             echo "$results"
             exit 1
-          fi
-
-  sort:
-    name: Cargo Sorted
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install cargo-sort
-        run: |
-          cargo install cargo-sort
-
-      - name: Cargo Sort
-        run: |
-          cargo sort -c
-          exit_code=$?
-          if [ $exit_code != 0 ]; then
-            echo "Cargo.toml is not sorted. Run `cargo sort` to fix it."
-            exit $exit_code
           fi
 
 

@@ -66,7 +66,9 @@ gifm() {
 	else
 		milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
 	fi
+	# the following have "puffy" formatting with extra empty lines, but can't get rid of them without killing the coloring.
 	gh issue list --milestone="${milestone}"
+	gh issue list --label=bug
 }
 # Git Issues Filter Assignee (me)
 gifa() {
