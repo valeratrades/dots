@@ -30,10 +30,14 @@ fc = "clippy --fix --allow-dirty"
 s = "sweep --recursive --installed" # only leave currently active artifacts
 
 # overriding defaults in favor of cargo-limit alternatives
-b = "lbuild --all-features"
-c = "lcheck --all-features"
-t = "ltest --all-features"
-r = "lrun --all-features"
+#b = "lbuild --all-features"
+#c = "lcheck --all-features"
+#t = "ltest --all-features"
+#r = "lrun --all-features"
+b = "lbuild"
+c = "lcheck"
+t = "ltest"
+r = "lrun"
 
 # all deps except package
 [profile.dev.package."*"]

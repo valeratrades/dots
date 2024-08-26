@@ -87,7 +87,7 @@ cw() {
 
 	trap cleanup INT
 
-	cargo watch -c -x "lbuild"
+	cargo watch -c -x "b"
 	cleanup
 }
 alias cu="cargo clean && cargo update"
