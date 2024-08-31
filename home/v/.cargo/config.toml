@@ -36,7 +36,7 @@ s = "sweep --recursive --installed" # only leave currently active artifacts
 #r = "lrun --all-features"
 b = "lbuild"
 c = "lcheck"
-t = "ltest"
+t = "nextest run"
 r = "lrun"
 
 # all deps except package
