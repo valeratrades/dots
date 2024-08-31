@@ -1,6 +1,6 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
-local gs = { hidden = true, no_ignore = false, file_ignore_patterns = { ".git" } }
+local gs = { hidden = true, no_ignore = false, file_ignore_patterns = {} } -- file ignore patterns don't really work
 
 vim.keymap.set('n', '<space>f', function() builtin.find_files(gs) end, { desc = "Search files" })
 vim.keymap.set('n', '<space>z', function() builtin.live_grep(gs) end, { desc = "Live grep" })
@@ -11,6 +11,7 @@ vim.keymap.set('n', '<space>sg', function() builtin.git_files(gs) end, { desc = 
 vim.keymap.set('n', '<space>sp', "<cmd>Telescope persisted<cr>", { desc = "Persisted: sessions" })
 vim.keymap.set('n', '<space>sb', function() builtin.buffers(gs) end, { desc = "Find buffers" })
 vim.keymap.set('n', '<space>sh', function() builtin.help_tags(gs) end, { desc = "Neovim documentation" })
+vim.keymap.set('n', '<space>sl', function() builtin.loclist(gs) end, { desc = "Telescope loclist" })
 vim.keymap.set('n', '<space>sn', function() builtin.find_files({ hidden = true, no_ignore_parent = true }) end,
 	{ desc = "No_ignore_parent" })
 vim.keymap.set('n', '<space>st', function()
@@ -18,10 +19,7 @@ vim.keymap.set('n', '<space>st', function()
 	require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
 end, { desc = "Project's TODOs" })
 vim.keymap.set('n', '<space>si', "<cmd>Telescope media_files<cr>", { desc = "Media files" })
-vim.keymap.set("n", "<C-f>",
-	"<cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top<CR>",
-	{ desc = "Ctrl+f remake" })
-
+vim.keymap.set("n", "<C-f>", function() builtin.current_buffer_fuzzy_find(gs) end, { desc = "Effectively Ctrl+f" })
 
 require("telescope").setup {
 	extensions = {
@@ -51,19 +49,21 @@ require("telescope").setup {
 	},
 	defaults = {
 		mappings = {
-			--Can't find action.top there, could this be done? (say on "<C-y>")
+			--Can't find action.top there, could this be done?
 			i = {
 				--TODO!!!: figure out how to do/immitate actions.top
 				["<CR>"] = actions.select_default + actions.center,
 				["<C-x>"] = actions.select_horizontal + actions.center,
 				["<C-v>"] = actions.select_vertical + actions.center,
 				["<C-t>"] = actions.select_tab + actions.center,
+				["<C-l>"] = actions.select_all + actions.add_selected_to_loclist
 			},
 			n = {
 				["<CR>"] = actions.select_default + actions.center,
 				["<C-x>"] = actions.select_horizontal + actions.center,
 				["<C-v>"] = actions.select_vertical + actions.center,
 				["<C-t>"] = actions.select_tab + actions.center,
+				["<C-l>"] = actions.select_all + actions.add_selected_to_loclist
 			}
 		},
 	},

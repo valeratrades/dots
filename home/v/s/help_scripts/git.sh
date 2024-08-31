@@ -1,5 +1,8 @@
 # all general git shorthands
 
+#TODO!!: start assigning dififculty score to all entries. Default to NaN.
+#Could do it through a label with say black-color. Probably a series of labels, simply named {[1-9],NaN}
+
 alias g="git"
 alias gu='gitui'
 gg() {

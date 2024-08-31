@@ -34,13 +34,13 @@ o.incsearch = true
 vim.o.timeoutlen = 700
 vim.o.ttimeoutlen = 2
 
-o.scrolloff = 5 --8
+o.scrolloff = 5
 o.signcolumn = "yes"
 o.isfname:append("@-@")
 
 o.updatetime = 50
 
-o.colorcolumn = "120"
+--o.colorcolumn = "120" // don't like that it a) wraps around when width is less than what it's set to, b) splits to multiple visual lines when they are longer than what it's set to.
 
 o.title = true
 o.titlestring = "nvim: %F"
