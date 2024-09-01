@@ -19,7 +19,7 @@ vim.keymap.set('n', '<space>st', function()
 	require('telescope.builtin').quickfix({ wrap_results = true, fname_width = 999 })
 end, { desc = "Project's TODOs" })
 vim.keymap.set('n', '<space>si', "<cmd>Telescope media_files<cr>", { desc = "Media files" })
-vim.keymap.set("n", "<C-f>", function() builtin.current_buffer_fuzzy_find(gs) end, { desc = "Effectively Ctrl+f" })
+vim.keymap.set("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Effectively Ctrl+f" })
 
 require("telescope").setup {
 	extensions = {
