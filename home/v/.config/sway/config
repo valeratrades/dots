@@ -6,7 +6,9 @@ exec mkdir -p ~/tmp/Screenshots
 set $mod Mod4
 # Rofi
 set $wifi ~/.config/rofi/modi/nmcli
-set $menu rofi -m $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1 -show drun -sorting-method fzf -sort -run-command 'swaymsg exec -- {cmd}'
+#TODO: test if works with multiple monitors
+#set $menu rofi -m $(../choose_rofi_monitor.sh) -show drun -sorting-method fzf -sort -run-command 'swaymsg exec -- {cmd}'
+set $menu rofi -m 0 -show drun -sorting-method fzf -sort -run-command 'swaymsg exec -- {cmd}'
 #
 set $output_laptop "eDP-1"
 

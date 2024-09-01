@@ -74,6 +74,9 @@ c() {
 	cargo ${@}
 }
 
+alias rd="./target/debug/$(basename $(pwd))"
+alias rr="./target/release/$(basename $(pwd))"
+
 cw() {
 	# not sure is duplication of processes is the best way to do it, but eh good enough
 	cargo watch -- todo manual counter-step --cargo-watch >/dev/null 2>&1 &

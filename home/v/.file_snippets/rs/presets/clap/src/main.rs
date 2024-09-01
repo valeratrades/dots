@@ -8,7 +8,7 @@ use config::AppConfig;
 struct Cli {
 	#[command(subcommand)]
 	command: Commands,
-	#[arg(long, default_value = "~/.config/what.toml")]
+	#[arg(long, default_value = "~/.config/PROJECT_NAME_PLACEHOLDER.toml")]
 	config: ExpandedPath,
 }
 #[derive(Subcommand)]

@@ -465,6 +465,7 @@ Arguments:
 . ~/.file_snippets/main.sh
 . ~/notes/functions.sh
 . ~/s/help_scripts/cargo.sh
+. ~/s/help_scripts/cpp.sh
 . ~/s/help_scripts/document_watch.sh
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/server.sh
