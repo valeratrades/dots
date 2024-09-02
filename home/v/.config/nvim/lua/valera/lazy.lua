@@ -224,6 +224,12 @@ return require('lazy').setup({
 
 	},
 	{
+		'fei6409/log-highlight.nvim',
+		config = function()
+			require('log-highlight').setup {}
+		end,
+	},
+	{
 		"toppair/peek.nvim",
 		event = { "VeryLazy" },
 		build = "deno task --quiet build:fast",
@@ -233,4 +239,5 @@ return require('lazy').setup({
 	"3rd/image.nvim",
 	"DreamMaoMao/yazi.nvim",
 	"zbirenbaum/copilot.lua",
+	--"meatballs/vim-xonsh",
 })

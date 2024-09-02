@@ -53,6 +53,8 @@ gd() {
 	git push origin --delete ${branch_name}
 }
 
+alias git_pull_force="git fetch --all && git reset --hard origin/$(git branch --show-current)"
+
 # # gh aliases
 # Issue
 alias gi="gh issue create -b \"\" -t"
@@ -77,7 +79,6 @@ gifm() {
 gifa() {
 	gh issue list --assignee="@me"
 }
-
 
 # r for rejected
 alias gir="gh issue close -r \"not planned\""

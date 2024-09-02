@@ -15,6 +15,16 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
+--vim.cmd([[ autocmd BufWritePost *.sh silent !chmod +x <afile> ]])
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	pattern = { "*.sh", "*.zsh", "*.bash", "*.fish", "*.xsh" },
+	callback = function()
+		os.execute('chmod +x ' .. vim.fn.expand('%:p'))
+	end,
+})
+
+
+
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "peek" },

@@ -276,3 +276,15 @@ K("t", "<C-w>r", "<C-\\><C-N><C-w>j")
 K("t", "<C-w>n", "<C-\\><C-N><C-w>k")
 K("t", "<C-w>t", "<C-\\><C-N><C-w>l")
 --
+
+local function copyFileLineCol()
+	local file = vim.fn.expand('%')
+	local line = vim.fn.line('.')
+	local col = vim.fn.col('.')
+	local location = string.format("%s:%d:%d", file, line, col)
+	return location
+end
+
+K("", "<Space>ay", function() vim.fn.setreg('"', copyFileLineCol()) end, { desc = "copy file:line:col to \" buffer" })
+K("", "<Space>a<Space>y", function() vim.fn.setreg('+', copyFileLineCol()) end,
+	{ desc = "copy file:line:col to + buffer" })
