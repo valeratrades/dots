@@ -1,6 +1,6 @@
 local builtin = require('telescope.builtin')
 local actions = require('telescope.actions')
-local gs = { hidden = true, no_ignore = false, file_ignore_patterns = {} } -- file ignore patterns don't really work
+local gs = { hidden = true, no_ignore = true, file_ignore_patterns = { ".git/", "target/", "%.lock" } } -- `^` and `.` in file ignore patterns don't really work
 
 vim.keymap.set('n', '<space>f', function() builtin.find_files(gs) end, { desc = "Search files" })
 vim.keymap.set('n', '<space>z', function() builtin.live_grep(gs) end, { desc = "Live grep" })
@@ -66,6 +66,10 @@ require("telescope").setup {
 				["<C-l>"] = actions.select_all + actions.add_selected_to_loclist
 			}
 		},
+		layout_config = {
+			width = 9999,
+			height = 9999,
+		}
 	},
 }
 --

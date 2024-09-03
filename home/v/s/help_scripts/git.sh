@@ -53,7 +53,9 @@ gd() {
 	git push origin --delete ${branch_name}
 }
 
-alias git_pull_force="git fetch --all && git reset --hard origin/$(git branch --show-current)"
+git_pull_force() {
+    git fetch --all && git reset --hard origin/$(git branch --show-current)
+}
 
 # # gh aliases
 # Issue

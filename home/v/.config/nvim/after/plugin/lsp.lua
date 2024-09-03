@@ -106,7 +106,8 @@ end
 
 --
 
---TODO!: add zz after some search commands (just appending to the cmd string doesn't work)
+
+--TODO!: add {zz, zt} after some search commands (just appending to the cmd string doesn't work)
 local on_attach = function(client, bufnr)
 	local telescope_builtin = require("telescope.builtin")
 
@@ -118,6 +119,10 @@ local on_attach = function(client, bufnr)
 
 	buf_set_keymap('n', 'K', vim.lsp.buf.hover, { desc = "Hover Info" })
 	buf_set_keymap('n', 'gd', vim.lsp.buf.definition, { desc = "Go to Definition" })
+	buf_set_keymap('n', '<space>lR', vim.lsp.buf.rename, { desc = "Rename" })
+	buf_set_keymap('n', '<space>lh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+		{ desc = "Toggle Inlay Hints" })
+
 	buf_set_keymap('n', '<C-r>', function() JumpToDiagnostic(1, 'max') end, { desc = "Next Error" })
 	buf_set_keymap('n', '<C-n>', function() JumpToDiagnostic(-1, 'max') end, { desc = "Previous Error" })
 	buf_set_keymap('n', '<C-R>', function() JumpToDiagnostic(1, 'all') end, { desc = "Next Diagnostic" })
@@ -131,9 +136,10 @@ local on_attach = function(client, bufnr)
 		{ desc = "Diagnostics" })
 	buf_set_keymap('n', '<space>ll', function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end,
 		{ desc = "Local Diagnostics" })
-	buf_set_keymap('n', '<space>lR', vim.lsp.buf.rename, { desc = "Rename" })
 	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Document Symbols" })
 	buf_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_workspace_symbols<CR>', { desc = "Workspace Symbols" })
+	buf_set_keymap('n', '<space>lz', '<cmd>Telescope lsp_incoming_calls<CR>', { desc = "Incoming Calls" })
+	buf_set_keymap('n', '<space>lZ', '<cmd>Telescope lsp_outgoing_calls<CR>', { desc = "Outgoing Calls" })
 	buf_set_keymap('n', '<space>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
 	buf_set_keymap({ 'n', 'v' }, '<space>la', vim.lsp.buf.code_action, { desc = "Code Action" })
 	buf_set_keymap('n', '<space>ly', YankDiagnosticPopup, { desc = "Yank Diagnostic Popup" })
