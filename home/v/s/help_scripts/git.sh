@@ -4,7 +4,6 @@
 #Could do it through a label with say black-color. Probably a series of labels, simply named {[1-9],NaN}
 
 alias g="git"
-alias gu='gitui'
 gg() {
 	# needs to be processed first, or acceess aliases would have to be turned into functions
 	prefix=""

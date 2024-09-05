@@ -240,4 +240,7 @@ return require('lazy').setup({
 	"DreamMaoMao/yazi.nvim",
 	"zbirenbaum/copilot.lua",
 	--"meatballs/vim-xonsh",
+	--"vim-scripts/AnsiEsc.vim",
+	"norcalli/nvim-colorizer.lua",
+	"powerman/vim-plugin-AnsiEsc"
 })

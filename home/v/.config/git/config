@@ -13,9 +13,15 @@
 [safe] # says it's okay to write anywhere
 	directory = *
 
+[help]
+	autocorrect = 5
+
 [core]
 	excludesfile = /home/v/.config/git/.gitignore_global
-# converts any large files that were not included into .gitignoree into pointers
+	# converts any large files that were not included into .gitignoree into pointers
+
+[pager]
+	difftool = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -28,8 +34,9 @@
 # copy/pastes are colored differently than actual removes/additions
 
 [diff]
-	colorMoved = zebra #"default"
+	colorMoved = zebra
 	colormovedws = "allow-indentation-change"
+	external = "/usr/bin/env difft --color auto --background light --display side-by-side"
 
 # warn when ponting to a commit instead of branch
 [advice]
@@ -42,10 +49,8 @@
 	r = rebase
 	d = diff
 	ds = diff --staged
-	dm = diff --stat master
-	# which one is better, one above or the one below?
-	sm = diff --stat master
 	s = diff --stat
+	sm = diff  --stat master
 	l = branch --list
 	unstage = reset HEAD --
 	last = log -1 HEAD
@@ -55,6 +60,26 @@
 	cb = checkout -b
 	f = push --force-with-lease
 	p = pull --rebase
+	blame = "blame -w -C -C -C"
+	ca = "commit -am"
+	ri = "rebase --autosquash -i master"
+	ra = "rebase --abort"
+	rc = "rebase --continue"
+	log = -c diff.external=difft log -p --ext-diff
+	stash = stash --all
+
+	# stolen from Orion, but not yet tested
+	hardupdate = "!git fetch && git reset --hard \"origin/$(git rev-parse --abbrev-ref HEAD)\""
+	noedit = "commit -a --amend --no-edit"
+
+[url "git@gist.github.com:"]
+    pushInsteadOf = "https://gist.github.com/"
+
+;[url "git@github.com:"]
+;    pushInsteadOf = "https://github.com/"
+
+[url "git@gitlab.com:"]
+    pushInsteadOf = "https://gitlab.com/"
 
 [init]
 	defaultBranch = master
@@ -64,9 +89,15 @@
 	default = current
 
 [rerere]
+	autoUpdate = true
 	enabled = true
 
 [branch]
+	sort = "-committerdate"
 	autoSetupMerge = simple
+
 [rebase]
 	autosquash = true
+
+[merge]
+	conflictStyle = "zdiff3"
