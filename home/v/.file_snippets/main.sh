@@ -139,7 +139,8 @@ gon() {
 	mkdir cmd && cp ${HOME}/.file_snippets/${lang}/presets/main ./cmd/main.${lang} && chmod u+x ./cmd/main.${lang}
 
 	shared_after ${1} ${lang}
-	go mod init "github.com/${GITHUB_NAME}/$1"
+	go mod init "github.com/${GITHUB_NAME}/${1}"
+	go mod tidy
 }
 
 lnn() {

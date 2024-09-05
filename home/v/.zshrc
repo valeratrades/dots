@@ -60,7 +60,7 @@ cs() {
 # # go
 go() {
 	todo manual counter-step --dev-runs;
-	go $@
+	/usr/bin/go $@
 }
 #
 
