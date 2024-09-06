@@ -288,3 +288,18 @@ end
 K("", "<Space>ay", function() vim.fn.setreg('"', copyFileLineCol()) end, { desc = "copy file:line:col to \" buffer" })
 K("", "<Space>a<Space>y", function() vim.fn.setreg('+', copyFileLineCol()) end,
 	{ desc = "copy file:line:col to + buffer" })
+
+function goto_file_line_column(file_line_col)
+	local file, line, col = string.match(file_line_col, "([^:]+):(%d+):(%d+)")
+
+	if file and line and col then
+		vim.cmd('edit ' .. file)
+		vim.fn.cursor(tonumber(line), tonumber(col))
+	else
+		print("Invalid format. Expected: file:line:col")
+	end
+end
+
+vim.api.nvim_create_user_command("Gf", function(opts)
+	goto_file_line_column(opts[1])
+end, { nargs = 1 })
