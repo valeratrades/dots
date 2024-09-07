@@ -1,4 +1,4 @@
-package main
+package u
 
 import (
 	"fmt"
@@ -35,16 +35,4 @@ func Cc(command string) string {
 		panic(err)
 	}
 	return res
-}
-
-func main() {
-	for {
-		fmt.Println(CLEAR)
-
-		result := Cc("g++ -g -o ./target/debug/$(basename $(pwd)) ./src/*.cpp")
-		fmt.Println(result)
-
-		//result, err := C(`inotifywait -e modify,create,delete ./src/*.cpp 2>&1 | grep -v -e "Setting up watches." -e "Watches established." # to prevent annoying confirmation`)
-		C(`inotifywait -e modify,create,delete ./src/*.cpp`)
-	}
 }

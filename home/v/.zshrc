@@ -206,6 +206,7 @@ alias nano="nvim"
 alias pro_audio="pulsemixer"
 alias wayland_wine="DISPLAY='' wine64" # set it up to work with wayland, following https://youtu.be/bg-xugXfSGM?si=neo2TQN8yQHQEIip. Still doesn't really work (or I'm dumb).
 alias pfind="ps aux | fzf"
+alias tree="fd . | as-tree"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)
@@ -463,19 +464,19 @@ Arguments:
 . ~/.config/tmux/functions.sh
 . ~/.config/zoxide/setup.sh
 . ~/.file_snippets/main.sh
+. ~/.local.sh
 . ~/notes/functions.sh
 . ~/s/help_scripts/cargo.sh
 . ~/s/help_scripts/document_watch.sh
 . ~/s/help_scripts/git.sh
+. ~/s/help_scripts/go.sh
+. ~/s/help_scripts/goShellScripts/functions.sh
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/shell_harpoon/main.zsh
-. ~/s/help_scripts/go.sh
-. ~/s/help_scripts/functions.sh
-. ~/s/tg/functions.sh
 . ~/s/help_scripts/video_editting.sh
 . ~/s/help_scripts/weird.sh
+. ~/s/tg/functions.sh
 . ~/s/todo/functions.sh
-. ~/.local.sh
 
 source ${HOME}/.config/zsh/other.zsh
 

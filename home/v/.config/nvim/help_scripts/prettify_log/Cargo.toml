@@ -1,0 +1,24 @@
+[package]
+name = "prettify_log"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.docs.rs]
+cargo-args = ["-Zunstable-options", "-Zrustdoc-scrape-examples"]
+
+[package.metadata.cargo-machete]
+ignored = ["derive-new", "anyhow", "serde", "tokio"]
+
+[lints.clippy]
+cmp_float = "allow" # is bad for `==` direct comparisons, but `<` and `>` should be allowed
+#get_first = "allow" # const fn, so actually more performant
+len_zero = "allow" # `.empty()` is O(1) but on &str only
+
+[dependencies]
+clap = { version = "4.5.17", features = ["derive"] }
+clap-stdin = "0.5.1"
+derive-new = "^0.7.0"
+eyre = "^0.6.12"
+
+[dev-dependencies]
+insta = "1.40.0"
