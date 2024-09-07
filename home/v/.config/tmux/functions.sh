@@ -13,9 +13,7 @@ tmux_new_session_base() {
 		cd $2 || return 1
 	fi
 	SESSION_NAME=${1:-$(basename "$(pwd)")}
-	if [ "${SESSION_NAME}" = ".${SESSION_NAME:1}" ]; then
-		SESSION_NAME="_${SESSION_NAME:1}"
-	fi
+	SESSION_NAME=$(echo "$SESSION_NAME" | sed 's/\./_/g')
 	if tmux has-session -t "${SESSION_NAME}" 2>/dev/null; then
 		echo "Session ${SESSION_NAME} already exists."
 		return 1

@@ -235,12 +235,13 @@ return require('lazy').setup({
 		build = "deno task --quiet build:fast",
 	},
 	"nvim-neotest/nvim-nio",
-	--"stevearc/aerial.nvim",
 	"3rd/image.nvim",
 	"DreamMaoMao/yazi.nvim",
 	"zbirenbaum/copilot.lua",
-	--"meatballs/vim-xonsh",
-	--"vim-scripts/AnsiEsc.vim",
 	"norcalli/nvim-colorizer.lua",
-	"powerman/vim-plugin-AnsiEsc"
+	"Makaze/AnsiEsc",
+	--{
+	--	dir = "/home/v/s/ansi_esc.nvim",
+	--	--"valeratrades/ansi_esc.nvim",
+	--},
 })

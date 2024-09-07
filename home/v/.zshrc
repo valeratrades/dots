@@ -327,7 +327,7 @@ csp() {
 	cs $_path
 }
 csn() {
-	_path="${HOME}/Documents/Notes"
+	_path="${HOME}/Documents/SheetMusic"
 	if [ -n "$1" ]; then
 		_path+="${1}"
 	fi
@@ -465,11 +465,11 @@ Arguments:
 . ~/.file_snippets/main.sh
 . ~/notes/functions.sh
 . ~/s/help_scripts/cargo.sh
-. ~/s/help_scripts/cpp.sh
 . ~/s/help_scripts/document_watch.sh
 . ~/s/help_scripts/git.sh
 . ~/s/help_scripts/server.sh
 . ~/s/help_scripts/shell_harpoon/main.zsh
+. ~/s/help_scripts/go.sh
 . ~/s/help_scripts/functions.sh
 . ~/s/tg/functions.sh
 . ~/s/help_scripts/video_editting.sh
