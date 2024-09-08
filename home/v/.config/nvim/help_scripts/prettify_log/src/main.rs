@@ -1,3 +1,4 @@
+#![feature(stmt_expr_attributes)]
 use ast::tokens_to_ast;
 use clap::{command, Parser};
 use clap_stdin::MaybeStdin;
@@ -18,5 +19,5 @@ fn main() {
 
 	let tokens = str_to_tokens(input);
 	let parsed = tokens_to_ast(tokens);
-	println!("{parsed}");
+	//println!("{parsed}");
 }

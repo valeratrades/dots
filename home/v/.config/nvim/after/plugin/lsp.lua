@@ -175,7 +175,7 @@ lsp_zero.on_attach(on_attach)
 
 -- Language setups
 local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'bashls', 'clangd', 'jedi_language_server',
-	'jsonls' }
+	'jsonls', 'marksman' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
