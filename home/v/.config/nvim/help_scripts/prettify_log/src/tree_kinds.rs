@@ -151,7 +151,7 @@ impl Pretty for KeyValuePair {
 				write!(f, "\"{}\": ", key.0)?;
 				value.pretty(f, root_indent)
 			}
-			KeyValuePair::RestPattern => write!(f, "..."),
+			KeyValuePair::RestPattern => write!(f, ".."),
 		}
 	}
 }
@@ -233,7 +233,7 @@ mod tests {
       unnamed,
       tuple
     ],
-    ...
+    ..
   }
   "###);
 		Ok(())
@@ -283,7 +283,7 @@ mod tests {
     "currently_deployed": RwLock{
       "data": [],
       "poisoned": false,
-      ...  
+      ..  
     }
   _
   "###);

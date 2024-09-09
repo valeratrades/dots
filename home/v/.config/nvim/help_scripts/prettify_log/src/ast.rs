@@ -125,7 +125,7 @@ fn try_assume_vec_kvp(oneof_raw_map_params_bracks: Vec<MaybeParsed>) -> Result<V
 					}));
 				}
 				_ => match key.as_str() {
-					".." => kvp_or_outer_delim.push(MaybeParsed::KeyValuePair(KeyValuePair::RestPattern)),
+					".." | "..." => kvp_or_outer_delim.push(MaybeParsed::KeyValuePair(KeyValuePair::RestPattern)),
 					_ => bail!("Encountered Token::Literal that is not part of a KeyValuePair"),
 				},
 			},

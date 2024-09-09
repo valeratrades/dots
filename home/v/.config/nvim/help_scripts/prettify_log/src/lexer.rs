@@ -88,7 +88,7 @@ pub fn str_into_tokens(input: String) -> Result<Vec<Token>> {
 	}
 
 	if !ongoing_literal.is_empty() {
-		dbg!(&"suspicious");
+		// suspicious if ever reached
 		tokens.push(Token::Literal(ongoing_literal));
 	}
 
