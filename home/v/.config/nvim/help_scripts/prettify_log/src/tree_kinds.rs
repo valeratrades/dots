@@ -31,7 +31,9 @@ pub enum Value {
 	Array(Vec<Value>),
 	Literal(Literal),
 	NamedMap(NamedMap),
+	UnnamedMap(Vec<KeyValuePair>),
 	NamedParams(NamedParams),
+	UnnamedTuple(Vec<Value>),
 }
 
 #[derive(Clone, Debug, derive_new::new, PartialEq, Eq)]
@@ -132,10 +134,12 @@ impl Pretty for NamedParams {
 impl Pretty for Value {
 	fn pretty(&self, f: &mut fmt::Formatter<'_>, root_indent: u8) -> fmt::Result {
 		match self {
-			Value::Array(arr) => arr.pretty(f, root_indent),
+			Value::Array(vec_value) => vec_value.pretty(f, root_indent),
 			Value::Literal(literal) => literal.pretty(f, root_indent),
-			Value::NamedMap(named_map) => named_map.pretty(f, root_indent),
-			Value::NamedParams(named_params) => named_params.pretty(f, root_indent),
+			Value::NamedMap(name_and_vec_kvp) => name_and_vec_kvp.pretty(f, root_indent),
+			Value::UnnamedMap(vec_kvp) => vec_kvp.pretty(f, root_indent),
+			Value::NamedParams(name_and_vec_value) => name_and_vec_value.pretty(f, root_indent),
+			Value::UnnamedTuple(vec_value) => vec_value.pretty(f, root_indent),
 		}
 	}
 }
@@ -162,7 +166,6 @@ impl Pretty for Literal {
 mod tests {
 	use color_eyre::Result;
 
-	
 	use crate::{ast::tokens_into_ast, lexer::str_into_tokens, utils::INIT};
 
 	#[test]
@@ -202,16 +205,16 @@ mod tests {
 	}
 
 	#[test]
-	fn from_pretty() -> Result<()> {
+	fn from_pretty_with_unnamed() -> Result<()> {
 		*INIT;
 		let input = r#"
 				MyMap {
 						array: [1, 2, 3],
-						nested: Name {
+						unnamed_map: {
 								a: "value",
 								b: NestedFunction(1, 2, 3)
 						},
-						name: test,
+						name: (an, unnamed, tuple),
 						..
 				}"#;
 		let tokens = str_into_tokens(input.to_owned())?;
@@ -223,11 +226,13 @@ mod tests {
       2,
       3
     ],
-    "nested": Name{
-      "a": "value",
-      "b": NestedFunction(1, 2, 3)  
-    },
-    "name": test,
+    "unnamed_map":     "a": "value",
+      "b": NestedFunction(1, 2, 3)  ,
+    "name": [
+      an,
+      unnamed,
+      tuple
+    ],
     ...
   }
   "###);

@@ -113,7 +113,9 @@ fn try_assume_vec_kvp(oneof_raw_map_params_bracks: Vec<MaybeParsed>) -> Result<V
 					let value: Value = match iter_raw_map_or_bracks.next() {
 						Some(MaybeParsed::NamedMap(map)) => Value::NamedMap(map),
 						Some(MaybeParsed::Bracks(arr)) => Value::Array(arr),
+						Some(MaybeParsed::Curlies(unnamed_map)) => Value::UnnamedMap(unnamed_map),
 						Some(MaybeParsed::NamedParams(params)) => Value::NamedParams(params),
+						Some(MaybeParsed::Parens(unnamed_tuple)) => Value::UnnamedTuple(unnamed_tuple),
 						Some(MaybeParsed::Raw(Token::Literal(literal))) => Value::Literal(Literal(literal)),
 						_ => bail!("Incorrect or missing KeyValuePair's Value"),
 					};
