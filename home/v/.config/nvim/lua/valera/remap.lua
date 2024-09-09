@@ -289,7 +289,7 @@ K("", "<Space>ay", function() vim.fn.setreg('"', copyFileLineCol()) end, { desc 
 K("", "<Space>a<Space>y", function() vim.fn.setreg('+', copyFileLineCol()) end,
 	{ desc = "copy file:line:col to + buffer" })
 
-function goto_file_line_column(file_line_col)
+local function goto_file_line_column(file_line_col)
 	local file, line, col = string.match(file_line_col, "([^:]+):(%d+):(%d+)")
 
 	if file and line and col then
@@ -301,12 +301,17 @@ function goto_file_line_column(file_line_col)
 end
 
 vim.api.nvim_create_user_command("Gf", function(opts)
-	goto_file_line_column(opts[1])
-end, { nargs = 1 })
+	goto_file_line_column(unpack(opts.fargs))
+end, {
+	nargs = "*",
+	complete = function(_, line)
+		-- Provide completion only for files, assuming Neovim's file completion
+		local l = vim.split(line, "%s+")
+		if #l == 2 then
+			-- Perform file completion (using Neovim's built-in)
+			return vim.fn.getcompletion(l[2], "file")
+		end
 
-
-
---TODO!!!!: write fn for pretty-printing in log files in properly-sized pop-up window
---ex payload:
---in discretionary_engine::exchange_apis::binance::handle_hub_orders_update with hub_rx: Receiver { shared: Shared { value: RwLock(PhantomData<std::sync::rwlock::RwLock<discretionary_engine::exchange_apis::hub::HubToExchange>>, RwLock { data: HubToExchange { key: 0191cc99-b03a-7003-ab4d-ef05bef629ad, orders: [Order { id: PositionOrderId { position_id: 0191cc99-b039-7960-96d5-3230a8a0a12a, protocol_id: "dm", ordinal: 0 }, order_type: Market, symbol: Symbol { base: "ADA", quote: "USDT", market: BinanceFutures }, side: Buy, qty_notional: 30.78817733990148 }] } }), version: Version(2), is_closed: false, ref_count_rx: 1 }, version: Version(2) }, last_reported_fill_key: 00000000-0000-0000-0000-000000000000, currently_deployed: RwLock { data: [], poisoned: false, .. }
---
+		return {}
+	end,
+})

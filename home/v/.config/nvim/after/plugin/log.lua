@@ -6,17 +6,16 @@ local M = {}
 --- @param log_line string The log line to parse.
 --- @return string destination The destination part of the log line.
 --- @return string contents The contents part of the log line.
-function parse_log_line(log_line)
+local function parse_log_line(log_line)
 	local destination = log_line:match("in%s+([%w_:]+)%s+with")
 	local contents = log_line:match("with%s+(.+)")
 	return destination, contents
 end
 
 --- Makes a popup with the given text. Sets the filetype to `markdown` to allow for syntax highlighting.
-function ShowMarkdownPopup(text)
+function M.ShowMarkdownPopup(text)
 	local buf = vim.api.nvim_create_buf(false, true)
 	local lines = {}
-
 	for line in string.gmatch(text, "([^\n]+)") do
 		table.insert(lines, line)
 	end
@@ -65,22 +64,24 @@ function ShowMarkdownPopup(text)
 	print("Actual Height: " .. actual_height)
 end
 
-function PopupPrettyfied()
+function M.PopupPrettyfied()
 	local current_line = vim.api.nvim_get_current_line()
 	local _, contents = parse_log_line(current_line)
 	local prettify_cmd = "cat <<EOF | prettify_log -\n" .. contents .. "\nEOF"
 	local prettified = vim.fn.system(prettify_cmd)
 	local as_rust_block = "```rs\n" .. prettified .. "```"
-	ShowMarkdownPopup(as_rust_block)
+	M.ShowMarkdownPopup(as_rust_block)
 end
 
-vim.keymap.set("n", "<Space>tp", function() PopupPrettyfied() end, { desc = "Popup with prettified log line" })
+vim.keymap.set("n", "<Space>tp", function() M.PopupPrettyfied() end, { desc = "Popup with prettified log line" })
 
 
-function CopyDestination()
+function M.CopyDestination()
 	local current_line = vim.api.nvim_get_current_line()
 	local destination, _ = parse_log_line(current_line)
 	vim.fn.setreg("+", destination)
 end
 
-vim.keymap.set("n", "<Space>ty", function() CopyDestination() end, { desc = "+y log-line's destination" })
+vim.keymap.set("n", "<Space>ty", function() M.CopyDestination() end, { desc = "+y log-line's destination" })
+
+return M
