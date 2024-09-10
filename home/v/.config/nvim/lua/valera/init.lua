@@ -1,4 +1,7 @@
-require("valera.shorthands") -- has to be first
+require("valera.shorthands")
+require("valera.utils")
+-- above could be used from other internal modules too
+
 require("valera.remap")
 require("valera.lazy")
 require("valera.opts")

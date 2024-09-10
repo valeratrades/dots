@@ -36,6 +36,7 @@ K("", "t", multiplySidewaysMovements('l'), { silent = true })
 K("n", "h", "r")
 K("n", "H", "<nop>")
 K("n", "H", "R")
+K("n", "gf", "gF")
 
 -- Useful Enter key
 K("", "<CR>", "o<Esc>")
@@ -289,19 +290,61 @@ K("", "<Space>ay", function() vim.fn.setreg('"', copyFileLineCol()) end, { desc 
 K("", "<Space>a<Space>y", function() vim.fn.setreg('+', copyFileLineCol()) end,
 	{ desc = "copy file:line:col to + buffer" })
 
-local function goto_file_line_column(file_line_col)
-	local file, line, col = string.match(file_line_col, "([^:]+):(%d+):(%d+)")
+local function goto_file_line_column_or_function(file_line_or_func)
+	local file, line, col = string.match(file_line_or_func, "([^:]+):(%d+):(%d+)")
 
 	if file and line and col then
 		vim.cmd('edit ' .. file)
 		vim.fn.cursor(tonumber(line), tonumber(col))
 	else
-		print("Invalid format. Expected: file:line:col")
+		local builtin = require('telescope.builtin')
+		local file_tmp_because_lua_stupid, func_name = string.match(file_line_or_func, "([^:]+):(.+)")
+		file = file_tmp_because_lua_stupid
+
+		if file and func_name then
+			vim.cmd('edit ' .. file)
+			-- Use LSP to find the function location if available
+			local lsp_active = #vim.lsp.get_clients() > 0
+			if false then
+				local action_state = require('telescope.actions.state')
+				builtin.lsp_document_symbols({
+					default_text = func_name,
+					--	attach_mappings = function(_, map)
+					--		-- Auto-select the first result after the picker loads
+					--		map('i', '<C-n>', function(prompt_bufnr)
+					--			local picker = action_state.get_current_picker(prompt_bufnr)
+					--			picker:set_selection(1)
+					--		end)
+					--		return true
+					--	end
+				})
+			else
+				-- Fallback
+				builtin.live_grep({ default_text = func_name .. [[\(]], hidden = true, no_ignore = true, file_ignore_patterns = { ".git/", "target/", "%.lock" } })
+			end
+		else
+			file, line = string.match(file_line_or_func, "([^:]+):?(%d*)")
+			line = tonumber(line) or 1
+			local expanded_file = vim.fn.expand(file)
+			if vim.fn.filereadable(expanded_file) == 1 then
+				vim.cmd("edit " .. expanded_file)
+				vim.api.nvim_win_set_cursor(0, { line, 0 })
+			else
+				file = file_line_or_func
+				expanded_file = vim.fn.expand(file)
+				if vim.fn.filereadable(expanded_file) == 1 then
+					vim.cmd("edit " .. expanded_file)
+				else
+					print("Invalid format. Expected: file:line:col or file:function_name")
+				end
+			end
+		end
 	end
 end
 
+
 vim.api.nvim_create_user_command("Gf", function(opts)
-	goto_file_line_column(unpack(opts.fargs))
+	goto_file_line_column_or_function(unpack(opts.fargs))
 end, {
 	nargs = "*",
 	complete = function(_, line)
@@ -315,3 +358,5 @@ end, {
 		return {}
 	end,
 })
+
+local utils = require('valera.utils')

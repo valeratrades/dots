@@ -15,6 +15,12 @@ TODO
 ## Usage
 TODO
 
+## Whitepaper
+- [ ] Procedurally generate the aliases for functions defined. Convert PascalCase to snake_case.
+- [ ] cli arg for target of procedurally generated aliases.sh
+
+	then in the [./functions.sh] we still have the workflow that recompiles the program on sourcing it, and there it will be clearly visible where the `aliases.sh` is generated, from evocation. And then we explicitly source that generated file from the same [./functions.sh] after.
+
 <br>
 
 <sup>

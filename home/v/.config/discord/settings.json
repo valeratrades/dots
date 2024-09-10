@@ -7,8 +7,8 @@
   "WINDOW_BOUNDS": {
     "x": 560,
     "y": 1466,
-    "width": 1920,
-    "height": 1200
+    "width": 1919,
+    "height": 1199
   },
   "enableHardwareAcceleration": false,
   "chromiumSwitches": {}
