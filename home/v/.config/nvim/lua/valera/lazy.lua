@@ -29,7 +29,7 @@ return require('lazy').setup({
 		"windwp/nvim-autopairs",
 	},
 	{
-		'nvim-telescope/telescope.nvim',
+		'valeratrades/telescope.nvim',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
 			"nvim-telescope/telescope-live-grep-args.nvim"
@@ -197,7 +197,7 @@ return require('lazy').setup({
 		build = ":TSUpdate html",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"nvim-telescope/telescope.nvim",
+			"valeratrades/telescope.nvim",
 			"nvim-lua/plenary.nvim", -- required by telescope
 			"MunifTanjim/nui.nvim",
 
@@ -212,7 +212,7 @@ return require('lazy').setup({
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
+			"valeratrades/telescope.nvim",
 		},
 	},
 	"nanotee/zoxide.vim",
@@ -240,8 +240,4 @@ return require('lazy').setup({
 	"zbirenbaum/copilot.lua",
 	"norcalli/nvim-colorizer.lua",
 	"Makaze/AnsiEsc",
-	--{
-	--	dir = "/home/v/s/ansi_esc.nvim",
-	--	--"valeratrades/ansi_esc.nvim",
-	--},
 })

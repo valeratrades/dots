@@ -1,5 +1,6 @@
-local lspconfig = require('lspconfig')
-local lsp_zero = require('lsp-zero')
+local lspconfig = require("lspconfig")
+local lsp_zero = require("lsp-zero")
+local utils = require("valera.utils")
 
 --TODO!!!: remove all breakpoints
 
@@ -52,17 +53,15 @@ function JumpToDiagnostic(direction, requestSeverity)
 		local allSeverity = { 1, 2, 3, 4 }
 		local targetSeverity = allSeverity
 		for _, d in pairs(diagnostics) do
-			if d.lnum == line and not BoolPopupOpen() then
-				-- meaning we selected casually
+			if d.lnum == line and not BoolPopupOpen() then -- meaning we selected casually
 				vim.diagnostic.open_float(floatOpts)
 				return
 			end
-			-- only navigate between errors, if there are any
+			-- navigate exclusively between errors, if there are any
 			if d.severity == 1 and requestSeverity ~= 'all' then
 				targetSeverity = { 1 }
 			end
 		end
-
 
 		local go_action = direction == 1 and "goto_next" or "goto_prev"
 		local get_action = direction == 1 and "get_next" or "get_prev"
@@ -125,8 +124,8 @@ local on_attach = function(client, bufnr)
 
 	buf_set_keymap('n', '<C-r>', function() JumpToDiagnostic(1, 'max') end, { desc = "Next Error" })
 	buf_set_keymap('n', '<C-n>', function() JumpToDiagnostic(-1, 'max') end, { desc = "Previous Error" })
-	buf_set_keymap('n', '<C-R>', function() JumpToDiagnostic(1, 'all') end, { desc = "Next Diagnostic" })
-	buf_set_keymap('n', '<C-N>', function() JumpToDiagnostic(-1, 'all') end, { desc = "Previous Diagnostic" })
+	buf_set_keymap('n', '<C-A-r>', function() JumpToDiagnostic(1, 'all') end, { desc = "Next Diagnostic" })
+	buf_set_keymap('n', '<C-A-n>', function() JumpToDiagnostic(-1, 'all') end, { desc = "Previous Diagnostic" })
 
 	buf_set_keymap('n', '<space>lD', vim.lsp.buf.declaration, { desc = "Declaration" })
 	buf_set_keymap('n', '<space>lt', vim.lsp.buf.type_definition, { desc = "Type Definition" })
@@ -137,7 +136,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<space>ll', function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end,
 		{ desc = "Local Diagnostics" })
 	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Document Symbols" })
-	buf_set_keymap('n', '<space>lW', '<cmd>Telescope lsp_workspace_symbols<CR>', { desc = "Workspace Symbols" })
+	buf_set_keymap('n', '<space>lW', function() telescope_builtin.lsp_dynamic_workspace_symbols() end,
+		{ desc = "Workspace Symbols" })
 	buf_set_keymap('n', '<space>lz', '<cmd>Telescope lsp_incoming_calls<CR>', { desc = "Incoming Calls" })
 	buf_set_keymap('n', '<space>lZ', '<cmd>Telescope lsp_outgoing_calls<CR>', { desc = "Outgoing Calls" })
 	buf_set_keymap('n', '<space>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
@@ -220,6 +220,14 @@ vim.g.rustaceanvim = {
 				},
 				procMacro = {
 					enable = true,
+				},
+				workspace = {
+					symbol = {
+						search = {
+							-- default is "only_types"
+							kind = "all_symbols",
+						},
+					},
 				},
 				checkOnSave = {
 					enable = true,
