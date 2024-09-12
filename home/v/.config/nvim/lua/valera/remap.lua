@@ -315,12 +315,17 @@ local function goto_file_line_column_or_function(file_line_or_func)
 			local actions = require('telescope.actions')
 			builtin.lsp_workspace_symbols({
 				query = function_name,
-				-- thing to auto-select the result if it's the only match.
-				--TODO: make it just auto-select the default match
+				symbols = { "function", "method" },
 				on_complete = {
+					--FUCK: puts me in insert
 					function(picker)
+						--actions.file_edit(picker.prompt_bufnr)
 						actions.select_default(picker.prompt_bufnr)
 						vim.cmd("normal! zt")
+						--HACK
+						vim.defer_fn(function()
+							vim.cmd("stopinsert")
+						end, 30)
 					end,
 				},
 			})

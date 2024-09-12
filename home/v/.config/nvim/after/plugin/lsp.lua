@@ -1,6 +1,7 @@
 local lspconfig = require("lspconfig")
 local lsp_zero = require("lsp-zero")
 local utils = require("valera.utils")
+local actions = require("telescope.actions")
 
 --TODO!!!: remove all breakpoints
 
@@ -136,15 +137,34 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<space>ll', function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end,
 		{ desc = "Local Diagnostics" })
 
-	-- Search Symbols
+	-- -- Search Symbols
+	--? should I make the base keymap for this shorter?
+	local set_dynamic_symbols_keymap = function(key, symbols)
+		local keymap = string.format('<space>l<space>%s', key)
+		local desc = string.format("Dynamic Workspace Symbols: [%s]", symbols)
+
+		local opts = {}
+		opts.buffer = bufnr
+		opts.desc = desc
+		opts.silent = true -- doesn't work, telescope still warns when no searches were shown given query
+		vim.keymap.set('n', keymap, function() telescope_builtin.lsp_dynamic_workspace_symbols({ symbols = symbols }) end,
+			opts)
+	end
+	--REF:
+	-- dynamic_workspace_symbols: matches on [name] only
+	-- workspace_symbols: matches on all of [destination, name, type]
 	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Document Symbols" })
 	buf_set_keymap('n', '<space>lW', function() telescope_builtin.lsp_dynamic_workspace_symbols() end,
-		{ desc = "Dynamic Workspace Symbols. Matches on [name] only" })
-	buf_set_keymap('n', '<space>l<space>a', function() telescope_builtin.lsp_workspace_symbols() end,
-		{ desc = "Workspace Symbols. Matches on all of [destination, name, type]" })
-	buf_set_keymap('n', '<space>l<space>f',
-		function() telescope_builtin.lsp_dynamic_workspace_symbols({ symbols = { "function" } }) end,
 		{ desc = "Dynamic Workspace Symbols" })
+	buf_set_keymap('n', '<space>l<space>a',
+		function() telescope_builtin.lsp_workspace_symbols() end,
+		{ desc = "Workspace Symbols" })
+	set_dynamic_symbols_keymap('f', { "function" })
+	set_dynamic_symbols_keymap('s', { "struct" })
+	set_dynamic_symbols_keymap('m', { "module" })
+	set_dynamic_symbols_keymap('c', { "constant" })
+	set_dynamic_symbols_keymap('e', { "enum" })
+	--
 
 	buf_set_keymap('n', '<space>lz', '<cmd>Telescope lsp_incoming_calls<CR>', { desc = "Incoming Calls" })
 	buf_set_keymap('n', '<space>lZ', '<cmd>Telescope lsp_outgoing_calls<CR>', { desc = "Outgoing Calls" })

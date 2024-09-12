@@ -25,7 +25,7 @@ u = "update"
 m = "machete"
 re = "insta review"
 tr = "insta test --review"
-f = "fix --allow-dirty"
+f = "fix --allow-dirty --allow-no-vcs"
 fc = "clippy --fix --allow-dirty"
 s = "sweep --recursive --installed" # only leave currently active artifacts
 

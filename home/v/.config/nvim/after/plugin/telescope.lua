@@ -22,20 +22,25 @@ vim.keymap.set('n', '<space>si', "<cmd>Telescope media_files<cr>", { desc = "Med
 vim.keymap.set("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Effectively Ctrl+f" })
 
 local telescope = require("telescope")
---telescope.load_extension('fzf')
---local fzf_opts = {
---	fuzzy = true,                  -- false will only do exact matching
---	override_generic_sorter = true, -- override the generic sorter
---	override_file_sorter = true,   -- override the file sorter
---	case_mode = "smart_case",      -- or "ignore_case" or "respect_case"
---}
+--FUCK: requires to explicitly:
+--```sh
+--cd $XDG_DATA_HOME/nvim/lazy/telescope-fzf-native.nvim
+--make
+--```
+telescope.load_extension('fzf')
+local fzf_opts = {
+	fuzzy = true,                  -- false will only do exact matching
+	override_generic_sorter = true, -- override the generic sorter
+	override_file_sorter = true,   -- override the file sorter
+	case_mode = "smart_case",      -- or "ignore_case" or "respect_case"
+}
 
 telescope.setup {
-	--pickers = {
-	--	lsp_dynamic_workspace_symbols = {
-	--		sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_opts)
-	--	},
-	--},
+	pickers = {
+		lsp_dynamic_workspace_symbols = {
+			sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_opts)
+		},
+	},
 	extensions = {
 		media_files = {
 			filetypes = { "png", "webp", "jpg", "jpeg" },

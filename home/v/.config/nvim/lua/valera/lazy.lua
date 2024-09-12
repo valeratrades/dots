@@ -34,7 +34,10 @@ return require('lazy').setup({
 			'nvim-lua/plenary.nvim',
 			"nvim-telescope/telescope-live-grep-args.nvim",
 			"nvim-telescope/telescope-fzf-native.nvim",
-		}
+		},
+		opts = {
+			extensions_list = { "fzf", "terms", "themes" },
+		},
 	},
 	{
 		'nvim-lualine/lualine.nvim',
@@ -188,6 +191,20 @@ return require('lazy').setup({
 			'RainbowDelimQuoted',
 			'RainbowMultiDelim'
 		}
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
 	},
 	{
 		"kylechui/nvim-surround",
