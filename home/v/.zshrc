@@ -207,6 +207,7 @@ alias pro_audio="pulsemixer"
 alias wayland_wine="DISPLAY='' wine64" # set it up to work with wayland, following https://youtu.be/bg-xugXfSGM?si=neo2TQN8yQHQEIip. Still doesn't really work (or I'm dumb).
 alias pfind="ps aux | fzf"
 alias tree="fd . | as-tree"
+alias bak="XDG_CONFIG_HOME=/home/v/.dots/home/v/.config"
 
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)

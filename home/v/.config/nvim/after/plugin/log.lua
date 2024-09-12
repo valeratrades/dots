@@ -7,11 +7,17 @@ local M = {}
 --- @return string destination The destination part of the log line.
 --- @return string contents The contents part of the log line.
 local function parse_log_line(log_line)
-	local destination = log_line:match("in%s+([%w_:]+)%s+with")
-	local contents = log_line:match("with%s+(.+)")
-	return destination, contents
+	if log_line:match("in%s+([%w_:]+)%s+with") then
+		local destination = log_line:match("in%s+([%w_:]+)%s+with")
+		local contents = log_line:match("with%s+(.+)")
+		return destination, contents
+	elseif log_line:match("at%s+([%w_/]+%.rs:%d+)") then
+		local destination = log_line:match("at%s+([%w_/]+%.rs:%d+)")
+		return destination, nil
+	else
+		return nil, nil
+	end
 end
-
 
 function M.PopupExpandedLog()
 	local current_line = vim.api.nvim_get_current_line()

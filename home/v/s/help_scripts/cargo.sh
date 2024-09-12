@@ -26,18 +26,40 @@ cb() {
 	fi
 }
 
+#cq() {
+#	local stderr_temp_file=$(mktemp)
+#	cargo --color always --quiet $@ 2>"$stderr_temp_file"
+#	local exit_status=$?
+#
+#	if [ $exit_status!=0 ]; then
+#		# note that when running `cargo check`, the warnings are piped to stdout, so still will be printed. However, we probably want that for `check`.
+#		cat "$stderr_temp_file" 1>&2
+#	fi
+#
+#	rm -f "$stderr_temp_file"
+#	return $exit_status
+#}
+
+# for some reason truncates the output of `cargo test`. But `cargo nextest` works, so don't care.
 cq() {
-	local stderr_temp_file=$(mktemp)
-	cargo --color always --quiet $@ 2>"$stderr_temp_file"
-	local exit_status=$?
-
-	if [ $exit_status!=0 ]; then
-		# note that when running `cargo check`, the warnings are piped to stdout, so still will be printed. However, we probably want that for `check`.
-		cat "$stderr_temp_file" 1>&2
-	fi
-
-	rm -f "$stderr_temp_file"
-	return $exit_status
+	cargo_output=$(script -q /dev/null --command="cargo --quiet ${@}")
+	echo "$cargo_output" | awk '
+	BEGIN{
+	RS="\r\n\r\n";
+	#formatted_warning = "\033\\[1m\033\\[33mwarning\033\\[0m\033\\[1m:\033\\[0m"
+}
+{
+	print_line = 1
+	first_word = $1
+	if (index(first_word, "[33mwarning\033") > 0) {
+		if (index($0, "Nextest") == 0) {
+			print_line = 0
+		}
+	}
+	if (print_line == 1) {
+		print $0
+	}
+}'
 }
 
 cpublish() {

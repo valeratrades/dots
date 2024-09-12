@@ -29,10 +29,11 @@ return require('lazy').setup({
 		"windwp/nvim-autopairs",
 	},
 	{
-		'valeratrades/telescope.nvim',
+		'nvim-telescope/telescope.nvim',
 		dependencies = {
 			'nvim-lua/plenary.nvim',
-			"nvim-telescope/telescope-live-grep-args.nvim"
+			"nvim-telescope/telescope-live-grep-args.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
 		}
 	},
 	{
@@ -158,6 +159,8 @@ return require('lazy').setup({
 	'olimorris/persisted.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-media-files.nvim',
+	--"PaterJason/nvim-treesitter-sexp",
+	"valeratrades/nvim-treesitter-sexp",
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		deps = { "echasnovski/mini.icons" },
@@ -197,7 +200,7 @@ return require('lazy').setup({
 		build = ":TSUpdate html",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"valeratrades/telescope.nvim",
+			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim", -- required by telescope
 			"MunifTanjim/nui.nvim",
 
@@ -212,7 +215,7 @@ return require('lazy').setup({
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"nvim-lua/plenary.nvim",
-			"valeratrades/telescope.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
 	},
 	"nanotee/zoxide.vim",

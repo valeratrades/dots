@@ -135,9 +135,17 @@ local on_attach = function(client, bufnr)
 		{ desc = "Diagnostics" })
 	buf_set_keymap('n', '<space>ll', function() telescope_builtin.diagnostics({ bufnr = 0, sort_by = "severity" }) end,
 		{ desc = "Local Diagnostics" })
+
+	-- Search Symbols
 	buf_set_keymap('n', '<space>lw', '<cmd>Telescope lsp_document_symbols<CR>', { desc = "Document Symbols" })
 	buf_set_keymap('n', '<space>lW', function() telescope_builtin.lsp_dynamic_workspace_symbols() end,
-		{ desc = "Workspace Symbols" })
+		{ desc = "Dynamic Workspace Symbols. Matches on [name] only" })
+	buf_set_keymap('n', '<space>l<space>a', function() telescope_builtin.lsp_workspace_symbols() end,
+		{ desc = "Workspace Symbols. Matches on all of [destination, name, type]" })
+	buf_set_keymap('n', '<space>l<space>f',
+		function() telescope_builtin.lsp_dynamic_workspace_symbols({ symbols = { "function" } }) end,
+		{ desc = "Dynamic Workspace Symbols" })
+
 	buf_set_keymap('n', '<space>lz', '<cmd>Telescope lsp_incoming_calls<CR>', { desc = "Incoming Calls" })
 	buf_set_keymap('n', '<space>lZ', '<cmd>Telescope lsp_outgoing_calls<CR>', { desc = "Outgoing Calls" })
 	buf_set_keymap('n', '<space>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "Format" })
@@ -207,6 +215,9 @@ vim.g.rustaceanvim = {
 		on_attach = on_attach,
 		default_settings = {
 			['rust-analyzer'] = {
+				dap = {
+					autoload_configuration = true,
+				},
 				cmd = {
 					"rustup", "run", "nightly", "rust-analyzer",
 				},
@@ -214,9 +225,13 @@ vim.g.rustaceanvim = {
 					overrideCommand = { "rustfmt" },
 				},
 				cargo = {
+					BuildScripts = {
+						enable = true,
+					},
 					runBuildScripts = true,
 					loadOutDirsFromCheck = true,
 					--allFeatures = true, -- will break on projects with incompatible features. If comes up, write a script to copy code before uploading to crates.io and sed `features = ["full"]` for `[]`
+					--extraEnv = { CARGO_TARGET_DIR = "target/analyzer" },
 				},
 				procMacro = {
 					enable = true,
@@ -235,7 +250,9 @@ vim.g.rustaceanvim = {
 					command = "clippy",
 				},
 			},
-
+			--server = {
+			--	extraEnv = { CARGO_TARGET_DIR = "target/analyzer" },
+			--},
 		},
 	},
 }

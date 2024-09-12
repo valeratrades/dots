@@ -1,7 +1,7 @@
 vim.g.maplocalleader = "\\"
 
 require('nvim-treesitter.configs').setup {
-	ensure_installed = { "c", "cpp", "lua", "rust", "go", "python", "javascript", "typescript", "gitignore", "markdown", "mermaid", "typst" },
+	ensure_installed = { "c", "cpp", "lua", "rust", "go", "python", "javascript", "typescript", "gitignore", "markdown", "mermaid", "typst", "awk" },
 	sync_install = true,
 	auto_install = true,
 	indent = { enable = true },
@@ -31,6 +31,9 @@ require('nvim-treesitter.configs').setup {
 			goto_next_start = {
 				["]m"] = "@function.outer",
 				["]]"] = "@class.outer",
+				["]o"] = "@loop.*",
+				["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+				["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
 			},
 			goto_next_end = {
 				["]M"] = "@function.outer",
@@ -43,6 +46,12 @@ require('nvim-treesitter.configs').setup {
 			goto_previous_end = {
 				["[M"] = "@function.outer",
 				["[]"] = "@class.outer",
+			},
+			goto_next = {
+				["]d"] = "@conditional.outer",
+			},
+			goto_previous = {
+				["[d"] = "@conditional.outer",
 			},
 		},
 		select = {
@@ -92,4 +101,54 @@ require 'treesitter-context'.setup {
 	separator = nil,
 	zindex = 20,    -- The Z-index of the context window
 	on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+}
+
+--FUCK: only works with:
+--clojure
+--fennel
+--janet
+--query tree-sitter query language
+require("treesitter-sexp").setup {
+	-- Enable/disable
+	enabled = true,
+	-- Move cursor when applying commands
+	set_cursor = true,
+	-- Set to false to disable all keymaps
+	keymaps = {
+		-- Set to false to disable keymap type
+		commands = {
+			-- Set to false to disable individual keymaps
+			swap_prev_elem = "<e",
+			swap_next_elem = ">e",
+			swap_prev_form = "<f",
+			swap_next_form = ">f",
+			promote_elem = "<LocalLeader>O",
+			promote_form = "<LocalLeader>o",
+			splice = "<LocalLeader>@",
+			slurp_left = "<(",
+			slurp_right = ">)",
+			barf_left = ">(",
+			barf_right = "<)",
+			insert_head = "<I",
+			insert_tail = ">I",
+		},
+		motions = {
+			form_start = "(",
+			form_end = ")",
+			prev_elem = "[e",
+			next_elem = "]e",
+			prev_elem_end = "[E",
+			next_elem_end = "]E",
+			prev_top_level = "[[",
+			next_top_level = "]]",
+		},
+		textobjects = {
+			inner_elem = "ie",
+			outer_elem = "ae",
+			inner_form = "io",
+			outer_form = "ao",
+			inner_top_level = "iF",
+			outer_top_level = "aF",
+		},
+	},
 }

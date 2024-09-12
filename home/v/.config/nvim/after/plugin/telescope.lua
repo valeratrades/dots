@@ -21,7 +21,21 @@ end, { desc = "Project's TODOs" })
 vim.keymap.set('n', '<space>si', "<cmd>Telescope media_files<cr>", { desc = "Media files" })
 vim.keymap.set("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Effectively Ctrl+f" })
 
-require("telescope").setup {
+local telescope = require("telescope")
+--telescope.load_extension('fzf')
+--local fzf_opts = {
+--	fuzzy = true,                  -- false will only do exact matching
+--	override_generic_sorter = true, -- override the generic sorter
+--	override_file_sorter = true,   -- override the file sorter
+--	case_mode = "smart_case",      -- or "ignore_case" or "respect_case"
+--}
+
+telescope.setup {
+	--pickers = {
+	--	lsp_dynamic_workspace_symbols = {
+	--		sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_opts)
+	--	},
+	--},
 	extensions = {
 		media_files = {
 			filetypes = { "png", "webp", "jpg", "jpeg" },
@@ -56,7 +70,8 @@ require("telescope").setup {
 				["<C-x>"] = actions.select_horizontal + actions.center,
 				["<C-v>"] = actions.select_vertical + actions.center,
 				["<C-t>"] = actions.select_tab + actions.center,
-				["<C-l>"] = actions.select_all + actions.add_selected_to_loclist
+				["<C-l>"] = actions.select_all + actions.add_selected_to_loclist,
+				["<c-f>"] = actions.to_fuzzy_refine,
 			},
 			n = {
 				["<CR>"] = actions.select_default + actions.center,

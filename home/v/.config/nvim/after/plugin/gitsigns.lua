@@ -25,15 +25,3 @@ vim.keymap.set('n', '<Space>gv', gs.preview_hunk_inline, { desc = "Git: preview 
 vim.keymap.set('n', '<Space>gU', "<cmd>Gitsigns reset_hunk<cr>", { desc = "Git: reset hunk" })
 vim.keymap.set('n', '<Space>gs', "<cmd>Gitsigns stage_hunk<cr>", { desc = "Git: stage hunk" })
 vim.keymap.set('n', '<Space>gf', "<cmd>Telescope git_status<cr>", { desc = "Git: find modifications" })
-
-K('n', 'gr', function()
-	if vim.wo.diff then return 'gr' end
-	vim.schedule(function() gs.next_hunk() end)
-	return '<Ignore>'
-end, { expr = true })
-
-K('n', 'gn', function()
-	if vim.wo.diff then return 'gn' end
-	vim.schedule(function() gs.prev_hunk() end)
-	return '<Ignore>'
-end, { expr = true })

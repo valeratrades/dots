@@ -1,3 +1,4 @@
+local utils = require('valera.utils')
 -- Notes for all mappings:
 -- 1) never use ':lua', instead use '<cmd>lua', for ':lua' forces us to normal mode.
 
@@ -295,11 +296,12 @@ local function goto_file_line_column_or_function(file_line_or_func)
 		local file, line, col = string.match(file_line_or_func, "([^:]+):(%d+):(%d+)")
 		vim.cmd('edit ' .. file)
 		vim.fn.cursor(tonumber(line), tonumber(col))
+		vim.cmd("normal! zz")
 	elseif string.match(file_line_or_func, "([^:]+):(%d+)") then -- file:line (without col)
 		local file, line = string.match(file_line_or_func, "([^:]+):(%d+)")
-		local expanded_file = vim.fn.expand(file)                 --? do I need to expand it?
-		vim.cmd("edit " .. expanded_file)
-		vim.api.nvim_win_set_cursor(0, { line, 0 })
+		vim.cmd("edit " .. file)
+		vim.fn.cursor(tonumber(line), 1)
+		vim.cmd("normal! zz")
 	elseif string.match(file_line_or_func, "::") then -- file::mod::another_mod::function_name (LSP symbol path)
 		local function_name
 		for segment in string.gmatch(file_line_or_func, "([^:]+)") do
@@ -309,14 +311,29 @@ local function goto_file_line_column_or_function(file_line_or_func)
 		local builtin = require('telescope.builtin')
 		-- Use LSP to find the function location if available
 		local lsp_active = #vim.lsp.get_clients() > 0
-		if false then
-			builtin.lsp_document_symbols({
-				symbols = { "function", "method" },
-				default_text = function_name,
+		if lsp_active then
+			builtin.lsp_workspace_symbols({
+				query = function_name,
+				-- thing to auto-select the result if it's the only match.
+				--TODO: make it just auto-select the default match
+				--on_complete = {
+				--	function(picker)
+				--		local index = 0
+				--		-- get an iterator of entries
+				--		for _ in picker.manager:iter() do
+				--			index = index + 1
+				--			if index > 1 then
+				--				break
+				--			end
+				--		end
+				--		if index == 1 then
+				--			require("telescope.actions").select_default(picker.prompt_bufnr)
+				--		end
+				--	end,
+				--},
 			})
 		else
-			-- Fallback
-			print("fallback")
+			print("Lsp Active, but no clients found. Falling back to live_grep")
 			builtin.live_grep({ default_text = function_name .. [[\(]], hidden = true, no_ignore = true, file_ignore_patterns = { ".git/", "target/", "%.lock" } })
 		end
 	else -- file only
@@ -332,7 +349,12 @@ end
 
 
 vim.api.nvim_create_user_command("Gf", function(opts)
-	goto_file_line_column_or_function(unpack(opts.fargs))
+	local arg = opts.fargs[1]
+	-- If no argument is passed, get the system clipboard contents
+	if not arg then
+		arg = vim.fn.getreg("+")
+	end
+	goto_file_line_column_or_function(arg)
 end, {
 	nargs = "*",
 	complete = function(_, line)
@@ -346,5 +368,3 @@ end, {
 		return {}
 	end,
 })
-
-local utils = require('valera.utils')
