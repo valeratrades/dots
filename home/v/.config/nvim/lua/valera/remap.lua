@@ -312,28 +312,20 @@ local function goto_file_line_column_or_function(file_line_or_func)
 		-- Use LSP to find the function location if available
 		local lsp_active = #vim.lsp.get_clients() > 0
 		if lsp_active then
+			local actions = require('telescope.actions')
 			builtin.lsp_workspace_symbols({
 				query = function_name,
 				-- thing to auto-select the result if it's the only match.
 				--TODO: make it just auto-select the default match
-				--on_complete = {
-				--	function(picker)
-				--		local index = 0
-				--		-- get an iterator of entries
-				--		for _ in picker.manager:iter() do
-				--			index = index + 1
-				--			if index > 1 then
-				--				break
-				--			end
-				--		end
-				--		if index == 1 then
-				--			require("telescope.actions").select_default(picker.prompt_bufnr)
-				--		end
-				--	end,
-				--},
+				on_complete = {
+					function(picker)
+						actions.select_default(picker.prompt_bufnr)
+						vim.cmd("normal! zt")
+					end,
+				},
 			})
 		else
-			print("Lsp Active, but no clients found. Falling back to live_grep")
+			print("No LSP clients found. Falling back to live_grep")
 			builtin.live_grep({ default_text = function_name .. [[\(]], hidden = true, no_ignore = true, file_ignore_patterns = { ".git/", "target/", "%.lock" } })
 		end
 	else -- file only
