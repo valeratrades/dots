@@ -1,6 +1,7 @@
 alias caclip="cargo clippy --tests -- -Dclippy::all"
 alias ctn="cargo test -- --nocapture"
 alias cpad="cargo publish --allow-dirty"
+alias cflags="RUST_LOG="debug,hyper=info" RUST_BACKTRACE=1 RUST_LIB_BACKTRACE=0"
 
 cb() {
 	guess_name=$(basename $(pwd))
@@ -26,23 +27,10 @@ cb() {
 	fi
 }
 
-#cq() {
-#	local stderr_temp_file=$(mktemp)
-#	cargo --color always --quiet $@ 2>"$stderr_temp_file"
-#	local exit_status=$?
-#
-#	if [ $exit_status!=0 ]; then
-#		# note that when running `cargo check`, the warnings are piped to stdout, so still will be printed. However, we probably want that for `check`.
-#		cat "$stderr_temp_file" 1>&2
-#	fi
-#
-#	rm -f "$stderr_temp_file"
-#	return $exit_status
-#}
-
 # for some reason truncates the output of `cargo test`. But `cargo nextest` works, so don't care.
 cq() {
-	cargo_output=$(script -q /dev/null --command="cargo --quiet ${@}")
+	cmd="${@}"
+	cargo_output=$(script -q /dev/null --command="cargo --quiet ${cmd}")
 	echo "$cargo_output" | awk '
 	BEGIN{
 	RS="\r\n\r\n";
@@ -158,4 +146,19 @@ ct() {
 	if [ "$run_after" = "true" ]; then
 		cargo run ${@}
 	fi
+}
+
+
+#DEPENDS: [cq]
+ce() {
+	cmd="cq \"nextest run"
+	for arg in ${@}; do
+		cmd="$cmd -E 'test(/${arg}/)'"
+	done
+	cmd+="\""
+	echo ${cmd}
+
+	# trim trailing whitespace
+	result=$(eval ${cmd})
+	printf "$(echo "${result}" | sed 's/[[:space:]]*$//')"
 }

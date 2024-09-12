@@ -14,8 +14,6 @@ func main() {
 		internal.CppWatch()
 	case "ce":
 		internal.CargoNextestShorthand(args)
-	case "cq":
-		internal.CargoSilent(args)
 	default:
 		panic("Command not found: " + base_cmd)
 	}
