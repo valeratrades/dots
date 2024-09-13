@@ -1,6 +1,8 @@
+# currently must rewrite _all_ the desired rustflags for each target, - they don't stack
+
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
-rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"] #, "--cfg", "tokio_unstable"]
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold", "--cfg", "tokio_unstable", "-Z", "threads=8", "-Z", "track-diagnostics"]
 
 [profile.dev]
 ## Disabling debug info speeds up builds a bit.

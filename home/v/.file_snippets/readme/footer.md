@@ -2,10 +2,9 @@
 <!-- markdownlint-disable -->
 <details>
   <summary>
-    <h2>Installation<h2>
+    <h2>Installation</h2>
   </summary>
-
-TODO
+	<pre><code class="language-sh">TODO</code></pre>
 </details>
 <!-- markdownlint-restore -->
 

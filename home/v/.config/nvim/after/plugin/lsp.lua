@@ -164,6 +164,7 @@ local on_attach = function(client, bufnr)
 	set_dynamic_symbols_keymap('m', { "module" })
 	set_dynamic_symbols_keymap('c', { "constant" })
 	set_dynamic_symbols_keymap('e', { "enum" })
+	set_dynamic_symbols_keymap('v', { "variable" })
 	--
 
 	buf_set_keymap('n', '<space>lz', '<cmd>Telescope lsp_incoming_calls<CR>', { desc = "Incoming Calls" })

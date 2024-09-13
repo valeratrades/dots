@@ -162,8 +162,6 @@ return require('lazy').setup({
 	'olimorris/persisted.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	'nvim-telescope/telescope-media-files.nvim',
-	--"PaterJason/nvim-treesitter-sexp",
-	"valeratrades/nvim-treesitter-sexp",
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		deps = { "echasnovski/mini.icons" },
