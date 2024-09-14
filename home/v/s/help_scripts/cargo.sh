@@ -48,6 +48,11 @@ cq() {
 		print $0
 	}
 }'
+
+	# Restore stdout (fd 1) and stderr (fd 2)
+	exec 1>&3 2>&4
+	# Close the saved file descriptors
+	exec 3>&- 4>&-
 }
 
 cpublish() {

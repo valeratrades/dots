@@ -80,5 +80,15 @@ tn2() {
 	tmux send-keys -t "${session_name}:build.1" "cd ~/.${assume_project_name} && nvim .log" Enter
 	tmux send-keys -t "${session_name}:build.2" 'cw' Enter
 
+	tmux new-window -t "${session_name}" -n "window"
+	tmux send-keys -t "${session_name}:window.0" "cd ~/.${assume_project_name} && nvim window.toml" Enter
+	tmux split-window -h -t "${session_name}:window"
+	tmux send-keys -t "${session_name}:window.1" "cd ~/.${assume_project_name} && nvim .log..window" Enter # double dot in ..window is a bug, may need to change once fixed
+	tmux split-window -v -t "${session_name}:window.0"
+	# numbering of panes switches after we split the 0th pane
+	tmux send-keys -t "${session_name}:window.1" "cd ~/.${assume_project_name} && window .log" Enter
+	#tmux resize-pane -t "${session_name}:window.1" -D 30
+	tmux select-pane -t "${session_name}:window.0"
+
 	tmux attach-session -t "${session_name}:source.0"
 }

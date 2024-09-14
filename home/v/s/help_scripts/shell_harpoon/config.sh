@@ -1,5 +1,5 @@
 _s() {
-	cs ~/s/discretionary_engine
+	cs ~/.discretionary_engine
 }
 
 _r() {

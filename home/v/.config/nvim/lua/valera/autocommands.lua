@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 --vim.cmd([[ autocmd BufWritePost *.sh silent !chmod +x <afile> ]])
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = { "*.sh", "*.zsh", "*.bash", "*.fish", "*.xsh" },
+	pattern = { "*.sh", "*.zsh", "*.bash", "*.fish", "*.xsh", "*script.rs" },
 	callback = function()
 		os.execute('chmod +x ' .. vim.fn.expand('%:p'))
 	end,

@@ -244,7 +244,9 @@ return require('lazy').setup({
 	{
 		'fei6409/log-highlight.nvim',
 		config = function()
-			require('log-highlight').setup {}
+			require('log-highlight').setup {
+				extension = { "log", "window" },
+			}
 		end,
 	},
 	{

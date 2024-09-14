@@ -11,6 +11,7 @@ application/pdf=org.pwmt.zathura.desktop
 x-scheme-handler/discord-1176718791388975124=discord-1176718791388975124.desktop
 dorion=dorion-handler.desktop
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
+x-scheme-handler/webcal=google-chrome-beta.desktop
 
 [Added Associations]
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
