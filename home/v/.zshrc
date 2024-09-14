@@ -32,6 +32,7 @@ sl() {
 		exa -Ah $@
 	fi
 }
+alias st="eza --sort new"
 mkfile() {
   file_path="$1"
   mkdir -p "$(dirname "${file_path}")"
@@ -413,6 +414,7 @@ beep() {
 		return 0
 	fi
 }	
+# doesn't work with hours, and that's intentional - starting a >1h timer with this is prone to failure, as it does not persist state between shutdowns.
 timer() {
 	trap 'eww update timer="";return 1' INT
 	trap 'eww update timer=""' EXIT
