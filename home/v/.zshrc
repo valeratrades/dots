@@ -208,6 +208,9 @@ alias wayland_wine="DISPLAY='' wine64" # set it up to work with wayland, followi
 alias pfind="procs --tree | fzf"
 alias tree="fd . | as-tree"
 alias bak="XDG_CONFIG_HOME=/home/v/.dots/home/v/.config"
+alias as_term="script -qfc" # don't forget the quotes
+
+
 #gpg id = gpg --list-keys --with-colons | awk -F: '/uid/ && /valeratrades@gmail.com/ {getline; print $5}'
 
 play_last() {

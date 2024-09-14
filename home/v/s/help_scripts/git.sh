@@ -72,13 +72,13 @@ gifm() {
 	else
 		milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
 	fi
-	# the following have "puffy" formatting with extra empty lines, but can't get rid of them without killing the coloring.
-	gh issue list --milestone="${milestone}"
-	gh issue list --label=bug
+	# doesn't print the warnings because conditionals in piped commands are hard, so awk ends up cutting them off
+	script -qfc="gh issue list --milestone=${milestone}" | awk 'NR > 3'
+	script -qfc='gh issue list --label=bug' | awk 'NR > 3'
 }
 # Git Issues Filter Assignee (me)
 gifa() {
-	gh issue list --assignee="@me"
+	script -qfc='gh issue list --assignee="@me"' | awk 'NR > 3'
 }
 
 # r for rejected
