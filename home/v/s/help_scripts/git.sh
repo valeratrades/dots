@@ -81,6 +81,10 @@ gifa() {
 	script -qfc='gh issue list --assignee="@me"' | awk 'NR > 3'
 }
 
+gml() {
+	gh api repos/:owner/:repo/milestones --jq '.[] | select(.state=="open") | "\(.title): \(.description | split("\n")[0] | gsub("\r"; ""))"'
+}
+
 # r for rejected
 alias gir="gh issue close -r \"not planned\""
 alias gid="gh issue delete --yes"

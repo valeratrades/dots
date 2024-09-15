@@ -32,7 +32,7 @@ sl() {
 		exa -Ah $@
 	fi
 }
-alias st="eza --sort new"
+alias lt="eza --sort new"
 mkfile() {
   file_path="$1"
   mkdir -p "$(dirname "${file_path}")"
