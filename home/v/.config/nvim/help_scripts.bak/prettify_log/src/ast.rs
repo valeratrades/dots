@@ -250,6 +250,37 @@ mod tests {
 	}
 
 	#[test]
+	fn case_1() -> Result<()> {
+		*INIT;
+		let input = r#"[Some(ConceptualOrderPercents { order_type: StopMarket(ConceptualStopMarket { price: 0.32500047473929544 }), symbol: Symbol { base: "ADA", quote: "USDT", market: BinanceFutures }, side: Sell, qty_percent_of_controlled: Percent(1.0) })]"#;
+		let tokens = str_into_tokens(input.to_owned())?;
+		let ast = tokens_into_ast(tokens);
+		insta::assert_debug_snapshot!(ast, @r###"
+  Err(
+	// Fails with:
+      "Could not convert tokens to AST",
+  )
+  "###);
+		Ok(())
+	}
+
+	#[test]
+	fn case_2() -> Result<()> {
+		*INIT;
+		let input = r#"parent_position_asset: "ADA", min_qty_any_ordertype: 5.0, left_to_target_notional: 0.320589068252616, side: Sell, dyn_info: PositionProtocolsDynamicInfo({StopEntry: {"dm": Some(ProtocolDynamicInfo { fills: [28.0], protocol_orders: ProtocolOrders { protocol_id: "dm", __orders: [Some(ConceptualOrderPercents { order_type: Market(ConceptualMarket { maximum_slippage_percent: Percent(1.0) }), symbol: Symbol { base: "ADA", quote: "USDT", market: BinanceFutures }, side: Sell, qty_percent_of_controlled: Percent(1.0) })] } })}})
+"#;
+		let tokens = str_into_tokens(input.to_owned())?;
+		let ast = tokens_into_ast(tokens);
+		insta::assert_debug_snapshot!(ast, @r###"
+  Err(
+	// Fails with:
+      "Array can only contain `Value` types",
+  )
+  "###);
+		Ok(())
+	}
+
+	#[test]
 	fn log() -> Result<()> {
 		*INIT;
 		let input = r#"hub_rx: Receiver { shared: Shared { value: RwLock(PhantomData<std::sync::rwlock::RwLock<discretionary_engine::exchange_apis::hub::HubToExchange>>, RwLock { data: HubToExchange { key: 0191cc99-b03a-7003-ab4d-ef05bef629ad, orders: [Order { id: PositionOrderId { position_id: 0191cc99-b039-7960-96d5-3230a8a0a12a, protocol_id: "dm", ordinal: 0 }, order_type: Market, symbol: Symbol { base: "ADA", quote: "USDT", market: BinanceFutures }, side: Buy, qty_notional: 30.78817733990148 }, None] } }), version: Version(2), is_closed: false, ref_count_rx: 1 }, version: Version(2) }, last_reported_fill_key: 00000000-0000-0000-0000-000000000000, currently_deployed: RwLock { data: [], poisoned: false, .. }"#;

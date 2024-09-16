@@ -2,7 +2,10 @@
 
 [target.x86_64-unknown-linux-gnu]
 linker = "clang"
+#rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"]
 rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold", "--cfg", "tokio_unstable", "-Z", "threads=8", "-Z", "track-diagnostics"]
+
+#[target.'cfg(all(nightly))']
 
 [profile.dev]
 ## Disabling debug info speeds up builds a bit.
@@ -15,10 +18,6 @@ debug = true
 
 [build]
 rustc-wrapper = "/usr/bin/sccache"
-rustflags = ["-Z", "threads=8"]
-
-[rust]
-rustflags = ["-Z", "track-diagnostics"]
 
 [alias]
 w = "watch"

@@ -2,6 +2,8 @@ alias caclip="cargo clippy --tests -- -Dclippy::all"
 alias ctn="cargo test -- --nocapture"
 alias cpad="cargo publish --allow-dirty"
 alias cflags="RUST_LOG="debug,hyper=info" RUST_BACKTRACE=1 RUST_LIB_BACKTRACE=0"
+# for "nightly flags"
+#alias nfl="RUSTFLAGS='-C link-arg=-fuse-ld=/usr/bin/mold --cfg tokio_unstable -Z threads=8 -Z track-diagnostics'"
 
 cb() {
 	guess_name=$(basename $(pwd))

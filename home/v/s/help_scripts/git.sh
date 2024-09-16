@@ -73,12 +73,12 @@ gifm() {
 		milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
 	fi
 	# doesn't print the warnings because conditionals in piped commands are hard, so awk ends up cutting them off
-	script -qfc="gh issue list --milestone=${milestone}" | awk 'NR > 3'
-	script -qfc='gh issue list --label=bug' | awk 'NR > 3'
+	script -f -q /dev/null -c="gh issue list --milestone=${milestone}" | awk 'NR > 3'
+	script -f -q /dev/null -c='gh issue list --label=bug' | awk 'NR > 3'
 }
 # Git Issues Filter Assignee (me)
 gifa() {
-	script -qfc='gh issue list --assignee="@me"' | awk 'NR > 3'
+	script -f -q /dev/null -c='gh issue list --assignee="@me"' | awk 'NR > 3'
 }
 
 gml() {

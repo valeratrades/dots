@@ -92,4 +92,11 @@ function M.FzfBestMatch(data, query)
 	return fzf_filter_symbols(data, query)
 end
 
+---@return string The visual selection
+function M.GetVisualSelection()
+	assert(vim.fn.mode() == 'v' or vim.fn.mode() == 'V' or vim.fn.mode() == '', "Not in visual mode")
+	vim.cmd('normal! "xy')
+	return vim.fn.getreg('x')
+end
+
 return M
