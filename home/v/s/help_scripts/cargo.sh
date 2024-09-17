@@ -1,7 +1,11 @@
 alias caclip="cargo clippy --tests -- -Dclippy::all"
 alias ctn="cargo test -- --nocapture"
 alias cpad="cargo publish --allow-dirty"
-alias cflags="RUST_LOG="debug,hyper=info" RUST_BACKTRACE=1 RUST_LIB_BACKTRACE=0"
+alias cflags="RUST_LOG=\"debug,hyper=info\" RUST_BACKTRACE=1 RUST_LIB_BACKTRACE=0"
+
+alias cscript="cargo +nightly -Zscript" # https://doc.rust-lang.org/cargo/reference/unstable.html#script
+#!/usr/bin/env -S cargo +nightly -Zscript
+
 # for "nightly flags"
 #alias nfl="RUSTFLAGS='-C link-arg=-fuse-ld=/usr/bin/mold --cfg tokio_unstable -Z threads=8 -Z track-diagnostics'"
 
@@ -32,7 +36,7 @@ cb() {
 # for some reason truncates the output of `cargo test`. But `cargo nextest` works, so don't care.
 cq() {
 	cmd="${@}"
-	cargo_output=$(script -q /dev/null --command="cargo --quiet ${cmd}")
+	cargo_output=$(script -f -q /dev/null -c="cargo --quiet ${cmd}")
 	echo "$cargo_output" | awk '
 	BEGIN{
 	RS="\r\n\r\n";
@@ -58,7 +62,7 @@ cq() {
 }
 
 cpublish() {
-	cargo release --no-confirm --execute ${@}
+	cargo release --no-confirm --execute "${@}"
 }
 
 

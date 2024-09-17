@@ -144,7 +144,13 @@ return require('lazy').setup({
 		'tpope/vim-fugitive',
 	},
 	{ -- Testing
-		'nvim-neotest/neotest',
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-treesitter/nvim-treesitter"
+		},
 	},
 	--
 
@@ -153,7 +159,6 @@ return require('lazy').setup({
 	--{ 'akinsho/toggleterm.nvim', version = "*", config = true }, // deprecated. Nvim seems to already have all the things I want. Delete this fallback reminder in a month.
 	{
 		'mrcjkb/rustaceanvim',
-		--version = '^4',
 		lazy = false, -- This plugin is already lazy
 	},
 

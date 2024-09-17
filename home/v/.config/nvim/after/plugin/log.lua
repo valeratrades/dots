@@ -44,7 +44,7 @@ local function popupLogContents(contents)
 		return
 	end
 
-	local prettify_cmd = "cat <<EOF | prettify_log -\n" .. contents .. "\nEOF"
+	local prettify_cmd = "cat <<EOF | prettify_log - --maybe-colon-nested\n" .. contents .. "\nEOF"
 	local prettified = vim.fn.system(prettify_cmd)
 	local as_rust_block = "```rs\n" .. prettified .. "```"
 	utils.ShowMarkdownPopup(as_rust_block)

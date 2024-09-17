@@ -234,7 +234,7 @@ exec_always "sh -c -- pkill -f 'todo monitor' && todo monitor || todo monitor"
 bindsym $mod+w exec "~/s/help_scripts/circle_wallpapers.sh f"
 bindsym $mod+Shift+w exec "~/s/help_scripts/circle_wallpapers.sh b"
 
-# Screenshots
+# # Screenshots
 exec mkdir -p ~/tmp/Screenshots >/dev/null
 set $throwaway_screenshot slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
 bindsym Insert exec $throwaway_screenshot
@@ -242,9 +242,11 @@ mode "screenshot" {
 	set $fullscreen_screenshot grim ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
 	set $delayed_screenshot sleep 3 && slurp | grim -g - ~/tmp/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/tmp/Screenshots/$(ls -t ~/tmp/Screenshots | awk 'NR==1 {print; exit}')
 	set $important_screenshot slurp | grim -g - ~/Images/Screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
+	set $trading_screenshot slurp | grim -g - ~/Images/Trading/PatternScreenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png && swappy -f ~/Images/Trading/PatternScreenshots/$(ls -t ~/Images/Trading/PatternScreenshots | awk 'NR==1 {print; exit}')
 	set $open_last_screenshot swappy -f ~/Images/Screenshots/$(ls -t ~/Images/Screenshots | awk 'NR==1 {print; exit}')
 
 	bindsym i exec $switch_out && $important_screenshot
+	bindsym t exec $switch_out && $trading_screenshot
 	# doesn't work for some reason
 	bindsym f exec $switch_out && $fullscrseen_screenshot
 	bindsym d exec $switch_out && $delayed_screenshot
@@ -259,6 +261,7 @@ mode "screenshot" {
 	bindsym q exec $switch_out
 }
 bindsym $mod+Insert exec "swaymsg mode screenshot && eww update sway_mode=screenshot"
+#
 
 mode "size_presets" {
 	bindsym 1 resize set 350px 650px
