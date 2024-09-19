@@ -372,6 +372,13 @@ alias yG="yay -Q | rg"
 alias yQ="yay -Q"
 alias ys="yay -s"
 
+alias aS="aura -S --noconfirm"
+alias aR="aura -R --noconfirm"
+alias aRn="aura -Rns --noconfirm"
+alias aG="aura -Q | rg"
+alias aQ="aura -Q"
+alias as="aura -s"
+
 alias pS="sudo pacman --noconfirm -S"
 alias pR="sudo pacman --noconfirm -R"
 alias pRn="sudo pacman --noconfirm -Rn"
