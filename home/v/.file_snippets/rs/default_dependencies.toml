@@ -11,4 +11,4 @@ len_zero = "allow" # `.empty()` is O(1) but on &str only
 
 [dependencies]
 derive-new = "^0.7.0"
-eyre = "^0.6.12"
+color-eyre = "^0.6.3"

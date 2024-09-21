@@ -59,7 +59,7 @@
 		:class "text"
 		:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
 		:visible {todo_timer != "None"}
-		"${todo_timer}"))
+		" ${todo_timer}"))
 
 ;; Cargo ;;
 (defwidget cargo []

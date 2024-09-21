@@ -11,5 +11,5 @@ _n() {
 }
 
 _t() {
-	cowsay -f dragon moo
+	cst aggr_orderbook_client
 }
