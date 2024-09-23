@@ -3,7 +3,7 @@ _s() {
 }
 
 _r() {
-	cs ~/s/aggregated_orderbook
+	cs ~/s/aggr_orderbook
 }
 
 _n() {

@@ -260,6 +260,7 @@ return require('lazy').setup({
 		build = "deno task --quiet build:fast",
 	},
 	"nvim-neotest/nvim-nio",
+	'arnamak/stay-centered.nvim',
 	"3rd/image.nvim",
 	"DreamMaoMao/yazi.nvim",
 	"zbirenbaum/copilot.lua",
