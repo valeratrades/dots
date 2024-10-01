@@ -20,6 +20,9 @@ export TOTAL_RAM_B=$(rg  MemTotal /proc/meminfo | awk '{print $2 * 1024}') # cur
 #export MANPAGER='nvim +Man!'
 export LC_TIME=en_GB.UTF-8
 
+export PAGER=less
+export MANPAGER=less
+
 . ~/.config/nvim/functions.sh
 mkdir -p /home/v/Videos/obs/ >/dev/null 2>&1
 
@@ -84,6 +87,18 @@ alias pt="pytest"
 alias pk="pytest -k "
 alias pm="py src/main.py"
 #
+
+fontsize() {
+	CONFIG_FILE="$HOME/.config/alacritty/alacritty.toml"
+
+	if [ -z "$1" ]; then
+		current_size=$(grep '^size = ' "$CONFIG_FILE" | sed 's/size = //')
+		echo "$current_size"
+	else
+		sed -i 's/^\(size = \).*/\1'"$1"'/' "$CONFIG_FILE"
+	fi
+}
+
 
 # ============================================================================
 # ABOVE THIS LINE WE RELY ON ALL THE APIS TO STAY CONSTANT, AS THEY ARE USED BY OTHER SH SCRIPTS.

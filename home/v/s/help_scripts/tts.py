@@ -4,6 +4,7 @@ import soundfile as sf
 import torch
 import sys
 import numpy as np
+import time
 
 try:
     from icecream import ic
@@ -62,9 +63,17 @@ def synthesise(text: str, output_path: str) -> None:
 
     mut_i = 0
     audio_chunks = []
+    start_time = time.perf_counter()
     for chunk in text_chunks:
-        ic(mut_i, len(text))
-        sys.stderr.write(f"\rSynthesising audio: {mut_i}/{len(text)}")
+        time_passed = time.perf_counter() - start_time
+        est_time = (
+            time_passed / (mut_i / (len(text) - mut_i)).__round__()
+            if mut_i > 0
+            else float("inf")
+        )
+        sys.stderr.write(
+            f"\rSynthesising audio: {mut_i}/{len(text)}\nTime passed: {time_passed.round()}s\nEstimated time to completion: {est_time}s\n"
+        )
         mut_i += len(chunk)
 
         speech = synthesiser(

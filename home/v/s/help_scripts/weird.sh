@@ -71,8 +71,15 @@ alias bad_apple="bad-apple-rs"
 russian_roulette() {
 	r=$((RANDOM % 6))
 	if [ $r -eq 0 ]; then
-		/usr/bin/emacs ${1} || /usr/bin/emacs
+		/usr/bin/emacs "${1}" || /usr/bin/emacs
 	else
-		$EDITOR ${@}
+		$EDITOR "${@}"
 	fi
+}
+
+away() {
+	current_fontsize=$(fontsize)
+	fontsize 22
+	printf 'Will be\nright back' | figlet | $PAGER
+	fontsize "$current_fontsize"
 }
