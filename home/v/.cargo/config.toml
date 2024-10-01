@@ -40,9 +40,10 @@ c = "lcheck"
 t = "nextest run"
 r = "lrun"
 
+# Orion says 3 is too much, suggested 2. 2 would lead to rebuild on `release` builds anyways, so going with just default 1.
 # all deps except package
-[profile.dev.package."*"]
-opt-level = 3
+#[profile.dev.package."*"]
+#opt-level = 3
 
 [profile.dev.package]
 v_utils.opt-level = 1

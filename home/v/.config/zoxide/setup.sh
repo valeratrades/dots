@@ -65,6 +65,7 @@ function z() {
     __zoxide_z "$@"
 }
 
+
 function zi() {
     __zoxide_zi "$@"
 }

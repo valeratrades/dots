@@ -1,5 +1,6 @@
 alias emacs="printf \"\033[31mno\033[0m\n\""
 alias nano="printf \"\033[31mno\033[0m\n\""
+alias wget="printf \"\033[33muse aria2 instead\033[0m\n\""
 
 function print_sturdy() {
     echo "+---+---+---+---+---++---+---+---+---+---+"

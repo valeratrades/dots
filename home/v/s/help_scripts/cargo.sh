@@ -9,7 +9,8 @@ alias cscript="cargo +nightly -Zscript" # https://doc.rust-lang.org/cargo/refere
 # for "nightly flags"
 #alias nfl="RUSTFLAGS='-C link-arg=-fuse-ld=/usr/bin/mold --cfg tokio_unstable -Z threads=8 -Z track-diagnostics'"
 
-cb() {
+# cargo build install
+cbi() {
 	guess_name=$(basename $(pwd))
 	if [ -n "$1" ]; then
 		if [ "$1" = "-d" ] || [ "$1" = "--dev" ]; then

@@ -13,14 +13,14 @@ gg() {
 	fi
 
 	if [ "$1" = "t" ] || [ "$1" = "-t" ] || [ "$1" = "--tag" ]; then
-		git tag -a $2 -m "$2"
+		git tag -a "$2" -m "$2"
 		shift 2
 	fi
 
 
 	message="_"
 	if [ -n "$1" ]; then
-		message="$@"
+		message="$*"
 	fi
 	message="${prefix}${message}"
 

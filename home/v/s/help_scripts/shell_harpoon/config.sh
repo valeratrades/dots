@@ -11,5 +11,5 @@ _n() {
 }
 
 _t() {
-	cst aggr_orderbook_client
+	cs ~/s/aggr_orderbook/tmp/aggr_orderbook_client
 }

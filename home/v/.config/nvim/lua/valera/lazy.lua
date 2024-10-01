@@ -266,4 +266,5 @@ return require('lazy').setup({
 	"zbirenbaum/copilot.lua",
 	"norcalli/nvim-colorizer.lua",
 	"Makaze/AnsiEsc",
+	"tpope/vim-speeddating",
 })

@@ -210,6 +210,7 @@ alias pfind="procs --tree | fzf"
 alias tree="fd . | as-tree"
 alias bak="XDG_CONFIG_HOME=/home/v/.dots/home/v/.config"
 alias as_term="script -qfc" # don't forget the quotes
+alias bluetooth="blueman-manager"
 
 
 #gpg id = gpg --list-keys --with-colons | awk -F: '/uid/ && /valeratrades@gmail.com/ {getline; print $5}'
@@ -217,6 +218,12 @@ alias as_term="script -qfc" # don't forget the quotes
 play_last() {
 	last=$(ls -t ~/Videos/obs| head -n 1)
 	vlc --one-instance ~/Videos/obs/$last
+}
+
+screenshot() {
+	base="$(ls -t ~/tmp/Screenshots/ | head -n 1)"
+	_path="${HOME}/tmp/Screenshots/${base}"
+	echo "$_path"
 }
 
 # # cli_translate
@@ -372,6 +379,7 @@ alias yG="yay -Q | rg"
 alias yQ="yay -Q"
 alias ys="yay -s"
 
+alias aA="aura -A --noconfirm"
 alias aS="aura -S --noconfirm"
 alias aR="aura -R --noconfirm"
 alias aRn="aura -Rns --noconfirm"

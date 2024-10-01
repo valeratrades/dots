@@ -232,12 +232,9 @@ K("n", "z8", "u8z=`x", { silent = true })
 K("n", "z9", "u9z=`x", { silent = true })
 
 K('n', '<space>clr', 'vi""8di\\033[31m<Esc>"8pa\\033[0m<Esc>', { desc = "add red escapecode" })
-K('n', '<space>clb', 'vi""8di\\033[34m<Esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
 K('n', '<space>clg', 'vi""8di\\033[32m<Esc>"8pa\\033[0m<Esc>', { desc = "add green escapecode" })
--- and now color rust, because they decided to have different escape codes...
-K('n', '<space>clrr', 'vi""8di\\x1b[31m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add red escapecode" })
-K('n', '<space>clrb', 'vi""8di\\x1b[34m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add blue escapecode" })
-K('n', '<space>clrg', 'vi""8di\\x1b[32m<Esc>"8pa\\x1b[0m<Esc>', { desc = "add green escapecode" })
+K('n', '<space>cly', 'vi""8di\\033[33m<Esc>"8pa\\033[0m<Esc>', { desc = "add yellow escapecode" })
+K('n', '<space>clb', 'vi""8di\\033[34m<Esc>"8pa\\033[0m<Esc>', { desc = "add blue escapecode" })
 
 K('', '<space>.', '<cmd>tabe .<cr>')
 
