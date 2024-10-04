@@ -407,6 +407,7 @@ alias pR="sudo pacman --noconfirm -R"
 alias pRn="sudo pacman --noconfirm -Rn"
 alias pSyy="sudo pacman --noconfirm -Syy"
 alias pSyu="sudo pacman --noconfirm -Syu"
+alias pSyyu="sudo pacman --noconfirm -Syyu"
 alias pG="pacman -Q | rg"
 
 alias pY="${HOME}/s/help_scripts/maintenance/main.sh"
