@@ -1,0 +1,36 @@
+(defwidget clickbox [var varname ?class ?duration ?transition]
+  (box :class "${class} clickbox" :orientation "h" :space-evenly false
+    (button :onclick "eww update ${varname}=${ var ? false : true }"
+      (children :nth 0)
+    )
+      (revealer :reveal var
+      :transition {transition ?: "slideleft"}
+      :duration {duration ?: "500ms"}
+      (box :class "${class}"
+      :space-evenly false
+      (children :nth 1)
+      (button :onclick "eww update ${varname}=false" :class "close" (label :text "Close"))
+      )
+    )
+  )
+)
+
+(defwidget reveal_on_hover [var varname ?transition ?label_text ?label_class]
+	(eventbox
+		:class "eventbox"
+		:onhover "eww update ${varname}=true"
+		:onhoverlost "eww update ${varname}=false"
+		(box
+			:space-evenly false
+			(revealer
+				:reveal var
+				:transition {transition ?: "slideleft"}
+				:duration "0ms"
+				(box
+				(children)
+				)
+			)
+			(label :class label_class :text label_text) ; also the area over which the hover is detected, as revealer is hiding
+		)
+	)
+)
