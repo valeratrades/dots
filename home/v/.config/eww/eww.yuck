@@ -170,29 +170,31 @@
 ;; }}}
 
 (defpoll day_ev :initial "{}" :interval "5s" "todo manual print-ev 2>/dev/null")
-(defvar goal_milestones_hover_state false)
-(defvar milestone_1d_hover_state false)
+(defvar todo_milestones_hover_state false)
 (defwidget test[]
 	(reveal_on_hover
-		:var goal_milestones_hover_state
-		:varname "goal_milestones_hover_state"
+		:var todo_milestones_hover_state
+		:varname "todo_milestones_hover_state"
 		:transition "slideleft"
 		:label_text "${day_ev}"
 		:label_class "text"
-		(button :onclick "notify-send how"
-			(label :class "text" :text "d")
+		(button :onclick "notify-send $(todo milestones 1d)"
+			(label :class "text" :text "D")
 		)
-		(button :onclick "notify-send to"
-			(label :class "text" :text "w")
+		(button :onclick "notify-send $(todo milestones 1w)"
+			(label :class "text" :text "W")
 		)
-		(button :onclick "notify-send fucking"
+		(button :onclick "notify-send $(todo milestones 1M)"
 			(label :class "text" :text "M")
 		)
-		(button :onclick "notify-send make"
+		(button :onclick "notify-send $(todo milestones 1Q)"
 			(label :class "text" :text "Q")
 		)
-		(button :onclick "notify-send this"
+		(button :onclick "notify-send $(todo milestones 1Y)"
 			(label :class "text" :text "Y")
+		)
+		(button :onclick "notify-send $(todo milestones 5Y)"
+			(label :class "text" :text "5Y")
 		)
 	)
 )
