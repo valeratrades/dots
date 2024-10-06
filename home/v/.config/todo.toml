@@ -1,4 +1,5 @@
 data_dir = "~/.data/personal/"
+github_token = { env = "GITHUB_KEY" }
 date_format = "%Y-%m-%d"
 
 [todos]

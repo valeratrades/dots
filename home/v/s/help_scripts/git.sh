@@ -70,7 +70,7 @@ gifm() {
 	if [ -n "$1" ]; then
 		milestone="$1"
 	else
-		milestone=$(gh api repos/{owner}/{repo}/milestones --jq 'sort_by(.title) | .[].title' | head -n 1)
+		milestone=$(gh api "repos/{owner}/{repo}/milestones" --jq 'sort_by(.title) | .[].title' | head -n 1)
 	fi
 	# doesn't print the warnings because conditionals in piped commands are hard, so awk ends up cutting them off
 	script -f -q /dev/null -c="gh issue list --milestone=${milestone}" | awk 'NR > 3'
@@ -110,7 +110,7 @@ gco() {
 
 #TODO!: make it default to my GITHUB_NAME, when no "/" are found in the provided repo query, and it's not in defaults.
 gc() {
-	help_message="""\
+	help_message="""
 #git clone on rails.
 	give repo name, it clones into /tmp or provided directory.
 
@@ -122,7 +122,7 @@ gc() {
 		url="https://github.com/$1" 
 	fi
 
-	if [ "$#" = 0 ] || "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
+	if [ "$#" = 0 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
 		printf "$help_message"
 		return 0
 	fi
@@ -130,16 +130,16 @@ gc() {
 	filename=$(echo "${url}" | tr "/" "\n" | tail -n 1)
 	filename="${filename%.git}"
 	if [ "$#" = 1 ]; then
-		if [ $(pwd) = /tmp/${filename} ]; then # otherwise will delete the directory under ourselves
+		if [ $(pwd) = "/tmp/${filename}" ]; then # otherwise will delete the directory under ourselves
 			cd - &>/dev/null
 		fi 
 		rm -rf /tmp/${filename}
-		git clone --depth=1 "$url" /tmp/${filename} 1>&2
+		git clone --depth=1 "$url" "/tmp/${filename}" 1>&2
 		if [ $? -ne 0 ]; then
 			return 1
 		fi
-		cd /tmp/${filename}
-		echo $(pwd)
+		cd "/tmp/${filename}" || return 1
+		pwd
 	elif [ "$#" = 2 ]; then
 		target="${2}"
 		if [ -d "$2" ]; then
@@ -152,7 +152,7 @@ gc() {
 	fi
 }
 
-local gb_readme='''\
+gb_readme='''
 #build from source helper
 	Does git clone into /tmp, and then tries to build until it works.
 
@@ -310,7 +310,7 @@ gtpr() {
 	git checkout -b temp-branch
 	git push origin temp-branch
 
-	gg $@
+	gg "$@"
 	gh pr create --title "_" --body "" --base master --head temp-branch
 	gh pr merge --auto --squash --delete-branch
 }

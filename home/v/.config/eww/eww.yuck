@@ -179,22 +179,22 @@
 		:label_text "${day_ev}"
 		:label_class "text"
 		(button :onclick "notify-send $(todo milestones 1d)"
-			(label :class "text" :text "D")
+			(label :class "text" :text "d")
 		)
 		(button :onclick "notify-send $(todo milestones 1w)"
-			(label :class "text" :text "W")
+			(label :class "text" :text "w")
 		)
 		(button :onclick "notify-send $(todo milestones 1M)"
-			(label :class "text" :text "M")
+			(label :class "text" :text "m")
 		)
 		(button :onclick "notify-send $(todo milestones 1Q)"
-			(label :class "text" :text "Q")
+			(label :class "text" :text "q")
 		)
-		(button :onclick "notify-send $(todo milestones 1Y)"
-			(label :class "text" :text "Y")
+		(button :onclick "notify-send $(todo milestones 1y)"
+			(label :class "text" :text "y")
 		)
-		(button :onclick "notify-send $(todo milestones 5Y)"
-			(label :class "text" :text "5Y")
+		(button :onclick "notify-send $(todo milestones 5y)"
+			(label :class "text" :text "5y")
 		)
 	)
 )
