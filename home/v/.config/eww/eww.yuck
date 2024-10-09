@@ -160,7 +160,7 @@
 (defpoll speaker_poll :initial "{}" :interval "1s" "./modules/speaker.sh")
 (defwidget speaker [] "${speaker_poll.icon} ${speaker_poll.content}")
 
-(defpoll microphone_poll :initial "{}" :interval "1s" "./modules/microphone.sh")
+(defpoll microphone_poll :initial "{}" :interval "100ms" "./modules/microphone.sh")
 (defwidget microphone []
 	(box
 		:class {microphone_poll.content <= 15 ? "problematic" : ""}
@@ -169,7 +169,7 @@
 )
 ;; }}}
 
-(defpoll day_ev :initial "{}" :interval "5s" "todo manual print-ev 2>/dev/null")
+(defpoll day_ev :initial "_" :interval "5s" "todo manual print-ev")
 (defvar todo_milestones_hover_state false)
 (defwidget test[]
 	(reveal_on_hover
@@ -178,22 +178,22 @@
 		:transition "slideleft"
 		:label_text "${day_ev}"
 		:label_class "text"
-		(button :onclick "notify-send $(todo milestones 1d)"
+		(button :onclick "notify-send TODO \"Open manually for now. fuck eww.\""
 			(label :class "text" :text "d")
 		)
-		(button :onclick "notify-send $(todo milestones 1w)"
+		(button :onclick "notify-send TODO"
 			(label :class "text" :text "w")
 		)
-		(button :onclick "notify-send $(todo milestones 1M)"
+		(button :onclick "notify-send TODO"
 			(label :class "text" :text "m")
 		)
-		(button :onclick "notify-send $(todo milestones 1Q)"
+		(button :onclick "notify-send TODO"
 			(label :class "text" :text "q")
 		)
-		(button :onclick "notify-send $(todo milestones 1y)"
+		(button :onclick "notify-send TODO"
 			(label :class "text" :text "y")
 		)
-		(button :onclick "notify-send $(todo milestones 5y)"
+		(button :onclick "notify-send TODO"
 			(label :class "text" :text "5y")
 		)
 	)

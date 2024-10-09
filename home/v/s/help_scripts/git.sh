@@ -181,7 +181,7 @@ gb() {
 	if [ $? -ne 0 ]; then
 		return 1
 	fi
-	cd $target_dir
+	cd "$target_dir" || return
 
 	if printf "\n\033[34mtrying just cmake\033[0m\n" && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install; then
 		:
@@ -191,13 +191,15 @@ gb() {
 		:
 	elif printf "\n\033[34mtrying cargo install\033[0m\n" && cargo install -f --path . --root /usr/local/bin/; then
 		:
+	elif printf "\n\033[34mtrying cbi\033[0m\n" && cbi; then
+		:
 	elif printf "\n\033[34mtrying cb script\033[0m\n" && cb; then
 		:
 	elif printf "\n\033[34mtrying makepkg\033[0m\n" && makepkg -si; then
 		:
 	elif printf "\n\033[34mtrying meson\033[0m\n" && meson build && ninja -C build && sudo ninja -C build install; then
 		:
-	elif printf "\n\033[34mfuck this, asking chat gpt\033[0m\n" && ~/s/help_scripts/gpt_build.py ${target_dir}; then
+	elif printf "\n\033[34mfuck this, asking chat gpt\033[0m\n" && ~/s/help_scripts/gpt_build.py "${target_dir}"; then
 		:
 	else
 		return 1

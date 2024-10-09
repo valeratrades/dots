@@ -8,7 +8,7 @@ export MODULAR_HOME="$HOME/.modular"
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/:$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:/${HOME}/.local/share/flatpak/:/var/lib/flatpak/"
 export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/flatpak/exports/share:${HOME}/.local/share/flatpak/exports/share"
 fpath+="${HOME}/.config/zsh/.zfunc"
-. ~/.private/credentials.sh
+. ~/s/g/private/credentials.sh
 export EDITOR=nvim
 edit() $EDITOR
 export LESSHISTFILE="-" # don't save history
@@ -179,7 +179,7 @@ matrix() {
 	cleanup
 }
 
-alias fd="fd -I"         # Creates an alias 'fd' for 'fd -I', ignoring .gitignore and .ignore files.
+alias fd="fd -I --full-path" # -I ignores .gitignore,etc
 alias rg="rg -I --glob '!.git'" # Creates an alias 'rg' for 'rg -I --glob '!.git'', ignoring case sensitivity and .git directories.
 alias ureload="pkill -u $(whoami)" # Creates an alias 'ureload' to kill all processes of the current user.
 alias rf="sudo rm -rf"
@@ -226,6 +226,7 @@ alias tree="fd . | as-tree"
 alias bak="XDG_CONFIG_HOME=/home/v/.dots/home/v/.config"
 alias as_term="script -qfc" # don't forget the quotes
 alias bluetooth="blueman-manager"
+alias wget="aria2c -x16"
 
 
 #gpg id = gpg --list-keys --with-colons | awk -F: '/uid/ && /valeratrades@gmail.com/ {getline; print $5}'
