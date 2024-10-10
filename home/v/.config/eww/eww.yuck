@@ -71,14 +71,14 @@
 (defwidget todo_timer []
 	(box
 		:class "text"
-		:class {substring(todo_timer,0,3) == "Out" ? "urgent" : substring(todo_timer,0,1) == "-" ? "problematic" : ""}
+		:class {substring(todo_timer,0,3) == "Out" ? "error" : substring(todo_timer,0,1) == "-" ? "warn" : ""}
 		:visible {todo_timer != "None"}
 		" ${todo_timer}"))
 
 ;; Cargo ;;
 (defwidget cargo []
 	(box
-		:class "problematic"
+		:class "warn"
 		:visible {cargo_compiling == "true"}
 		""
 	)
@@ -107,7 +107,7 @@
 (defpoll battery_poll	:initial "{}" :interval "1s" "./modules/battery.sh")
 (defwidget battery []
 	(box
-		:class {battery_poll.content < 10 && battery_poll.icon != "" ? "urgent" : battery_poll.content < 10 && battery_poll.icon == "" ? "problematic" : ""}
+		:class {battery_poll.content < 10 && battery_poll.icon != "" ? "error" : battery_poll.content < 10 && battery_poll.icon == "" ? "warn" : ""}
 		:visible {battery_poll.content < 99}
 		"${battery_poll.icon}${battery_poll.content}"
 	)
@@ -129,7 +129,7 @@
 ;; System Utilization ;;
 (defwidget cpu []
 	(box
-		:class {"${round(EWW_CPU.avg, 0)}" > 90 ? "problematic" : ""}
+		:class {"${round(EWW_CPU.avg, 0)}" > 90 ? "warn" : ""}
 		" ${round(EWW_CPU.avg, 0)}%"))
 (defwidget ram []
 	(box
@@ -153,7 +153,7 @@
 (defpoll ping_poll :interval "10s" "./modules/ping.sh")
 (defwidget ping []
 	(box
-		:class {ping_poll > 100 || ping_poll == "None" ? "problematic" : ""}
+		:class {ping_poll > 100 || ping_poll == "None" ? "warn" : ""}
 		"${ping_poll == "None" ? "No WiFi" : ping_poll == "Some" ? "Some WiFi" : "${ping_poll}ms"}")) 
 
 ;; Volume ;;
@@ -163,21 +163,20 @@
 (defpoll microphone_poll :initial "{}" :interval "100ms" "./modules/microphone.sh")
 (defwidget microphone []
 	(box
-		:class {microphone_poll.content <= 15 ? "problematic" : ""}
+		:class {microphone_poll.content <= 15 ? "warn" : ""}
 		"${microphone_poll.icon}${microphone_poll.content}"
 	)
 )
-;; }}}
 
-(defpoll day_ev :initial "_" :interval "5s" "todo manual print-ev")
+(defpoll day_ev_poll :initial "{}" :interval "5s" "./modules/day_ev.sh")
 (defvar todo_milestones_hover_state false)
 (defwidget test[]
 	(reveal_on_hover
 		:var todo_milestones_hover_state
 		:varname "todo_milestones_hover_state"
 		:transition "slideleft"
-		:label_text "${day_ev}"
-		:label_class "text"
+		:label_text "${day_ev_poll.content}"
+		:label_class "${day_ev_poll.class}"
 		(button :onclick "notify-send TODO \"Open manually for now. fuck eww.\""
 			(label :class "text" :text "d")
 		)
@@ -198,6 +197,8 @@
 		)
 	)
 )
+;;,}}}
+
 
 (defvar btc_line_main_str "")
 (defvar btc_line_additional_str "")

@@ -118,7 +118,7 @@ usb() {
 	exa -A
 }
 creds() {
-	_dir="${HOME}/.private/"
+	_dir="${HOME}/s/g/private/"
 	git -C "$1" pull > /dev/null 2>&1
 	nvim "${_dir}/credentials.sh"
 	git -C "$_dir" add -A && git -C "$_dir" commit -m "." && git -C "$_dir" push
