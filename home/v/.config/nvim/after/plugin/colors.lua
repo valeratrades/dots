@@ -37,3 +37,7 @@ function SetSystemTheme()
 end
 
 SetSystemTheme()
+
+-- -- expand shared regex syntax hightlighting
+--TODO: add NB, Q, PERF etc
+--

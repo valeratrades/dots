@@ -8,7 +8,7 @@ DEFAULT_CONTENT="_"
 
 if day_ev=$(todo manual print-ev); then
 	content="$day_ev"
-	if last_update=$(todo manual last-update-hours); then
+	if last_update=$(todo manual last-ev-update-hours); then
 		if [ "$MAX_WITHOUT_UPDATE" -le "$last_update" ]; then
 			class="warn"
 		else

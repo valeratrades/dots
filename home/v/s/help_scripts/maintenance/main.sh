@@ -14,8 +14,11 @@ sync()  {
 	PID4=$!
 
 	wait $PID1 $PID2 $PID3 $PID4
-	# pacman -Syu is parallelized to the limit, so no gains from further parallelizing it here.
+	# pacman operations are already parallelized
 	(sudo pacman -Syu --noconfirm && printf "\033[32mupdated system\033[0m\n") || (printf "\033[31mpacman -Syu failed. FIXME.\033[0m\n" && return 1)
+
+	# nix operations are already parallelized
+	(nix-env --upgrade && printf "\033[32mupdated nix\033[0m\n") || (printf "\033[31mnix-env --upgrade failed. FIXME.\033[0m\n" && return 1)
 	return 0
 }
 

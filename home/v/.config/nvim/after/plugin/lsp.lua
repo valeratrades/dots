@@ -39,7 +39,8 @@ local floatOpts = {
 	-- source = true,
 	-- prefix = "",
 	-- suffix = "",
-	focusable = false,
+	focusable = true,
+	--focusable = false,
 	header = ""
 }
 function JumpToDiagnostic(direction, requestSeverity)

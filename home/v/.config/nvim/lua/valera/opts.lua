@@ -1,6 +1,5 @@
 -- note that ver{M}; M doesn't affect nothing. As well as blinking values. I can only turn things on and off here. The rest is controlled by alacritty.
 local o = vim.opt
-local k = vim.keymap.set
 
 o.guicursor =
 "n:blinkwait3000-blinkoff50-blinkon400-Cursor/lCursor,i:ver40-blinkwait3000-blinkoff300-blinkon150-Cursor/lCursor,c:ver40-blinkwait3000-blinkoff300-blinkon150-Cursor/lCursor"
@@ -29,7 +28,7 @@ o.backup = false
 o.undofile = true
 o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 if not vim.fn.isdirectory(vim.fn.expand(vim.o.undodir)) then
-	vim.fn.mkdir(vim.fn.expand(o.undodir), "p", 0770) -- ensure created
+	vim.fn.mkdir(vim.fn.expand(o.undodir), "p", "0770") -- ensure created
 end
 
 o.hlsearch = false
