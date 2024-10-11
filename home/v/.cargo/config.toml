@@ -26,8 +26,9 @@ u = "update"
 m = "machete"
 re = "insta review"
 tr = "insta test --review"
-f = "fix --allow-dirty --allow-no-vcs"
-fc = "clippy --fix --allow-dirty --allow-no-vcs"
+f = "fmt"
+x = "fix --allow-dirty --allow-no-vcs"
+xc = "clippy --fix --allow-dirty --allow-no-vcs"
 s = "sweep --recursive --installed" # only leave currently active artifacts
 
 # overriding defaults in favor of cargo-limit alternatives

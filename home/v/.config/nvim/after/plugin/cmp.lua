@@ -86,7 +86,8 @@ cmp.setup({
 	},
 	snippet = {
 		expand = function(args)
-			require('luasnip').lsp_expand(args.body)
+			-- You need Neovim v0.10 to use vim.snippet
+			vim.snippet.expand(args.body)
 		end,
 	},
 	window = {
@@ -94,8 +95,8 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = {
-		['<C-s>'] = cmp_action.luasnip_supertab(),
 		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<C-s>'] = cmp_action.luasnip_supertab(),
 		['<C-r>'] = cmp.mapping(function()
 			if cmp.visible() then
 				cmp.scroll_docs(4)
