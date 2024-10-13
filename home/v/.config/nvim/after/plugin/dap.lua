@@ -168,7 +168,7 @@ dap_go.setup()
 dap.configurations.rust = {
 	{
 		type = "lldb",
-		name = "Debug",
+		name = "Run no args",
 		request = "launch",
 		program = "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
 		cwd = "${workspaceFolder}",
@@ -176,8 +176,97 @@ dap.configurations.rust = {
 		args = {},
 		runInTerminal = false,
 		showDisassembly = "never",
+	},
+	{
+		type = "lldb",
+		name = "Gimme args",
+		request = "launch",
+		program = "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+		-- Input args or restore last ones
+		args = function()
+			local args_str = vim.fn.input({
+				prompt = 'Arguments /*ex: arg1,arg2*/: ',
+			})
+			local args = {}
+			if args_str ~= '' then
+				args = vim.split(args_str, ',')
+				vim.print(args)
+				if vim.fn.isdirectory('./tmp') then -- my standard
+					local file = io.open('./tmp/dap', 'w')
+					if file then
+						file:write(args_str)
+						file:close()
+					end
+				end
+			else
+				local file = io.open('./tmp/dap', 'r')
+				if file then
+					args_str = file:read()
+					file:close()
+					args = vim.split(args_str, ',')
+				end
+			end
+			return args
+		end,
+		runInTerminal = false,
+		showDisassembly = "never",
+		initCommands = function()
+			-- Find out where to look for the pretty printer Python module
+			local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
+
+			local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
+			local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
+
+			local commands = {}
+			local file = io.open(commands_file, 'r')
+			if file then
+				for line in file:lines() do
+					table.insert(commands, line)
+				end
+				file:close()
+			end
+			table.insert(commands, 1, script_import)
+
+			return commands
+		end,
 	}
 }
+
+-- looks like this is done by default
+--K("n", "<Space><F6>", function()
+--	if vim.fn.filereadable(".vscode/launch.json") then
+--		require("dap.ext.vscode").load_launchjs(nil)
+--	end
+--	require("dap").continue()
+--end, { desc = "DAP: load local launch.json" })
+
+--dap.configurations.rust = {
+--  {
+--    -- ... the previous config goes here ...,
+--    initCommands = function()
+--      -- Find out where to look for the pretty printer Python module
+--      local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
+--
+--      local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
+--      local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
+--
+--      local commands = {}
+--      local file = io.open(commands_file, 'r')
+--      if file then
+--        for line in file:lines() do
+--          table.insert(commands, line)
+--        end
+--        file:close()
+--      end
+--      table.insert(commands, 1, script_import)
+--
+--      return commands
+--    end,
+--    -- ...,
+--  }
+--}
 
 -- Python
 dap.configurations.python = {
@@ -203,48 +292,102 @@ dap_python.setup("python", {
 	include_configs = true,
 })
 
+-- best for rust
 dap.adapters.lldb = {
 	type = "executable",
 	command = "/usr/bin/codelldb",
 	name = "lldb",
 }
+dap.adapters.gdb = {
+	id = 'gdb',
+	type = 'executable',
+	command = 'gdb',
+	args = { '--quiet', '--interpreter=dap' },
+}
+dap.adapters.lldb_dap = {
+	type = 'executable',
+	command = '/usr/bin/lldb-dap', -- adjust as needed, must be absolute path
+	name = 'lldb'
+}
+
+dap.configurations.c = {
+	{
+		name = 'Run executable (LLDB)',
+		type = 'lldb',
+		request = 'launch',
+		-- This requires special handling of 'run_last', see
+		-- https://github.com/mfussenegger/nvim-dap/issues/1025#issuecomment-1695852355
+		program = function()
+			local path = vim.fn.input({
+				prompt = 'Path to executable: ',
+				default = vim.fn.getcwd() .. '/',
+				completion = 'file',
+			})
+
+			return (path and path ~= '') and path or dap.ABORT
+		end,
+	},
+	{
+		name = 'Run executable with arguments (LLDB)',
+		type = 'lldb',
+		request = 'launch',
+		-- This requires special handling of 'run_last', see
+		-- https://github.com/mfussenegger/nvim-dap/issues/1025#issuecomment-1695852355
+		program = function()
+			local path = vim.fn.input({
+				prompt = 'Path to executable: ',
+				default = vim.fn.getcwd() .. '/',
+				completion = 'file',
+			})
+
+			return (path and path ~= '') and path or dap.ABORT
+		end,
+		args = function()
+			local args_str = vim.fn.input({
+				prompt = 'Arguments: ',
+			})
+			return vim.split(args_str, ' +')
+		end,
+	},
+}
+dap.configurations.cpp = dap.configurations.c
 --
 
 -- Ui
-dapui.setup {
-	icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-	controls = {
-		icons = {
-			pause = '⏸',
-			play = '▶',
-			step_into = '⏎',
-			step_over = '⏭',
-			step_out = '⏮',
-			step_back = 'b',
-			run_last = '▶▶',
-			terminate = '⏹',
-			disconnect = '⏏',
-		},
-	},
-	mappings = {
-		expand = "<CR>",
-		open = "o",
-		remove = "d",
-		repl = "r",
-		toggle = "t",
-		edit = "e",
-	},
-	sidebar = {
-		elements = {
-			"scopes",
-			"scopes",
-			"watches",
-		},
-		width = 40,
-		position = "left",
-	},
-}
+--dapui.setup {
+--	icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+--	controls = {
+--		icons = {
+--			pause = '⏸',
+--			play = '▶',
+--			step_into = '⏎',
+--			step_over = '⏭',
+--			step_out = '⏮',
+--			step_back = 'b',
+--			run_last = '▶▶',
+--			terminate = '⏹',
+--			disconnect = '⏏',
+--		},
+--	},
+--	mappings = {
+--		expand = "<CR>",
+--		open = "o",
+--		remove = "d",
+--		repl = "r",
+--		toggle = "t",
+--		edit = "e",
+--	},
+--	sidebar = {
+--		elements = {
+--			"scopes",
+--			"scopes",
+--			"watches",
+--		},
+--		width = 40,
+--		position = "left",
+--	},
+--}
+dapui.setup()
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 --dap.listeners.before.event_terminated['dapui_config'] = dapui.close
 --dap.listeners.before.event_exited['dapui_config'] = dapui.close
---
