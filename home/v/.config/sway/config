@@ -69,8 +69,8 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-	xkb_layout "semimak,ru,us"
-	xkb_variant "iso,iso,"
+	xkb_layout "semimak,ru"
+	xkb_variant "iso,iso"
 	xkb_options "grp:win_space_toggle"
 
 	tap enabled
@@ -85,6 +85,8 @@ input * {
 input type:touchpad {
 	natural_scroll enabled
 }
+
+exec_always ~/.config/sway/loop_bind_tablet_to_focused.sh
 
 # # Multimedia
 bindsym $mod+F1 exec pamixer --toggle-mute

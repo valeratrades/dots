@@ -4,6 +4,38 @@ local cmp_action = require('lsp-zero').cmp_action()
 local ts_utils = require('nvim-treesitter.ts_utils')
 local lspkind = require('lspkind')
 
+-- modes: `i`nsert, `s`elect, `c`ommand
+local mappings = {
+	['<C-s>'] = cmp_action.luasnip_supertab(),
+	['<C-y>'] = cmp.mapping.confirm({ select = true }),
+
+	-- impossible to overwrite the defaults. There is literally no way to make this work, - without cmp.mapping.preset.insert this is not registered at all.
+	--['<C-r>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'i', 's', 'c' }),
+	--['<C-n>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'i', 's', 'c' }),
+
+	['<Right>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'c' }),
+	['<Left>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'c' }),
+
+	['<C-d>'] = cmp.mapping(function()
+		if cmp.visible() then
+			cmp.scroll_docs(4)
+		end
+	end, {
+		"i",
+		"s",
+	}),
+	['<C-u>'] = cmp.mapping(function()
+		if cmp.visible() then
+			cmp.scroll_docs(-4)
+		end
+	end, {
+		"i",
+		"s",
+	}),
+	['<C-c>'] = cmp.mapping(cmp.mapping.complete_common_string(), { "i", "s", "c" }),
+}
+
+
 -- max_item_count doesn't seem to work
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 cmp.setup({
@@ -11,7 +43,7 @@ cmp.setup({
 		{
 			name = 'nvim_lsp',
 			keyword_lenght = 1,
-			max_item_count = 8,
+			max_item_count = 12,
 			-- when inputting an argument, suggest only values with this in mind
 			entry_filter = function(entry, _context)
 				local success = pcall(function()
@@ -24,10 +56,11 @@ cmp.setup({
 				return success or true
 			end,
 		},
-		{ name = 'luasnip', keyword_length = 1, max_item_count = 8 },
-		{ name = 'buffer',  keyword_length = 5, max_item_count = 8 },
-		{ name = 'cmdline', keyword_length = 3, max_item_count = 8 },
+		{ name = 'luasnip',   keyword_length = 1, max_item_count = 8 },
+		{ name = 'buffer',    keyword_length = 5, max_item_count = 8 },
+		--{ name = 'cmdline',   keyword_length = 3, max_item_count = 8 }, // does nothing here (why, nvim-cmp, whyy)
 		{ name = "crates" },
+		{ name = "async_path" },
 	}),
 	formatting = {
 		fields = { 'abbr', 'kind', 'menu' },
@@ -86,34 +119,15 @@ cmp.setup({
 	},
 	snippet = {
 		expand = function(args)
-			-- You need Neovim v0.10 to use vim.snippet
-			vim.snippet.expand(args.body)
+			require('luasnip').lsp_expand(args.body)
 		end,
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-	mapping = {
-		['<C-y>'] = cmp.mapping.confirm({ select = true }),
-		['<C-s>'] = cmp_action.luasnip_supertab(),
-		['<C-r>'] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.scroll_docs(4)
-			end
-		end, {
-			"i",
-			"s",
-		}),
-		['<C-n>'] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.scroll_docs(-4)
-			end
-		end, {
-			"i",
-			"s",
-		}),
-	},
+	--mapping = cmp.mapping.preset.insert(mappings),
+	mapping = mappings,
 })
 cmp.setup.cmdline({ '/', '?' }, {
 	mapping = cmp.mapping.preset.cmdline(),
@@ -122,10 +136,16 @@ cmp.setup.cmdline({ '/', '?' }, {
 	}
 })
 cmp.setup.cmdline(':', {
-	mapping = cmp.mapping.preset.cmdline(),
+	--mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = 'path' }
 	}, {
-		{ name = 'cmdline' }
+		{
+			name = 'cmdline',
+			option = {
+				ignore_cmds = { 'Man', '!' }
+			},
+			max_item_count = 15,
+		},
 	})
 })

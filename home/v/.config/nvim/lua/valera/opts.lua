@@ -65,6 +65,12 @@ K("i", ";", ";<c-g>u")
 o.showmatch = true
 o.joinspaces = false
 
+-- Spelling
+--o.spellang = "en_us,fr" // doesn't work
+o.spelloptions = "camel"
+o.spellcapcheck =
+[[[.?!]\_[\])'"\t ]\+]] -- default. Can't figure out how to prevent it from forcing capitalization at new line start.
+
 -- o.path = "**"
 
 -- -- LaTeX

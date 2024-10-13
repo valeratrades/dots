@@ -229,15 +229,6 @@ return require('lazy').setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
-	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
 	"nanotee/zoxide.vim",
 	{
 		"ziontee113/color-picker.nvim",
@@ -268,4 +259,5 @@ return require('lazy').setup({
 	"Makaze/AnsiEsc",
 	"tpope/vim-speeddating",
 	"stevearc/aerial.nvim",
+	"https://codeberg.org/FelipeLema/cmp-async-path",
 })
