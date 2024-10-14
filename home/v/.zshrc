@@ -227,6 +227,8 @@ alias bak="XDG_CONFIG_HOME=/home/v/.dots/home/v/.config"
 alias as_term="script -qfc" # don't forget the quotes
 alias bluetooth="blueman-manager"
 alias wget="aria2c -x16"
+alias disable_fan="echo 0 | sudo tee /sys/class/hwmon/hwmon6/pwm1" # until it gets retriggered back on rising temperature
+alias enable_fan="echo 2 | sudo tee /sys/class/hwmon/hwmon6/pwm1"
 
 
 #gpg id = gpg --list-keys --with-colons | awk -F: '/uid/ && /valeratrades@gmail.com/ {getline; print $5}'

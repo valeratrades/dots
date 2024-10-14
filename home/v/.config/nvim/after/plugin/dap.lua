@@ -168,7 +168,7 @@ dap_go.setup()
 dap.configurations.rust = {
 	{
 		type = "lldb",
-		name = "Run no args",
+		name = "Debug: No Args",
 		request = "launch",
 		program = "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
 		cwd = "${workspaceFolder}",
@@ -179,7 +179,7 @@ dap.configurations.rust = {
 	},
 	{
 		type = "lldb",
-		name = "Gimme args",
+		name = "Debug: Provide Args",
 		request = "launch",
 		program = "${workspaceFolder}/target/debug/${workspaceFolderBasename}",
 		cwd = "${workspaceFolder}",
@@ -194,6 +194,7 @@ dap.configurations.rust = {
 				args = vim.split(args_str, ',')
 				vim.print(args)
 				if vim.fn.isdirectory('./tmp') then -- my standard
+					--? maybe should dump it next to undotree files
 					local file = io.open('./tmp/dap', 'w')
 					if file then
 						file:write(args_str)
