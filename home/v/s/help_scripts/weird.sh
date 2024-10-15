@@ -1,7 +1,7 @@
 alias emacs="printf \"\033[31mno\033[0m\n\""
 alias nano="printf \"\033[31mno\033[0m\n\""
 
-function print_sturdy() {
+print_sturdy() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
     echo "┊ V ┊ M ┊ L ┊ C ┊ P    X ┊ F ┊ O ┊ U ┊ J ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
@@ -10,7 +10,7 @@ function print_sturdy() {
     echo "┊ Z ┊ K ┊ Q ┊ G ┊ W    B ┊ H ┊ ' ┊ ; ┊ , ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
-function print_dvorak() {
+print_dvorak() {
 	echo "+---+---+---+---+---++---+---+---+---+---+"
 	echo "┊ ' ┊ , ┊ . ┊ P ┊ Y    F ┊ G ┊ C ┊ R ┊ L ┊"
 	echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
@@ -20,7 +20,7 @@ function print_dvorak() {
 	echo "+---+---+---+---+---++---+---+---+---+---+"
 }
 
-function print_semimak_original() {
+print_semimak_original() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
     echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Q ┊ W ┊ U ┊ O ┊ Y ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
@@ -29,7 +29,7 @@ function print_semimak_original() {
     echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ , ┊ . ┊ / ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
-function print_semimak() {
+print_semimak() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
     echo "┊ F ┊ L ┊ H ┊ V ┊ Z    Qü┊ Wù┊ Uû┊ Oô┊ Y ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
@@ -38,7 +38,7 @@ function print_semimak() {
     echo "┊ X ┊ ' ┊ B ┊ M ┊ J    P ┊ G ┊ ,è┊ .â┊ ; ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
-function print_qwerty() {
+print_qwerty() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
     echo "┊ Q ┊ W ┊ E ┊ R ┊ T    Y ┊ U ┊ I ┊ O ┊ P ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊"
@@ -47,7 +47,7 @@ function print_qwerty() {
     echo "┊ Z ┊ X ┊ C ┊ V ┊ B    N ┊ M ┊ , ┊ . ┊ / ┊"
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
-function print_ru() {
+print_ru() {
     echo "+---+---+---+---+---++---+---+---+---+---+---+---+"
     echo "┊ Й ┊ Ц ┊ У ┊ К ┊ Е    Н ┊ Г ┊ Ш ┊ Щ ┊ З ┊ Х | Ъ ┊"
     echo "┊---┊---┊---┊---┊---  ---┊---┊---┊---┊---┊---┊---+"
@@ -57,11 +57,17 @@ function print_ru() {
     echo "+---+---+---+---+---++---+---+---+---+---+"
 }
 
-function typing_guide() {
+print_alphabet() {
+    echo "a b c d e f g h i j"
+    echo "k l m n o p q r s t"
+    echo "u v w x y z"
+}
+
+typing_guide() {
 	google-chrome-stable "https://docs.google.com/document/d/1L-P68VDSGlpLM5A9tfRvWFohaR2NzPbkUT0ok34rsFU/edit"
 }
 
-function what() {
+what() {
 	cat ~/s/help_scripts/weird/sbf_tweet.txt | python3 ~/s/help_scripts/weird/what.py | figlet
 }
 
