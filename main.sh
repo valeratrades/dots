@@ -9,10 +9,11 @@ README="""\
 
 
 target_dir="/home/v/.dots"
+#/etc/systemd/system/getty@tty1.service.d/override.conf //cut on 2024/10/19
 dot_directories="
 	/etc/NetworkManager/NetworkManager.conf
 	/etc/keyd
-	/etc/systemd/system/getty@tty1.service.d/override.conf
+	/etc/nixos
 	/home/v/.cargo/config.toml
 	/home/v/.config/alacritty
 	/home/v/.config/btc_line.toml
