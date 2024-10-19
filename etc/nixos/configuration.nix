@@ -21,6 +21,8 @@ in
 	services = {
 		xserver = {
 			enable = true;
+			autorun = false; #dbg: trying out. May or may not help with lightdm
+			desktopManager.default = "none"; #dbg: trying
 			xkb = {
 				extraLayouts.semimak = {
 					description = "Semimak for both keyboard standards";
