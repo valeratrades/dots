@@ -6,7 +6,6 @@
 [[ $- != *i* ]] && return
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$PATH:${HOME}/s/evdev/:${HOME}/.cargo/bin/:${HOME}/go/bin/:/usr/lib/rustup/bin/:${HOME}/.local/bin/:$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:/${HOME}/.local/share/flatpak/:/var/lib/flatpak/"
-export XDG_DATA_DIRS="${XDG_DATA_DIRS}:/var/lib/flatpak/exports/share:${HOME}/.local/share/flatpak/exports/share"
 fpath+="${HOME}/.config/zsh/.zfunc"
 . ~/s/g/private/credentials.sh
 export EDITOR=nvim
@@ -417,88 +416,6 @@ alias pY="${HOME}/s/help_scripts/maintenance/main.sh"
 #
 alias phone-wifi="sudo nmcli dev wifi connect Valera password 12345678"
 alias phone_wifi="phone-wifi"
-#TODO!!!!!!!!: fix the bug, where it it blows your ears off when another sound is ongoing when the beep with -l option happens.
-# Should be fine if I just implement a global limit on volume, conditional on headphones. But currently fuck the sound-maxing feature.
-beep() {	
-	if [ $# = 1 ]; then
-		if [ "$1" = "-l" ] || [ "$1" = "--loud" ]; then
-			mute=$(pamixer --get-mute)
-			if [ "$mute" = "true" ]; then
-				pamixer --unmute
-			fi
-
-			volume=$(pamixer --get-volume)
-			#pamixer --set-volume 100
-			#mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
-			#pamixer --set-volume $volume
-
-			if [ "$mute" = "true" ]; then
-				pamixer --mute
-			fi
-
-			notify-send "beep" -t 600000 # 10min
-			return 0
-		else
-			printf "Only takes \"-l\"/\"--loud\". Provided: $1\n"
-			return 1
-		fi
-	else # normal beep
-		notify-send "beep"
-		mpv ${HOME}/Sounds/Notification.mp3 > /dev/null 2>&1
-		return 0
-	fi
-}	
-# doesn't work with hours, and that's intentional - starting a >1h timer with this is prone to failure, as it does not persist state between shutdowns.
-timer() {
-	trap 'eww update timer="";return 1' INT
-	trap 'eww update timer=""' EXIT
-	no_beep="false"
-	if [ "$1" = "-q" ]; then
-		no_beep="true"
-		shift
-	fi
-	if [ "$2" = "-q" ]; then
-		no_beep="true"
-	fi
-
-	if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "help" ]; then
-		printf """\
-Usage: timer [time] [-q]
-
-Arguments:
-	time: time in seconds or in format \"mm:ss\".
-	-q: quiet mode, shows forever notif instead of beeping.
-"""
-		return 0
-	fi
-
-
-	input=$1
-	if [[ "$input" == *":"* ]]; then
-		IFS=: read mins secs <<< "$input"
-		left=$((mins * 60 + secs))
-	else
-		left=$input
-	fi
-
-	while [ $left -gt 0 ]; do
-		mins=$((left / 60))
-		secs=$((left % 60))
-		formatted_secs=$(printf "%02d" $secs)
-		eww update timer="${mins}:${formatted_secs}"
-		sleep 1
-		left=$((left - 1))
-	done	
-	eww update timer=""
-
-
-	if [ "$no_beep" = "false" ]; then
-		beep --loud
-	else
-		notify-send "timer finished" -t 2147483647
-		return 0
-	fi
-}
 
 . /etc/profile.d/google-cloud-cli.sh # what the fuck they're doing other there
 . ~/.config/nnn/setup.sh
@@ -532,12 +449,6 @@ case ":$PATH:" in
 esac
 # pnpm end
 . "$HOME/.cargo/env"
-#[BEGIN SKAR_CONFIG]
-alias '?'='/home/v/.cargo/bin/skar shell complete'
-alias '??'='/home/v/.cargo/bin/skar shell explain'
-alias '?!'='/home/v/.cargo/bin/skar shell generate'
-alias '?-'='/home/v/.cargo/bin/skar chat'
-#[END SKAR_CONFIG]
 
 . "$HOME/.atuin/bin/env"
 

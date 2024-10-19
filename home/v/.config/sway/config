@@ -58,6 +58,7 @@ exec mako
 #exec "sh -c 'tg server' > /tmp/tg_server_log.txt 2>&1 &" # for some damn reason doesn't work
 exec libinput-gestures
 exec_always wlr-gamma-service
+exec "sh -c 'sudo chmod 766 /var/run/keyd.socket'"
 exec keyd-application-mapper -d
 exec bluetoothctl
 exec pipewire
@@ -69,8 +70,10 @@ bindsym $mod+Shift+g exec greenclip clear
 #
 
 input * {
-	xkb_layout "semimak,ru"
-	xkb_variant "iso,iso"
+	xkb_layout "semimak"
+	#,ru"
+	xkb_variant "iso"
+	#,iso"
 	xkb_options "grp:win_space_toggle"
 
 	tap enabled
@@ -123,9 +126,8 @@ exec_always sleep 2 && auto_redshift start 7:00 --wallpapers
 #
 
 # # Workspaces
-# bug on sway's side; can't set wallpaper if it's not preset.
 # was using ~/Wallpapers/AndreySakharov.jpg, but it's too bright to be the default.
-output * bg ~/Wallpapers/starry_night.jpg fill
+# output * bg ~/Wallpapers/starry_night.jpg fill
 workspace 1 output $primary
 workspace 2 output $primary
 workspace 3 output $primary

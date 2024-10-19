@@ -6,7 +6,7 @@ while true; do
 
 		# Check if the port is in use (suppressing stderr)
 		if ! ss -tulwn | grep -q ":$port " 2>/dev/null; then
-			echo $port
+			echo "$port"
 			break
 		fi
 done

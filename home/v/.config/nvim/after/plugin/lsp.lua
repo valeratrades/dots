@@ -205,7 +205,7 @@ lsp_zero.on_attach(on_attach)
 
 -- Language setups
 local lspconfig_servers = { 'ruff_lsp', 'typst_lsp', 'lua_ls', 'gopls', 'bashls', 'clangd', 'jedi_language_server',
-	'jsonls', 'marksman' }
+	'jsonls', 'marksman', 'nil_ls' }
 lsp_zero.setup_servers(lspconfig_servers)
 lsp_zero.setup()
 
@@ -301,9 +301,9 @@ vim.g.rustaceanvim = {
 	},
 }
 
-require('mason').setup({})
+--require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = lspconfig_servers,
+	--ensure_installed = lspconfig_servers,
 	handlers = { lsp_zero.default_setup },
 	settings = {
 		["gopls"] = {
@@ -334,10 +334,13 @@ require('mason-lspconfig').setup({
 			filetypes = { 'python' },
 			root_dir = require('lspconfig').util.find_git_ancestor,
 		},
-		['typst_lsp'] = {
+		["typst_lsp"] = {
 			--exportPdf = "checkOnSave",
 			exportPdf = "onType",
 			--serverPath = "/usr/local/bin/typst-lsp",
+		},
+		["nil_ls"] = {
+			formatter = { command = { "nixpkgs-fmt" } },
 		},
 	},
 })

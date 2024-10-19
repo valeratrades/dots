@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 # ---------- Xwayland ------------
 # ensure xdg run dir exists and is clean

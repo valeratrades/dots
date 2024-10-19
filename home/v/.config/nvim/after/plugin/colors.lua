@@ -29,7 +29,8 @@ function SetSystemTheme()
 	local result = handle:read("*a")
 	handle:close()
 
-	if string.match(string.lower(result), "dark") then
+	--if string.match(string.lower(result), "dark") then
+	if true then --dbg
 		Dark()
 	else
 		Light()

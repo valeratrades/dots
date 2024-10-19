@@ -1,5 +1,3 @@
-#!/bin/env sh
-
 # TODO: rename stuff in here. And potentially replace some of these with /usr/bin/sshpass
 # TODO: Move to [SSHFS](<https://en.wikipedia.org/wiki/SSHFS>)
 

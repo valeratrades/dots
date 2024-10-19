@@ -1,9 +1,9 @@
 [Default Applications]
-text/html=google-chrome-beta.desktop
-x-scheme-handler/http=google-chrome-beta.desktop
-x-scheme-handler/https=google-chrome-beta.desktop
-x-scheme-handler/about=google-chrome-beta.desktop
-x-scheme-handler/unknown=google-chrome-beta.desktop
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
 text/plain=nvim.desktop
 inode/directory=nnn.desktop
 x-scheme-handler/mailto=google-chrome.desktop
@@ -12,6 +12,8 @@ x-scheme-handler/discord-1176718791388975124=discord-1176718791388975124.desktop
 dorion=dorion-handler.desktop
 x-scheme-handler/tonsite=org.telegram.desktop.desktop
 x-scheme-handler/webcal=google-chrome-beta.desktop
+x-scheme-handler/tg=org.telegram.desktop.desktop
 
 [Added Associations]
 x-scheme-handler/tonsite=org.telegram.desktop.desktop;
+x-scheme-handler/tg=org.telegram.desktop.desktop;
