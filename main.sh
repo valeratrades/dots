@@ -20,16 +20,13 @@ dot_directories="
 	/home/v/.config/dconf/user
 	/home/v/.config/discord/settings.json
 	/home/v/.config/eww
-	/home/v/.config/foot
 	/home/v/.config/gh/config.yml
 	/home/v/.config/git
 	/home/v/.config/greenclip.toml
 	/home/v/.config/helix
-	/home/v/.config/jfind
 	/home/v/.config/keyd
 	/home/v/.config/mako/config
 	/home/v/.config/mimeapps.list
-	/home/v/.config/nnn/setup.sh
 	/home/v/.config/discretionary_engine.toml
 	/home/v/.config/nnn/termfilechooser.sh
 	/home/v/.config/nvim
@@ -41,16 +38,10 @@ dot_directories="
 	/home/v/.config/todo.toml
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config
 	/home/v/.config/zathura
-	/home/v/.config/zellij
 	/home/v/.config/zoxide/setup.sh
-	/home/v/.config/zsh
 	/home/v/.file_snippets
 	/home/v/.lesskey
-	/home/v/.local/share/applications/nnn.desktop
 	/home/v/.local/share/applications/nvim.desktop
-	/home/v/.profile
-	/home/v/.zprofile
-	/home/v/.zshrc
 	/home/v/Wallpapers
 	/home/v/g/README.md
 	/home/v/s/g/README.md	
