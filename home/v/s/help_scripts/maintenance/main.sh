@@ -20,7 +20,7 @@ sync()  {
 	## nix operations are already parallelized
 	#(nix-env --upgrade && printf "\033[32mupdated nix\033[0m\n") || (printf "\033[31mnix-env --upgrade failed. FIXME.\033[0m\n" && return 1)
 
-	nixos-rebuild switch
+	sudo nixos-rebuild switch
 	return 0
 }
 
