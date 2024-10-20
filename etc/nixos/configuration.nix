@@ -2,13 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 #TODO: add build script that cds in $XDG_DATA_HOME/nvim/lazy-telescope-fzf-native.nvim and runs `make`
 
 let
 	userHome = config.users.users.v.home;
-	userName = config.users.users.v.name;
 
 	modularHome = "${userHome}/.modular";
 
@@ -83,15 +82,10 @@ in
 	xdg.portal.wlr.enable = true;
 
 
-	#inputs = {
-	# nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-	#    nixpkgs-fixes.url = "github:NixOS/nixpkgs/91a7822b04fe5e15f1604f9ca0fb81eff61b4143";
-	#};
-	imports =
-		[ # Include the results of the hardware scan.
-			./hardware-configuration.nix
-			<home-manager/nixos>
-		];
+	imports = [
+		./hardware-configuration.nix
+		<home-manager/nixos>
+	];
 
 
 	# Bootloader.
@@ -162,6 +156,7 @@ in
 				pkgs.atool
 				pkgs.httpie
 				unstablePkgs.bash-language-server
+				#unstablePkgs.wl-gammactl-unstable
 			];
 			gtk = {
 				enable = true;
@@ -281,9 +276,14 @@ in
 		'';
 
 		systemPackages = with pkgs; [
-			python312Packages.jedi-language-server
-			#jsonls
+			#naersk
+			#(naersk.buildPackage {
+			#	src = "${userHome}/s/tg";
+			#})
+			#inputs.helix.packages."${pkgs.system}".helix
+
 			adwaita-qt
+			pkg-config
 			adwaita-qt
 			alacritty
 			alsa-utils
@@ -291,6 +291,9 @@ in
 			babelfish
 			bemenu
 			blueman
+			blueman
+			mold
+			sccache
 			bluez
 			clang
 			clang-tools
@@ -304,6 +307,7 @@ in
 			fish
 			fishPlugins.bass
 			fzf
+			difftastic
 			gawk
 			gh
 			git
@@ -314,9 +318,8 @@ in
 			gopls
 			grim
 			gsettings-desktop-schemas
-			jq
-			tokei
 			haskellPackages.greenclip
+			jq
 			keyd
 			lean4
 			libinput-gestures
@@ -325,7 +328,6 @@ in
 			mako
 			marksman
 			neovim
-			vscode-langservers-extracted #contains jsonls
 			networkmanagerapplet
 			nil
 			nix-diff
@@ -333,17 +335,21 @@ in
 			pamixer
 			pavucontrol
 			python3
+			python312Packages.jedi-language-server
+			python312Packages.pip
 			ripgrep
 			rofi
 			ruff-lsp
-			rustup
+			ruff
+			rustup # should I?
 			slurp
 			swappy
 			tmux
-			tokyonight-gtk-theme #dbg
+			tokei
 			typst
 			typst-lsp
 			vim
+			vscode-langservers-extracted #contains jsonls
 			wget
 			wireplumber
 			wl-clipboard
@@ -364,8 +370,5 @@ in
 		# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 	};
 
-	system = {
-		copySystemConfiguration = true; # only captures /etc/configuration.nix
-		stateVersion = "24.05"; #NB: DO NOT CHANGE. badly named, actually means "legacy compat version", will not affect sync versions.
-	};
+	system.stateVersion = "24.05"; #NB: changing requires migration
 }
