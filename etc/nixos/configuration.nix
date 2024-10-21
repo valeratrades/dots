@@ -312,6 +312,7 @@ in
 			unzip
 			usbutils # lsusb
 			vim
+			mpv
 			vscode-langservers-extracted #contains jsonls
 			wget
 			which
