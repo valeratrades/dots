@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs-stable, ... }:
 
 {
 	# TODO please change the username & home directory to your own
@@ -34,6 +34,10 @@
 		figlet
 		bash-language-server
 	];
+
+	#home.packages = with nixpkgs-stable: [
+	#	google-chrome
+	#];
 
 	gtk = {
 		enable = true;
@@ -122,6 +126,7 @@
 	#};
 	programs.fish = {
 		enable = true;
+		#package = nixpkgs-stable.fish;
 		shellInit = ''
 			source "$HOME/.config/fish/main.fish"
 		'';

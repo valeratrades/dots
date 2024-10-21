@@ -2,7 +2,8 @@
 	description = "OS master";
 
 	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+		nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
 		home-manager = {
 			url = "github:nix-community/home-manager/release-24.05";
@@ -16,7 +17,7 @@
 		#naersk.url = "https://github.com/nix-community/naersk/master";
 	};
 
-	outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+	outputs = inputs@{ self, nixpkgs, nixpkgs-stable, home-manager, ... }: {
 		# from https://nixos-and-flakes.thiscute.world/nixos-with-flakes/nixos-flake-and-module-system 
 		#nix.registry.nixpkgs.flake = nixpkgs;
 		#nix.channel.enable = false;
@@ -26,7 +27,15 @@
 		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 
-			specialArgs = { inherit inputs; };
+			specialArgs = { 
+				inherit inputs;
+
+				# freaks out on `inherit system`
+				#pkgs-stable = import nixpkgs-stable {
+				#	inherit system;
+				#	config.allowUnfree = true;
+				#};
+			};
 			modules = [
 				./configuration.nix
 
