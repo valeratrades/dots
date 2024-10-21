@@ -313,6 +313,7 @@ in
 			usbutils # lsusb
 			vim
 			mpv
+			yazi
 			vscode-langservers-extracted #contains jsonls
 			wget
 			which
