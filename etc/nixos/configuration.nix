@@ -19,7 +19,8 @@ in
 
 	services = {
 		xserver = {
-			enable = true;
+			#enable = true;
+			enable = false;
 			autorun = false; #dbg: trying out. May or may not help with lightdm
 			xkb = {
 				extraLayouts.semimak = {
@@ -84,7 +85,7 @@ in
 
 	imports = [
 		./hardware-configuration.nix
-		<home-manager/nixos>
+		#<home-manager/nixos>
 	];
 
 
@@ -132,75 +133,6 @@ in
 		description = "v";
 		shell = pkgs.fish;
 		extraGroups = [ "networkmanager" "wheel" "keyd" "audio" "video" ];
-		# Things that never need to be available with sudo
-		packages = with pkgs; [
-			spotify
-			telegram-desktop
-			vesktop
-			rnote
-			zathura
-			ncspot
-			neomutt
-			neofetch
-			figlet
-		];
-	};
-	home-manager =
-	{
-		users.v = { pkgs, ...}: let
-			unstablePkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
-				config = config.nixpkgs.config;
-			};
-		in {
-			home.packages = [
-				pkgs.atool
-				pkgs.httpie
-				unstablePkgs.bash-language-server
-				#unstablePkgs.wl-gammactl-unstable
-			];
-			gtk = {
-				enable = true;
-				theme = {
-					name = "Materia-dark"; #dbg: Adwaita-dark
-					package = pkgs.materia-theme;
-				};
-			};
-
-			dconf.settings = {
-				"org/gnome/desktop/interface" = {
-					color-scheme = "prefer-dark";
-				};
-			};
-
-			home.pointerCursor = {
-				name = "Adwaita";
-				package = pkgs.adwaita-icon-theme;
-				size = 24;
-				x11 = {
-					enable = true;
-					defaultCursor = "Adwaita";
-				};
-			};
-
-			home.sessionPath = [
-				"${pkgs.lib.makeBinPath [ ]}"
-				"${userHome}/s/evdev/"
-				"${userHome}/.cargo/bin/"
-				"${userHome}/go/bin/"
-				"/usr/lib/rustup/bin/"
-				"${userHome}/.local/bin/"
-				"${modularHome}/pkg/packages.modular.com_mojo/bin"
-				"${userHome}/.local/share/flatpak"
-				"/var/lib/flatpak"
-			];
-
-
-			programs.fish.enable = true;
-
-			home.stateVersion = "24.05"; #NB: DO NOT CHANGE, same as `system.stateVersion`
-		};
-		backupFileExtension = "hm-backup";
-		useGlobalPkgs = true;
 	};
 
 	systemd = {
@@ -275,87 +207,124 @@ in
 		sudo ln -sfT ${pkgs.dash}/bin/dash /bin/sh
 		'';
 
+		#naersk
+		#(naersk.buildPackage {
+		#	src = "${userHome}/s/tg";
+		#})
+		#inputs.helix.packages."${pkgs.system}".helix
 		systemPackages = with pkgs; [
-			#naersk
-			#(naersk.buildPackage {
-			#	src = "${userHome}/s/tg";
-			#})
-			#inputs.helix.packages."${pkgs.system}".helix
-
-			adwaita-qt
-			pkg-config
 			adwaita-qt
 			alacritty
 			alsa-utils
+			aria2 # better wget
+			atool
 			atuin
 			babelfish
 			bemenu
 			blueman
-			blueman
-			mold
-			sccache
 			bluez
+			bottom
 			clang
 			clang-tools
 			cmake
+			cotp
+			cowsay
 			dash
 			dbus
 			dconf
+			difftastic
+			dnsutils  # `dig` + `nslookup`
+			ethtool
 			eww
 			eza
+			eza # A modern replacement for ‘ls’
+			eza # A modern replacement for ‘ls’
 			fd
+			file
 			fish
 			fishPlugins.bass
 			fzf
-			difftastic
 			gawk
 			gh
 			git
 			glib
 			gnumake
+			gnupg
+			gnused
+			gnutar
 			go
 			google-chrome
 			gopls
 			grim
 			gsettings-desktop-schemas
 			haskellPackages.greenclip
+			httpie
+			iftop # network monitoring
+			iotop # io monitoring
+			ipcalc  # it is a calculator for the IPv4/v6 addresses
+			iperf3
 			jq
+			jq
+			jq # A lightweight and flexible command-line JSON processor
 			keyd
+			ldns # replacement of `dig`, it provide the command `drill`
 			lean4
 			libinput-gestures
 			libnotify
+			lm_sensors # for `sensors` command
+			lsof # list open files
+			ltrace # library call monitoring
 			lua-language-server
 			mako
 			marksman
+			mold
+			mtr # A network diagnostic tool
 			neovim
 			networkmanagerapplet
 			nil
 			nix-diff
 			nixpkgs-fmt
+			nmap # A utility for network discovery and security auditing
+			p7zip
 			pamixer
 			pavucontrol
+			pciutils # lspci
+			pkg-config
 			python3
 			python312Packages.jedi-language-server
 			python312Packages.pip
 			ripgrep
 			rofi
-			ruff-lsp
 			ruff
+			ruff-lsp
 			rustup # should I?
+			sccache
 			slurp
+			socat # replacement of openbsd-netcat
+			strace # system call monitoring
 			swappy
+			sysstat
 			tmux
 			tokei
+			tree
 			typst
 			typst-lsp
+			unzip
+			usbutils # lsusb
 			vim
 			vscode-langservers-extracted #contains jsonls
 			wget
+			which
 			wireplumber
 			wl-clipboard
 			xorg.xkbcomp
+			xz
+			yq-go # yaml processor https://github.com/mikefarah/yq
+			yq-go # yaml processor https://github.com/mikefarah/yq
+			zip
 			zoxide
 			zsh
+			zstd
 		];
 	};
 
