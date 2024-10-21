@@ -339,5 +339,13 @@ in
 		# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 	};
 
+
+	nix.gc = {
+		automatic = true;
+		dates = "weekly";
+		options = "--delete-older-than 1w";
+	};
+	# https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
+	nix.settings.auto-optimise-store = true;
 	system.stateVersion = "24.05"; #NB: changing requires migration
 }
