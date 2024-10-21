@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
-let
-	unstablePkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") {
-		config = config.nixpkgs.config;
-	};
-in {
+{
 	# TODO please change the username & home directory to your own
 	home.username = "v";
 	home.homeDirectory = "/home/v";
@@ -36,7 +32,6 @@ in {
 		neomutt
 		neofetch
 		figlet
-		#unstablePkgs.bash-language-server
 		bash-language-server
 	];
 
@@ -125,7 +120,12 @@ in {
 	#    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 	#  };
 	#};
-	programs.fish.enable = true;
+	programs.fish = {
+		enable = true;
+		shellInit = ''
+			source "$HOME/.config/fish/main.fish"
+		'';
+	};
 
 	# This value determines the home Manager release that your
 	# configuration is compatible with. This helps avoid breakage
