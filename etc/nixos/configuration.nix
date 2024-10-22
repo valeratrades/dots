@@ -229,20 +229,15 @@ in
 			cmake
 			cotp
 			cowsay
-			dash
 			dbus
 			dconf
 			difftastic
 			dnsutils  # `dig` + `nslookup`
 			ethtool
 			eww
-			eza
-			eza # A modern replacement for ‘ls’
-			eza # A modern replacement for ‘ls’
-			fd
+			eza # better ‘ls’
+			fd # better `find`
 			file
-			fish
-			fishPlugins.bass
 			fzf
 			gawk
 			gh
@@ -252,9 +247,7 @@ in
 			gnupg
 			gnused
 			gnutar
-			go
 			google-chrome
-			gopls
 			grim
 			gsettings-desktop-schemas
 			haskellPackages.greenclip
@@ -264,8 +257,6 @@ in
 			ipcalc  # it is a calculator for the IPv4/v6 addresses
 			iperf3
 			jq
-			jq
-			jq # A lightweight and flexible command-line JSON processor
 			keyd
 			ldns # replacement of `dig`, it provide the command `drill`
 			lean4
@@ -276,10 +267,9 @@ in
 			ltrace # library call monitoring
 			lua-language-server
 			mako
-			marksman
 			mold
 			mtr # A network diagnostic tool
-			neovim
+			graphviz
 			networkmanagerapplet
 			nil
 			nix-diff
@@ -290,14 +280,8 @@ in
 			pavucontrol
 			pciutils # lspci
 			pkg-config
-			python3
-			python312Packages.jedi-language-server
-			python312Packages.pip
 			ripgrep
 			rofi
-			ruff
-			ruff-lsp
-			rustup # should I?
 			sccache
 			slurp
 			socat # replacement of openbsd-netcat
@@ -308,10 +292,8 @@ in
 			tokei
 			tree
 			typst
-			typst-lsp
 			unzip
 			usbutils # lsusb
-			vim
 			mpv
 			yazi
 			vscode-langservers-extracted #contains jsonls
@@ -322,11 +304,56 @@ in
 			xorg.xkbcomp
 			xz
 			yq-go # yaml processor https://github.com/mikefarah/yq
-			yq-go # yaml processor https://github.com/mikefarah/yq
 			zip
 			zoxide
-			zsh
 			zstd
+
+			# Coding {{{
+				
+				# Editors {{{
+					vim
+					neovim
+					vscode
+				#,}}}
+
+				# Shells {{{
+					zsh
+					fish
+					fishPlugins.bass
+					dash
+				#,}}}
+				
+				# Language-specific {{{
+					# Python {{{
+						python3
+						python312Packages.pip
+						python312Packages.jedi-language-server
+						ruff
+						ruff-lsp
+					#,}}}
+
+					# Golang {{{
+						go
+						gopls
+					#,}}}
+
+					# Rust {{{
+						rustup # Currently maintaining through rustup, as working with nightly is easier like that
+
+						#cargo
+						#rustc
+					#,}}}
+
+					typst-lsp
+					marksman # md lsp
+				#,}}}
+
+				# Debuggers {{{
+				lldb
+				vscode-extensions.vadimcn.vscode-lldb
+				#,}}}
+
+			#,}}}
 		];
 	};
 
