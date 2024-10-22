@@ -353,6 +353,9 @@ in
 					# Rust {{{
 						#rustup # Currently maintaining through rustup, as working with nightly is easier like that. //upd: switched to fenix.nix
 
+						cargo-edit
+						cargo-update
+						cargo-machete
 						#cargo
 						#rustc
 					#,}}}
