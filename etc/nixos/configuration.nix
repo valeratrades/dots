@@ -352,6 +352,8 @@ in
 
 					# Rust {{{
 						cargo-edit
+						cargo-sort
+						cargo-mutants
 						cargo-update
 						cargo-machete
 						cargo-watch
