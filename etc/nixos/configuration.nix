@@ -351,7 +351,7 @@ in
 					#,}}}
 
 					# Rust {{{
-						rustup # Currently maintaining through rustup, as working with nightly is easier like that
+						#rustup # Currently maintaining through rustup, as working with nightly is easier like that. //upd: switched to fenix.nix
 
 						#cargo
 						#rustc

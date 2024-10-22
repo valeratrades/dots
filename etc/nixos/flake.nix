@@ -14,6 +14,11 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
+		fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
 		#naersk.url = "https://github.com/nix-community/naersk/master";
 	};
 
@@ -47,7 +52,8 @@
 					home-manager.users.v = import ./home.nix;
 				}
 
-				./fenix.nix
+				#./fenix.nix
+				({ pkgs, ... }: import ./other/fenix.nix { inherit pkgs; })
 			];
 		};
 	};
