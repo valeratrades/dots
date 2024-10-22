@@ -46,6 +46,8 @@
 
 					home-manager.users.v = import ./home.nix;
 				}
+
+				./fenix.nix
 			];
 		};
 	};
