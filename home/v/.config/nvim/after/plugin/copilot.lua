@@ -1,3 +1,5 @@
+--TODO: switch to https://github.com/zbirenbaum/copilot.lua (allows to cut off the weight for completion start)
+
 vim.g.copilot_filetypes = {
 	markdown = false,
 	gitcommit = false,

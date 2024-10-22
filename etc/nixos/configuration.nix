@@ -309,6 +309,7 @@ in
 			zstd
 
 			# Coding {{{
+				vscode-extensions.github.copilot
 				
 				# Editors {{{
 					vim
