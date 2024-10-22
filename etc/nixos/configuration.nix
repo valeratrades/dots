@@ -357,6 +357,7 @@ in
 						cargo-update
 						cargo-machete
 						cargo-watch
+						cargo-nextest
 						#cargo
 						#rustc
 					#,}}}
