@@ -152,19 +152,27 @@ in
 		nerdfonts	
 		font-awesome
 		ocamlPackages.codicons
-
-		# # copied over for no particular reason:
-		google-fonts
-		dejavu_fonts
+		corefonts
 		noto-fonts
 		noto-fonts-cjk
 		noto-fonts-emoji
-		liberation_ttf
+
+		# # copied over for no particular reason:
+		dejavu_fonts
+		dina-font
+		emojione
 		fira-code
 		fira-code-symbols
+		font-awesome
+		google-fonts
+		ipafont
+		kanji-stroke-order-font
+		liberation_ttf
 		mplus-outline-fonts.githubRelease
-		dina-font
+		powerline-fonts
 		proggyfonts
+		source-code-pro
+		ubuntu_font_family
 		#
 	];
 
