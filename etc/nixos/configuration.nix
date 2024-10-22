@@ -356,6 +356,7 @@ in
 						cargo-edit
 						cargo-update
 						cargo-machete
+						cargo-watch
 						#cargo
 						#rustc
 					#,}}}
