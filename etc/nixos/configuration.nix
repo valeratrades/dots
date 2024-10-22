@@ -351,15 +351,12 @@ in
 					#,}}}
 
 					# Rust {{{
-						#rustup # Currently maintaining through rustup, as working with nightly is easier like that. //upd: switched to fenix.nix
-
 						cargo-edit
 						cargo-update
 						cargo-machete
 						cargo-watch
 						cargo-nextest
-						#cargo
-						#rustc
+						cargo-limit # brings `lrun` and other `l$command` aliases for cargo, that suppress warnings if any errors are present.
 					#,}}}
 
 					typst-lsp
