@@ -19,9 +19,8 @@ in
 
 	services = {
 		xserver = {
-			#enable = true;
 			enable = false;
-			autorun = false; #dbg: trying out. May or may not help with lightdm
+			#autorun = false; #dbg: trying out. May or may not help with lightdm
 			xkb = {
 				extraLayouts.semimak = {
 					description = "Semimak for both keyboard standards";
@@ -152,9 +151,11 @@ in
 	fonts.packages = with pkgs; [
 		nerdfonts	
 		font-awesome
+		ocamlPackages.codicons
 
 		# # copied over for no particular reason:
 		google-fonts
+		dejavu_fonts
 		noto-fonts
 		noto-fonts-cjk
 		noto-fonts-emoji
@@ -212,6 +213,7 @@ in
 		#	src = "${userHome}/s/tg";
 		#})
 		#inputs.helix.packages."${pkgs.system}".helix
+		#TODO!: make structure modular, using [flatten](<https://noogle.dev/f/lib/flatten>)
 		systemPackages = with pkgs; [
 			adwaita-qt
 			alacritty
