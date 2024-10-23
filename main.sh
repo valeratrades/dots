@@ -13,7 +13,6 @@ target_dir="/home/v/.dots"
 dot_directories="
 	/etc/NetworkManager/NetworkManager.conf
 	/etc/keyd
-	/etc/nixos
 	/home/v/.cargo/config.toml
 	/home/v/.config/alacritty
 	/home/v/.config/btc_line.toml
