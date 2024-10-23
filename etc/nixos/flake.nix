@@ -15,9 +15,9 @@
 		};
 
 		fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+			url = "github:nix-community/fenix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 
 		#naersk.url = "https://github.com/nix-community/naersk/master";
 	};
