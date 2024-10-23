@@ -241,7 +241,7 @@ in
     #inputs.helix.packages."${pkgs.system}".helix
     #TODO!: make structure modular, using [flatten](<https://noogle.dev/f/lib/flatten>)
     systemPackages =
-      with pkgs;
+      with pkgs; # basically `use pkgs::*`
       lib.lists.flatten [
         # UI/UX Utilities
         [
