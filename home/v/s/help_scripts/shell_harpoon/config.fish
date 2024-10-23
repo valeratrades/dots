@@ -3,7 +3,7 @@ function _s
 end
 
 function _r
-    cs ~/s/aggr_orderbook
+    cowsay "moo"
 end
 
 function _n
