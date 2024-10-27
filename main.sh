@@ -15,7 +15,6 @@ dot_directories="
 	/etc/keyd
 	/home/v/.cargo/config.toml
 	/home/v/.config/alacritty
-	/home/v/.config/btc_line.toml
 	/home/v/.config/cargo
 	/home/v/.config/dconf/user
 	/home/v/.config/discord/settings.json
@@ -32,10 +31,7 @@ dot_directories="
 	/home/v/.config/nvim
 	/home/v/.config/openvpn
 	/home/v/.config/sway
-	/home/v/.config/tg.toml
-	/home/v/.config/tg_admin.toml
 	/home/v/.config/tmux
-	/home/v/.config/todo.toml
 	/home/v/.config/xdg-desktop-portal-termfilechooser/config
 	/home/v/.config/zathura
 	/home/v/.config/zoxide/setup.sh
@@ -45,10 +41,8 @@ dot_directories="
 	/home/v/Wallpapers
 	/home/v/g/README.md
 	/home/v/s/g/README.md	
-	/home/v/s/help_scripts
 	/home/v/s/l/README.md
 	/home/v/s/t/README.md
-	/usr/bin/start_sway.sh
 	/usr/share/X11/xkb/symbols/ru
 	/usr/share/X11/xkb/symbols/semimak
 	/usr/share/X11/xkb/symbols/us
