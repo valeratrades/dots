@@ -1,3 +1,6 @@
+# Archived
+All configuration are henceforth moved to Nix, and now reside [here](<https://github.com/valeratrades/nix>). This \`dots\` framework of mine was always a way to get some of the configurational power of nix (not knowing that was what I was searching for), so now it has outlived its purpose, as I see no reason to use anything but Nix for all of my machines and servers.
+
 ## Copy
 ```sh
 dots() {
